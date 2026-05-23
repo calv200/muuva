@@ -4,6 +4,9 @@ import ringImage from "../assets/images/Products/ring1.png";
 import ballImage from "../assets/images/Products/ball1.png";
 import ballExerciseImage from "../assets/images/Products/ball_exercise.png";
 
+const amazonUrl =
+  "https://www.amazon.com/kure-fit-Pilates-Essentials-Equipment-Included/dp/B0FP551YZ2";
+
 const productImages = [
   { src: kitImage, alt: "Pilates Essential Kit" },
   { src: ringImage, alt: "Pilates ring from the Pilates Essential Kit" },
@@ -64,8 +67,7 @@ export default function ProductPurchase() {
             Pilates Essential Kit
           </h2>
           <p className="mt-6 text-base leading-8 text-ink/70 sm:text-lg">
-            Pilates Ring · Resistance Band · Soft Pilates Ball · Sliders · Pump
-            · Carry Bag · Guide
+            {"Pilates Ring \u00b7 Resistance Band \u00b7 Soft Pilates Ball \u00b7 Sliders \u00b7 Pump \u00b7 Carry Bag \u00b7 Guide"}
           </p>
 
           <div className="mt-10 border-y border-ink/10 py-7">
@@ -83,9 +85,9 @@ export default function ProductPurchase() {
 
           <a
             className="mt-9 inline-flex min-h-12 items-center justify-center border border-ink px-8 text-sm uppercase tracking-[0.22em] transition hover:bg-ink hover:text-linen"
-            href="#"
+            href={amazonUrl}
           >
-            Buy on Amazon →
+            {"Buy on Amazon \u2192"}
           </a>
         </div>
       </div>
@@ -125,7 +127,7 @@ function GalleryModal({
         onClick={onClose}
         aria-label="Close gallery"
       >
-        ×
+        &times;
       </button>
 
       <button
@@ -134,7 +136,7 @@ function GalleryModal({
         onClick={onPrevious}
         aria-label="Previous image"
       >
-        ‹
+        &lsaquo;
       </button>
 
       <img
@@ -149,7 +151,7 @@ function GalleryModal({
         onClick={onNext}
         aria-label="Next image"
       >
-        ›
+        &rsaquo;
       </button>
 
       <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-3 rounded-full bg-linen/90 p-2">
