@@ -38,7 +38,7 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
         <a href="#" className="inline-flex items-center" aria-label="muuva home">
           <img
-            className="h-7 w-auto object-contain sm:h-8"
+            className="h-4 w-auto object-contain"
             src={muuvaLogo}
             alt="muuva"
           />

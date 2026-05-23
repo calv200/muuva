@@ -13,7 +13,10 @@ Nordic, calm, premium, feminine, clean
 1. Header
 2. Hero video
 3. Intro text below hero
-4. Product purchase section
+4. Product purchase
+5. Guided Routines
+6. Styled by You Gallery
+7. Footer
 
 ## 5. Visual References
 
@@ -287,6 +290,112 @@ Buy on Amazon
     Do not make the CTA too aggressive.
     Do not overcrowd the section with too much text.
     Do not make the gallery open a new page; it should open as an overlay/modal.
+
+## 5.4 Guided Routines Section Reference
+- Section name
+Guided Routines
+
+- Source reference image
+`references/screenshots/guided-routines-section-reference.png`
+
+- Purpose
+This section should communicate that the Pilates Essential Kit includes complimentary access to a digital product: guided Pilates routines. It should add value to the physical kit and make the product feel like a complete movement experience, not only a set of accessories.
+
+- Section placement
+Place this section directly after the Product Purchase Section and before the Styled by You Gallery Section.
+
+- Suggested page flow:
+    ```text
+    [ Product Purchase Section ]
+    [ Guided Routines Section ]
+    [ Styled by You Gallery Section ]
+    [ Footer ]
+    ```
+
+- Overall feeling
+The section should feel calm, premium, modern, and supportive. It should introduce the digital content in a clean editorial way, without looking promotional or overly sales-focused.
+
+- Layout description
+Use a two-column desktop layout:
+    ```text
+    [ Lifestyle image ]        [ Guided routines content block ]
+    ```
+
+- Left side
+    - Display one large lifestyle image.
+    - The image should show a woman using or exercising with the Pilates kit in a warm, calm home environment.
+    - The image should occupy approximately 50% of the section width.
+    - Use an edge-to-edge image within its half of the section.
+    - The image should feel natural, aspirational, and aligned with the premium muuva aesthetic.
+
+- Right side
+    - Use a soft, very light neutral or muted pale background.
+    - Place a short headline, supporting text, and CTA centered vertically inside the content area.
+    - Keep generous empty space around the text.
+    - The content block should feel refined and minimal.
+
+- Content direction
+    - Small optional label:
+    `Included with your kit`
+
+    - Headline:
+    `Guided routines included`
+
+    - Supporting text:
+    `Your kit includes complimentary access to guided Pilates routines designed to help you move with confidence, from your first session onwards.`
+
+    - CTA:
+    `Explore guided routines →`
+
+- CTA behavior
+    - For now, use a placeholder link such as `#`.
+    - The CTA can be styled as a refined pill-shaped button or an elegant text link.
+    - It should feel premium and subtle, not loud or overly commercial.
+    - Do not use strong Amazon orange or bright fitness-style colors.
+
+- Visual style direction
+    - The right-side background should contrast softly with the image while remaining within the neutral muuva palette.
+    - Keep the design editorial, calm, and spacious.
+    - Use dark charcoal text.
+    - The headline should be visually stronger than the body text.
+    - The CTA should be clearly visible but understated.
+
+- Desktop layout
+    - Image on the left.
+    - Text content block on the right.
+    - Both sides should have equal or near-equal width.
+    - The section should feel like one horizontal visual block.
+
+- Mobile layout
+    - Stack the layout vertically.
+    - Show the image first.
+    - Show the text content block underneath.
+    - Maintain comfortable padding and centered text.
+    - Avoid making the content block feel too tall or empty on small screens.
+
+- Lifestyle image asset
+    `src/assets/images/Model/ball_exercise1.png`
+    - Do not use external images unless explicitly requested.
+
+- What to borrow from the sketch
+    - Two-column layout.
+    - Lifestyle image on the left.
+    - Soft contrasting content panel on the right.
+    - Short value-focused message.
+    - Centered CTA within the text panel.
+
+- What to change from the sketch
+    - Use muuva branding and tone.
+    - Do not mention any reference brand.
+    - Keep the copy more premium and aligned with the muuva identity.
+    - Use `Guided routines included` rather than heavily promotional messaging.
+
+- What not to do
+    - Do not make it look like an advertisement banner.
+    - Do not overcrowd the section with multiple benefits or icons.
+    - Do not use bright blue, neon, or sporty colors.
+    - Do not include app screens, login forms, or membership details yet.
+    - Do not imply paid subscriptions or ongoing fees.
 
 ## 6. Important Rules for Codex
 - Use this brief as the main design direction.

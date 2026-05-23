@@ -1,5 +1,6 @@
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
+import GuidedRoutinesSection from "./components/GuidedRoutinesSection.jsx";
 import ProductPurchase from "./components/ProductPurchase.jsx";
 
 export default function App() {
@@ -9,6 +10,7 @@ export default function App() {
       <main>
         <Hero />
         <ProductPurchase />
+        <GuidedRoutinesSection />
       </main>
     </div>
   );
