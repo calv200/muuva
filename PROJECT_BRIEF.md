@@ -15,7 +15,7 @@ Nordic, calm, premium, feminine, clean
 3. Intro text below hero
 4. Product purchase
 5. Guided Routines
-6. Styled by You Gallery
+6. Lifestyle Carousel
 7. Footer
 
 ## 5. Visual References
@@ -396,6 +396,81 @@ Use a two-column desktop layout:
     - Do not use bright blue, neon, or sporty colors.
     - Do not include app screens, login forms, or membership details yet.
     - Do not imply paid subscriptions or ongoing fees.
+
+## 5.5 Lifestyle Carousel Section Reference
+- Section name
+Lifestyle Carousel
+
+- Source reference image
+`references/screenshots/lifeStyle-reference.png`
+
+- Purpose
+This section should show lifestyle imagery for the Pilates Essential Kit and make the page feel more editorial, social, and premium after the guided routines message.
+
+- Section placement
+Place this section directly after the Guided Routines Section and before the Footer.
+
+- Suggested page flow:
+    ```text
+    [ Guided Routines Section ]
+    [ Lifestyle Carousel Section ]
+    [ Footer ]
+    ```
+
+- Visible heading
+`Styled by You.`
+
+- Image asset folder
+Use the local lifestyle images from:
+`src/assets/images/lifestyle/`
+
+- Image order
+    1. `lifeStyle1.png`
+    2. `lifeStyle2.png`
+    3. `lifeStyle3.png`
+    4. `lifeStyle4.png`
+    5. `lifeStyle5.png`
+    6. `lifeStyle6.png`
+    7. `lifeStyle7.png`
+    8. `lifeStyle8.png`
+
+- Overall feeling
+The section should feel premium, minimal, calm, feminine, and editorial. The photos should be the dominant visual element and the section should avoid heavy borders, shadows, badges, or loud promotional styling.
+
+- Layout direction
+    - Use a clean warm/light neutral background.
+    - Place the heading above the carousel, aligned toward the left.
+    - Place subtle previous and next arrow controls near the top-right, aligned with the heading.
+    - Display the images in a horizontal scrollable carousel.
+    - Use portrait-oriented image cards with consistent height and width.
+    - Use small refined gaps between images.
+    - Use `object-cover` so every image crops consistently and elegantly.
+    - Let the next image appear slightly at the right edge to suggest more content is available.
+
+- Carousel behavior
+    - Support native horizontal scrolling.
+    - Support touch dragging/swiping on mobile devices.
+    - Use previous and next arrow buttons that scroll smoothly.
+    - Hide the scrollbar visually while keeping scrolling accessible.
+    - Disable or visually soften the previous arrow at the beginning and the next arrow at the end.
+
+- Responsive behavior
+    - Desktop: show approximately four lifestyle images in the viewport.
+    - Tablet: show approximately two or three images.
+    - Mobile: show approximately one full image plus part of the next image.
+    - Keep touch/swipe scrolling natural on mobile.
+
+- What to borrow from the reference
+    - Horizontal image carousel structure.
+    - Left-aligned heading above the images.
+    - Subtle top-right arrow controls.
+    - A partial next image visible at the right edge.
+
+- What not to do
+    - Do not copy the reference brand or styling exactly.
+    - Do not use heavy carousel libraries.
+    - Do not use bright blue, neon colors, heavy shadows, or sporty styling.
+    - Do not overcrowd the section with extra text, icons, or promotional badges.
 
 ## 6. Important Rules for Codex
 - Use this brief as the main design direction.

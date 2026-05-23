@@ -41,3 +41,8 @@ Your kit includes complimentary access to guided Pilates routines designed to he
 
 ## CTA
 Explore guided routines →
+
+# Lifestyle Carousel Section Copy
+
+## Heading
+Styled by You.

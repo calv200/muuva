@@ -1,6 +1,7 @@
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import GuidedRoutinesSection from "./components/GuidedRoutinesSection.jsx";
+import LifestyleCarouselSection from "./components/LifestyleCarouselSection.jsx";
 import ProductPurchase from "./components/ProductPurchase.jsx";
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
         <Hero />
         <ProductPurchase />
         <GuidedRoutinesSection />
+        <LifestyleCarouselSection />
       </main>
     </div>
   );
