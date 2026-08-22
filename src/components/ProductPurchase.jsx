@@ -3,6 +3,7 @@ import kitImage from "../assets/images/Products/kit1.png";
 import ringImage from "../assets/images/Products/ring1.png";
 import ballImage from "../assets/images/Products/ball1.png";
 import ballExerciseImage from "../assets/images/Products/ball_exercise.png";
+import CtaLink from "./CtaLink.jsx";
 import SiteContainer from "./SiteContainer.jsx";
 
 const amazonUrl =
@@ -84,12 +85,9 @@ export default function ProductPurchase() {
             </div>
           </div>
 
-          <a
-            className="mt-9 inline-flex min-h-12 items-center justify-center border border-ink px-8 text-sm font-medium uppercase tracking-[0.16em] transition hover:bg-ink hover:text-linen"
-            href={amazonUrl}
-          >
+          <CtaLink className="mt-9" href={amazonUrl}>
             {"Buy on Amazon \u2192"}
-          </a>
+          </CtaLink>
         </div>
       </SiteContainer>
 

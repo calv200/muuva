@@ -69,7 +69,7 @@ function InstagramIcon() {
 function FooterLinkList({ links, ariaLabel }) {
   return (
     <nav aria-label={ariaLabel}>
-      <ul className="space-y-4 text-muted">
+      <ul className="space-y-3 text-muted sm:space-y-3.5">
         {links.map((link) => (
           <li key={link}>
             <a
@@ -97,7 +97,7 @@ export default function Footer() {
   return (
     <footer className="bg-warm py-16 text-ink sm:py-20 lg:py-24">
       <SiteContainer>
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.45fr_0.85fr_0.85fr_1.1fr] lg:gap-16">
+        <div className="grid gap-12 md:grid-cols-2 md:gap-x-16 md:gap-y-14 lg:grid-cols-[1.45fr_0.8fr_0.8fr_1fr] lg:gap-16">
           <div>
             <h2 className="font-serif text-4xl font-medium leading-tight sm:text-5xl">
               Stay in the move.
@@ -122,9 +122,9 @@ export default function Footer() {
                 <label className="sr-only" htmlFor="footer-email">
                   Email address
                 </label>
-                <div className="flex h-16 items-center border border-softborder bg-cream transition focus-within:border-brand/50">
+                <div className="flex h-14 items-center border border-softborder bg-cream transition focus-within:border-brand/60">
                   <input
-                    className="h-full min-w-0 flex-1 bg-transparent px-5 text-base text-ink placeholder:text-muted/70 focus:outline-none"
+                    className="muuva-ui h-full min-w-0 flex-1 bg-transparent px-5 text-ink placeholder:text-muted/70 focus:outline-none"
                     id="footer-email"
                     name="email"
                     type="email"
@@ -132,7 +132,7 @@ export default function Footer() {
                     required
                   />
                   <button
-                    className="mr-4 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/[0.06] text-muted transition hover:bg-ink/10 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
+                    className="mr-3 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/[0.06] text-muted transition hover:bg-ink/10 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-3 focus-visible:outline-brand"
                     type="submit"
                     aria-label="Subscribe to newsletter"
                   >
@@ -146,8 +146,8 @@ export default function Footer() {
           <FooterLinkList links={navigationLinks} ariaLabel="Footer navigation" />
           <FooterLinkList links={policyLinks} ariaLabel="Footer policies" />
 
-          <div className="max-w-sm lg:max-w-xs">
-            <h2 className="muuva-ui font-semibold text-ink">About Muuva</h2>
+          <div className="max-w-sm lg:max-w-[18rem]">
+            <h2 className="muuva-ui font-medium text-ink">About Muuva</h2>
             <p className="muuva-support mt-7 text-muted">
               Based in Amsterdam, Muuva creates beautifully designed and
               sustainably made Pilates gear for movement practices at home and in

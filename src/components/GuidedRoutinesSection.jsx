@@ -1,4 +1,5 @@
 import routineImage from "../assets/images/Model/ball_exercise1.png";
+import CtaLink from "./CtaLink.jsx";
 
 export default function GuidedRoutinesSection() {
   return (
@@ -26,12 +27,9 @@ export default function GuidedRoutinesSection() {
               onwards.
             </p>
 
-            <a
-              className="mt-9 inline-flex min-h-12 items-center justify-center rounded-full border border-ink/70 px-8 text-sm font-medium uppercase tracking-[0.16em] transition hover:bg-ink hover:text-linen"
-              href="#"
-            >
+            <CtaLink className="mt-9" href="#">
               {"Explore guided routines \u2192"}
-            </a>
+            </CtaLink>
           </div>
         </div>
       </div>
