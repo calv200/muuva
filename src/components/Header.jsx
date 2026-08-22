@@ -5,7 +5,7 @@ function SearchIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-5 w-5"
+      className="h-[22px] w-[22px]"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -21,7 +21,7 @@ function GlobeIcon() {
   return (
     <svg
       aria-hidden="true"
-      className="h-5 w-5"
+      className="h-[22px] w-[22px]"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -39,32 +39,38 @@ export default function Header() {
       <SiteContainer className="flex h-16 items-center justify-between">
         <a href="#" className="inline-flex items-center" aria-label="muuva home">
           <img
-            className="h-4 w-auto object-contain"
+            className="h-[18px] w-auto object-contain"
             src={muuvaLogo}
             alt="muuva"
           />
         </a>
 
-        <div className="flex items-center gap-5 sm:gap-8">
-          <nav className="hidden items-center gap-8 text-[15px] font-medium sm:flex">
-            <a className="underline underline-offset-4" href="#product">
+        <div className="flex items-center gap-6 sm:gap-10">
+          <nav className="hidden items-center gap-8 text-[15px] font-medium leading-none sm:flex">
+            <a
+              className="underline decoration-ink/70 underline-offset-4 transition hover:decoration-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              href="#product"
+            >
               Shop
             </a>
-            <a className="underline underline-offset-4" href="#">
+            <a
+              className="underline decoration-ink/70 underline-offset-4 transition hover:decoration-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              href="#"
+            >
               Training sessions
             </a>
           </nav>
 
-          <div className="flex items-center gap-4 text-ink">
+          <div className="flex items-center gap-2 text-ink">
             <button
-              className="grid h-9 w-9 place-items-center rounded-full transition hover:bg-linen/40"
+              className="grid h-10 w-10 place-items-center rounded-full transition hover:bg-linen/40 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-brand"
               type="button"
               aria-label="Search"
             >
               <SearchIcon />
             </button>
             <button
-              className="grid h-9 w-9 place-items-center rounded-full transition hover:bg-linen/40"
+              className="grid h-10 w-10 place-items-center rounded-full transition hover:bg-linen/40 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-brand"
               type="button"
               aria-label="Language"
             >
