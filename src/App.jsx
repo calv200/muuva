@@ -3,6 +3,7 @@ import Hero from "./components/Hero.jsx";
 import GuidedRoutinesSection from "./components/GuidedRoutinesSection.jsx";
 import LifestyleCarouselSection from "./components/LifestyleCarouselSection.jsx";
 import ProductPurchase from "./components/ProductPurchase.jsx";
+import Footer from "./components/Footer.jsx";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <GuidedRoutinesSection />
         <LifestyleCarouselSection />
       </main>
+      <Footer />
     </div>
   );
 }
