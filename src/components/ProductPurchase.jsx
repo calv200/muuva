@@ -3,6 +3,7 @@ import kitImage from "../assets/images/Products/kit1.png";
 import ringImage from "../assets/images/Products/ring1.png";
 import ballImage from "../assets/images/Products/ball1.png";
 import ballExerciseImage from "../assets/images/Products/ball_exercise.png";
+import SiteContainer from "./SiteContainer.jsx";
 
 const amazonUrl =
   "https://www.amazon.com/kure-fit-Pilates-Essentials-Equipment-Included/dp/B0FP551YZ2";
@@ -44,8 +45,8 @@ export default function ProductPurchase() {
   }, [isGalleryOpen]);
 
   return (
-    <section id="product" className="bg-[#fbf8f2] px-5 py-16 sm:px-8 sm:py-24">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16">
+    <section id="product" className="section-pad bg-cream">
+      <SiteContainer className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16">
         <button
           type="button"
           className="group overflow-hidden bg-linen shadow-soft"
@@ -60,37 +61,37 @@ export default function ProductPurchase() {
         </button>
 
         <div className="mx-auto max-w-xl lg:mx-0">
-          <p className="text-xs uppercase tracking-[0.28em] text-stonegreen">
+          <p className="muuva-label text-brand">
             muuva
           </p>
-          <h2 className="mt-5 font-serif text-5xl font-medium leading-tight text-balance sm:text-6xl">
+          <h2 className="mt-5 font-serif text-[clamp(2rem,5vw,2.5rem)] font-medium leading-[1.1] text-balance">
             Pilates Essential Kit
           </h2>
-          <p className="mt-6 text-base leading-8 text-ink/70 sm:text-lg">
+          <p className="muuva-support mt-6 text-muted">
             {"Pilates Ring \u00b7 Resistance Band \u00b7 Soft Pilates Ball \u00b7 Sliders \u00b7 Pump \u00b7 Carry Bag \u00b7 Guide"}
           </p>
 
-          <div className="mt-10 border-y border-ink/10 py-7">
-            <p className="text-sm uppercase tracking-[0.22em] text-ink/55">
+          <div className="mt-10 border-y border-softborder py-7">
+            <p className="muuva-label text-muted">
               Color
             </p>
             <div className="mt-4 flex items-center gap-3">
               <span
-                className="h-7 w-7 rounded-full border border-ink/15 bg-[#d8cbb0] shadow-inner"
+                className="h-7 w-7 rounded-full border border-softborder bg-beige shadow-inner"
                 aria-hidden="true"
               />
-              <span className="text-base">Beige</span>
+              <span className="muuva-ui">Beige</span>
             </div>
           </div>
 
           <a
-            className="mt-9 inline-flex min-h-12 items-center justify-center border border-ink px-8 text-sm uppercase tracking-[0.22em] transition hover:bg-ink hover:text-linen"
+            className="mt-9 inline-flex min-h-12 items-center justify-center border border-ink px-8 text-sm font-medium uppercase tracking-[0.16em] transition hover:bg-ink hover:text-linen"
             href={amazonUrl}
           >
             {"Buy on Amazon \u2192"}
           </a>
         </div>
-      </div>
+      </SiteContainer>
 
       {isGalleryOpen && (
         <GalleryModal

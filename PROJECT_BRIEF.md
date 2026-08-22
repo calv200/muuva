@@ -1,26 +1,268 @@
-# Landing Page Project Brief
+# MUUVA Website Project Brief
 
 ## 1. Goal
-Create a local landing page for muuva.
+Create and evolve the MUUVA website, starting from the current landing page and extending it with additional pages such as Guided Routines.
+
+Before adding new pages, establish a reusable site-wide design foundation so typography, colors, spacing, containers, header, footer, and shared UI elements remain consistent across the whole website.
 
 ## 2. Target audience
 Women who want stylish, premium Pilates products for home workouts and everyday movement.
 
 ## 3. Desired style
-Nordic, calm, premium, feminine, clean
+Nordic, calm, premium, feminine, clean, editorial, contemporary, and wellness-oriented.
 
-## 4. Page structure
+The website should feel closer to a modern lifestyle / design brand than to a conventional fitness or generic e-commerce website.
+
+## 4. Current Landing Page Structure
 1. Header
 2. Hero video
 3. Intro text below hero
-4. Product purchase
-5. Guided Routines
-6. Lifestyle Carousel
+4. Product purchase section
+5. Guided Routines promotional section
+6. Styled by You lifestyle image carousel
 7. Footer
 
-## 5. Visual References
+A separate **Guided Routines page** will be developed after the shared design foundation is cleaned up and approved.
 
-### 5.1 Header Reference
+---
+
+## 5. Site-wide Design Foundation
+
+This section defines the visual rules that should be reused across the landing page and all future MUUVA pages.
+
+### 5.1 Brand / Logo Relationship
+
+- The existing `muuva` logo is the primary visual anchor of the brand.
+- The logo has a rounded, geometric, modern, calm, and slightly playful character.
+- Website typography should complement the logo rather than try to reproduce or imitate it exactly.
+- Do not recreate the logo using a website font when the real logo asset is available.
+- Keep the logo clear and recognizable with enough surrounding whitespace.
+- The primary logo green is approximately:
+  - `#4E6D5E`
+- When possible, use the original logo asset rather than recoloring or rebuilding it in CSS.
+
+### 5.2 Typography System
+
+Use only two main font families across the website.
+
+#### Display / editorial font
+**Newsreader**
+
+Use for:
+- Major page headings
+- Section headings
+- Product titles
+- Editorial statements
+- Important short brand messages
+
+Recommended weights:
+- Regular `400`
+- Medium `500` when additional emphasis is required
+- Italic only as a deliberate editorial accent
+
+Newsreader should provide the elegant/editorial contrast to the rounded MUUVA logo without making the site feel overly formal or like a traditional luxury fashion brand.
+
+#### Body / UI font
+**Manrope**
+
+Use for:
+- Body copy
+- Navigation
+- Buttons and CTAs
+- Product information
+- Small labels
+- Form elements
+- Footer content
+- Utility text
+
+Recommended weights:
+- Regular `400`
+- Medium `500`
+- Semi-bold `600` only where stronger UI emphasis is required
+
+Manrope should visually connect with the rounded, modern character of the MUUVA logo while remaining very readable.
+
+#### Typography hierarchy — desktop starting values
+
+Use responsive typography where appropriate, preferably with reusable Tailwind classes or `clamp()` rather than many isolated font-size values.
+
+| Role | Suggested size |
+| --- | --- |
+| Major / hero heading | `48–56px` |
+| Section heading | `36–44px` |
+| Product heading | `34–40px` |
+| Body copy | `15–17px` |
+| Navigation | `14–15px` |
+| Small uppercase label | `11–12px` |
+| Button / CTA | `12–14px` |
+
+#### Typography hierarchy — mobile starting values
+
+| Role | Suggested size |
+| --- | --- |
+| Major / hero heading | `36–44px` |
+| Section heading | `30–36px` |
+| Product heading | `28–34px` |
+| Body copy | `15–16px` |
+| Navigation / menu | `14–15px` |
+| Small uppercase label | `11–12px` |
+| Button / CTA | `12–14px` |
+
+#### Typography rules
+
+- Newsreader headings should generally use a tight but comfortable line height, around `1.0–1.15` depending on size.
+- Manrope body copy should generally use a line height around `1.5–1.7`.
+- Small labels may use uppercase styling with restrained letter spacing, approximately `0.12em–0.18em`.
+- Buttons may also use subtle letter spacing when uppercase.
+- Avoid extremely small body or footer text.
+- Important supporting text should remain comfortably readable; do not reduce it simply to create more negative space.
+- Avoid introducing additional font families unless explicitly approved later.
+
+### 5.3 Brand Color System
+
+Use a small, restrained palette. These are starting design tokens and may be fine-tuned later after visual review.
+
+#### Primary colors
+- Brand green / logo green: `#4E6D5E`
+- Primary text / soft charcoal: `#24211F`
+- Muted text: `#6F6A63`
+
+#### Neutral backgrounds
+- Main warm cream: `#FBF8F2`
+- Secondary warm neutral: `#F2EFE9`
+- Soft beige: `#DFD3BD`
+- White: `#FFFFFF` only when it is visually intentional, such as photography or a defined card/image area
+
+#### Borders / dividers
+- Soft neutral border: `#D7D0C6`
+
+#### Color rules
+- Favor warm neutrals rather than bright white across large page areas.
+- Use the MUUVA green selectively for brand details, logo-related moments, accents, or subtle interactive states.
+- Do not overuse the green as a large UI fill unless a section specifically calls for it.
+- Avoid loud fitness colors, saturated gradients, or aggressive e-commerce colors.
+- Avoid pure black when soft charcoal provides sufficient contrast.
+- Maintain accessible contrast for body text, navigation, and interactive elements.
+
+### 5.4 Global Content Grid
+
+Create one consistent content container that controls alignment across the site.
+
+#### Desktop
+- Maximum content width: approximately `1280px`
+- Standard horizontal page gutter: approximately `48px`
+
+#### Tablet
+- Horizontal page gutter: approximately `32px`
+
+#### Mobile
+- Horizontal page gutter: approximately `20–24px`
+
+#### Grid rules
+- Header content, product content, section headings, lifestyle content, and footer content should visually align to the same global left/right grid whenever they are inside a contained section.
+- Full-width / full-bleed media sections are allowed.
+- When a section is full bleed, its internal text/content should still use the shared content grid where appropriate.
+- Avoid giving every section a different arbitrary maximum width.
+- Use a reusable container utility/component instead of repeating unrelated width and padding values throughout the code.
+
+### 5.5 Spacing Scale
+
+Use a consistent spacing system instead of adjusting every section independently by eye.
+
+Recommended reusable spacing values:
+- `8px` — micro spacing
+- `16px` — small spacing
+- `24px` — small/medium spacing
+- `32px` — medium spacing
+- `48px` — medium/large spacing
+- `64px` — large spacing
+- `96px` — standard desktop section spacing
+- `128px` — large editorial section spacing when genuinely needed
+
+#### Section spacing guidance
+- Standard desktop section spacing: around `96px`
+- Large editorial sections may use up to `128px`
+- Tablet sections: around `64–80px`
+- Mobile sections: around `48–64px`
+
+#### Spacing rules
+- Preserve generous breathing room, but do not use empty space to compensate for text that is too small.
+- Sections should feel related to each other and follow a consistent vertical rhythm.
+- Avoid large one-off spacing values unless the composition specifically requires them.
+
+### 5.6 Shared Header Foundation
+
+The header should remain minimal and elegant, but it must not feel visually insignificant compared with the hero.
+
+- Use the same global content container and horizontal gutters as the rest of the website.
+- Use the real MUUVA logo asset.
+- Navigation should use **Manrope**, normally around `14–15px` on desktop.
+- Use comfortable spacing between navigation items.
+- Utility icons should remain thin and minimal but large enough to recognize easily.
+- The header should feel slim rather than bulky, while still giving the logo and navigation enough visual presence.
+- Suggested desktop header height starting range: approximately `64–72px`.
+- Suggested mobile header height starting range: approximately `56–64px`.
+- Newsreader Italic may be used selectively as an editorial accent elsewhere, but the primary navigation should favor Manrope for clarity and consistency.
+
+### 5.7 Shared CTA / Button Foundation
+
+Create one reusable CTA/button style for actions such as:
+- `Buy on Amazon →`
+- `Explore Guided Routines →`
+
+Default direction:
+- Manrope Medium
+- Approximately `12–14px`
+- Restrained uppercase styling and/or subtle letter spacing when appropriate
+- Thin neutral border
+- Transparent or warm-neutral background
+- Dark charcoal text
+- Subtle corner radius rather than a highly rounded pill unless specifically chosen later
+- Comfortable horizontal and vertical padding
+- Gentle hover/focus change
+- No loud Amazon-orange treatment
+- Keep arrows and icons minimal
+
+Interactive elements must include visible keyboard focus states and should remain accessible on mobile.
+
+### 5.8 Shared Footer Foundation
+
+- Footer content should use Manrope.
+- Footer headings may use Newsreader or Manrope depending on hierarchy; the large newsletter statement can use Newsreader.
+- Avoid microscopic footer copy.
+- Standard footer body/link text should generally remain around `14–15px` on desktop unless a specific legal line needs to be smaller.
+- Footer columns should align to the global content grid.
+- Maintain generous spacing without making the footer feel empty because its content is too small.
+
+### 5.9 Responsive Behavior
+
+- The design foundation must work consistently across desktop, tablet, and mobile.
+- Do not treat mobile as a compressed desktop layout.
+- Typography should scale intentionally.
+- Horizontal gutters should decrease according to the global grid rules.
+- Multi-column sections should stack cleanly when space becomes limited.
+- Buttons and interactive controls should remain easy to tap.
+- Avoid horizontal overflow.
+- Preserve the calm/editorial feeling at smaller sizes rather than overcrowding the screen.
+
+### 5.10 Foundation Cleanup Guardrails
+
+During the design-foundation cleanup:
+
+- Do **not** redesign the individual landing-page sections.
+- Do **not** change the written content unless specifically requested.
+- Do **not** replace imagery or alter image/gallery behavior unless required to support the global system.
+- Preserve the current overall landing-page order and concept.
+- Focus first on typography, shared colors, grid/container rules, and spacing.
+- Header, CTA, and footer refinements should use those global foundations rather than independent styling.
+- Prefer reusable components, design tokens, and shared utility classes over repeated one-off values.
+- After each major implementation pass, review the page visually before introducing further design changes.
+
+---
+
+## 6. Visual References
+
+### 6.1 Header Reference
 - Source image
 `references/screenshots/headerMuuva.png`
 
@@ -41,25 +283,25 @@ Nordic, calm, premium, feminine, clean
 
 - Logo
     - The `muuva®` logo appears on the left.
+    - Use the existing logo asset rather than recreating the wordmark with text.
     - Logo color is muted green / grey-green.
     - Logo should feel grounded, soft, and premium.
-    - Registered trademark symbol should sit close to the logo, aligned near the top-right of the wordmark.
-    - Logo should not be too large, but it should remain clearly visible.
+    - Registered trademark symbol should remain part of the official logo treatment when present in the asset.
+    - Logo should not be oversized, but it should remain clearly visible.
 
-- Navigation links, Navigation items shown in the sketch:
+- Navigation links shown in the sketch:
     - Shop
     - Training sessions
 
-- Style direction:
-    - Serif italic typeface.
-    - Elegant, editorial, slightly fashion-like.
-    - Black or very dark charcoal text.
-    - Underlined links.
-    - Links should feel refined, not bold or sporty.
+- Updated navigation style direction:
+    - Use Manrope as the primary navigation font.
+    - Elegant, clean, modern, and highly readable.
+    - Dark charcoal text.
+    - Underlining may be used selectively if it improves the editorial feeling, but it should not make the menu feel busy.
     - Spacing between links should be generous.
     - The navigation should sit visually closer to the right side than the center.
 
-- Utility icons, Icons shown on the far right:
+- Utility icons shown on the far right:
     - Search icon
     - Globe / language icon
 
@@ -68,30 +310,23 @@ Nordic, calm, premium, feminine, clean
     - Dark charcoal color.
     - Clean, minimal, and simple.
     - Icons should align vertically with the navigation links.
-    - Icon size should be balanced with the text, not oversized.
+    - Icon size should be balanced with the text, not oversized or too small.
 
-- Background color. The header background should use a warm neutral beige similar to the sketch.
-    Suggested starting values:
-    - `#d8cbb0`
-    - `#d9ccb2`
-    - `#ded2ba`
+- Background color
+    The header should use one of the approved warm-neutral colors from the site-wide color system, with the original sketch used as visual inspiration.
 
 - Typography direction
     Use a contrast between:
-    - A soft, modern logo wordmark.
-    - Elegant italic serif navigation links.
+    - The existing rounded MUUVA logo wordmark.
+    - Clean Manrope navigation / utility typography.
+    - Newsreader for editorial headings elsewhere on the page.
     - Minimal outline utility icons.
-
-- Possible navigation font direction:
-    - Editorial serif italic
-    - High-fashion inspired
-    - Elegant but readable
 
 - Avoid:
     - Sporty fonts
-    - Heavy sans-serif navigation
-    - Rounded playful fonts
-    - Corporate-looking menus
+    - Heavy or corporate-looking navigation
+    - Overly decorative serif navigation
+    - Rounded playful display fonts that compete with the MUUVA logo
 
 - Header structure
     Recommended desktop structure:
@@ -99,7 +334,7 @@ Nordic, calm, premium, feminine, clean
     [ muuva® ]                                      [ Shop ] [ Training sessions ]   [ Search icon ] [ Globe icon ]
     ```
 
-### 5.2 Hero Section Reference
+### 6.2 Hero Section Reference
 - Source image
 `references/screenshots/hero-section-sketch.png`
 
@@ -142,10 +377,11 @@ The text block should not overlay the video. It should appear underneath the vid
     - The subtitle should sit directly underneath the headline.
 
 - Text style direction
-    - Use clean, elegant typography.
+    - Use **Newsreader** for the headline.
+    - Use **Manrope** for the subtitle.
     - Avoid sporty or generic fitness styling.
     - The text should feel editorial and refined.
-    - Use dark charcoal or soft black text.
+    - Use dark charcoal or soft black text from the global color system.
     - Background should be light, warm, and neutral.
 
 - Suggested structure
@@ -157,7 +393,7 @@ The text block should not overlay the video. It should appear underneath the vid
     Styled for everyday movement.
     ```
 
-### 5.3  Product Purchase Section Reference
+### 6.3 Product Purchase Section Reference
 - Source image
 `references/screenshots/product-purchase-section-sketch.png`
 
@@ -188,7 +424,7 @@ The section should feel minimal, premium, spacious, and product-focused. It shou
 
     - Left side:
         - Large product visual.
-        - The image should show the full Pilates Essential Kit clearly.   
+        - The image should show the full Pilates Essential Kit clearly.
         - Product should feel clean, premium, and centered.
         - Use lots of white or warm neutral negative space.
 
@@ -206,10 +442,10 @@ The section should feel minimal, premium, spacious, and product-focused. It shou
     - Keep background clean and neutral.
     - Avoid cluttered product grid styling.
     - The product should appear premium and editorial.
-    - Product title
 
 - Titles
-    The title should be large, clean, and easy to read.
+    - Use **Newsreader** for the product title.
+    - Use **Manrope** for product descriptions, labels, color information, and CTA text.
     - Product title: Pilates Essential Kit
     - Optional subtitle or expanded product description:
     Pilates Ring · Resistance Band · Soft Pilates Ball · Sliders · Pump · Carry Bag · Guide
@@ -228,12 +464,12 @@ Replace the reference text View full details with:
 Buy on Amazon
 
 - CTA behavior:
+    - Use the shared MUUVA CTA/button component defined in the site-wide foundation.
     - The Buy on Amazon text/button should be clearly visible.
     - It should link to the Amazon product page once the final Amazon URL is available.
-    - For now, use a placeholder link such as #.
+    - For now, use a placeholder link such as `#` if no final URL has been provided to the implementation.
     - The design should feel elegant, not aggressive.
     - Avoid using a loud orange Amazon-style button unless requested later.
-    - The CTA may be styled as an elegant text link with arrow or as a refined button.
     - Suggested CTA text: Buy on Amazon →
 
 - Image click behavior
@@ -252,12 +488,12 @@ Buy on Amazon
     The image reel should use the product images from:
     `src/assets/images/product/`
 
--  Images order for the reel
+- Images order for the reel
     `src/assets/images/product/kit1.png`
     `src/assets/images/product/ring1.png`
     `src/assets/images/product/ball1.png`
     `src/assets/images/product/ball_exercise.png`
-    
+
 - Gallery design direction
     - Dark or softly blurred overlay behind the image.
     - Large centered image.
@@ -268,226 +504,57 @@ Buy on Amazon
     - The gallery should feel clean, premium, and editorial.
 
 - What to borrow from the sketch
-    Two-column product layout.
-    Large product image on the left.
-    Product information on the right.
-    Clean white or neutral background.
-    Minimal product purchase feeling.
-    Clear CTA on the right side.
-    Premium spacing.
+    - Two-column product layout.
+    - Large product image on the left.
+    - Product information on the right.
+    - Clean white or neutral background.
+    - Minimal product purchase feeling.
+    - Clear CTA on the right side.
+    - Premium spacing.
 
 - What to change from the sketch
-    Show only one color: Beige.
-    Replace View full details with Buy on Amazon.
-    Do not include multiple color options.
-    Do not use the exact reference product layout too literally.
-    Do not include unnecessary e-commerce elements unless needed.
+    - Show only one color: Beige.
+    - Replace View full details with Buy on Amazon.
+    - Do not include multiple color options.
+    - Do not use the exact reference product layout too literally.
+    - Do not include unnecessary e-commerce elements unless needed.
 
 - What not to do
-    Do not make the section look like a generic Shopify template.
-    Do not use loud discount badges.
-    Do not show multiple product colors.
-    Do not make the CTA too aggressive.
-    Do not overcrowd the section with too much text.
-    Do not make the gallery open a new page; it should open as an overlay/modal.
+    - Do not make the section look like a generic Shopify template.
+    - Do not use loud discount badges.
+    - Do not show multiple product colors.
+    - Do not make the CTA too aggressive.
+    - Do not overcrowd the section with too much text.
+    - Do not make the gallery open a new page; it should open as an overlay/modal.
 
-## 5.4 Guided Routines Section Reference
-- Section name
-Guided Routines
+---
 
-- Source reference image
-`references/screenshots/guided-routines-section-reference.png`
+## 7. Important Rules for Codex
 
-- Purpose
-This section should communicate that the Pilates Essential Kit includes complimentary access to a digital product: guided Pilates routines. It should add value to the physical kit and make the product feel like a complete movement experience, not only a set of accessories.
-
-- Section placement
-Place this section directly after the Product Purchase Section and before the Styled by You Gallery Section.
-
-- Suggested page flow:
-    ```text
-    [ Product Purchase Section ]
-    [ Guided Routines Section ]
-    [ Styled by You Gallery Section ]
-    [ Footer ]
-    ```
-
-- Overall feeling
-The section should feel calm, premium, modern, and supportive. It should introduce the digital content in a clean editorial way, without looking promotional or overly sales-focused.
-
-- Layout description
-Use a two-column desktop layout:
-    ```text
-    [ Lifestyle image ]        [ Guided routines content block ]
-    ```
-
-- Left side
-    - Display one large lifestyle image.
-    - The image should show a woman using or exercising with the Pilates kit in a warm, calm home environment.
-    - The image should occupy approximately 50% of the section width.
-    - Use an edge-to-edge image within its half of the section.
-    - The image should feel natural, aspirational, and aligned with the premium muuva aesthetic.
-
-- Right side
-    - Use a soft, very light neutral or muted pale background.
-    - Place a short headline, supporting text, and CTA centered vertically inside the content area.
-    - Keep generous empty space around the text.
-    - The content block should feel refined and minimal.
-
-- Content direction
-    - Small optional label:
-    `Included with your kit`
-
-    - Headline:
-    `Guided routines included`
-
-    - Supporting text:
-    `Your kit includes complimentary access to guided Pilates routines designed to help you move with confidence, from your first session onwards.`
-
-    - CTA:
-    `Explore guided routines →`
-
-- CTA behavior
-    - For now, use a placeholder link such as `#`.
-    - The CTA can be styled as a refined pill-shaped button or an elegant text link.
-    - It should feel premium and subtle, not loud or overly commercial.
-    - Do not use strong Amazon orange or bright fitness-style colors.
-
-- Visual style direction
-    - The right-side background should contrast softly with the image while remaining within the neutral muuva palette.
-    - Keep the design editorial, calm, and spacious.
-    - Use dark charcoal text.
-    - The headline should be visually stronger than the body text.
-    - The CTA should be clearly visible but understated.
-
-- Desktop layout
-    - Image on the left.
-    - Text content block on the right.
-    - Both sides should have equal or near-equal width.
-    - The section should feel like one horizontal visual block.
-
-- Mobile layout
-    - Stack the layout vertically.
-    - Show the image first.
-    - Show the text content block underneath.
-    - Maintain comfortable padding and centered text.
-    - Avoid making the content block feel too tall or empty on small screens.
-
-- Lifestyle image asset
-    `src/assets/images/Model/ball_exercise1.png`
-    - Do not use external images unless explicitly requested.
-
-- What to borrow from the sketch
-    - Two-column layout.
-    - Lifestyle image on the left.
-    - Soft contrasting content panel on the right.
-    - Short value-focused message.
-    - Centered CTA within the text panel.
-
-- What to change from the sketch
-    - Use muuva branding and tone.
-    - Do not mention any reference brand.
-    - Keep the copy more premium and aligned with the muuva identity.
-    - Use `Guided routines included` rather than heavily promotional messaging.
-
-- What not to do
-    - Do not make it look like an advertisement banner.
-    - Do not overcrowd the section with multiple benefits or icons.
-    - Do not use bright blue, neon, or sporty colors.
-    - Do not include app screens, login forms, or membership details yet.
-    - Do not imply paid subscriptions or ongoing fees.
-
-## 5.5 Lifestyle Carousel Section Reference
-- Section name
-Lifestyle Carousel
-
-- Source reference image
-`references/screenshots/lifeStyle-reference.png`
-
-- Purpose
-This section should show lifestyle imagery for the Pilates Essential Kit and make the page feel more editorial, social, and premium after the guided routines message.
-
-- Section placement
-Place this section directly after the Guided Routines Section and before the Footer.
-
-- Suggested page flow:
-    ```text
-    [ Guided Routines Section ]
-    [ Lifestyle Carousel Section ]
-    [ Footer ]
-    ```
-
-- Visible heading
-`Styled by You.`
-
-- Image asset folder
-Use the local lifestyle images from:
-`src/assets/images/lifestyle/`
-
-- Image order
-    1. `lifeStyle1.png`
-    2. `lifeStyle2.png`
-    3. `lifeStyle3.png`
-    4. `lifeStyle4.png`
-    5. `lifeStyle5.png`
-    6. `lifeStyle6.png`
-    7. `lifeStyle7.png`
-    8. `lifeStyle8.png`
-
-- Overall feeling
-The section should feel premium, minimal, calm, feminine, and editorial. The photos should be the dominant visual element and the section should avoid heavy borders, shadows, badges, or loud promotional styling.
-
-- Layout direction
-    - Use a clean warm/light neutral background.
-    - Place the heading above the carousel, aligned toward the left.
-    - Place subtle previous and next arrow controls near the top-right, aligned with the heading.
-    - Display the images in a horizontal scrollable carousel.
-    - Use portrait-oriented image cards with consistent height and width.
-    - Use small refined gaps between images.
-    - Use `object-cover` so every image crops consistently and elegantly.
-    - Let the next image appear slightly at the right edge to suggest more content is available.
-
-- Carousel behavior
-    - Support native horizontal scrolling.
-    - Support touch dragging/swiping on mobile devices.
-    - Use previous and next arrow buttons that scroll smoothly.
-    - Hide the scrollbar visually while keeping scrolling accessible.
-    - Disable or visually soften the previous arrow at the beginning and the next arrow at the end.
-
-- Responsive behavior
-    - Desktop: show approximately four lifestyle images in the viewport.
-    - Tablet: show approximately two or three images.
-    - Mobile: show approximately one full image plus part of the next image.
-    - Keep touch/swipe scrolling natural on mobile.
-
-- What to borrow from the reference
-    - Horizontal image carousel structure.
-    - Left-aligned heading above the images.
-    - Subtle top-right arrow controls.
-    - A partial next image visible at the right edge.
-
-- What not to do
-    - Do not copy the reference brand or styling exactly.
-    - Do not use heavy carousel libraries.
-    - Do not use bright blue, neon colors, heavy shadows, or sporty styling.
-    - Do not overcrowd the section with extra text, icons, or promotional badges.
-
-## 6. Important Rules for Codex
-- Use this brief as the main design direction.
+- Read this brief before making design or layout changes.
+- Treat **Section 5: Site-wide Design Foundation** as the main source of truth for typography, colors, spacing, containers, and shared UI styling.
 - Use visual references only as inspiration.
 - Do not copy any external website exactly.
 - Keep the design minimal, premium, calm, and editorial.
-- Avoid sporty, loud, or generic fitness styling.
+- Avoid sporty, loud, overly corporate, or generic fitness styling.
 - Keep the code beginner-friendly and easy to understand.
 - Use React + Tailwind CSS.
 - Use reusable components.
-- Make the page responsive for desktop and mobile.
+- Prefer shared design tokens/classes/components over repeated hard-coded values.
+- Make all pages responsive for desktop, tablet, and mobile.
+- Preserve existing content unless the requested task explicitly includes copy changes.
+- During foundation-cleanup tasks, do not redesign individual sections unless explicitly requested.
 - Before making large structural changes, explain the plan first.
+- After a major design-system pass, stop and allow visual review before making additional unrelated design changes.
 
-## 7. Technical Requirements
+## 8. Technical Requirements
+
 - Build locally first.
 - Use Vite + React + Tailwind CSS.
 - Use local assets from the `src/assets/` folder.
 - Use reference screenshots from the `references/screenshots/` folder.
+- Load **Manrope** and **Newsreader** consistently through one font-loading approach; do not mix multiple font-loading methods.
+- Use a reusable site/container pattern for global page alignment.
+- Use shared components for recurring UI such as Header, Footer, and CTA/Button elements.
 - No backend is needed for now.
-- No hosting or domain setup is needed yet.
+- No additional hosting or domain setup is needed for the current design work.

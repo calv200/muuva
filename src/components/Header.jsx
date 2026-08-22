@@ -1,4 +1,5 @@
 import muuvaLogo from "../assets/images/muuvaLogo.png";
+import SiteContainer from "./SiteContainer.jsx";
 
 function SearchIcon() {
   return (
@@ -34,8 +35,8 @@ function GlobeIcon() {
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-30 bg-oat/95 backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
+    <header className="sticky top-0 z-30 bg-beige/95 backdrop-blur-sm">
+      <SiteContainer className="flex h-16 items-center justify-between">
         <a href="#" className="inline-flex items-center" aria-label="muuva home">
           <img
             className="h-4 w-auto object-contain"
@@ -45,7 +46,7 @@ export default function Header() {
         </a>
 
         <div className="flex items-center gap-5 sm:gap-8">
-          <nav className="hidden items-center gap-8 font-serif text-lg italic sm:flex">
+          <nav className="hidden items-center gap-8 text-[15px] font-medium sm:flex">
             <a className="underline underline-offset-4" href="#product">
               Shop
             </a>
@@ -71,7 +72,7 @@ export default function Header() {
             </button>
           </div>
         </div>
-      </div>
+      </SiteContainer>
     </header>
   );
 }

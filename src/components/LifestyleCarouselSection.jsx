@@ -7,6 +7,7 @@ import lifeStyle5 from "../assets/images/lifestyle/lifeStyle5.png";
 import lifeStyle6 from "../assets/images/lifestyle/lifeStyle6.png";
 import lifeStyle7 from "../assets/images/lifestyle/lifeStyle7.png";
 import lifeStyle8 from "../assets/images/lifestyle/lifeStyle8.png";
+import SiteContainer from "./SiteContainer.jsx";
 
 const lifestyleImages = [
   {
@@ -82,16 +83,16 @@ export default function LifestyleCarouselSection() {
   }, []);
 
   return (
-    <section className="bg-[#fbf8f2] px-5 py-16 sm:px-8 sm:py-24">
-      <div className="mx-auto max-w-7xl">
+    <section className="section-pad bg-cream">
+      <SiteContainer>
         <div className="mb-8 flex items-center justify-between gap-6 sm:mb-10">
-          <h2 className="font-serif text-4xl font-medium leading-none text-ink sm:text-5xl">
+          <h2 className="font-serif text-[clamp(2rem,5vw,2.75rem)] font-medium leading-[1.05] text-ink">
             Styled by You.
           </h2>
 
           <div className="flex items-center gap-2">
             <button
-              className={`grid h-9 w-9 place-items-center rounded-full border border-ink/20 text-xl leading-none text-ink/70 transition hover:border-ink/40 hover:text-ink ${
+              className={`grid h-9 w-9 place-items-center rounded-full border border-softborder text-xl leading-none text-muted transition hover:border-ink/40 hover:text-ink ${
                 canScrollPrevious ? "" : "cursor-default opacity-35"
               }`}
               type="button"
@@ -102,7 +103,7 @@ export default function LifestyleCarouselSection() {
               &lsaquo;
             </button>
             <button
-              className={`grid h-9 w-9 place-items-center rounded-full border border-ink/20 text-xl leading-none text-ink/70 transition hover:border-ink/40 hover:text-ink ${
+              className={`grid h-9 w-9 place-items-center rounded-full border border-softborder text-xl leading-none text-muted transition hover:border-ink/40 hover:text-ink ${
                 canScrollNext ? "" : "cursor-default opacity-35"
               }`}
               type="button"
@@ -135,7 +136,7 @@ export default function LifestyleCarouselSection() {
             </div>
           ))}
         </div>
-      </div>
+      </SiteContainer>
     </section>
   );
 }

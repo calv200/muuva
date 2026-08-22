@@ -1,4 +1,5 @@
 import heroVideo from "../assets/videos/hero-video.mp4";
+import SiteContainer from "./SiteContainer.jsx";
 
 export default function Hero() {
   return (
@@ -15,14 +16,16 @@ export default function Hero() {
         />
       </div>
 
-      <div className="mx-auto max-w-3xl px-6 py-14 text-center sm:py-20">
-        <h1 className="font-serif text-5xl font-medium leading-none text-balance sm:text-7xl">
-          Pilates essentials,
-        </h1>
-        <p className="mt-4 text-lg text-ink/75 sm:text-2xl">
-          Styled for everyday movement.
-        </p>
-      </div>
+      <SiteContainer className="py-12 text-center sm:py-16 lg:py-20">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="font-serif text-[clamp(2.25rem,7vw,3.5rem)] font-medium leading-[1.05] text-balance">
+            Pilates essentials,
+          </h1>
+          <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
+            Styled for everyday movement.
+          </p>
+        </div>
+      </SiteContainer>
     </section>
   );
 }
