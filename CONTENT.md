@@ -1,28 +1,15 @@
-# Hero Section Copy
-
-## Intro text below hero video
-
-### Headline:
-Pilates essentials,
-
-### Subtitle:
-Styled for everyday movement.
-
 # Product Purchase Section Copy
-
-## Product label
-muuva
 
 ## Product title
 Pilates Essential Kit
 
-## Product description
-Pilates Ring · Resistance Band · Soft Pilates Ball · Sliders · Pump · Carry Bag · Guide
+## Supporting copy
+Everything you need to make Pilates part of your everyday routine.
 
-## Color
-Beige
+## More info CTA
+More info
 
-## CTA
+## Buy CTA
 Buy on Amazon →
 
 ## Amazon link

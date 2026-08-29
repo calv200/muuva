@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
-import kitImage from "../assets/images/Products/kit1.png";
+import billboardImage from "../assets/images/Products/kit-billboard.webp";
 import ringImage from "../assets/images/Products/ring1.png";
 import ballImage from "../assets/images/Products/ball1.png";
-import ballExerciseImage from "../assets/images/Products/ball_exercise.png";
-import CtaLink from "./CtaLink.jsx";
+import bandImage from "../assets/images/Products/band1.png";
+import sliderImage from "../assets/images/Products/slider1.png";
+import kitImage from "../assets/images/Products/kit1.png";
+import CtaLink, { ctaClassName } from "./CtaLink.jsx";
 import SiteContainer from "./SiteContainer.jsx";
 
 const amazonUrl =
   "https://www.amazon.com/kure-fit-Pilates-Essentials-Equipment-Included/dp/B0FP551YZ2";
 
 const productImages = [
-  { src: kitImage, alt: "Pilates Essential Kit" },
   { src: ringImage, alt: "Pilates ring from the Pilates Essential Kit" },
   { src: ballImage, alt: "Soft Pilates ball from the Pilates Essential Kit" },
-  { src: ballExerciseImage, alt: "Pilates ball exercise" },
+  { src: bandImage, alt: "Resistance band from the Pilates Essential Kit" },
+  { src: sliderImage, alt: "Pilates sliders from the Pilates Essential Kit" },
+  { src: kitImage, alt: "Pilates Essential Kit" },
 ];
 
 export default function ProductPurchase() {
@@ -47,47 +50,33 @@ export default function ProductPurchase() {
 
   return (
     <section id="product" className="section-pad bg-cream">
-      <SiteContainer className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16">
-        <button
-          type="button"
-          className="group overflow-hidden bg-linen shadow-soft"
-          onClick={() => setIsGalleryOpen(true)}
-          aria-label="Open product image gallery"
-        >
-          <img
-            className="aspect-[4/5] h-full w-full object-cover transition duration-500 group-hover:scale-[1.02] sm:aspect-[5/4] lg:aspect-[4/5]"
-            src={productImages[0].src}
-            alt={productImages[0].alt}
-          />
-        </button>
-
-        <div className="mx-auto max-w-xl lg:mx-0">
-          <p className="muuva-label text-brand">
-            muuva
-          </p>
-          <h2 className="mt-5 font-serif text-[clamp(2rem,5vw,2.5rem)] font-medium leading-[1.1] text-balance">
+      <SiteContainer className="text-center">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="font-serif text-[clamp(2.5rem,6vw,4rem)] font-medium leading-[1.05] text-balance text-ink">
             Pilates Essential Kit
           </h2>
-          <p className="muuva-support mt-6 text-muted">
-            {"Pilates Ring \u00b7 Resistance Band \u00b7 Soft Pilates Ball \u00b7 Sliders \u00b7 Pump \u00b7 Carry Bag \u00b7 Guide"}
+          <p className="muuva-support mx-auto mt-4 max-w-2xl text-muted">
+            Everything you need to make Pilates part of your everyday routine.
           </p>
 
-          <div className="mt-10 border-y border-softborder py-7">
-            <p className="muuva-label text-muted">
-              Color
-            </p>
-            <div className="mt-4 flex items-center gap-3">
-              <span
-                className="h-7 w-7 rounded-full border border-softborder bg-beige shadow-inner"
-                aria-hidden="true"
-              />
-              <span className="muuva-ui">Beige</span>
-            </div>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+            <button
+              className={ctaClassName}
+              type="button"
+              onClick={() => setIsGalleryOpen(true)}
+            >
+              More info
+            </button>
+            <CtaLink href={amazonUrl}>{"Buy on Amazon \u2192"}</CtaLink>
           </div>
+        </div>
 
-          <CtaLink className="mt-9" href={amazonUrl}>
-            {"Buy on Amazon \u2192"}
-          </CtaLink>
+        <div className="mx-auto mt-12 max-w-site sm:mt-14 lg:mt-16">
+          <img
+            className="mx-auto w-full max-w-[1120px] object-contain"
+            src={billboardImage}
+            alt="Pilates Essential Kit arranged as a complete home workout set"
+          />
         </div>
       </SiteContainer>
 

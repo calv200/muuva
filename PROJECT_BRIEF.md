@@ -16,11 +16,10 @@ The website should feel closer to a modern lifestyle / design brand than to a co
 ## 4. Current Landing Page Structure
 1. Header
 2. Hero video
-3. Intro text below hero
-4. Product purchase section
-5. Guided Routines promotional section
-6. Styled by You lifestyle image carousel
-7. Footer
+3. Product purchase section
+4. Guided Routines promotional section
+5. Styled by You lifestyle image carousel
+6. Footer
 
 A separate **Guided Routines page** will be developed after the shared design foundation is cleaned up and approved.
 
@@ -339,15 +338,12 @@ During the design-foundation cleanup:
 `references/screenshots/hero-section-sketch.png`
 
 - Purpose
-This sketch defines the desired layout direction for the hero section, including the header, hero video, and introductory text block placed directly underneath the video.
+This sketch defines the desired layout direction for the hero section, including the header and hero video.
 
 - Hero layout description
-    The hero section should be composed of three main parts:
+    The hero section should be composed of two main parts:
     1. Header at the top.
     2. Hero video directly below the header.
-    3. Introductory text block directly below the video.
-
-The text block should not overlay the video. It should appear underneath the video, centered on a clean light background.
 
 - Video file location
     `src/assets/videos/hero-video.mp4`
@@ -361,172 +357,104 @@ The text block should not overlay the video. It should appear underneath the vid
     - Should not show video controls
     - Should feel premium, calm, and editorial
 
-- Text block below video
-    Place the following phrase directly underneath the video:
-    - Headline:
-    `Pilates essentials,`
-    - Subtitle:
-    `Styled for everyday movement.`
-
-- Text block positioning
-    - The text should be centered horizontally.
-    - It should appear immediately after the hero video.
-    - Use generous vertical breathing room, but keep it visually connected to the video.
-    - The block should feel minimal, calm, and premium.
-    - The headline should be visually stronger than the subtitle.
-    - The subtitle should sit directly underneath the headline.
-
-- Text style direction
-    - Use **Newsreader** for the headline.
-    - Use **Manrope** for the subtitle.
-    - Avoid sporty or generic fitness styling.
-    - The text should feel editorial and refined.
-    - Use dark charcoal or soft black text from the global color system.
-    - Background should be light, warm, and neutral.
-
 - Suggested structure
     ```text
     [ Header ]
     [ Full-width hero video ]
-    [ Centered text block ]
-    Pilates essentials,
-    Styled for everyday movement.
     ```
 
 ### 6.3 Product Purchase Section Reference
 - Source image
-`references/screenshots/product-purchase-section-sketch.png`
+`references/screenshots/product-purchase-section-billboard-reference.png`
 
 - Purpose
-This section should appear after the user scrolls down from the hero section. It presents the Pilates Essential Kit as the main product and gives the visitor a clear path to buy it on Amazon.
+This section presents the Pilates Essential Kit as a calm editorial product billboard rather than an e-commerce product-detail panel.
 
 - Section placement
-Place this section directly after the hero/introduction area.
+Place this section directly after the hero video.
 
 - Suggested page flow:
     ```text
     [ Header ]
     [ Hero video ]
-    [ Centered intro text ]
-    Pilates essentials,
-    Styled for everyday movement.
     [ Product Purchase Section ]
+    [ Guided Routines promotional section ]
+    [ Styled by You lifestyle carousel ]
+    [ Footer ]
     ```
 
 - Overall feeling
-The section should feel minimal, premium, spacious, and product-focused. It should look closer to a refined e-commerce product page than a loud fitness sales page.
+The section should feel minimal, premium, spacious, product-first, and campaign-like. It should avoid generic Shopify, Amazon listing, or product-configuration styling.
 
 - Layout description
-    - Use a two-column desktop layout:
+Use a centered vertical billboard composition:
     ```text
-    [ Large product image / product collage ]        [ Product title and purchase information ]
+    Pilates Essential Kit
+    Everything you need to make Pilates part of your everyday routine.
+    [ More info ] [ Buy on Amazon -> ]
+
+    [ Large transparent product kit composition ]
     ```
 
-    - Left side:
-        - Large product visual.
-        - The image should show the full Pilates Essential Kit clearly.
-        - Product should feel clean, premium, and centered.
-        - Use lots of white or warm neutral negative space.
+- Product title
+    - Text: `Pilates Essential Kit`
+    - Use **Newsreader**.
+    - Use dark soft charcoal from the design system.
+    - The title may use the upper end of the established section/display heading scale.
+    - Keep the line-height tight but comfortable.
 
-    - Right side:
-        - Small brand/category label above the title.
-        - Large product title.
-        - One color option only: Beige.
-        - A clear Buy on Amazon action.
-        - Minimal supporting details.
+- Supporting copy
+    - Text: `Everything you need to make Pilates part of your everyday routine.`
+    - Use **Manrope**.
+    - Use the muted text color from the design system.
+    - Keep it clearly smaller than the title but comfortably readable.
 
-- Product image area
-    - Use the beige Pilates kit product images from the asset folder.
-    - Main image should show the full kit or a polished product collage.
-    - Image should be large and visually dominant.
-    - Keep background clean and neutral.
-    - Avoid cluttered product grid styling.
-    - The product should appear premium and editorial.
+- CTAs
+    - Show `More info` and `Buy on Amazon ->` side by side on desktop.
+    - Use the shared MUUVA CTA/button foundation.
+    - Keep the treatment minimal, editorial, and restrained.
+    - Do not use Apple-style blue or Amazon-orange styling.
+    - Preserve the existing Amazon destination.
 
-- Titles
-    - Use **Newsreader** for the product title.
-    - Use **Manrope** for product descriptions, labels, color information, and CTA text.
-    - Product title: Pilates Essential Kit
-    - Optional subtitle or expanded product description:
-    Pilates Ring · Resistance Band · Soft Pilates Ball · Sliders · Pump · Carry Bag · Guide
+- Main product image
+    - Use the transparent product composition asset:
+    `src/assets/images/Products/kit-billboard.webp`
+    - The image has a transparent background and natural/contact shadows.
+    - Display it with `object-contain`.
+    - Let it sit directly on the CSS-controlled section background.
+    - Do not add a white/beige rectangle behind it.
+    - Do not add a heavy CSS drop shadow.
+    - Preserve the horizontal/wide composition.
 
-- Product color options
-Only show one color option:
-    Beige
-Do not show multiple color swatches.
-If a color indicator is used:
-    Show only one beige circle.
-    Do not include brown, pink, black, or any other color options.
-    The selected color should be clearly beige.
+- Gallery behavior
+    - The main billboard image is not the gallery trigger.
+    - The `More info` button opens the existing product gallery/lightbox.
+    - The gallery should open as an overlay/modal, not a separate page.
+    - Preserve previous/next controls, close control, Escape-to-close behavior, and keyboard arrow navigation where available.
+    - Keep the gallery minimal and premium with a dark or softly blurred overlay.
 
-- CTA
-Replace the reference text View full details with:
-Buy on Amazon
+- Gallery images
+Keep this existing image order:
+    `src/assets/images/Products/ring1.png`
+    `src/assets/images/Products/ball1.png`
+    `src/assets/images/Products/band1.png`
+    `src/assets/images/Products/slider1.png`
+    `src/assets/images/Products/kit1.png`
 
-- CTA behavior:
-    - Use the shared MUUVA CTA/button component defined in the site-wide foundation.
-    - The Buy on Amazon text/button should be clearly visible.
-    - It should link to the Amazon product page once the final Amazon URL is available.
-    - For now, use a placeholder link such as `#` if no final URL has been provided to the implementation.
-    - The design should feel elegant, not aggressive.
-    - Avoid using a loud orange Amazon-style button unless requested later.
-    - Suggested CTA text: Buy on Amazon →
+- Removed product-detail UI
+Do not show:
+    - the small `muuva` product/category label above the title
+    - `COLOR` label
+    - beige color selector or swatch
+    - product configuration UI
+    - horizontal divider lines
+    - the long contents line
+    - product-detail panel styling
 
-- Image click behavior
-    When the user clicks the main product image, open a product image gallery / reel.
-    - The gallery should:
-        - Display all product images already stored in the asset folder.
-        - Open as a modal or lightbox overlay.
-        - Allow the user to move through images.
-        - Include previous and next controls.
-        - Allow closing the gallery.
-        - Work on desktop and mobile.
-        - Support keyboard close with Esc if possible.
-        - Keep the design minimal and premium.
-
-- Product gallery / reel behavior
-    The image reel should use the product images from:
-    `src/assets/images/product/`
-
-- Images order for the reel
-    `src/assets/images/product/kit1.png`
-    `src/assets/images/product/ring1.png`
-    `src/assets/images/product/ball1.png`
-    `src/assets/images/product/ball_exercise.png`
-
-- Gallery design direction
-    - Dark or softly blurred overlay behind the image.
-    - Large centered image.
-    - Minimal arrows for previous/next.
-    - Small close button in the top-right.
-    - Optional thumbnail row at the bottom.
-    - Avoid busy carousel styling.
-    - The gallery should feel clean, premium, and editorial.
-
-- What to borrow from the sketch
-    - Two-column product layout.
-    - Large product image on the left.
-    - Product information on the right.
-    - Clean white or neutral background.
-    - Minimal product purchase feeling.
-    - Clear CTA on the right side.
-    - Premium spacing.
-
-- What to change from the sketch
-    - Show only one color: Beige.
-    - Replace View full details with Buy on Amazon.
-    - Do not include multiple color options.
-    - Do not use the exact reference product layout too literally.
-    - Do not include unnecessary e-commerce elements unless needed.
-
-- What not to do
-    - Do not make the section look like a generic Shopify template.
-    - Do not use loud discount badges.
-    - Do not show multiple product colors.
-    - Do not make the CTA too aggressive.
-    - Do not overcrowd the section with too much text.
-    - Do not make the gallery open a new page; it should open as an overlay/modal.
-
+- Responsive behavior
+    - Desktop: centered title, supporting copy, side-by-side CTAs, large wide product composition below.
+    - Tablet: maintain centered hierarchy and scale the product image intentionally.
+    - Mobile: keep title and supporting copy centered, allow CTAs to stack if needed, and preserve the full wide kit composition with `object-contain` and no horizontal overflow.
 ---
 
 ## 7. Important Rules for Codex
