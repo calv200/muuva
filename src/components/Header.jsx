@@ -37,7 +37,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-30 bg-beige/95 backdrop-blur-sm">
       <SiteContainer className="flex h-16 items-center justify-between">
-        <a href="#" className="inline-flex items-center" aria-label="muuva home">
+        <a href="#/" className="inline-flex items-center" aria-label="muuva home">
           <img
             className="h-[18px] w-auto object-contain"
             src={muuvaLogo}
@@ -55,7 +55,7 @@ export default function Header() {
             </a>
             <a
               className="underline decoration-ink/70 underline-offset-4 transition hover:decoration-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-              href="#"
+              href="#/guided-routines"
             >
               Training sessions
             </a>

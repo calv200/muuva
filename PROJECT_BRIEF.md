@@ -21,7 +21,7 @@ The website should feel closer to a modern lifestyle / design brand than to a co
 5. Styled by You lifestyle image carousel
 6. Footer
 
-A separate **Guided Routines page** will be developed after the shared design foundation is cleaned up and approved.
+A separate **Guided Routines page** now exists as a GitHub Pages-safe routed experience and can continue to be refined after visual review.
 
 ---
 
@@ -455,6 +455,133 @@ Do not show:
     - Desktop: centered title, supporting copy, side-by-side CTAs, large wide product composition below.
     - Tablet: maintain centered hierarchy and scale the product image intentionally.
     - Mobile: keep title and supporting copy centered, allow CTAs to stack if needed, and preserve the full wide kit composition with `object-contain` and no horizontal overflow.
+
+### 6.4 Guided Routines Page
+
+- Page route
+Use a GitHub Pages-safe hash route:
+`#/guided-routines`
+
+Routine detail pages use:
+`#/guided-routines/ring`
+`#/guided-routines/ball`
+`#/guided-routines/band`
+`#/guided-routines/full-body`
+
+The Sliders routine has no video URL yet, so it should not link to a detail page until a URL is added.
+
+- Routing decision
+The project is deployed as a static Vite build through GitHub Pages. Use lightweight hash routing in React instead of `BrowserRouter` so direct entry to the deployed site does not require a server-side fallback.
+
+- Page structure
+    ```text
+    [ Header ]
+    [ Guided Routines dynamic hero ]
+    [ Workout filters ]
+    [ Routine grid ]
+    [ Footer ]
+    ```
+
+- Default hero
+When no filter is active, show:
+    - Heading: `Guided routines`
+    - Description: `Move with your essentials. Follow simple Pilates sessions designed to make movement part of your everyday routine.`
+
+Do not show an individual product image or product CTA in the default state.
+
+- Filters
+Show only:
+    - Ring
+    - Ball
+    - Sliders
+    - Band
+    - Full body
+
+Only one filter can be active at a time. Clicking the active filter again clears it and returns to the default state showing all available routines.
+
+- Dynamic hero behavior
+The same hero area changes when a filter is active.
+
+Equipment filters use a two-column editorial layout on desktop:
+    ```text
+    [ Text/content ] [ Product image or neutral placeholder ]
+    ```
+
+Full body uses a lifestyle image or neutral placeholder and does not show the Pilates Essential Kit CTA.
+
+- Equipment hero copy
+Ring:
+    - Heading: `Pilates Ring Routines`
+    - Description: `Add resistance and control to familiar movements while engaging your core, legs and upper body.`
+
+Ball:
+    - Heading: `Pilates Ball Routines`
+    - Description: `Small prop, endless possibilities. Use the ball to challenge stability, alignment and deeper muscle control.`
+
+Sliders:
+    - Heading: `Slider Routines`
+    - Description: `Turn simple movements into controlled, full-range exercises that challenge strength, stability and coordination.`
+
+Band:
+    - Heading: `Resistance Band Routines`
+    - Description: `Add just the right amount of resistance to strengthen, activate and move with more intention.`
+
+For equipment categories, show the discreet text CTA:
+`Part of the Pilates Essential Kit · Explore the kit →`
+
+Full body:
+    - Heading: `Full Body Routines`
+    - Description: `Balanced sessions designed to connect strength, control and mobility from head to toe.`
+
+- Routine grid
+Use a clean editorial card grid. Cards should show a custom thumbnail or neutral placeholder, a custom MUUVA play button overlay, a routine title, and category metadata. Do not load YouTube iframes inside the grid.
+
+- Routine detail pages
+Clicking a valid routine opens a detail page with:
+    ```text
+    [ Header ]
+    [ Same category hero ]
+    [ Back to Guided Routines ]
+    [ Large centered responsive YouTube iframe ]
+    [ Footer ]
+    ```
+
+The back link should return to `#/guided-routines` and preserve the active filter when possible, for example `#/guided-routines?filter=Ring`.
+
+- Video data
+Keep routine data and video URLs centralized in:
+`src/data/guidedRoutines.js`
+
+Temporary YouTube embed URLs:
+    - Ring: `https://www.youtube.com/embed/Ns9PKZRh2j4`
+    - Ball: `https://www.youtube.com/embed/eZBYO-GSlVk`
+    - Band: `https://www.youtube.com/embed/i9Ev0n22PYc`
+    - Full body: `https://www.youtube.com/embed/7X87YbXHo9c`
+
+No Slider video URL exists yet. Show `New routine coming soon.` for the Sliders filter.
+
+- Expected image assets
+Header images:
+    - `src/assets/images/guided-routines/headers/ring-header.png`
+    - `src/assets/images/guided-routines/headers/ball-header.png`
+    - `src/assets/images/guided-routines/headers/sliders-header.png`
+    - `src/assets/images/guided-routines/headers/band-header.png`
+    - `src/assets/images/guided-routines/headers/full-body-header.png`
+
+Thumbnails:
+    - `src/assets/images/guided-routines/thumbnails/ring-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/ball-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/sliders-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/band-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/full-body-routine-thumbnail.png`
+
+Missing assets should render as neutral placeholders and must not break the build.
+
+- How to add another routine
+Add or update one object in `src/data/guidedRoutines.js` with the routine `id`, `slug`, `title`, `meta`, `filters`, thumbnail filename, YouTube URLs, and matching category hero. Add the expected image file to the relevant `guided-routines` asset folder when ready.
+
+- Visual direction
+The page should feel curated, editorial, premium, and calm. Do not add search, ratings, fake durations, difficulty badges, progress UI, many filters, YouTube UI in cards, or dense fitness-platform styling.
 ---
 
 ## 7. Important Rules for Codex

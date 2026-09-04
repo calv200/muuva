@@ -27,7 +27,7 @@ export default function GuidedRoutinesSection() {
               onwards.
             </p>
 
-            <CtaLink className="mt-9" href="#">
+            <CtaLink className="mt-9" href="#/guided-routines">
               {"Explore guided routines \u2192"}
             </CtaLink>
           </div>
