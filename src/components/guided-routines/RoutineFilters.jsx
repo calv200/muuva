@@ -20,7 +20,7 @@ export default function RoutineFilters({ filters, activeFilter, onFilterChange }
                 }`}
                 type="button"
                 aria-pressed={isActive}
-                onClick={() => onFilterChange(isActive ? "" : filter)}
+                onClick={() => onFilterChange(filter)}
               >
                 {filter}
               </button>

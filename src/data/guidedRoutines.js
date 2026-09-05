@@ -16,15 +16,25 @@ const thumbnailAssets = import.meta.glob(
   }
 );
 
-function findAsset(assets, filename) {
+function findAsset(assets, filenames) {
+  const names = Array.isArray(filenames) ? filenames : [filenames];
   const match = Object.entries(assets).find(([path]) =>
-    path.endsWith(`/${filename}`)
+    names.some((filename) => path.endsWith(`/${filename}`))
   );
 
   return match ? match[1] : "";
 }
 
-export const routineFilters = ["Ring", "Ball", "Sliders", "Band", "Full body"];
+export const allFilter = "All";
+
+export const routineFilters = [
+  allFilter,
+  "Ring",
+  "Ball",
+  "Sliders",
+  "Band",
+  "Full body",
+];
 
 export const categoryHeroes = {
   ring: {
@@ -32,7 +42,7 @@ export const categoryHeroes = {
     title: "Pilates Ring Routines",
     description:
       "Add resistance and control to familiar movements while engaging your core, legs and upper body.",
-    image: findAsset(headerAssets, "ring-header.png"),
+    image: findAsset(headerAssets, ["ring-header.webp", "ring-header.png"]),
     imageAlt: "Pilates ring for guided routines",
     imageKind: "product",
     kitCta: true,
@@ -42,7 +52,7 @@ export const categoryHeroes = {
     title: "Pilates Ball Routines",
     description:
       "Small prop, endless possibilities. Use the ball to challenge stability, alignment and deeper muscle control.",
-    image: findAsset(headerAssets, "ball-header.png"),
+    image: findAsset(headerAssets, ["ball-header.webp", "ball-header.png"]),
     imageAlt: "Pilates ball for guided routines",
     imageKind: "product",
     kitCta: true,
@@ -52,7 +62,10 @@ export const categoryHeroes = {
     title: "Slider Routines",
     description:
       "Turn simple movements into controlled, full-range exercises that challenge strength, stability and coordination.",
-    image: findAsset(headerAssets, "sliders-header.png"),
+    image: findAsset(headerAssets, [
+      "sliders-header.webp",
+      "sliders-header.png",
+    ]),
     imageAlt: "Pilates sliders for guided routines",
     imageKind: "product",
     kitCta: true,
@@ -62,7 +75,7 @@ export const categoryHeroes = {
     title: "Resistance Band Routines",
     description:
       "Add just the right amount of resistance to strengthen, activate and move with more intention.",
-    image: findAsset(headerAssets, "band-header.png"),
+    image: findAsset(headerAssets, ["band-header.webp", "band-header.png"]),
     imageAlt: "Resistance band for guided routines",
     imageKind: "product",
     kitCta: true,
@@ -72,7 +85,10 @@ export const categoryHeroes = {
     title: "Full Body Routines",
     description:
       "Balanced sessions designed to connect strength, control and mobility from head to toe.",
-    image: findAsset(headerAssets, "full-body-header.png"),
+    image: findAsset(headerAssets, [
+      "full-body-header.webp",
+      "full-body-header.png",
+    ]),
     imageAlt: "Full body Pilates routine in a calm studio setting",
     imageKind: "lifestyle",
     kitCta: false,
@@ -86,7 +102,10 @@ export const routines = [
     title: "Pilates Ring Routine",
     meta: "Pilates Ring",
     filters: ["Ring"],
-    thumbnail: findAsset(thumbnailAssets, "ring-routine-thumbnail.png"),
+    thumbnail: findAsset(thumbnailAssets, [
+      "ring-routine-thumbnail.webp",
+      "ring-routine-thumbnail.png",
+    ]),
     thumbnailAlt: "Pilates ring routine thumbnail",
     youtubeUrl: "https://www.youtube.com/watch?v=Ns9PKZRh2j4",
     youtubeEmbedUrl: "https://www.youtube.com/embed/Ns9PKZRh2j4",
@@ -98,7 +117,10 @@ export const routines = [
     title: "Pilates Ball Routine",
     meta: "Pilates Ball",
     filters: ["Ball"],
-    thumbnail: findAsset(thumbnailAssets, "ball-routine-thumbnail.png"),
+    thumbnail: findAsset(thumbnailAssets, [
+      "ball-routine-thumbnail.webp",
+      "ball-routine-thumbnail.png",
+    ]),
     thumbnailAlt: "Pilates ball routine thumbnail",
     youtubeUrl: "https://www.youtube.com/watch?v=eZBYO-GSlVk",
     youtubeEmbedUrl: "https://www.youtube.com/embed/eZBYO-GSlVk",
@@ -110,7 +132,10 @@ export const routines = [
     title: "Slider Routine",
     meta: "Sliders",
     filters: ["Sliders"],
-    thumbnail: findAsset(thumbnailAssets, "sliders-routine-thumbnail.png"),
+    thumbnail: findAsset(thumbnailAssets, [
+      "sliders-routine-thumbnail.webp",
+      "sliders-routine-thumbnail.png",
+    ]),
     thumbnailAlt: "Slider routine thumbnail",
     youtubeUrl: "",
     youtubeEmbedUrl: "",
@@ -122,7 +147,10 @@ export const routines = [
     title: "Resistance Band Routine",
     meta: "Resistance Band",
     filters: ["Band"],
-    thumbnail: findAsset(thumbnailAssets, "band-routine-thumbnail.png"),
+    thumbnail: findAsset(thumbnailAssets, [
+      "band-routine-thumbnail.webp",
+      "band-routine-thumbnail.png",
+    ]),
     thumbnailAlt: "Resistance band routine thumbnail",
     youtubeUrl: "https://www.youtube.com/watch?v=i9Ev0n22PYc",
     youtubeEmbedUrl: "https://www.youtube.com/embed/i9Ev0n22PYc",
@@ -134,7 +162,10 @@ export const routines = [
     title: "Full Body Pilates Routine",
     meta: "Full Body",
     filters: ["Full body"],
-    thumbnail: findAsset(thumbnailAssets, "full-body-routine-thumbnail.png"),
+    thumbnail: findAsset(thumbnailAssets, [
+      "full-body-routine-thumbnail.webp",
+      "full-body-routine-thumbnail.png",
+    ]),
     thumbnailAlt: "Full body Pilates routine thumbnail",
     youtubeUrl: "https://www.youtube.com/watch?v=7X87YbXHo9c",
     youtubeEmbedUrl: "https://www.youtube.com/embed/7X87YbXHo9c",

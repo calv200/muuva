@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import billboardImage from "../assets/images/Products/kit-billboard.webp";
+import billboardImage from "../assets/images/Products/kit-billboard.png";
 import ringImage from "../assets/images/Products/ring1.png";
 import ballImage from "../assets/images/Products/ball1.png";
 import bandImage from "../assets/images/Products/band1.png";
 import sliderImage from "../assets/images/Products/slider1.png";
-import kitImage from "../assets/images/Products/kit1.png";
+import kitImage from "../assets/images/Products/Archive/kit1.png";
 import CtaLink, { ctaClassName } from "./CtaLink.jsx";
 import SiteContainer from "./SiteContainer.jsx";
 

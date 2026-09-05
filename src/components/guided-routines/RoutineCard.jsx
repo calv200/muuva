@@ -15,7 +15,9 @@ function PlayIcon() {
 
 export default function RoutineCard({ routine, activeFilter }) {
   const href = `#/guided-routines/${routine.slug}${
-    activeFilter ? `?filter=${encodeURIComponent(activeFilter)}` : ""
+    activeFilter && activeFilter !== "All"
+      ? `?filter=${encodeURIComponent(activeFilter)}`
+      : ""
   }`;
 
   return (

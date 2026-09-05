@@ -483,31 +483,38 @@ The project is deployed as a static Vite build through GitHub Pages. Use lightwe
     ```
 
 - Default hero
-When no filter is active, show:
+When `All` is active, show:
+    - Small label: `Guided routines`
     - Heading: `Guided routines`
     - Description: `Move with your essentials. Follow simple Pilates sessions designed to make movement part of your everyday routine.`
 
-Do not show an individual product image or product CTA in the default state.
+Do not show an individual product image or product CTA in the `All` state. The default hero must use the same fixed responsive hero height as every filtered state so the filter bar does not jump.
 
 - Filters
 Show only:
+    - All
     - Ring
     - Ball
     - Sliders
     - Band
     - Full body
 
-Only one filter can be active at a time. Clicking the active filter again clears it and returns to the default state showing all available routines.
+Only one filter can be active at a time. `All` represents the default state and shows every available routine. Selecting `All` resets the page to the complete routine collection and generic hero. Product filters should remain selected until another filter is chosen.
 
 - Dynamic hero behavior
 The same hero area changes when a filter is active.
 
-Equipment filters use a two-column editorial layout on desktop:
+Filtered heroes use the header image as one full-width background-image banner:
     ```text
-    [ Text/content ] [ Product image or neutral placeholder ]
+    [ Full-width background image ]
+    [ Left-aligned content within the normal site container ]
     ```
 
-Full body uses a lifestyle image or neutral placeholder and does not show the Pilates Essential Kit CTA.
+The hero image should span the available page width beneath the global navigation, while text remains aligned to the shared site container. The supplied hero assets place product imagery primarily on the right, so position hero copy in the left content area and preserve the right-side image composition. Use a very subtle warm-neutral readability layer rather than a heavy overlay.
+
+All hero states use an explicit fixed responsive height controlled by the hero container, not by the image's intrinsic dimensions. The current implementation uses the same height for `All`, Ring, Ball, Sliders, Band, and Full body at each breakpoint.
+
+Full body uses the `full-body-header` asset as the full-width hero background in the same manner as equipment filters and does not show the Pilates Essential Kit CTA.
 
 - Equipment hero copy
 Ring:
@@ -541,12 +548,15 @@ Clicking a valid routine opens a detail page with:
     ```text
     [ Header ]
     [ Same category hero ]
-    [ Back to Guided Routines ]
+    [ Centered video section viewport ]
+    [ Back to Guided Routines pill ]
     [ Large centered responsive YouTube iframe ]
     [ Footer ]
     ```
 
-The back link should return to `#/guided-routines` and preserve the active filter when possible, for example `#/guided-routines?filter=Ring`.
+The category hero remains above the video in the document. When a detail page opens, automatically position the video section in the viewport using immediate scroll behavior so the visitor does not need to manually scroll down. The video section should use a viewport-aware minimum height and center the responsive 16:9 iframe comfortably.
+
+The back link should look like an inactive filter pill and return to `#/guided-routines`, preserving the active filter when possible, for example `#/guided-routines?filter=Ring`.
 
 - Video data
 Keep routine data and video URLs centralized in:
@@ -562,20 +572,20 @@ No Slider video URL exists yet. Show `New routine coming soon.` for the Sliders 
 
 - Expected image assets
 Header images:
-    - `src/assets/images/guided-routines/headers/ring-header.png`
-    - `src/assets/images/guided-routines/headers/ball-header.png`
-    - `src/assets/images/guided-routines/headers/sliders-header.png`
-    - `src/assets/images/guided-routines/headers/band-header.png`
-    - `src/assets/images/guided-routines/headers/full-body-header.png`
+    - `src/assets/images/guided-routines/headers/ring-header.webp`
+    - `src/assets/images/guided-routines/headers/ball-header.webp`
+    - `src/assets/images/guided-routines/headers/sliders-header.webp`
+    - `src/assets/images/guided-routines/headers/band-header.webp`
+    - `src/assets/images/guided-routines/headers/full-body-header.webp`
 
 Thumbnails:
-    - `src/assets/images/guided-routines/thumbnails/ring-routine-thumbnail.png`
-    - `src/assets/images/guided-routines/thumbnails/ball-routine-thumbnail.png`
-    - `src/assets/images/guided-routines/thumbnails/sliders-routine-thumbnail.png`
-    - `src/assets/images/guided-routines/thumbnails/band-routine-thumbnail.png`
-    - `src/assets/images/guided-routines/thumbnails/full-body-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/ring-routine-thumbnail.webp`
+    - `src/assets/images/guided-routines/thumbnails/ball-routine-thumbnail.webp`
+    - `src/assets/images/guided-routines/thumbnails/sliders-routine-thumbnail.webp`
+    - `src/assets/images/guided-routines/thumbnails/band-routine-thumbnail.webp`
+    - `src/assets/images/guided-routines/thumbnails/full-body-routine-thumbnail.webp`
 
-Missing assets should render as neutral placeholders and must not break the build.
+Missing assets should render as neutral placeholders and must not break the build. The implementation may also support `.png` fallbacks while assets are being migrated.
 
 - How to add another routine
 Add or update one object in `src/data/guidedRoutines.js` with the routine `id`, `slug`, `title`, `meta`, `filters`, thumbnail filename, YouTube URLs, and matching category hero. Add the expected image file to the relevant `guided-routines` asset folder when ready.

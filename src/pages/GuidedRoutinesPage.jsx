@@ -3,6 +3,7 @@ import GuidedRoutineHero from "../components/guided-routines/GuidedRoutineHero.j
 import RoutineFilters from "../components/guided-routines/RoutineFilters.jsx";
 import RoutineGrid from "../components/guided-routines/RoutineGrid.jsx";
 import {
+  allFilter,
   categoryHeroes,
   routineFilters,
   routines,
@@ -10,18 +11,18 @@ import {
 } from "../data/guidedRoutines.js";
 
 function getValidFilter(filter) {
-  return routineFilters.includes(filter) ? filter : "";
+  return routineFilters.includes(filter) ? filter : allFilter;
 }
 
-export default function GuidedRoutinesPage({ initialFilter = "" }) {
+export default function GuidedRoutinesPage({ initialFilter = allFilter }) {
   const [activeFilter, setActiveFilter] = useState(getValidFilter(initialFilter));
-  const activeHero = activeFilter
+  const activeHero = activeFilter !== allFilter
     ? categoryHeroes[slugForFilter(activeFilter)]
     : null;
 
   const visibleRoutines = routines.filter((routine) => {
     if (!routine.youtubeEmbedUrl) return false;
-    if (!activeFilter) return true;
+    if (activeFilter === allFilter) return true;
     return routine.filters.includes(activeFilter);
   });
 
@@ -29,9 +30,13 @@ export default function GuidedRoutinesPage({ initialFilter = "" }) {
     setActiveFilter(getValidFilter(initialFilter));
   }, [initialFilter]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
-    window.location.hash = filter
+    window.location.hash = filter && filter !== allFilter
       ? `/guided-routines?filter=${encodeURIComponent(filter)}`
       : "/guided-routines";
   };
@@ -47,7 +52,6 @@ export default function GuidedRoutinesPage({ initialFilter = "" }) {
       <section className="section-pad bg-cream" aria-label="Workout routines">
         <div className="site-container">
           <RoutineGrid routines={visibleRoutines} activeFilter={activeFilter} />
-          {activeFilter === "Sliders" && <RoutineGrid routines={[]} />}
         </div>
       </section>
     </main>

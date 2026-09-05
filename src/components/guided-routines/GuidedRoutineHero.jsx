@@ -1,15 +1,19 @@
 import AssetPlaceholder from "./AssetPlaceholder.jsx";
 
 export default function GuidedRoutineHero({ hero }) {
+  const heroHeight =
+    "flex h-[460px] items-center sm:h-[430px] lg:h-[440px]";
+
   if (!hero) {
     return (
-      <section className="bg-warm py-16 sm:py-20 lg:py-24">
-        <div className="site-container text-center">
-          <div className="mx-auto max-w-3xl">
-            <h1 className="font-serif text-[clamp(2.5rem,6vw,4rem)] font-medium leading-[1.05] text-balance text-ink">
+      <section className={`${heroHeight} bg-warm`}>
+        <div className="site-container">
+          <div className="max-w-xl">
+            <p className="muuva-label text-brand">Guided routines</p>
+            <h1 className="mt-5 font-serif text-[clamp(2.5rem,6vw,4rem)] font-medium leading-[1.05] text-balance text-ink">
               Guided routines
             </h1>
-            <p className="muuva-support mx-auto mt-5 max-w-2xl text-muted">
+            <p className="muuva-support mt-5 max-w-xl text-muted">
               Move with your essentials. Follow simple Pilates sessions designed
               to make movement part of your everyday routine.
             </p>
@@ -20,9 +24,13 @@ export default function GuidedRoutineHero({ hero }) {
   }
 
   return (
-    <section className="bg-warm py-14 sm:py-18 lg:py-24">
-      <div className="site-container grid items-center gap-10 md:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-        <div>
+    <section
+      className={`${heroHeight} relative overflow-hidden bg-warm bg-cover bg-[position:62%_center] sm:bg-[position:center_center]`}
+      style={hero.image ? { backgroundImage: `url(${hero.image})` } : undefined}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-warm via-warm/90 to-warm/15" />
+      <div className="site-container relative z-10">
+        <div className="max-w-xl">
           <p className="muuva-label text-brand">Guided routines</p>
           <h1 className="mt-5 font-serif text-[clamp(2.25rem,5vw,3.5rem)] font-medium leading-[1.08] text-balance text-ink">
             {hero.title}
@@ -43,24 +51,18 @@ export default function GuidedRoutineHero({ hero }) {
             </p>
           )}
         </div>
-
-        <div className="mx-auto w-full max-w-xl overflow-hidden">
-          {hero.image ? (
-            <img
-              className="h-full max-h-[420px] w-full object-contain"
-              src={hero.image}
-              alt={hero.imageAlt}
-            />
-          ) : (
-            <AssetPlaceholder
-              kind={hero.imageKind}
-              label={`Add ${hero.filter} header image at src/assets/images/guided-routines/headers/${hero.filter
-                .toLowerCase()
-                .replace(/\s+/g, "-")}-header.png`}
-            />
-          )}
-        </div>
       </div>
+
+      {!hero.image && (
+        <div className="absolute inset-y-8 right-8 hidden w-[42%] lg:block">
+          <AssetPlaceholder
+            kind={hero.imageKind}
+            label={`Add ${hero.filter} header image at src/assets/images/guided-routines/headers/${hero.filter
+              .toLowerCase()
+              .replace(/\s+/g, "-")}-header.webp`}
+          />
+        </div>
+      )}
     </section>
   );
 }

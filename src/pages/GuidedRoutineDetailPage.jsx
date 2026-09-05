@@ -1,14 +1,27 @@
+import { useEffect, useRef } from "react";
 import GuidedRoutineHero from "../components/guided-routines/GuidedRoutineHero.jsx";
 import RoutineVideo from "../components/guided-routines/RoutineVideo.jsx";
 import { routines } from "../data/guidedRoutines.js";
 
 export default function GuidedRoutineDetailPage({ slug, returnFilter = "" }) {
+  const videoSectionRef = useRef(null);
   const routine = routines.find(
     (item) => item.slug === slug && item.youtubeEmbedUrl
   );
   const backHref = returnFilter
     ? `#/guided-routines?filter=${encodeURIComponent(returnFilter)}`
     : "#/guided-routines";
+
+  useEffect(() => {
+    if (!routine) return;
+
+    window.requestAnimationFrame(() => {
+      videoSectionRef.current?.scrollIntoView({
+        behavior: "auto",
+        block: "center",
+      });
+    });
+  }, [routine]);
 
   if (!routine) {
     return (
@@ -22,7 +35,7 @@ export default function GuidedRoutineDetailPage({ slug, returnFilter = "" }) {
               This routine is not ready yet.
             </p>
             <a
-              className="muuva-ui mt-8 inline-flex text-ink underline decoration-ink/40 underline-offset-4 transition hover:decoration-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              className="muuva-ui mt-8 inline-flex min-h-11 items-center rounded-full border border-softborder bg-warm px-5 text-ink transition hover:border-brand/40 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
               href="#/guided-routines"
             >
               ← Back to Guided Routines
@@ -36,10 +49,14 @@ export default function GuidedRoutineDetailPage({ slug, returnFilter = "" }) {
   return (
     <main>
       <GuidedRoutineHero hero={routine.hero} />
-      <section className="section-pad bg-cream" aria-label={routine.title}>
-        <div className="site-container">
+      <section
+        ref={videoSectionRef}
+        className="flex min-h-[calc(100svh-4rem)] items-center bg-cream py-12 sm:py-16"
+        aria-label={routine.title}
+      >
+        <div className="site-container w-full">
           <a
-            className="muuva-ui mb-8 inline-flex text-muted underline decoration-ink/30 underline-offset-4 transition hover:text-ink hover:decoration-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
+            className="muuva-ui mb-5 inline-flex min-h-11 items-center rounded-full border border-softborder bg-warm px-5 text-ink transition hover:border-brand/40 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
             href={backHref}
           >
             ← Back to Guided Routines

@@ -38,6 +38,7 @@ Guided routines
 Move with your essentials. Follow simple Pilates sessions designed to make movement part of your everyday routine.
 
 ## Filters
+All
 Ring
 Ball
 Sliders
