@@ -1,48 +1,36 @@
 import { useEffect, useRef, useState } from "react";
-import lifeStyle1 from "../assets/images/lifestyle/lifeStyle1.png";
-import lifeStyle2 from "../assets/images/lifestyle/lifeStyle2.png";
-import lifeStyle3 from "../assets/images/lifestyle/lifeStyle3.png";
-import lifeStyle4 from "../assets/images/lifestyle/lifeStyle4.png";
-import lifeStyle5 from "../assets/images/lifestyle/lifeStyle5.png";
-import lifeStyle6 from "../assets/images/lifestyle/lifeStyle6.png";
-import lifeStyle7 from "../assets/images/lifestyle/lifeStyle7.png";
-import lifeStyle8 from "../assets/images/lifestyle/lifeStyle8.png";
 import SiteContainer from "./SiteContainer.jsx";
 
-const lifestyleImages = [
-  {
-    src: lifeStyle1,
-    alt: "Woman with the Pilates Essential Kit on a neutral exercise mat",
-  },
-  {
-    src: lifeStyle2,
-    alt: "Pilates accessories styled on a soft neutral surface",
-  },
-  {
-    src: lifeStyle3,
-    alt: "Woman in Pilates wear standing by a bright beach window",
-  },
-  {
-    src: lifeStyle4,
-    alt: "Woman presenting the Pilates Essential Kit in a calm home setting",
-  },
-  {
-    src: lifeStyle5,
-    alt: "Neutral Pilates accessories and everyday essentials arranged together",
-  },
-  {
-    src: lifeStyle6,
-    alt: "Pilates kit details styled with soft warm tones",
-  },
-  {
-    src: lifeStyle7,
-    alt: "Lifestyle detail of Pilates products in a clean interior",
-  },
-  {
-    src: lifeStyle8,
-    alt: "Pilates kit and accessories arranged in an editorial lifestyle scene",
-  },
-];
+const lifestyleImageModules = import.meta.glob(
+  "../assets/images/lifestyle/lifeStyle*.{png,PNG,jpg,JPG,jpeg,JPEG}",
+  { eager: true, import: "default" }
+);
+
+const lifestyleAltText = {
+  1: "Woman with the Pilates Essential Kit on a neutral exercise mat",
+  2: "Pilates accessories styled on a soft neutral surface",
+  3: "Woman in Pilates wear standing by a bright beach window",
+  4: "Woman presenting the Pilates Essential Kit in a calm home setting",
+  5: "Neutral Pilates accessories and everyday essentials arranged together",
+  6: "Pilates kit details styled with soft warm tones",
+  7: "Lifestyle detail of Pilates products in a clean interior",
+  8: "Pilates kit and accessories arranged in an editorial lifestyle scene",
+};
+
+const lifestyleImages = Object.entries(lifestyleImageModules)
+  .map(([path, src]) => {
+    const imageNumber = Number(path.match(/lifeStyle(\d+)/i)?.[1]);
+
+    return {
+      src,
+      order: imageNumber,
+      alt:
+        lifestyleAltText[imageNumber] ||
+        "Muuva Pilates essentials styled in an editorial lifestyle scene",
+    };
+  })
+  .filter((image) => Number.isFinite(image.order))
+  .sort((firstImage, secondImage) => firstImage.order - secondImage.order);
 
 export default function LifestyleCarouselSection() {
   const carouselRef = useRef(null);

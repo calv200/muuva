@@ -414,11 +414,11 @@ Use a centered vertical billboard composition:
     - Use the shared MUUVA CTA/button foundation.
     - Keep the treatment minimal, editorial, and restrained.
     - Do not use Apple-style blue or Amazon-orange styling.
-    - Preserve the existing Amazon destination.
+    - Use the official Amazon destination `https://www.amazon.de/dp/B0GZ4RBMX9`, centralized as `AMAZON_PRODUCT_URL` in `src/data/product.js`. All purchase links open a new tab with `rel="noopener noreferrer"`.
 
 - Main product image
     - Use the transparent product composition asset:
-    `src/assets/images/Products/kit-billboard.webp`
+    `src/assets/images/Products/kit-billboard.png`
     - The image has a transparent background and natural/contact shadows.
     - Display it with `object-contain`.
     - Let it sit directly on the CSS-controlled section background.
@@ -432,6 +432,8 @@ Use a centered vertical billboard composition:
     - The gallery should open as an overlay/modal, not a separate page.
     - Preserve previous/next controls, close control, Escape-to-close behavior, and keyboard arrow navigation where available.
     - Keep the gallery minimal and premium with a dark or softly blurred overlay.
+    - Show one persistent `Buy on Amazon →` link using the shared Amazon URL. Place it beside the centered image at its upper-right when space allows; otherwise place it beneath the image and above thumbnails on tablet/mobile. Use a warm-neutral, rounded button without covering the image or navigation.
+    - Keep focus within the open modal, return focus to the trigger when closed, and support backdrop-click closing.
 
 - Gallery images
 Keep this existing image order:
@@ -439,7 +441,7 @@ Keep this existing image order:
     `src/assets/images/Products/ball1.png`
     `src/assets/images/Products/band1.png`
     `src/assets/images/Products/slider1.png`
-    `src/assets/images/Products/kit1.png`
+    `src/assets/images/Products/Archive/kit1.png`
 
 - Removed product-detail UI
 Do not show:
@@ -488,7 +490,7 @@ When `All` is active, show:
     - Heading: `Guided routines`
     - Description: `Move with your essentials. Follow simple Pilates sessions designed to make movement part of your everyday routine.`
 
-Do not show an individual product image or product CTA in the `All` state. The default hero must use the same fixed responsive hero height as every filtered state so the filter bar does not jump.
+Use `src/assets/images/guided-routines/headers/main-page.png` as the full-width background for `All`, with left-aligned copy and a warm readability overlay. Do not show a product CTA in the `All` state. The default hero must use the same fixed responsive hero height as every filtered state so the filter bar does not jump.
 
 - Filters
 Show only:
@@ -536,6 +538,8 @@ Band:
 For equipment categories, show the discreet text CTA:
 `Part of the Pilates Essential Kit · Explore the kit →`
 
+The equipment CTA links directly to the shared official Amazon URL in a new tab for Ring, Ball, Sliders, and Band. Full body and All show no product CTA.
+
 Full body:
     - Heading: `Full Body Routines`
     - Description: `Balanced sessions designed to connect strength, control and mobility from head to toe.`
@@ -568,10 +572,11 @@ Temporary YouTube embed URLs:
     - Band: `https://www.youtube.com/embed/i9Ev0n22PYc`
     - Full body: `https://www.youtube.com/embed/7X87YbXHo9c`
 
-No Slider video URL exists yet. Show `New routine coming soon.` for the Sliders filter.
+No Sliders video URL is supplied in the current brief or routine data. Show `New routine coming soon.` for the Sliders filter.
 
 - Expected image assets
 Header images:
+    - `src/assets/images/guided-routines/headers/main-page.png` (default All hero)
     - `src/assets/images/guided-routines/headers/ring-header.webp`
     - `src/assets/images/guided-routines/headers/ball-header.webp`
     - `src/assets/images/guided-routines/headers/sliders-header.webp`

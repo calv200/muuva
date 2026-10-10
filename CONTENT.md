@@ -12,8 +12,11 @@ More info
 ## Buy CTA
 Buy on Amazon →
 
+## Gallery Buy CTA
+Buy on Amazon →
+
 ## Amazon link
-https://www.amazon.com/kure-fit-Pilates-Essentials-Equipment-Included/dp/B0FP551YZ2
+https://www.amazon.de/dp/B0GZ4RBMX9
 
 # Guided Routines Section Copy
 

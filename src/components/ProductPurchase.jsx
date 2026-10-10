@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import billboardImage from "../assets/images/Products/kit-billboard.png";
 import ringImage from "../assets/images/Products/ring1.png";
 import ballImage from "../assets/images/Products/ball1.png";
@@ -8,8 +8,7 @@ import kitImage from "../assets/images/Products/Archive/kit1.png";
 import CtaLink, { ctaClassName } from "./CtaLink.jsx";
 import SiteContainer from "./SiteContainer.jsx";
 
-const amazonUrl =
-  "https://www.amazon.com/kure-fit-Pilates-Essentials-Equipment-Included/dp/B0FP551YZ2";
+import { AMAZON_PRODUCT_URL } from "../data/product.js";
 
 const productImages = [
   { src: ringImage, alt: "Pilates ring from the Pilates Essential Kit" },
@@ -67,7 +66,7 @@ export default function ProductPurchase() {
             >
               More info
             </button>
-            <CtaLink href={amazonUrl}>{"Buy on Amazon \u2192"}</CtaLink>
+            <CtaLink href={AMAZON_PRODUCT_URL} target="_blank" rel="noopener noreferrer">{"Buy on Amazon \u2192"}</CtaLink>
           </div>
         </div>
 
@@ -102,8 +101,54 @@ function GalleryModal({
   onPrevious,
   onSelect,
 }) {
+  const modalRef = useRef(null);
+  const [ctaBesideImage, setCtaBesideImage] = useState(false);
+
+  useEffect(() => {
+    const modal = modalRef.current;
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    modal.querySelector("button").focus();
+    const trapFocus = (event) => {
+      if (event.key !== "Tab") return;
+      const controls = [...modal.querySelectorAll("button, a[href]")];
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    modal.addEventListener("keydown", trapFocus);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      modal.removeEventListener("keydown", trapFocus);
+      previousFocus?.focus();
+    };
+  }, []);
+
+  const updateCtaPosition = () => {
+    const img = modalRef.current?.querySelector(".gallery-image");
+    if (!img?.naturalWidth) return;
+    // Measure the image at its original desktop height before choosing a layout.
+    const imageWidth = Math.min(img.naturalWidth, window.innerHeight * 0.76 * img.naturalWidth / img.naturalHeight, window.innerWidth - 144);
+    setCtaBesideImage(window.innerWidth >= 1024 && (window.innerWidth - imageWidth) / 2 >= 280);
+  };
+
+  useEffect(() => {
+    updateCtaPosition();
+    window.addEventListener("resize", updateCtaPosition);
+    return () => window.removeEventListener("resize", updateCtaPosition);
+  }, [activeImage]);
+
   return (
     <div
+      ref={modalRef}
+      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/85 p-4 backdrop-blur-sm sm:p-8"
       role="dialog"
       aria-modal="true"
@@ -127,11 +172,22 @@ function GalleryModal({
         &lsaquo;
       </button>
 
+      <div className="relative flex flex-col items-center gap-4">
       <img
-        className="max-h-[76vh] max-w-[88vw] object-contain shadow-soft"
+        className={`gallery-image max-w-[calc(100vw-9rem)] object-contain shadow-soft ${ctaBesideImage ? "max-h-[min(76vh,calc(100svh-160px))]" : "max-h-[min(76vh,calc(100svh-240px))]"}`}
         src={images[activeImage].src}
         alt={images[activeImage].alt}
+        onLoad={updateCtaPosition}
       />
+      <a
+        className={`inline-flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-lg border border-softborder bg-cream px-4 py-3 font-sans text-sm font-medium text-ink transition hover:bg-beige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream ${ctaBesideImage ? "absolute left-full top-4 ml-6" : ""}`}
+        href={AMAZON_PRODUCT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Buy on Amazon &rarr;
+      </a>
+      </div>
 
       <button
         className="absolute right-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-linen/90 text-2xl text-ink transition hover:bg-white sm:right-8"
@@ -142,7 +198,7 @@ function GalleryModal({
         &rsaquo;
       </button>
 
-      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-3 rounded-full bg-linen/90 p-2">
+      <div className="absolute bottom-5 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-linen/90 p-2 sm:gap-3">
         {images.map((image, index) => (
           <button
             key={image.src}

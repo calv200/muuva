@@ -1,7 +1,9 @@
 
 # Repository local access
 
-http://localhost:5173/ only works while your local development server is running
+http://localhost:5173/ (Vite's development server) only works while your local development server is running
+ 
+ http://localhost:4173/muuva/ (Vite's production preview server)
 
 Intrcutions:
     In VS Code, open your project folder
