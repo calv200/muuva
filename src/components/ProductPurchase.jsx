@@ -1,26 +1,33 @@
 import { useEffect, useRef, useState } from "react";
-import billboardImage from "../assets/images/Products/kit-billboard.png";
 import ringImage from "../assets/images/Products/ring1.png";
 import ballImage from "../assets/images/Products/ball1.png";
 import bandImage from "../assets/images/Products/band1.png";
 import sliderImage from "../assets/images/Products/slider1.png";
-import kitImage from "../assets/images/Products/Archive/kit1.png";
+import kitImage from "../assets/images/Products/kit1.png";
 import CtaLink, { ctaClassName } from "./CtaLink.jsx";
 import SiteContainer from "./SiteContainer.jsx";
+import ProductComposition from "./ProductComposition.jsx";
 
 import { AMAZON_PRODUCT_URL } from "../data/product.js";
 
 const productImages = [
-  { src: ringImage, alt: "Pilates ring from the Pilates Essential Kit" },
-  { src: ballImage, alt: "Soft Pilates ball from the Pilates Essential Kit" },
-  { src: bandImage, alt: "Resistance band from the Pilates Essential Kit" },
-  { src: sliderImage, alt: "Pilates sliders from the Pilates Essential Kit" },
-  { src: kitImage, alt: "Pilates Essential Kit" },
+  { id: "ring", src: ringImage, alt: "Pilates ring from the Pilates Essential Kit" },
+  { id: "ball", src: ballImage, alt: "Soft Pilates ball from the Pilates Essential Kit" },
+  { id: "band", src: bandImage, alt: "Resistance band from the Pilates Essential Kit" },
+  { id: "sliders", src: sliderImage, alt: "Pilates sliders from the Pilates Essential Kit" },
+  { id: "full-kit", src: kitImage, alt: "Pilates Essential Kit" },
 ];
 
 export default function ProductPurchase() {
   const [activeImage, setActiveImage] = useState(0);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
+  const openGalleryAt = (id = "full-kit") => {
+    const index = productImages.findIndex((image) => image.id === id);
+    if (index < 0) return;
+    setActiveImage(index);
+    setIsGalleryOpen(true);
+  };
 
   const showPreviousImage = () => {
     setActiveImage((current) =>
@@ -48,35 +55,18 @@ export default function ProductPurchase() {
   }, [isGalleryOpen]);
 
   return (
-    <section id="product" className="section-pad bg-cream">
-      <SiteContainer className="text-center">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="font-serif text-[clamp(2.5rem,6vw,4rem)] font-medium leading-[1.05] text-balance text-ink">
-            Pilates Essential Kit
-          </h2>
-          <p className="muuva-support mx-auto mt-4 max-w-2xl text-muted">
-            Everything you need to make Pilates part of your everyday routine.
-          </p>
-
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <button
-              className={ctaClassName}
-              type="button"
-              onClick={() => setIsGalleryOpen(true)}
-            >
-              More info
-            </button>
-            <CtaLink href={AMAZON_PRODUCT_URL} target="_blank" rel="noopener noreferrer">{"Buy on Amazon \u2192"}</CtaLink>
+    <section id="product" className="section-pad bg-soft-sand" aria-labelledby="product-discovery-heading">
+      <SiteContainer className="product-discovery-layout">
+        <div className="product-discovery-content text-center">
+          <h2 id="product-discovery-heading" className="font-serif text-[clamp(2rem,4vw,2.75rem)] font-normal leading-[1.1] text-ink">Pilates Essential Kit</h2>
+          <p className="mt-4 font-sans text-base leading-relaxed text-muted">Four essentials. Endless ways to move.</p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <button className={ctaClassName} type="button" onClick={() => openGalleryAt("full-kit")}>More info</button>
+            <CtaLink href={AMAZON_PRODUCT_URL} target="_blank" rel="noopener noreferrer">Buy on Amazon &rarr;</CtaLink>
           </div>
         </div>
+        <ProductComposition onOpenGallery={openGalleryAt} />
 
-        <div className="mx-auto mt-12 max-w-site sm:mt-14 lg:mt-16">
-          <img
-            className="mx-auto w-full max-w-[1120px] object-contain"
-            src={billboardImage}
-            alt="Pilates Essential Kit arranged as a complete home workout set"
-          />
-        </div>
       </SiteContainer>
 
       {isGalleryOpen && (

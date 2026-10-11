@@ -13,7 +13,7 @@ export default function GuidedRoutinesSection() {
           />
         </div>
 
-        <div className="flex min-h-[420px] items-center justify-center bg-warm px-6 py-16 text-center sm:px-12 sm:py-20 lg:min-h-[560px] lg:px-20">
+        <div className="flex min-h-[420px] items-center justify-center bg-cream px-6 py-16 text-center sm:px-12 sm:py-20 lg:min-h-[560px] lg:px-20">
           <div className="max-w-xl">
             <p className="muuva-label text-brand">
               Included with your kit

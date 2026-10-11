@@ -1,0 +1,70 @@
+.product-discovery-layout {
+  display: grid;
+  grid-template-areas: "content" "composition";
+  gap: 2rem;
+}
+
+.product-discovery-content {
+  grid-area: content;
+  align-self: center;
+  min-width: 0;
+}
+
+.product-composition {
+  grid-area: composition;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 1118px;
+  margin-inline: auto;
+  align-self: center;
+}
+
+
+
+.product-image-button { display: block; width: 100%; pointer-events: auto; }
+.product-image-button:focus-visible { outline: 2px solid #4E6D5E; outline-offset: 3px; border-radius: 2px; }
+
+.product-hotspot {
+  position: absolute;
+  left: var(--hotspot-mobile-x);
+  top: var(--hotspot-mobile-y);
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+  border-radius: 50%;
+  touch-action: manipulation;
+}
+
+.product-hotspot-marker {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #4E6D5E;
+  border-radius: 50%;
+  background: #FBF8F2;
+  color: #4E6D5E;
+  transition: background-color 180ms, color 180ms, box-shadow 180ms;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-hotspot:hover .product-hotspot-marker { box-shadow: 0 0 0 3px rgb(78 109 94 / 15%); }
+}
+
+.product-hotspot:focus-visible { outline: 2px solid #4E6D5E; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .product-hotspot-marker { transition: none; }
+}
+
+@media (min-width: 640px) {
+  .product-hotspot { left: var(--hotspot-tablet-x); top: var(--hotspot-tablet-y); }
+
+}
+
+@media (min-width: 1024px) {
+  .product-hotspot { left: var(--hotspot-desktop-x); top: var(--hotspot-desktop-y); }
+}

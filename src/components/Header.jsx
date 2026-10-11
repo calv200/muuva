@@ -35,7 +35,7 @@ function GlobeIcon() {
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-30 bg-beige/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-30 bg-warm backdrop-blur-sm">
       <SiteContainer className="flex h-16 items-center justify-between">
         <a href="#/" className="inline-flex items-center" aria-label="muuva home">
           <img

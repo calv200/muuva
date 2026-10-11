@@ -9,6 +9,7 @@ export default {
         muted: "#6F6A63",
         cream: "#FBF8F2",
         warm: "#F2EFE9",
+        "soft-sand": "#E9E1D6",
         beige: "#DFD3BD",
         white: "#FFFFFF",
         softborder: "#D7D0C6",

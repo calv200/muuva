@@ -127,6 +127,7 @@ Use a small, restrained palette. These are starting design tokens and may be fin
 - Muted text: `#6F6A63`
 
 #### Neutral backgrounds
+- Featured product Soft Sand: `#E9E1D6` (Tailwind `soft-sand`).
 - Main warm cream: `#FBF8F2`
 - Secondary warm neutral: `#F2EFE9`
 - Soft beige: `#DFD3BD`
@@ -134,6 +135,12 @@ Use a small, restrained palette. These are starting design tokens and may be fin
 
 #### Borders / dividers
 - Soft neutral border: `#D7D0C6`
+
+#### Landing-page section assignments
+- Header and footer: warm neutral `#F2EFE9` (`warm`).
+- Featured Product Purchase Section: soft sand `#E9E1D6` (`soft-sand`), full width.
+- Guided Routines promotional text panel and Styled by You: warm cream `#FBF8F2` (`cream`), matching the dominant page canvas.
+- Hero video, photography, overlays, typography and shared CTA styling remain unchanged. Soft beige `#DFD3BD` remains available as a secondary token; MUUVA green stays an accent.
 
 #### Color rules
 - Favor warm neutrals rather than bright white across large page areas.
@@ -363,98 +370,21 @@ This sketch defines the desired layout direction for the hero section, including
     [ Full-width hero video ]
     ```
 
-### 6.3 Product Purchase Section Reference
-- Source image
-`references/screenshots/product-purchase-section-billboard-reference.png`
+### 6.3 Product Purchase / Discovery Section
 
-- Purpose
-This section presents the Pilates Essential Kit as a calm editorial product billboard rather than an e-commerce product-detail panel.
-
-- Section placement
-Place this section directly after the hero video.
-
-- Suggested page flow:
-    ```text
-    [ Header ]
-    [ Hero video ]
-    [ Product Purchase Section ]
-    [ Guided Routines promotional section ]
-    [ Styled by You lifestyle carousel ]
-    [ Footer ]
-    ```
-
-- Overall feeling
-The section should feel minimal, premium, spacious, product-first, and campaign-like. It should avoid generic Shopify, Amazon listing, or product-configuration styling.
-
-- Layout description
-Use a centered vertical billboard composition:
-    ```text
-    Pilates Essential Kit
-    Everything you need to make Pilates part of your everyday routine.
-    [ More info ] [ Buy on Amazon -> ]
-
-    [ Large transparent product kit composition ]
-    ```
-
-- Product title
-    - Text: `Pilates Essential Kit`
-    - Use **Newsreader**.
-    - Use dark soft charcoal from the design system.
-    - The title may use the upper end of the established section/display heading scale.
-    - Keep the line-height tight but comfortable.
-
-- Supporting copy
-    - Text: `Everything you need to make Pilates part of your everyday routine.`
-    - Use **Manrope**.
-    - Use the muted text color from the design system.
-    - Keep it clearly smaller than the title but comfortably readable.
-
-- CTAs
-    - Show `More info` and `Buy on Amazon ->` side by side on desktop.
-    - Use the shared MUUVA CTA/button foundation.
-    - Keep the treatment minimal, editorial, and restrained.
-    - Do not use Apple-style blue or Amazon-orange styling.
-    - Preserve the existing Amazon destination.
-
-- Main product image
-    - Use the transparent product composition asset:
-    `src/assets/images/Products/kit-billboard.webp`
-    - The image has a transparent background and natural/contact shadows.
-    - Display it with `object-contain`.
-    - Let it sit directly on the CSS-controlled section background.
-    - Do not add a white/beige rectangle behind it.
-    - Do not add a heavy CSS drop shadow.
-    - Preserve the horizontal/wide composition.
-
-- Gallery behavior
-    - The main billboard image is not the gallery trigger.
-    - The `More info` button opens the existing product gallery/lightbox.
-    - The gallery should open as an overlay/modal, not a separate page.
-    - Preserve previous/next controls, close control, Escape-to-close behavior, and keyboard arrow navigation where available.
-    - Keep the gallery minimal and premium with a dark or softly blurred overlay.
-
-- Gallery images
-Keep this existing image order:
-    `src/assets/images/Products/ring1.png`
-    `src/assets/images/Products/ball1.png`
-    `src/assets/images/Products/band1.png`
-    `src/assets/images/Products/slider1.png`
-    `src/assets/images/Products/kit1.png`
-
-- Removed product-detail UI
-Do not show:
-    - the small `muuva` product/category label above the title
-    - `COLOR` label
-    - beige color selector or swatch
-    - product configuration UI
-    - horizontal divider lines
-    - the long contents line
-    - product-detail panel styling
-
-- Responsive behavior
-    - Desktop: centered title, supporting copy, side-by-side CTAs, large wide product composition below.
-    - Tablet: maintain centered hierarchy and scale the product image intentionally.
-    - Mobile: keep title and supporting copy centered, allow CTAs to stack if needed, and preserve the full wide kit composition with `object-contain` and no horizontal overflow.
+- Placement: after the hero video, before the Guided Routines promotional section. Preserve the remaining page order.
+- Layout: centered vertical stack within the shared site container at every breakpoint. Compact editorial content sits above the single transparent full-kit photograph, which grows to 1118px wide on desktop (previously 860px; a 30% increase). Mobile allows CTA wrapping and preserves the original photo proportions and arrangement.
+- Background: full-width MUUVA Soft Sand (#E9E1D6), shared by content and products, without cards, borders or image backplates.
+- Static copy: Newsreader title `Pilates Essential Kit`; Manrope description `Four essentials. Endless ways to move.`; shared `More info` and `Buy on Amazon` CTAs.
+- Scaling: retain `width: 100%` and increase only `max-width` from 860px to 1118px. The original image aspect ratio, transparent padding and percentage hotspot coordinates are unchanged; no transform scaling or asset edits. Section height grows naturally. The full 30% increase fits at viewport widths of 1214px and above. At 1024px the width is capped at 928px (+7.9%); at 768px and 390px it remains 704px and 350px respectively because the composition already fills the available width. Preserve the shared 48/32/20px gutters.
+- Composition: one transparent `src/assets/images/Products/full-kit-cutout.png` (1672?941), derived locally from `src/assets/images/Products/kit-billboard.png`. Preserve the original product arrangement, perspective, guide/phone angle and photographic shadows. Original source remains unchanged. No floating animation.
+- Gallery triggers: four semantic hotspot buttons overlay the single image, with percentage coordinates in `src/data/productComposition.js`. Ring, Ball, Band and Sliders open their respective photos. The independent hero-image button opens the full-kit gallery image; empty section space outside the image and editorial text do not.
+- Gallery order and mapping, all under `src/assets/images/Products/`: Ring = `ring1.png`; Ball = `ball1.png`; Band = `band1.png`; Sliders = `slider1.png`; full kit = `kit1.png`. Use the root-level kit image, never `Archive/kit1.png`.
+- `More info` always opens `kit1.png`, regardless of the previous slide. Stable image IDs select the correct slide before the modal opens.
+- Preserve gallery styling, five images, previous/next arrows, thumbnails, close/backdrop/Escape behavior, keyboard arrows, focus trapping/restoration, and its Amazon CTA.
+- Both Amazon CTAs use the centralized product URL, a new tab, and `noopener noreferrer`.
+- Accessibility: hotspots have 44px targets, meaningful photo-viewing labels and visible focus. The hero-image button and hotspots are independent siblings, never nested controls.
+- Removed: dynamic selection state, hover-preview copy, contextual routine links, reset controls and selected-content transitions. Editorial content never changes during interaction.
 
 ### 6.4 Guided Routines Page
 

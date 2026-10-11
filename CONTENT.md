@@ -4,7 +4,7 @@
 Pilates Essential Kit
 
 ## Supporting copy
-Everything you need to make Pilates part of your everyday routine.
+Four essentials. Endless ways to move.
 
 ## More info CTA
 More info
@@ -17,6 +17,18 @@ Buy on Amazon →
 
 ## Amazon link
 https://www.amazon.de/dp/B0GZ4RBMX9
+
+## Presentation and gallery behavior
+Centered static title, description and CTAs above the single transparent full-kit hero image on full-width Soft Sand (#E9E1D6). No dynamic selection copy or routine links. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
+
+Hotspot labels and destinations, under `src/assets/images/Products/`:
+
+- View Pilates Ring photos: `ring1.png`
+- View Pilates Ball photos: `ball1.png`
+- View Resistance Band photos: `band1.png`
+- View Pilates Sliders photos: `slider1.png`
+
+More info and hero-image clicks always open root-level `kit1.png`, not the archived copy. Empty section space outside the hero image does not open the gallery. Image order: Ring, Ball, Band, Sliders, complete kit.
 
 # Guided Routines Section Copy
 
