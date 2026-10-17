@@ -1,4 +1,4 @@
-export default function ProductHotspot({ id, hotspot, onOpenGallery }) {
+export default function ProductHotspot({ hotspot, onOpenGallery }) {
   const style = {};
   for (const size of ["mobile", "tablet", "desktop"]) {
     const point = hotspot[size] ?? hotspot.desktop;
@@ -13,7 +13,7 @@ export default function ProductHotspot({ id, hotspot, onOpenGallery }) {
       style={style}
       aria-label={hotspot.label}
       aria-haspopup="dialog"
-      onClick={(event) => { event.stopPropagation(); onOpenGallery(id); }}
+      onClick={(event) => { event.stopPropagation(); onOpenGallery(hotspot.galleryImageId); }}
     >
       <span className="product-hotspot-marker" aria-hidden="true">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">

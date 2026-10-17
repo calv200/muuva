@@ -127,7 +127,7 @@ Use a small, restrained palette. These are starting design tokens and may be fin
 - Muted text: `#6F6A63`
 
 #### Neutral backgrounds
-- Featured product Soft Sand: `#E9E1D6` (Tailwind `soft-sand`).
+- Soft Sand token: `#E9E1D6` (Tailwind `soft-sand`); the current featured product container instead uses `#F3EBE0`.
 - Main warm cream: `#FBF8F2`
 - Secondary warm neutral: `#F2EFE9`
 - Soft beige: `#DFD3BD`
@@ -138,7 +138,7 @@ Use a small, restrained palette. These are starting design tokens and may be fin
 
 #### Landing-page section assignments
 - Header and footer: warm neutral `#F2EFE9` (`warm`).
-- Featured Product Purchase Section: soft sand `#E9E1D6` (`soft-sand`), full width.
+- Featured Product Purchase Section: square framed container in warm cream `#F3EBE0` on the existing cream page background.
 - Guided Routines promotional text panel and Styled by You: warm cream `#FBF8F2` (`cream`), matching the dominant page canvas.
 - Hero video, photography, overlays, typography and shared CTA styling remain unchanged. Soft beige `#DFD3BD` remains available as a secondary token; MUUVA green stays an accent.
 
@@ -170,6 +170,8 @@ Create one consistent content container that controls alignment across the site.
 - When a section is full bleed, its internal text/content should still use the shared content grid where appropriate.
 - Avoid giving every section a different arbitrary maximum width.
 - Use a reusable container utility/component instead of repeating unrelated width and padding values throughout the code.
+
+The Product Purchase featured card is an intentional exception to the shared 1280px content grid: its own container reaches 1462px so the complete kit can remain prominent.
 
 ### 5.5 Spacing Scale
 
@@ -228,6 +230,8 @@ Default direction:
 - Gentle hover/focus change
 - No loud Amazon-orange treatment
 - Keep arrows and icons minimal
+
+The Product Purchase CTA is a deliberate section-specific exception: a rounded, filled `#304C40` pill with white text. The gallery CTA and Guided Routines CTA retain their own implemented styles.
 
 Interactive elements must include visible keyboard focus states and should remain accessible on mobile.
 
@@ -373,16 +377,14 @@ This sketch defines the desired layout direction for the hero section, including
 ### 6.3 Product Purchase / Discovery Section
 
 - Placement: after the hero video, before the Guided Routines promotional section. Preserve the remaining page order.
-- Layout: centered vertical stack within the shared site container at every breakpoint. Compact editorial content sits above the single transparent full-kit photograph, which grows to 1118px wide on desktop (previously 860px; a 30% increase). Mobile allows CTA wrapping and preserves the original photo proportions and arrangement.
-- Background: full-width MUUVA Soft Sand (#E9E1D6), shared by content and products, without cards, borders or image backplates.
-- Static copy: Newsreader title `Pilates Essential Kit`; Manrope description `Four essentials. Endless ways to move.`; shared `More info` and `Buy on Amazon` CTAs.
-- Scaling: retain `width: 100%` and increase only `max-width` from 860px to 1118px. The original image aspect ratio, transparent padding and percentage hotspot coordinates are unchanged; no transform scaling or asset edits. Section height grows naturally. The full 30% increase fits at viewport widths of 1214px and above. At 1024px the width is capped at 928px (+7.9%); at 768px and 390px it remains 704px and 350px respectively because the composition already fills the available width. Preserve the shared 48/32/20px gutters.
-- Composition: one transparent `src/assets/images/Products/full-kit-cutout.png` (1672?941), derived locally from `src/assets/images/Products/kit-billboard.png`. Preserve the original product arrangement, perspective, guide/phone angle and photographic shadows. Original source remains unchanged. No floating animation.
-- Gallery triggers: four semantic hotspot buttons overlay the single image, with percentage coordinates in `src/data/productComposition.js`. Ring, Ball, Band and Sliders open their respective photos. The independent hero-image button opens the full-kit gallery image; empty section space outside the image and editorial text do not.
-- Gallery order and mapping, all under `src/assets/images/Products/`: Ring = `ring1.png`; Ball = `ball1.png`; Band = `band1.png`; Sliders = `slider1.png`; full kit = `kit1.png`. Use the root-level kit image, never `Archive/kit1.png`.
-- `More info` always opens `kit1.png`, regardless of the previous slide. Stable image IDs select the correct slide before the modal opens.
+- Layout: centered framed container up to 1462px wide with square 90-degree corners, a subtle shadow, and one unified `#F3EBE0` background. At 1280px and wider, the left-aligned editorial block shares the card with the image positioned across the center and right. Below 1280px, copy stacks above the image. The surrounding section remains `#FBF8F2`.
+- Static copy: Newsreader title `Pilates Essential Kit` in deep green `#304C40`, visually split after `Pilates` on wide desktop but with unchanged text content; Manrope description `Four essentials. Endless ways to move.` in muted charcoal. The single main CTA is a rounded, filled `Buy on Amazon →` button in `#304C40` with white text, darker hover, and visible focus. The `More info` button is removed.
+- Sizing and positioning: the image wrapper is 100% wide up to 1341.6px below 1280px. At 1280px and wider it is 106% wide up to 1422.1px, shifted right by 9% of its width and upward with a -24px top margin. The wider layout uses 40px top and 24px bottom card padding; the card remains content-sized. The original image proportions, transparent padding, product arrangement, and percentage hotspot alignment remain intact. No equipment is independently resized.
+- Composition: one transparent `src/assets/images/Products/full-kit-cutout.png` (1672×941), derived locally from `src/assets/images/Products/kit-billboard.png`. Preserve the original product arrangement, perspective, guide/phone angle and photographic shadows. Original source remains unchanged. No floating animation.
+- Gallery triggers: five semantic hotspot buttons overlay the single image, with percentage coordinates and centralized `galleryImageId` mapping in `src/data/productComposition.js`. Ring, Ball, Band and Sliders open their respective photos. The workout-guide hotspot at 73% x / 83% y, beneath the printed guide beside the phone, temporarily opens the full-kit photo. Change only its `galleryImageId` when a dedicated guide photo is added to the gallery. The independent image button opens the full-kit photo; empty section space outside the image and editorial text do not.
+- Gallery order and mapping, all under `src/assets/images/Products/`: Ring = `ring1.png`; Ball = `ball1.png`; Band = `band1.png`; Sliders = `slider1.png`; workout guide and full kit = `kit1.png`. The workout-guide hotspot does not add a gallery slide. Use the root-level kit image, never `Archive/kit1.png`.
 - Preserve gallery styling, five images, previous/next arrows, thumbnails, close/backdrop/Escape behavior, keyboard arrows, focus trapping/restoration, and its Amazon CTA.
-- Both Amazon CTAs use the centralized product URL, a new tab, and `noopener noreferrer`.
+- The main and gallery Amazon CTAs use the centralized product URL, a new tab, and `noopener noreferrer`.
 - Accessibility: hotspots have 44px targets, meaningful photo-viewing labels and visible focus. The hero-image button and hotspots are independent siblings, never nested controls.
 - Removed: dynamic selection state, hover-preview copy, contextual routine links, reset controls and selected-content transitions. Editorial content never changes during interaction.
 
@@ -396,9 +398,10 @@ Routine detail pages use:
 `#/guided-routines/ring`
 `#/guided-routines/ball`
 `#/guided-routines/band`
+`#/guided-routines/sliders`
 `#/guided-routines/full-body`
 
-The Sliders routine has no video URL yet, so it should not link to a detail page until a URL is added.
+The Sliders routine is available in All and Sliders, using its existing thumbnail and the video URL listed below.
 
 - Routing decision
 The project is deployed as a static Vite build through GitHub Pages. Use lightweight hash routing in React instead of `BrowserRouter` so direct entry to the deployed site does not require a server-side fallback.
@@ -427,9 +430,9 @@ Show only:
     - Ball
     - Sliders
     - Band
-    - Full body
+    - All Equipment
 
-Only one filter can be active at a time. `All` represents the default state and shows every available routine. Selecting `All` resets the page to the complete routine collection and generic hero. Product filters should remain selected until another filter is chosen.
+The displayed `All Equipment` filter retains the internal `Full body` identifier and existing routes. Workout muscle-group pills still display `Full body`; the existing `Full Body Routines` hero heading is unchanged. Only one filter can be active at a time. `All` represents the default state and shows every available routine. Selecting `All` resets the page to the complete routine collection and generic hero. Product filters should remain selected until another filter is chosen.
 
 - Dynamic hero behavior
 The same hero area changes when a filter is active.
@@ -442,9 +445,9 @@ Filtered heroes use the header image as one full-width background-image banner:
 
 The hero image should span the available page width beneath the global navigation, while text remains aligned to the shared site container. The supplied hero assets place product imagery primarily on the right, so position hero copy in the left content area and preserve the right-side image composition. Use a very subtle warm-neutral readability layer rather than a heavy overlay.
 
-All hero states use an explicit fixed responsive height controlled by the hero container, not by the image's intrinsic dimensions. The current implementation uses the same height for `All`, Ring, Ball, Sliders, Band, and Full body at each breakpoint.
+All hero states use an explicit fixed responsive height controlled by the hero container, not by the image's intrinsic dimensions. The current implementation uses the same height for `All`, Ring, Ball, Sliders, Band, and All Equipment at each breakpoint.
 
-Full body uses the `full-body-header` asset as the full-width hero background in the same manner as equipment filters and does not show the Pilates Essential Kit CTA.
+All Equipment uses the `full-body-header` asset as the full-width hero background in the same manner as equipment filters and does not show the Pilates Essential Kit CTA.
 
 - Equipment hero copy
 Ring:
@@ -466,12 +469,16 @@ Band:
 For equipment categories, show the discreet text CTA:
 `Part of the Pilates Essential Kit · Explore the kit →`
 
-Full body:
+All Equipment:
     - Heading: `Full Body Routines`
     - Description: `Balanced sessions designed to connect strength, control and mobility from head to toe.`
 
 - Routine grid
-Use a clean editorial card grid. Cards should show a custom thumbnail or neutral placeholder, a custom MUUVA play button overlay, a routine title, and category metadata. Do not load YouTube iframes inside the grid.
+Use the existing responsive one/two/three-column editorial grid and unchanged thumbnails and play overlays. Below each thumbnail, show a Newsreader workout title after 20px, then a duration/clock and intensity row after 8px, followed by muscle-group and equipment pills after 8px. Remove the previous uppercase category label. Do not load YouTube iframes inside the grid.
+
+Workout metadata lives in `src/data/guidedRoutines.js`: `title`, `durationMinutes`, `intensity`, `muscleGroups`, and `equipment`. Pilates Ring Workout, Pilates Ball Workout, Pilates Sliders Workout, and Resistance Band Workout each show 15 min, Medium, Full body, and their respective Ring/Ball/Slider/Band equipment tag. All Equipment Workout shows 20 min, Medium, Full body, and four separate equipment pills: Band, Ball, Ring, Slider. It remains associated only with the internal `Full body` category, displayed as the All Equipment filter (and the All view).
+
+Reusable non-interactive metadata pills use Manrope, soft borders, and charcoal text (#24211F). Intensity uses buttery cream #F8EACB; muscle group uses creamy blush #F8E9E3; equipment uses sage #DFE5D8. Styles are centralized in `src/components/guided-routines/RoutineCard.css`. Equipment tags stay in one wrapping group; multi-equipment cards place this group beneath the muscle-group row. The `All` filter shows all five playable cards. Preserve filter labels, category associations, video IDs, destinations, thumbnails, hero content, and player behavior.
 
 - Routine detail pages
 Clicking a valid routine opens a detail page with:
@@ -493,37 +500,37 @@ Keep routine data and video URLs centralized in:
 `src/data/guidedRoutines.js`
 
 YouTube embed URLs:
-    - Ring: `https://youtu.be/VuyUiYfP00g`
-    - Ball: `https://youtu.be/JmUp1e-86yo`
-    - Band: `https://youtu.be/UEQraCdzot8`
-    - Sliders: `https://youtu.be/hcx_IU7NLf8`
-    - Full body: `https://youtu.be/VuyUiYfP00g`
+    - Ring: `https://www.youtube.com/embed/Ns9PKZRh2j4`
+    - Ball: `https://www.youtube.com/embed/eZBYO-GSlVk`
+    - Band: `https://www.youtube.com/embed/i9Ev0n22PYc`
+    - Sliders: `https://www.youtube.com/embed/hcx_IU7NLf8`
+    - All Equipment: `https://www.youtube.com/embed/7X87YbXHo9c`
 
-No Slider video URL exists yet. Show `New routine coming soon.` for the Sliders filter.
+The Sliders card is titled `Pilates Sliders Workout` and shows the clock with `15 min`, `Medium` intensity, `Full body` muscle group, and a `Slider` equipment pill, using the same metadata layout as the other workouts.
 
 - Expected image assets
 Header images:
-    - `src/assets/images/guided-routines/headers/ring-header.webp`
-    - `src/assets/images/guided-routines/headers/ball-header.webp`
-    - `src/assets/images/guided-routines/headers/sliders-header.webp`
-    - `src/assets/images/guided-routines/headers/band-header.webp`
-    - `src/assets/images/guided-routines/headers/full-body-header.webp`
+    - `src/assets/images/guided-routines/headers/ring-header.png`
+    - `src/assets/images/guided-routines/headers/ball-header.png`
+    - `src/assets/images/guided-routines/headers/sliders-header.png`
+    - `src/assets/images/guided-routines/headers/band-header.png`
+    - `src/assets/images/guided-routines/headers/full-body-header.png`
     - `src/assets/images/guided-routines/headers/main-page.png`
 
 Thumbnails:
-    - `src/assets/images/guided-routines/thumbnails/ring-routine-thumbnail.webp`
-    - `src/assets/images/guided-routines/thumbnails/ball-routine-thumbnail.webp`
-    - `src/assets/images/guided-routines/thumbnails/sliders-routine-thumbnail.webp`
-    - `src/assets/images/guided-routines/thumbnails/band-routine-thumbnail.webp`
-    - `src/assets/images/guided-routines/thumbnails/full-body-routine-thumbnail.webp`
+    - `src/assets/images/guided-routines/thumbnails/ring-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/ball-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/sliders-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/band-routine-thumbnail.png`
+    - `src/assets/images/guided-routines/thumbnails/full-body-routine-thumbnail.png`
 
-Missing assets should render as neutral placeholders and must not break the build. The implementation may also support `.png` fallbacks while assets are being migrated.
+All listed assets currently exist as `.png` files. The asset lookup also accepts `.webp` names, and missing assets render neutral placeholders without breaking the build.
 
 - How to add another routine
-Add or update one object in `src/data/guidedRoutines.js` with the routine `id`, `slug`, `title`, `meta`, `filters`, thumbnail filename, YouTube URLs, and matching category hero. Add the expected image file to the relevant `guided-routines` asset folder when ready.
+Add or update one object in `src/data/guidedRoutines.js` with the routine `id`, `slug`, `title`, `durationMinutes`, `intensity`, `muscleGroups`, `equipment`, `filters`, thumbnail filename, YouTube URLs, and matching category hero. Keep equipment display labels separate from filter identifiers. Add the expected image file to the relevant `guided-routines` asset folder when ready.
 
 - Visual direction
-The page should feel curated, editorial, premium, and calm. Do not add search, ratings, fake durations, difficulty badges, progress UI, many filters, YouTube UI in cards, or dense fitness-platform styling.
+The page should feel curated, editorial, premium, and calm. Use the approved duration and intensity metadata above; do not invent additional values. Do not add search, ratings, progress UI, extra filters, YouTube UI in cards, or dense fitness-platform styling.
 ---
 
 ## 7. Important Rules for Codex

@@ -1,0 +1,16 @@
+.workout-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 16px;
+  border: 1px solid rgb(36 33 31 / 7%);
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 22px;
+  color: #24211F;
+}
+
+.workout-pill--intensity { background-color: #F8EACB; }
+.workout-pill--muscle { background-color: #F8E9E3; }
+.workout-pill--equipment { background-color: #DFE5D8; }

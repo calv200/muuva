@@ -1,25 +1,82 @@
+.product-feature-section {
+  padding-inline: clamp(16px, 3vw, 48px);
+}
+
 .product-discovery-layout {
   display: grid;
   grid-template-areas: "content" "composition";
   gap: 2rem;
+  max-width: 1462px;
+  margin-inline: auto;
+  padding: clamp(24px, 4vw, 60px);
+  border-radius: 0;
+  background: #F3EBE0;
+  box-shadow: 0 12px 40px rgb(36 33 31 / 4%);
 }
 
 .product-discovery-content {
   grid-area: content;
-  align-self: center;
+  align-self: start;
+  text-align: left;
   min-width: 0;
 }
+
+#product-discovery-heading { color: #304C40; }
 
 .product-composition {
   grid-area: composition;
   position: relative;
   isolation: isolate;
   width: 100%;
-  max-width: 1118px;
-  margin-inline: auto;
+  max-width: 1341.6px;
+  margin-left: auto;
+  margin-right: 0;
   align-self: center;
 }
 
+.product-purchase-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 16px 32px;
+  border-radius: 9999px;
+  background: #304C40;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 180ms;
+}
+
+.product-purchase-cta:hover { background: #243B32; }
+.product-purchase-cta:focus-visible { outline: 2px solid #304C40; outline-offset: 4px; }
+
+@media (min-width: 1280px) {
+  .product-discovery-layout {
+    grid-template-areas: "feature";
+    gap: 0;
+    padding-block: 40px 24px;
+    overflow: hidden;
+  }
+  .product-discovery-content {
+    grid-area: feature;
+    position: relative;
+    z-index: 1;
+    max-width: 390px;
+    padding-top: 8px;
+  }
+  #product-discovery-heading { font-size: 3.375rem; line-height: 0.96; }
+  .product-title-line { display: block; white-space: nowrap; }
+  .product-discovery-subtitle { margin-top: 12px; font-size: 17px; }
+  .product-purchase-action { margin-top: 20px; }
+  .product-composition {
+    grid-area: feature;
+    width: 106%;
+    max-width: 1422.1px;
+    margin-top: -24px;
+    transform: translateX(9%);
+  }
+}
 
 
 .product-image-button { display: block; width: 100%; pointer-events: auto; }

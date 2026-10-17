@@ -22,7 +22,7 @@ export default function RoutineFilters({ filters, activeFilter, onFilterChange }
                 aria-pressed={isActive}
                 onClick={() => onFilterChange(filter)}
               >
-                {filter}
+                {filter === "Full body" ? "All Equipment" : filter}
               </button>
             );
           })}

@@ -99,7 +99,11 @@ export const routines = [
   {
     id: "ring-routine",
     slug: "ring",
-    title: "Pilates Ring Routine",
+    title: "Pilates Ring Workout",
+    durationMinutes: 15,
+    intensity: "Medium",
+    muscleGroups: ["Full body"],
+    equipment: ["Ring"],
     meta: "Pilates Ring",
     filters: ["Ring"],
     thumbnail: findAsset(thumbnailAssets, [
@@ -114,7 +118,11 @@ export const routines = [
   {
     id: "ball-routine",
     slug: "ball",
-    title: "Pilates Ball Routine",
+    title: "Pilates Ball Workout",
+    durationMinutes: 15,
+    intensity: "Medium",
+    muscleGroups: ["Full body"],
+    equipment: ["Ball"],
     meta: "Pilates Ball",
     filters: ["Ball"],
     thumbnail: findAsset(thumbnailAssets, [
@@ -129,7 +137,11 @@ export const routines = [
   {
     id: "sliders-routine",
     slug: "sliders",
-    title: "Slider Routine",
+    title: "Pilates Sliders Workout",
+    durationMinutes: 15,
+    intensity: "Medium",
+    muscleGroups: ["Full body"],
+    equipment: ["Slider"],
     meta: "Sliders",
     filters: ["Sliders"],
     thumbnail: findAsset(thumbnailAssets, [
@@ -137,14 +149,18 @@ export const routines = [
       "sliders-routine-thumbnail.png",
     ]),
     thumbnailAlt: "Slider routine thumbnail",
-    youtubeUrl: "",
-    youtubeEmbedUrl: "",
+    youtubeUrl: "https://youtu.be/hcx_IU7NLf8",
+    youtubeEmbedUrl: "https://www.youtube.com/embed/hcx_IU7NLf8",
     hero: categoryHeroes.sliders,
   },
   {
     id: "band-routine",
     slug: "band",
-    title: "Resistance Band Routine",
+    title: "Resistance Band Workout",
+    durationMinutes: 15,
+    intensity: "Medium",
+    muscleGroups: ["Full body"],
+    equipment: ["Band"],
     meta: "Resistance Band",
     filters: ["Band"],
     thumbnail: findAsset(thumbnailAssets, [
@@ -159,7 +175,11 @@ export const routines = [
   {
     id: "full-body-routine",
     slug: "full-body",
-    title: "Full Body Pilates Routine",
+    title: "All Equipment Workout",
+    durationMinutes: 20,
+    intensity: "Medium",
+    muscleGroups: ["Full body"],
+    equipment: ["Band", "Ball", "Ring", "Slider"],
     meta: "Full Body",
     filters: ["Full body"],
     thumbnail: findAsset(thumbnailAssets, [

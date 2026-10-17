@@ -4,8 +4,6 @@ import ballImage from "../assets/images/Products/ball1.png";
 import bandImage from "../assets/images/Products/band1.png";
 import sliderImage from "../assets/images/Products/slider1.png";
 import kitImage from "../assets/images/Products/kit1.png";
-import CtaLink, { ctaClassName } from "./CtaLink.jsx";
-import SiteContainer from "./SiteContainer.jsx";
 import ProductComposition from "./ProductComposition.jsx";
 
 import { AMAZON_PRODUCT_URL } from "../data/product.js";
@@ -55,19 +53,18 @@ export default function ProductPurchase() {
   }, [isGalleryOpen]);
 
   return (
-    <section id="product" className="section-pad bg-soft-sand" aria-labelledby="product-discovery-heading">
-      <SiteContainer className="product-discovery-layout">
-        <div className="product-discovery-content text-center">
-          <h2 id="product-discovery-heading" className="font-serif text-[clamp(2rem,4vw,2.75rem)] font-normal leading-[1.1] text-ink">Pilates Essential Kit</h2>
-          <p className="mt-4 font-sans text-base leading-relaxed text-muted">Four essentials. Endless ways to move.</p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-            <button className={ctaClassName} type="button" onClick={() => openGalleryAt("full-kit")}>More info</button>
-            <CtaLink href={AMAZON_PRODUCT_URL} target="_blank" rel="noopener noreferrer">Buy on Amazon &rarr;</CtaLink>
+    <section id="product" className="section-pad product-feature-section bg-cream" aria-labelledby="product-discovery-heading">
+      <div className="product-discovery-layout">
+        <div className="product-discovery-content">
+          <h2 id="product-discovery-heading" className="font-serif text-[clamp(2rem,4vw,2.75rem)] font-normal leading-[1.1] text-ink"><span className="product-title-line">Pilates</span>{" "}<span className="product-title-line">Essential Kit</span></h2>
+          <p className="product-discovery-subtitle mt-4 font-sans text-base leading-relaxed text-muted">Four essentials. Endless ways to move.</p>
+          <div className="product-purchase-action mt-6">
+            <a className="product-purchase-cta" href={AMAZON_PRODUCT_URL} target="_blank" rel="noopener noreferrer">Buy on Amazon &rarr;</a>
           </div>
         </div>
         <ProductComposition onOpenGallery={openGalleryAt} />
 
-      </SiteContainer>
+      </div>
 
       {isGalleryOpen && (
         <GalleryModal

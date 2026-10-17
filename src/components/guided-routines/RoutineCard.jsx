@@ -1,4 +1,9 @@
 import AssetPlaceholder from "./AssetPlaceholder.jsx";
+import "./RoutineCard.css";
+
+function MetadataPill({ kind, children }) {
+  return <span className={`workout-pill workout-pill--${kind}`}>{children}</span>;
+}
 
 function PlayIcon() {
   return (
@@ -47,10 +52,27 @@ export default function RoutineCard({ routine, activeFilter }) {
       </div>
 
       <div className="pt-5">
-        <p className="muuva-label text-brand">{routine.meta}</p>
-        <h2 className="mt-2 font-serif text-2xl font-medium leading-tight text-ink">
+        <h2 className="font-serif text-2xl font-medium leading-tight text-ink">
           {routine.title}
         </h2>
+        {(routine.durationMinutes || routine.intensity) && <div className="mt-2 flex flex-wrap items-center gap-4 font-sans text-sm text-muted">
+          {routine.durationMinutes && <span className="inline-flex items-center gap-2">
+            <svg aria-hidden="true" className="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>
+            <span><span className="sr-only">Duration: </span>{routine.durationMinutes} min</span>
+          </span>}
+          {routine.intensity && <MetadataPill kind="intensity"><span className="sr-only">Intensity: </span>{routine.intensity}</MetadataPill>}
+        </div>}
+        <div className={`mt-2 flex gap-2 ${routine.equipment?.length > 1 ? "flex-col items-start" : "flex-wrap items-center"}`}>
+          <div className="flex flex-wrap gap-2">
+            {routine.muscleGroups?.map(group => <MetadataPill key={group} kind="muscle"><span className="sr-only">Muscle group: </span>{group}</MetadataPill>)}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {routine.equipment?.map(item => <MetadataPill key={item} kind="equipment"><span className="sr-only">Equipment: </span>{item}</MetadataPill>)}
+          </div>
+        </div>
       </div>
     </a>
   );
