@@ -1,10 +1,29 @@
+# Copy authority and localization
+
+The approved website interface is available in English, German, Dutch, and Spanish. Runtime copy is authoritative in `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json`. The English excerpts below summarize the approved editorial content; update the JSON files whenever copy changes and keep this reference aligned. Do not copy the complete translated catalogs into this document.
+
+| Locale key group | Content |
+| --- | --- |
+| `header`, `languages`, `site` | Navigation, native language names, selector labels, document title |
+| `hero` | Homepage hero/video accessibility labels |
+| `product` | Purchase title and CTA, gallery controls, five hotspots and image descriptions |
+| `promo` | Homepage Guided Routines promotion |
+| `lifestyle` | Styled by You heading, image descriptions and carousel controls |
+| `footer` | Newsletter, navigation, policies, about text, legal credit and form messaging |
+| `routines` | Listing and category heroes, filter labels, workouts, metadata, player title, back links, placeholders and unavailable states |
+
+MUUVA/Muuva and Calv200 remain unchanged. Translate interface copy, not URLs, filenames, asset paths, category IDs, route slugs, or YouTube IDs. Keep interpolation variables unchanged across languages. See `PROJECT_BRIEF.md` section 8.1 for detection, persistence, terminology, and maintenance rules.
+
+Before publishing, request native-language brand review of the translated kit heading, promotional descriptions, newsletter heading, and Styled by You adaptations. The DE/NL/ES carousel headings adapt the English phrase to “Your style. Your Muuva.” rather than translate it literally. Preserve the implemented wording until an editorial change is approved.
+
+# Shared Header and Hero Copy
+
+English navigation: Shop · Training sessions. The language selector shows EN, DE, NL, or ES and lists English, Deutsch, Nederlands, Español. The homepage hero has no visible heading or CTA; its video and section accessibility descriptions are in `hero`.
+
 # Product Purchase Section Copy
 
 ## Product title
-Pilates Essential Kit
-
-## Supporting copy
-Four essentials. Endless ways to move.
+Get Your Pilates Kit
 
 ## Buy CTA
 Buy on Amazon →
@@ -16,7 +35,7 @@ Buy on Amazon →
 https://www.amazon.de/dp/B0GZ4RBMX9
 
 ## Presentation and gallery behavior
-Left-aligned static title, description and one Buy on Amazon CTA in the square, unified `#F3EBE0` featured container. On wide desktop the title visually wraps as `Pilates` / `Essential Kit`, and the full-kit image sits across the center and right; smaller layouts stack the text above the image. The title and rounded CTA use deep green `#304C40`. No dynamic selection copy or routine links. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
+Left-aligned title and one Buy on Amazon CTA in the square, unified `#F2EFE9` featured container. The title wraps naturally and has no subtitle. On wide desktop the full-kit image sits across the center and right; smaller layouts stack the title and CTA above the image. The title and rounded CTA use deep green `#304C40`. No dynamic selection copy or routine links. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
 
 Hotspot labels and destinations, under `src/assets/images/Products/`:
 
@@ -91,7 +110,19 @@ Part of the Pilates Essential Kit · Explore the kit →
 | Resistance Band Workout | 15 min | Medium | Full body | Band |
 | All Equipment Workout | 20 min | Medium | Full body | Band, Ball, Ring, Slider |
 
-Equipment items are separate non-interactive pills. The visible All Equipment filter uses the internal `Full body` category; every workout card still shows `Full body` as its muscle-group pill. No uppercase category label appears above card titles. The `All` filter shows all five workouts.
+Equipment items are separate non-interactive pills. The visible All Equipment filter uses the stable internal `Full body` category; every workout card still shows `Full body` as its English muscle-group pill, resolved from the separate `fullBody` metadata ID. No uppercase category label appears above card titles. The `All` filter shows all five workouts. Translated labels never determine filter behavior or routes.
+
+The displayed titles and thumbnail descriptions use `routines.workouts.<slug>`, category heroes use `routines.categories.<slug>`, and filter text uses `routines.filters`. Workout duration values, category associations, order, and video destinations remain in `src/data/guidedRoutines.js`.
+
+## Navigation and fallback messages
+
+- Back: ← Back to Guided Routines
+- Unavailable heading: Routine not available
+- Unavailable description: This routine is not ready yet.
+- Empty collection: New routine coming soon.
+- Missing asset: Image placeholder / Image unavailable
+
+Video audio, embedded player controls, and text printed into thumbnails or other media are not translated by these interface catalogs. See the media QA findings in `PROJECT_BRIEF.md`: the Sliders video currently reports private, and several live video titles differ from the approved card metadata. Verify media ownership, availability, and intended destinations before publishing; this synchronization preserves the current video IDs and card copy.
 
 # Lifestyle Carousel Section Copy
 
@@ -108,6 +139,16 @@ Sign up for exclusive Muuva content and pilates inspiration
 
 ## Newsletter confirmation
 You have been subscribed to our newsletter.
+
+## Newsletter field and validation
+
+- Field label: Email address
+- Placeholder: E-mail
+- Submit accessibility label: Subscribe to newsletter
+- Missing value: Please enter your email address.
+- Invalid email: Please enter a valid email address.
+
+All form messages use `footer` locale entries and update when the language changes. The browser's native email validation remains in use.
 
 ## About heading
 About Muuva

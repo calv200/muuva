@@ -1,0 +1,183 @@
+{
+  "header": {
+    "shop": "Shop",
+    "trainingSessions": "Training sessions",
+    "languageSelector": "Select language, current language: {{language}}",
+    "home": "muuva home"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "nl": "Nederlands",
+    "es": "Español"
+  },
+  "hero": {
+    "section": "muuva hero",
+    "video": "muuva Pilates essentials in motion"
+  },
+  "product": {
+    "title": "Get Your Pilates Kit",
+    "buy": "Buy on Amazon →",
+    "discover": "Discover the complete MUUVA Pilates Essential Kit",
+    "viewKit": "View complete Pilates Essential Kit photos",
+    "imageAlt": "MUUVA Pilates kit with ring, ball, band, sliders, packaging, carry bag, pump, and guide with phone",
+    "gallery": "Product image gallery",
+    "close": "Close gallery",
+    "previous": "Previous image",
+    "next": "Next image",
+    "showImage": "Show image {{number}}",
+    "hotspots": {
+      "ring": "View Pilates Ring photos",
+      "ball": "View Pilates Ball photos",
+      "band": "View Resistance Band photos",
+      "sliders": "View Pilates Sliders photos",
+      "workout-guide": "View workout guide and complete kit photos"
+    },
+    "images": {
+      "ring": "Pilates ring from the Pilates Essential Kit",
+      "ball": "Soft Pilates ball from the Pilates Essential Kit",
+      "band": "Resistance band from the Pilates Essential Kit",
+      "sliders": "Pilates sliders from the Pilates Essential Kit",
+      "full-kit": "Pilates Essential Kit"
+    }
+  },
+  "promo": {
+    "section": "Guided Pilates routines",
+    "imageAlt": "Woman practicing Pilates with a soft exercise ball",
+    "label": "Included with your kit",
+    "title": "Guided routines included",
+    "description": "Your kit includes complimentary access to guided Pilates routines designed to help you move with confidence, from your first session onwards.",
+    "cta": "Explore guided routines →"
+  },
+  "lifestyle": {
+    "title": "Styled by You.",
+    "previous": "Previous lifestyle images",
+    "next": "Next lifestyle images",
+    "alt": {
+      "1": "Woman with the Pilates Essential Kit on a neutral exercise mat",
+      "2": "Pilates accessories styled on a soft neutral surface",
+      "3": "Woman in Pilates wear standing by a bright beach window",
+      "4": "Woman presenting the Pilates Essential Kit in a calm home setting",
+      "5": "Neutral Pilates accessories and everyday essentials arranged together",
+      "6": "Pilates kit details styled with soft warm tones",
+      "7": "Lifestyle detail of Pilates products in a clean interior",
+      "8": "Pilates kit and accessories arranged in an editorial lifestyle scene",
+      "default": "Muuva Pilates essentials styled in an editorial lifestyle scene"
+    }
+  },
+  "footer": {
+    "title": "Stay in the move.",
+    "description": "Sign up for exclusive Muuva content and pilates inspiration",
+    "success": "You have been subscribed to our newsletter.",
+    "email": "Email address",
+    "placeholder": "E-mail",
+    "subscribe": "Subscribe to newsletter",
+    "navigation": "Footer navigation",
+    "policies": "Footer policies",
+    "aboutTitle": "About Muuva",
+    "about": "Based in Amsterdam, Muuva creates beautifully designed and sustainably made Pilates gear for movement practices at home and in the studio.",
+    "instagram": "Muuva on Instagram",
+    "copyrightPrefix": "© {{year}}, Muuva. Website designed by",
+    "required": "Please enter your email address.",
+    "invalid": "Please enter a valid email address.",
+    "links": {
+      "behind": "Behind Muuva",
+      "contact": "Contact Us",
+      "wholesale": "Wholesale Muuva",
+      "apply": "Apply for Wholesale",
+      "care": "Caring For Your Muuva",
+      "sustainability": "Sustainability Commitment",
+      "faq": "FAQs",
+      "privacy": "Privacy Policy",
+      "refund": "Refund Policy",
+      "shipping": "Shipping Policy",
+      "service": "Terms of Service",
+      "use": "Terms of Use"
+    }
+  },
+  "routines": {
+    "title": "Guided routines",
+    "description": "Move with your essentials. Follow simple Pilates sessions designed to make movement part of your everyday routine.",
+    "filtersLabel": "Routine filters",
+    "workoutsLabel": "Workout routines",
+    "kitPart": "Part of the Pilates Essential Kit ·",
+    "kitCta": "Explore the kit →",
+    "back": "← Back to Guided Routines",
+    "unavailable": "Routine not available",
+    "notReady": "This routine is not ready yet.",
+    "empty": "New routine coming soon.",
+    "open": "Open {{title}}",
+    "play": "Play routine",
+    "video": "{{title}} video",
+    "duration": "{{count}} min",
+    "durationLabel": "Duration: ",
+    "intensityLabel": "Intensity: ",
+    "muscleLabel": "Muscle group: ",
+    "equipmentLabel": "Equipment: ",
+    "medium": "Medium",
+    "fullBody": "Full body",
+    "placeholder": "Image placeholder",
+    "missingImage": "Image unavailable",
+    "filters": {
+      "all": "All",
+      "ring": "Ring",
+      "ball": "Ball",
+      "sliders": "Sliders",
+      "band": "Band",
+      "full-body": "All Equipment"
+    },
+    "equipment": {
+      "ring": "Ring",
+      "ball": "Ball",
+      "sliders": "Slider",
+      "band": "Band"
+    },
+    "categories": {
+      "ring": {
+        "title": "Pilates Ring Routines",
+        "description": "Add resistance and control to familiar movements while engaging your core, legs and upper body."
+      },
+      "ball": {
+        "title": "Pilates Ball Routines",
+        "description": "Small prop, endless possibilities. Use the ball to challenge stability, alignment and deeper muscle control."
+      },
+      "sliders": {
+        "title": "Slider Routines",
+        "description": "Turn simple movements into controlled, full-range exercises that challenge strength, stability and coordination."
+      },
+      "band": {
+        "title": "Resistance Band Routines",
+        "description": "Add just the right amount of resistance to strengthen, activate and move with more intention."
+      },
+      "full-body": {
+        "title": "Full Body Routines",
+        "description": "Balanced sessions designed to connect strength, control and mobility from head to toe."
+      }
+    },
+    "workouts": {
+      "ring": {
+        "title": "Pilates Ring Workout",
+        "thumbnailAlt": "Pilates ring routine thumbnail"
+      },
+      "ball": {
+        "title": "Pilates Ball Workout",
+        "thumbnailAlt": "Pilates ball routine thumbnail"
+      },
+      "sliders": {
+        "title": "Pilates Sliders Workout",
+        "thumbnailAlt": "Slider routine thumbnail"
+      },
+      "band": {
+        "title": "Resistance Band Workout",
+        "thumbnailAlt": "Resistance band routine thumbnail"
+      },
+      "full-body": {
+        "title": "All Equipment Workout",
+        "thumbnailAlt": "Full body Pilates routine thumbnail"
+      }
+    }
+  },
+  "site": {
+    "title": "muuva | Pilates Essential Kit"
+  }
+}

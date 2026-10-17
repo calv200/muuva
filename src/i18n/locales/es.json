@@ -1,0 +1,183 @@
+{
+  "header": {
+    "shop": "Tienda",
+    "trainingSessions": "Sesiones de entrenamiento",
+    "languageSelector": "Seleccionar idioma, idioma actual: {{language}}",
+    "home": "Inicio de muuva"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "nl": "Nederlands",
+    "es": "Español"
+  },
+  "hero": {
+    "section": "Descubre muuva",
+    "video": "Esenciales de Pilates de muuva en movimiento"
+  },
+  "product": {
+    "title": "Consigue tu kit de Pilates",
+    "buy": "Comprar en Amazon →",
+    "discover": "Descubre el kit completo de Pilates de MUUVA",
+    "viewKit": "Ver fotos del kit completo de Pilates",
+    "imageAlt": "Kit de Pilates de MUUVA con aro, pelota, banda, discos deslizantes, caja, bolsa, inflador y guía con teléfono",
+    "gallery": "Galería de imágenes del producto",
+    "close": "Cerrar galería",
+    "previous": "Imagen anterior",
+    "next": "Imagen siguiente",
+    "showImage": "Mostrar imagen {{number}}",
+    "hotspots": {
+      "ring": "Ver fotos del aro de Pilates",
+      "ball": "Ver fotos de la pelota de Pilates",
+      "band": "Ver fotos de la banda de resistencia",
+      "sliders": "Ver fotos de los discos deslizantes de Pilates",
+      "workout-guide": "Ver fotos de la guía de ejercicios y del kit completo"
+    },
+    "images": {
+      "ring": "Aro de Pilates del kit de Pilates",
+      "ball": "Pelota blanda de Pilates del kit de Pilates",
+      "band": "Banda de resistencia del kit de Pilates",
+      "sliders": "Discos deslizantes del kit de Pilates",
+      "full-kit": "Kit de Pilates"
+    }
+  },
+  "promo": {
+    "section": "Rutinas guiadas de Pilates",
+    "imageAlt": "Mujer practicando Pilates con una pelota blanda",
+    "label": "Incluido en tu kit",
+    "title": "Rutinas guiadas incluidas",
+    "description": "Tu kit incluye acceso gratuito a rutinas guiadas de Pilates para que te muevas con confianza desde tu primera sesión.",
+    "cta": "Descubre las rutinas guiadas →"
+  },
+  "lifestyle": {
+    "title": "Tu estilo. Tu Muuva.",
+    "previous": "Imágenes de estilo de vida anteriores",
+    "next": "Imágenes de estilo de vida siguientes",
+    "alt": {
+      "1": "Mujer con el kit de Pilates sobre una esterilla de color neutro",
+      "2": "Accesorios de Pilates sobre una superficie suave de tonos neutros",
+      "3": "Mujer con ropa de Pilates junto a una ventana luminosa con vistas a la playa",
+      "4": "Mujer presentando el kit de Pilates en un ambiente tranquilo en casa",
+      "5": "Accesorios de Pilates de tonos neutros junto a objetos de uso diario",
+      "6": "Detalles del kit de Pilates en tonos cálidos y suaves",
+      "7": "Detalle de productos de Pilates en un interior despejado",
+      "8": "Kit de Pilates y accesorios en una composición de estilo de vida",
+      "default": "Esenciales de Pilates de Muuva en una composición de estilo de vida"
+    }
+  },
+  "footer": {
+    "title": "Sigue en movimiento.",
+    "description": "Suscríbete para recibir contenido exclusivo de Muuva e inspiración para Pilates",
+    "success": "Te has suscrito a nuestra newsletter.",
+    "email": "Dirección de correo electrónico",
+    "placeholder": "Correo electrónico",
+    "subscribe": "Suscribirse a la newsletter",
+    "navigation": "Navegación del pie de página",
+    "policies": "Políticas del pie de página",
+    "aboutTitle": "Sobre Muuva",
+    "about": "Desde Ámsterdam, Muuva crea accesorios de Pilates con un diseño cuidado y una fabricación sostenible para tu práctica en casa y en el estudio.",
+    "instagram": "Muuva en Instagram",
+    "copyrightPrefix": "© {{year}}, Muuva. Sitio web diseñado por",
+    "required": "Introduce tu dirección de correo electrónico.",
+    "invalid": "Introduce una dirección de correo electrónico válida.",
+    "links": {
+      "behind": "Detrás de Muuva",
+      "contact": "Contacto",
+      "wholesale": "Muuva para distribuidores",
+      "apply": "Hazte distribuidor",
+      "care": "Cuida tus productos Muuva",
+      "sustainability": "Compromiso con la sostenibilidad",
+      "faq": "Preguntas frecuentes",
+      "privacy": "Política de privacidad",
+      "refund": "Política de reembolso",
+      "shipping": "Política de envíos",
+      "service": "Condiciones del servicio",
+      "use": "Condiciones de uso"
+    }
+  },
+  "routines": {
+    "title": "Rutinas guiadas",
+    "description": "Muévete con tus esenciales. Sigue sesiones sencillas de Pilates para que el movimiento forme parte de tu día a día.",
+    "filtersLabel": "Filtros de rutinas",
+    "workoutsLabel": "Rutinas de entrenamiento",
+    "kitPart": "Parte del kit de Pilates ·",
+    "kitCta": "Descubre el kit →",
+    "back": "← Volver a las rutinas guiadas",
+    "unavailable": "Rutina no disponible",
+    "notReady": "Esta rutina aún no está disponible.",
+    "empty": "Próximamente, una nueva rutina.",
+    "open": "Abrir {{title}}",
+    "play": "Reproducir rutina",
+    "video": "Vídeo: {{title}}",
+    "duration": "{{count}} min",
+    "durationLabel": "Duración: ",
+    "intensityLabel": "Intensidad: ",
+    "muscleLabel": "Grupo muscular: ",
+    "equipmentLabel": "Equipo: ",
+    "medium": "Media",
+    "fullBody": "Cuerpo completo",
+    "placeholder": "Imagen provisional",
+    "missingImage": "Imagen no disponible",
+    "filters": {
+      "all": "Todas",
+      "ring": "Aro",
+      "ball": "Pelota",
+      "sliders": "Discos deslizantes",
+      "band": "Banda",
+      "full-body": "Todo el equipo"
+    },
+    "equipment": {
+      "ring": "Aro",
+      "ball": "Pelota",
+      "sliders": "Disco deslizante",
+      "band": "Banda de resistencia"
+    },
+    "categories": {
+      "ring": {
+        "title": "Rutinas con aro de Pilates",
+        "description": "Añade resistencia y control a movimientos conocidos mientras activas el abdomen, las piernas y el tren superior."
+      },
+      "ball": {
+        "title": "Rutinas con pelota de Pilates",
+        "description": "Un pequeño accesorio, infinitas posibilidades. Usa la pelota para trabajar la estabilidad, la alineación y el control de la musculatura profunda."
+      },
+      "sliders": {
+        "title": "Rutinas con discos deslizantes",
+        "description": "Convierte movimientos sencillos en ejercicios controlados con un recorrido completo para trabajar la fuerza, la estabilidad y la coordinación."
+      },
+      "band": {
+        "title": "Rutinas con banda de resistencia",
+        "description": "Añade la resistencia justa para fortalecer y activar los músculos y moverte de forma más consciente."
+      },
+      "full-body": {
+        "title": "Rutinas de cuerpo completo",
+        "description": "Sesiones equilibradas que conectan fuerza, control y movilidad de pies a cabeza."
+      }
+    },
+    "workouts": {
+      "ring": {
+        "title": "Entrenamiento con aro de Pilates",
+        "thumbnailAlt": "Vista previa de la rutina con aro de Pilates"
+      },
+      "ball": {
+        "title": "Entrenamiento con pelota de Pilates",
+        "thumbnailAlt": "Vista previa de la rutina con pelota de Pilates"
+      },
+      "sliders": {
+        "title": "Entrenamiento con discos deslizantes de Pilates",
+        "thumbnailAlt": "Vista previa de la rutina con discos deslizantes"
+      },
+      "band": {
+        "title": "Entrenamiento con banda de resistencia",
+        "thumbnailAlt": "Vista previa de la rutina con banda de resistencia"
+      },
+      "full-body": {
+        "title": "Entrenamiento con todo el equipo",
+        "thumbnailAlt": "Vista previa de la rutina de Pilates de cuerpo completo"
+      }
+    }
+  },
+  "site": {
+    "title": "muuva | Kit de Pilates"
+  }
+}

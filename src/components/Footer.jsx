@@ -1,22 +1,23 @@
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useEffect, useRef, useState } from "react";
 import SiteContainer from "./SiteContainer.jsx";
 
 const navigationLinks = [
-  "Behind Muuva",
-  "Contact Us",
-  "Wholesale Muuva",
-  "Apply for Wholesale",
-  "Caring For Your Muuva",
-  "Sustainability Commitment",
+  "footer.links.behind",
+  "footer.links.contact",
+  "footer.links.wholesale",
+  "footer.links.apply",
+  "footer.links.care",
+  "footer.links.sustainability",
 ];
 
 const policyLinks = [
-  "FAQs",
-  "Privacy Policy",
-  "Refund Policy",
-  "Shipping Policy",
-  "Terms of Service",
-  "Terms of Use",
+  "footer.links.faq",
+  "footer.links.privacy",
+  "footer.links.refund",
+  "footer.links.shipping",
+  "footer.links.service",
+  "footer.links.use",
 ];
 
 function ArrowIcon() {
@@ -67,6 +68,7 @@ function InstagramIcon() {
 }
 
 function FooterLinkList({ links, ariaLabel }) {
+  const { t } = useTranslation();
   return (
     <nav aria-label={ariaLabel}>
       <ul className="space-y-3 text-muted sm:space-y-3.5">
@@ -76,7 +78,7 @@ function FooterLinkList({ links, ariaLabel }) {
               className="muuva-footer-link transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
               href="#"
             >
-              {link}
+              {t(link)}
             </a>
           </li>
         ))}
@@ -86,6 +88,14 @@ function FooterLinkList({ links, ariaLabel }) {
 }
 
 export default function Footer() {
+  const { t } = useTranslation();
+  const emailRef = useRef(null);
+  useEffect(() => {
+    const input = emailRef.current;
+    if (input?.validity.customError) {
+      input.setCustomValidity(t(input.validity.valueMissing ? "footer.required" : "footer.invalid"));
+    }
+  }, [t]);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const handleSubmit = (event) => {
@@ -100,10 +110,10 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-2 md:gap-x-16 md:gap-y-14 lg:grid-cols-[1.45fr_0.8fr_0.8fr_1fr] lg:gap-16">
           <div>
             <h2 className="font-serif text-4xl font-medium leading-tight sm:text-5xl">
-              Stay in the move.
+              {t("footer.title")}
             </h2>
             <p className="muuva-support mt-7 max-w-md text-muted">
-              Sign up for exclusive Muuva content and pilates inspiration
+              {t("footer.description")}
             </p>
 
             {isSubscribed ? (
@@ -115,26 +125,32 @@ export default function Footer() {
                 <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/15 text-brand">
                   <CheckIcon />
                 </span>
-                <span>You have been subscribed to our newsletter.</span>
+                <span>{t("footer.success")}</span>
               </div>
             ) : (
               <form className="mt-8 max-w-md" onSubmit={handleSubmit}>
                 <label className="sr-only" htmlFor="footer-email">
-                  Email address
+                  {t("footer.email")}
                 </label>
                 <div className="flex h-14 items-center border border-softborder bg-cream transition focus-within:border-brand/60">
                   <input
                     className="muuva-ui h-full min-w-0 flex-1 bg-transparent px-5 text-ink placeholder:text-muted/70 focus:outline-none"
+                    ref={emailRef}
+                    onInvalid={(event) => {
+                      const input = event.currentTarget;
+                      input.setCustomValidity(t(input.validity.valueMissing ? "footer.required" : "footer.invalid"));
+                    }}
+                    onInput={(event) => event.currentTarget.setCustomValidity("")}
                     id="footer-email"
                     name="email"
                     type="email"
-                    placeholder="E-mail"
+                    placeholder={t("footer.placeholder")}
                     required
                   />
                   <button
                     className="mr-3 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/[0.06] text-muted transition hover:bg-ink/10 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-3 focus-visible:outline-brand"
                     type="submit"
-                    aria-label="Subscribe to newsletter"
+                    aria-label={t("footer.subscribe")}
                   >
                     <ArrowIcon />
                   </button>
@@ -143,15 +159,13 @@ export default function Footer() {
             )}
           </div>
 
-          <FooterLinkList links={navigationLinks} ariaLabel="Footer navigation" />
-          <FooterLinkList links={policyLinks} ariaLabel="Footer policies" />
+          <FooterLinkList links={navigationLinks} ariaLabel={t("footer.navigation")} />
+          <FooterLinkList links={policyLinks} ariaLabel={t("footer.policies")} />
 
           <div className="max-w-sm lg:max-w-[18rem]">
-            <h2 className="muuva-ui font-medium text-ink">About Muuva</h2>
+            <h2 className="muuva-ui font-medium text-ink">{t("footer.aboutTitle")}</h2>
             <p className="muuva-support mt-7 text-muted">
-              Based in Amsterdam, Muuva creates beautifully designed and
-              sustainably made Pilates gear for movement practices at home and in
-              the studio.
+              {t("footer.about")}
             </p>
           </div>
         </div>
@@ -162,13 +176,13 @@ export default function Footer() {
             href="https://www.instagram.com/muuva.studio/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Muuva on Instagram"
+            aria-label={t("footer.instagram")}
           >
             <InstagramIcon />
           </a>
 
           <p>
-            &copy; 2026, Muuva. Website designed by{" "}
+            {t("footer.copyrightPrefix", { year: 2026 })}{" "}
             <a
               className="transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
               href="#"

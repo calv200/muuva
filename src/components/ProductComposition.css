@@ -10,7 +10,7 @@
   margin-inline: auto;
   padding: clamp(24px, 4vw, 60px);
   border-radius: 0;
-  background: #F3EBE0;
+  background: #F2EFE9;
   box-shadow: 0 12px 40px rgb(36 33 31 / 4%);
 }
 
@@ -66,9 +66,7 @@
     padding-top: 8px;
   }
   #product-discovery-heading { font-size: 3.375rem; line-height: 0.96; }
-  .product-title-line { display: block; white-space: nowrap; }
-  .product-discovery-subtitle { margin-top: 12px; font-size: 17px; }
-  .product-purchase-action { margin-top: 20px; }
+  .product-purchase-action { margin-top: 28px; }
   .product-composition {
     grid-area: feature;
     width: 106%;

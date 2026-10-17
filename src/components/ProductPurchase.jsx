@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useRef, useState } from "react";
 import ringImage from "../assets/images/Products/ring1.png";
 import ballImage from "../assets/images/Products/ball1.png";
@@ -9,14 +10,15 @@ import ProductComposition from "./ProductComposition.jsx";
 import { AMAZON_PRODUCT_URL } from "../data/product.js";
 
 const productImages = [
-  { id: "ring", src: ringImage, alt: "Pilates ring from the Pilates Essential Kit" },
-  { id: "ball", src: ballImage, alt: "Soft Pilates ball from the Pilates Essential Kit" },
-  { id: "band", src: bandImage, alt: "Resistance band from the Pilates Essential Kit" },
-  { id: "sliders", src: sliderImage, alt: "Pilates sliders from the Pilates Essential Kit" },
-  { id: "full-kit", src: kitImage, alt: "Pilates Essential Kit" },
+  { id: "ring", src: ringImage, altKey: "product.images.ring" },
+  { id: "ball", src: ballImage, altKey: "product.images.ball" },
+  { id: "band", src: bandImage, altKey: "product.images.band" },
+  { id: "sliders", src: sliderImage, altKey: "product.images.sliders" },
+  { id: "full-kit", src: kitImage, altKey: "product.images.full-kit" },
 ];
 
 export default function ProductPurchase() {
+  const { t } = useTranslation();
   const [activeImage, setActiveImage] = useState(0);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
@@ -56,10 +58,9 @@ export default function ProductPurchase() {
     <section id="product" className="section-pad product-feature-section bg-cream" aria-labelledby="product-discovery-heading">
       <div className="product-discovery-layout">
         <div className="product-discovery-content">
-          <h2 id="product-discovery-heading" className="font-serif text-[clamp(2rem,4vw,2.75rem)] font-normal leading-[1.1] text-ink"><span className="product-title-line">Pilates</span>{" "}<span className="product-title-line">Essential Kit</span></h2>
-          <p className="product-discovery-subtitle mt-4 font-sans text-base leading-relaxed text-muted">Four essentials. Endless ways to move.</p>
+          <h2 id="product-discovery-heading" className="font-serif text-[clamp(2rem,4vw,2.75rem)] font-normal leading-[1.1] text-ink">{t("product.title")}</h2>
           <div className="product-purchase-action mt-6">
-            <a className="product-purchase-cta" href={AMAZON_PRODUCT_URL} target="_blank" rel="noopener noreferrer">Buy on Amazon &rarr;</a>
+            <a className="product-purchase-cta" href={AMAZON_PRODUCT_URL} target="_blank" rel="noopener noreferrer">{t("product.buy")}</a>
           </div>
         </div>
         <ProductComposition onOpenGallery={openGalleryAt} />
@@ -88,6 +89,7 @@ function GalleryModal({
   onPrevious,
   onSelect,
 }) {
+  const { t } = useTranslation();
   const modalRef = useRef(null);
   const [ctaBesideImage, setCtaBesideImage] = useState(false);
 
@@ -139,13 +141,13 @@ function GalleryModal({
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/85 p-4 backdrop-blur-sm sm:p-8"
       role="dialog"
       aria-modal="true"
-      aria-label="Product image gallery"
+      aria-label={t("product.gallery")}
     >
       <button
         className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-linen/90 text-2xl leading-none text-ink transition hover:bg-white"
         type="button"
         onClick={onClose}
-        aria-label="Close gallery"
+        aria-label={t("product.close")}
       >
         &times;
       </button>
@@ -154,7 +156,7 @@ function GalleryModal({
         className="absolute left-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-linen/90 text-2xl text-ink transition hover:bg-white sm:left-8"
         type="button"
         onClick={onPrevious}
-        aria-label="Previous image"
+        aria-label={t("product.previous")}
       >
         &lsaquo;
       </button>
@@ -163,7 +165,7 @@ function GalleryModal({
       <img
         className={`gallery-image max-w-[calc(100vw-9rem)] object-contain shadow-soft ${ctaBesideImage ? "max-h-[min(76vh,calc(100svh-160px))]" : "max-h-[min(76vh,calc(100svh-240px))]"}`}
         src={images[activeImage].src}
-        alt={images[activeImage].alt}
+        alt={t(images[activeImage].altKey)}
         onLoad={updateCtaPosition}
       />
       <a
@@ -172,7 +174,7 @@ function GalleryModal({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Buy on Amazon &rarr;
+        {t("product.buy")}
       </a>
       </div>
 
@@ -180,7 +182,7 @@ function GalleryModal({
         className="absolute right-4 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-linen/90 text-2xl text-ink transition hover:bg-white sm:right-8"
         type="button"
         onClick={onNext}
-        aria-label="Next image"
+        aria-label={t("product.next")}
       >
         &rsaquo;
       </button>
@@ -194,7 +196,7 @@ function GalleryModal({
             }`}
             type="button"
             onClick={() => onSelect(index)}
-            aria-label={`Show image ${index + 1}`}
+            aria-label={t("product.showImage", { number: index + 1 })}
           >
             <img
               className="h-full w-full object-cover"

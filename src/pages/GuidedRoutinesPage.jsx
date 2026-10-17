@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import GuidedRoutineHero from "../components/guided-routines/GuidedRoutineHero.jsx";
 import RoutineFilters from "../components/guided-routines/RoutineFilters.jsx";
@@ -15,6 +16,7 @@ function getValidFilter(filter) {
 }
 
 export default function GuidedRoutinesPage({ initialFilter = allFilter }) {
+  const { t } = useTranslation();
   const [activeFilter, setActiveFilter] = useState(getValidFilter(initialFilter));
   const activeHero = activeFilter !== allFilter
     ? categoryHeroes[slugForFilter(activeFilter)]
@@ -49,7 +51,7 @@ export default function GuidedRoutinesPage({ initialFilter = allFilter }) {
         activeFilter={activeFilter}
         onFilterChange={handleFilterChange}
       />
-      <section className="section-pad bg-cream" aria-label="Workout routines">
+      <section className="section-pad bg-cream" aria-label={t("routines.workoutsLabel")}>
         <div className="site-container">
           <RoutineGrid routines={visibleRoutines} activeFilter={activeFilter} />
         </div>

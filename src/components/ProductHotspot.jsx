@@ -1,4 +1,6 @@
+import { useTranslation } from "react-i18next";
 export default function ProductHotspot({ hotspot, onOpenGallery }) {
+  const { t } = useTranslation();
   const style = {};
   for (const size of ["mobile", "tablet", "desktop"]) {
     const point = hotspot[size] ?? hotspot.desktop;
@@ -11,7 +13,7 @@ export default function ProductHotspot({ hotspot, onOpenGallery }) {
       type="button"
       className="product-hotspot"
       style={style}
-      aria-label={hotspot.label}
+      aria-label={t(hotspot.labelKey)}
       aria-haspopup="dialog"
       onClick={(event) => { event.stopPropagation(); onOpenGallery(hotspot.galleryImageId); }}
     >

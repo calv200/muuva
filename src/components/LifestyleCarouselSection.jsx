@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useRef, useState } from "react";
 import SiteContainer from "./SiteContainer.jsx";
 
@@ -6,17 +7,6 @@ const lifestyleImageModules = import.meta.glob(
   { eager: true, import: "default" }
 );
 
-const lifestyleAltText = {
-  1: "Woman with the Pilates Essential Kit on a neutral exercise mat",
-  2: "Pilates accessories styled on a soft neutral surface",
-  3: "Woman in Pilates wear standing by a bright beach window",
-  4: "Woman presenting the Pilates Essential Kit in a calm home setting",
-  5: "Neutral Pilates accessories and everyday essentials arranged together",
-  6: "Pilates kit details styled with soft warm tones",
-  7: "Lifestyle detail of Pilates products in a clean interior",
-  8: "Pilates kit and accessories arranged in an editorial lifestyle scene",
-};
-
 const lifestyleImages = Object.entries(lifestyleImageModules)
   .map(([path, src]) => {
     const imageNumber = Number(path.match(/lifeStyle(\d+)/i)?.[1]);
@@ -24,15 +14,14 @@ const lifestyleImages = Object.entries(lifestyleImageModules)
     return {
       src,
       order: imageNumber,
-      alt:
-        lifestyleAltText[imageNumber] ||
-        "Muuva Pilates essentials styled in an editorial lifestyle scene",
+      altKey: imageNumber >= 1 && imageNumber <= 8 ? `lifestyle.alt.${imageNumber}` : "lifestyle.alt.default",
     };
   })
   .filter((image) => Number.isFinite(image.order))
   .sort((firstImage, secondImage) => firstImage.order - secondImage.order);
 
 export default function LifestyleCarouselSection() {
+  const { t } = useTranslation();
   const carouselRef = useRef(null);
   const [canScrollPrevious, setCanScrollPrevious] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
@@ -75,10 +64,10 @@ export default function LifestyleCarouselSection() {
       <SiteContainer>
         <div className="mb-8 flex items-center justify-between gap-6 sm:mb-10">
           <h2 className="font-serif text-[clamp(2rem,5vw,2.75rem)] font-medium leading-[1.05] text-ink">
-            Styled by You.
+            {t("lifestyle.title")}
           </h2>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <button
               className={`grid h-9 w-9 place-items-center rounded-full border border-softborder text-xl leading-none text-muted transition hover:border-ink/40 hover:text-ink ${
                 canScrollPrevious ? "" : "cursor-default opacity-35"
@@ -86,7 +75,7 @@ export default function LifestyleCarouselSection() {
               type="button"
               onClick={() => scrollCarousel(-1)}
               disabled={!canScrollPrevious}
-              aria-label="Previous lifestyle images"
+              aria-label={t("lifestyle.previous")}
             >
               &lsaquo;
             </button>
@@ -97,7 +86,7 @@ export default function LifestyleCarouselSection() {
               type="button"
               onClick={() => scrollCarousel(1)}
               disabled={!canScrollNext}
-              aria-label="Next lifestyle images"
+              aria-label={t("lifestyle.next")}
             >
               &rsaquo;
             </button>
@@ -118,7 +107,7 @@ export default function LifestyleCarouselSection() {
               <img
                 className="h-[430px] w-full object-cover sm:h-[520px] lg:h-[560px]"
                 src={image.src}
-                alt={image.alt}
+                alt={t(image.altKey)}
                 draggable="false"
               />
             </div>

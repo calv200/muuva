@@ -23,6 +23,8 @@ The website should feel closer to a modern lifestyle / design brand than to a co
 
 A separate **Guided Routines page** now exists as a GitHub Pages-safe routed experience and can continue to be refined after visual review.
 
+The homepage, Guided Routines listing and detail pages, and shared interfaces support English, German, Dutch, and Spanish. Section 8.1 describes the approved localization implementation and maintenance conventions.
+
 ---
 
 ## 5. Site-wide Design Foundation
@@ -127,7 +129,7 @@ Use a small, restrained palette. These are starting design tokens and may be fin
 - Muted text: `#6F6A63`
 
 #### Neutral backgrounds
-- Soft Sand token: `#E9E1D6` (Tailwind `soft-sand`); the current featured product container instead uses `#F3EBE0`.
+- Soft Sand token: `#E9E1D6` (Tailwind `soft-sand`); the current featured product container instead uses `#F2EFE9`.
 - Main warm cream: `#FBF8F2`
 - Secondary warm neutral: `#F2EFE9`
 - Soft beige: `#DFD3BD`
@@ -138,7 +140,7 @@ Use a small, restrained palette. These are starting design tokens and may be fin
 
 #### Landing-page section assignments
 - Header and footer: warm neutral `#F2EFE9` (`warm`).
-- Featured Product Purchase Section: square framed container in warm cream `#F3EBE0` on the existing cream page background.
+- Featured Product Purchase Section: square framed container in warm neutral `#F2EFE9` on the existing cream page background.
 - Guided Routines promotional text panel and Styled by You: warm cream `#FBF8F2` (`cream`), matching the dominant page canvas.
 - Hero video, photography, overlays, typography and shared CTA styling remain unchanged. Soft beige `#DFD3BD` remains available as a secondary token; MUUVA green stays an accent.
 
@@ -273,6 +275,9 @@ During the design-foundation cleanup:
 ## 6. Visual References
 
 ### 6.1 Header Reference
+
+Current implementation: the shared header uses the real logo, Shop and Training sessions links from 640px upward, and a globe/language-code selector at every viewport size. The language menu lists English, Deutsch, Nederlands, and Español. The search icon in the reference below is not implemented. The reference remains visual inspiration rather than a list of current functionality.
+
 - Source image
 `references/screenshots/headerMuuva.png`
 
@@ -377,8 +382,8 @@ This sketch defines the desired layout direction for the hero section, including
 ### 6.3 Product Purchase / Discovery Section
 
 - Placement: after the hero video, before the Guided Routines promotional section. Preserve the remaining page order.
-- Layout: centered framed container up to 1462px wide with square 90-degree corners, a subtle shadow, and one unified `#F3EBE0` background. At 1280px and wider, the left-aligned editorial block shares the card with the image positioned across the center and right. Below 1280px, copy stacks above the image. The surrounding section remains `#FBF8F2`.
-- Static copy: Newsreader title `Pilates Essential Kit` in deep green `#304C40`, visually split after `Pilates` on wide desktop but with unchanged text content; Manrope description `Four essentials. Endless ways to move.` in muted charcoal. The single main CTA is a rounded, filled `Buy on Amazon →` button in `#304C40` with white text, darker hover, and visible focus. The `More info` button is removed.
+- Layout: centered framed container up to 1462px wide with square 90-degree corners, a subtle shadow, and one unified `#F2EFE9` background. At 1280px and wider, the left-aligned editorial block shares the card with the image positioned across the center and right. Below 1280px, copy stacks above the image. The surrounding section remains `#FBF8F2`.
+- Static copy: left-aligned Newsreader title `Get Your Pilates Kit` in deep green `#304C40`, wrapping naturally without forced line breaks. No subtitle appears. The single main CTA remains the rounded, filled `Buy on Amazon →` button in `#304C40` with white text, darker hover, and visible focus, spaced directly below the title. The `More info` button remains removed.
 - Sizing and positioning: the image wrapper is 100% wide up to 1341.6px below 1280px. At 1280px and wider it is 106% wide up to 1422.1px, shifted right by 9% of its width and upward with a -24px top margin. The wider layout uses 40px top and 24px bottom card padding; the card remains content-sized. The original image proportions, transparent padding, product arrangement, and percentage hotspot alignment remain intact. No equipment is independently resized.
 - Composition: one transparent `src/assets/images/Products/full-kit-cutout.png` (1672×941), derived locally from `src/assets/images/Products/kit-billboard.png`. Preserve the original product arrangement, perspective, guide/phone angle and photographic shadows. Original source remains unchanged. No floating animation.
 - Gallery triggers: five semantic hotspot buttons overlay the single image, with percentage coordinates and centralized `galleryImageId` mapping in `src/data/productComposition.js`. Ring, Ball, Band and Sliders open their respective photos. The workout-guide hotspot at 73% x / 83% y, beneath the printed guide beside the phone, temporarily opens the full-kit photo. Change only its `galleryImageId` when a dedicated guide photo is added to the gallery. The independent image button opens the full-kit photo; empty section space outside the image and editorial text do not.
@@ -476,7 +481,7 @@ All Equipment:
 - Routine grid
 Use the existing responsive one/two/three-column editorial grid and unchanged thumbnails and play overlays. Below each thumbnail, show a Newsreader workout title after 20px, then a duration/clock and intensity row after 8px, followed by muscle-group and equipment pills after 8px. Remove the previous uppercase category label. Do not load YouTube iframes inside the grid.
 
-Workout metadata lives in `src/data/guidedRoutines.js`: `title`, `durationMinutes`, `intensity`, `muscleGroups`, and `equipment`. Pilates Ring Workout, Pilates Ball Workout, Pilates Sliders Workout, and Resistance Band Workout each show 15 min, Medium, Full body, and their respective Ring/Ball/Slider/Band equipment tag. All Equipment Workout shows 20 min, Medium, Full body, and four separate equipment pills: Band, Ball, Ring, Slider. It remains associated only with the internal `Full body` category, displayed as the All Equipment filter (and the All view).
+Workout metadata lives in `src/data/guidedRoutines.js`: `titleKey`, `durationMinutes`, `intensity`, `muscleGroups`, and `equipment`. Text is resolved from the locale files. Intensity uses the stable `medium` ID, muscle groups use `fullBody`, and equipment uses `ring`, `ball`, `sliders`, and `band`. In English, Pilates Ring Workout, Pilates Ball Workout, Pilates Sliders Workout, and Resistance Band Workout each show 15 min, Medium, Full body, and their respective Ring/Ball/Slider/Band equipment tag. All Equipment Workout shows 20 min, Medium, Full body, and four separate equipment pills: Band, Ball, Ring, Slider. It remains associated only with the internal `Full body` filter category, displayed as the All Equipment filter (and the All view).
 
 Reusable non-interactive metadata pills use Manrope, soft borders, and charcoal text (#24211F). Intensity uses buttery cream #F8EACB; muscle group uses creamy blush #F8E9E3; equipment uses sage #DFE5D8. Styles are centralized in `src/components/guided-routines/RoutineCard.css`. Equipment tags stay in one wrapping group; multi-equipment cards place this group beneath the muscle-group row. The `All` filter shows all five playable cards. Preserve filter labels, category associations, video IDs, destinations, thumbnails, hero content, and player behavior.
 
@@ -527,7 +532,7 @@ Thumbnails:
 All listed assets currently exist as `.png` files. The asset lookup also accepts `.webp` names, and missing assets render neutral placeholders without breaking the build.
 
 - How to add another routine
-Add or update one object in `src/data/guidedRoutines.js` with the routine `id`, `slug`, `title`, `durationMinutes`, `intensity`, `muscleGroups`, `equipment`, `filters`, thumbnail filename, YouTube URLs, and matching category hero. Keep equipment display labels separate from filter identifiers. Add the expected image file to the relevant `guided-routines` asset folder when ready.
+Add or update one object in `src/data/guidedRoutines.js` with the routine `id`, `slug`, `titleKey`, `durationMinutes`, `intensity`, `muscleGroups`, `equipment`, `filters`, thumbnail filename, `thumbnailAltKey`, YouTube URLs, and matching category hero. Hero copy uses `titleKey` and `descriptionKey`. Add matching text entries to all four locale files. Keep equipment display labels separate from filter identifiers. Add the expected image file to the relevant `guided-routines` asset folder when ready.
 
 - Visual direction
 The page should feel curated, editorial, premium, and calm. Use the approved duration and intensity metadata above; do not invent additional values. Do not add search, ratings, progress UI, extra filters, YouTube UI in cards, or dense fitness-platform styling.
@@ -562,3 +567,53 @@ The page should feel curated, editorial, premium, and calm. Use the approved dur
 - Use shared components for recurring UI such as Header, Footer, and CTA/Button elements.
 - No backend is needed for now.
 - No additional hosting or domain setup is needed for the current design work.
+
+### 8.1 Multilingual implementation
+
+Supported languages are English (`en`), German (`de`), Dutch (`nl`), and Spanish (`es`). The implementation uses the existing React components with `i18next`, `react-i18next`, and `i18next-browser-languagedetector`; there are no duplicated pages or language-specific routes.
+
+#### Translation sources and coverage
+
+- `src/i18n/index.js` initializes i18next once through `src/main.jsx`.
+- `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json` are the authoritative runtime copy. English preserves the approved source copy; `CONTENT.md` is an editorial reference and key map rather than a second translation catalog.
+- Keys are grouped under `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, and `site`. Each language currently has 127 string entries.
+- Coverage includes the homepage, all Guided Routines heroes/cards/detail states, shared header/footer, gallery controls, hotspots, carousel descriptions and controls, newsletter placeholder/validation/confirmation, accessible labels, image descriptions, and browser document title.
+- The Product Purchase heading remains `Get Your Pilates Kit` in English, with no subtitle. Its square container remains uniformly `#F2EFE9`; localization does not change the kit composition, five hotspot coordinates, or Amazon destination.
+
+#### Detection, persistence, and switching
+
+1. Read the manual preference from localStorage key `muuva.language`, if it contains a supported language.
+2. Otherwise use the first supported entry in `navigator.languages`, or `navigator.language` when the list is absent or empty. Normalize case, underscores, and regional tags to the base language, for example `de-AT` → `de`, `nl-BE` → `nl`, and `es-MX` → `es`.
+3. Fall back to English when no supported preference is available. i18next also uses English as the missing-key fallback; this is a safeguard, not permission to omit translations.
+
+Automatic detection does not write a preference. A manual selection saves the base language. Both storage reads and writes are guarded: if storage is unavailable, detection and switching still work during the current page session, but a manual choice cannot persist across reloads.
+
+`LanguageSelector.jsx` shows a globe, current uppercase language code, and dropdown chevron. The menu uses native language names and radio-menu semantics with the active option marked. It supports keyboard opening, arrow keys, Home/End, Enter/Space selection, Escape, Tab dismissal, and outside clicks. Closing by selection or Escape restores trigger focus. Controls have visible keyboard focus styles and at least 44px menu/trigger height.
+
+Language changes update React text, the visible header code, `<html lang>`, and `document.title` without reloading or redirecting. They preserve the route, selected filter, current workout, and mounted video iframe. The mobile header retains the existing hidden navigation links below 640px; the selector remains available.
+
+#### Translation conventions and maintenance
+
+- Add or edit strings in all four locale files together and consume them with `useTranslation()`. Preserve English wording unless a content change is approved. Translate complete phrases, including accessible labels and form messages.
+- Keep interpolation variables identical across languages: `{{language}}`, `{{number}}`, `{{year}}`, `{{title}}`, and `{{count}}`. React handles escaping; locale values are plain text, not HTML. Duration is interpolated from unchanged numeric workout metadata.
+- Do not translate MUUVA/Muuva, Calv200, domains, URLs, video IDs, data IDs, route slugs, filenames, or asset paths. Language names remain in their native spelling. Shared words such as Ring, Shop, Slider, or min can correctly match English in another language.
+- Filtering uses fixed IDs `All`, `Ring`, `Ball`, `Sliders`, `Band`, and `Full body`. `filterLabelKeys` maps these IDs to translated UI labels. Preserve these IDs in query strings for existing links; `Full body` displays as All Equipment in English and is distinct from the `fullBody` muscle-group ID.
+- Keep workout data and hero objects stable. Translate their keys at render time; do not reconstruct data or change React keys when switching language. Preserve video URLs and iframe identity.
+- Use natural wrapping and responsive layout constraints rather than language-specific positions or reduced font sizes. Retain Newsreader and Manrope.
+- After editing, compare key sets and interpolation variables, check duplicate keys, and review all languages on home, listing, filtered, detail, unavailable, and form states. Test keyboard controls, manual persistence, filters, gallery, and video continuity. Run `npm run build` and `git diff --check`.
+
+#### Media and editorial limitations
+
+Product packaging, printed guides, phone screens, photographs, and video imagery can contain baked-in English. These assets remain unchanged. The website translates surrounding interface text and the iframe's accessible title; YouTube owns the embedded player's controls and their language. Website language selection does not localize spoken audio. Captions, subtitles, or localized video versions require separate media work.
+
+Final QA on 2026-10-17 found the Sliders embed (`hcx_IU7NLf8`) reporting a private video. Other live YouTube titles also differ from approved card metadata: Ring and Ball refer to 20-minute videos while the cards show 15 minutes; Band refers to a no-equipment workout; All Equipment refers to a 30-minute dumbbell workout while its card shows 20 minutes and the kit equipment. IDs and card metadata were preserved. The owner should verify availability and intended destinations before publishing. The live embeds loaded, but playback did not advance in the automated Chromium check; uninterrupted playback and audio still require a manual browser/device check.
+
+Native-language brand review is recommended for the localized Product Purchase heading, Styled by You adaptations, newsletter heading, and promotional descriptions. In particular, the DE/NL/ES carousel headings adapt the English phrase to “Your style. Your Muuva.” These are implemented editorial choices, not literal translations; final QA does not replace a native editor's brand-voice review.
+
+### 8.2 GitHub Pages and localization limits
+
+`vite.config.js` uses base `/muuva/`. `.github/workflows/deploy-pages.yml` builds with Node 20 and `npm ci`, uploads `dist`, and deploys through GitHub Pages on a push to `main` or manual workflow dispatch. All four JSON catalogs are imported into the JavaScript bundle; no translation-server endpoint or runtime locale-file request is required.
+
+Use hash URLs such as `/muuva/#/guided-routines` and `/muuva/#/guided-routines/ring?filter=Ring`. The server always receives the existing `/muuva/` document path, so direct entry and reload work without server rewrite rules. Clean path URLs such as `/muuva/guided-routines/ring` are not implemented. Production-preview QA verified bundled resources, image loading, language switching, and hash deep-link reloads under the configured base; it did not deploy or validate a live GitHub Pages release.
+
+Localization is client-side and uses a saved or detected language at one URL. There are no independently addressable language pages, `hreflang` alternates, localized canonical URLs, or prerendered translations. Initial HTML still has the English title, description, and `lang`; JavaScript updates the title and `lang`, while the static meta description remains English. Crawlers and shared previews may therefore receive English/default metadata, and this setup does not provide separate per-language indexing. Language-specific SEO would require a separately scoped project.

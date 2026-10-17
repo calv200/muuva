@@ -1,0 +1,183 @@
+{
+  "header": {
+    "shop": "Shop",
+    "trainingSessions": "Trainingssessies",
+    "languageSelector": "Taal kiezen, huidige taal: {{language}}",
+    "home": "muuva startpagina"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "nl": "Nederlands",
+    "es": "Español"
+  },
+  "hero": {
+    "section": "muuva in beeld",
+    "video": "muuva Pilates-essentials in beweging"
+  },
+  "product": {
+    "title": "Haal jouw Pilates-set in huis",
+    "buy": "Koop op Amazon →",
+    "discover": "Ontdek de complete MUUVA Pilates-set",
+    "viewKit": "Bekijk foto's van de complete Pilates-set",
+    "imageAlt": "MUUVA Pilates-set met ring, bal, band, sliders, verpakking, draagtas, pomp en handleiding met telefoon",
+    "gallery": "Galerij met productfoto's",
+    "close": "Galerij sluiten",
+    "previous": "Vorige afbeelding",
+    "next": "Volgende afbeelding",
+    "showImage": "Afbeelding {{number}} tonen",
+    "hotspots": {
+      "ring": "Bekijk foto's van de Pilates-ring",
+      "ball": "Bekijk foto's van de Pilates-bal",
+      "band": "Bekijk foto's van de weerstandsband",
+      "sliders": "Bekijk foto's van de Pilates-sliders",
+      "workout-guide": "Bekijk foto's van de trainingsgids en de complete set"
+    },
+    "images": {
+      "ring": "Pilates-ring uit de Pilates-set",
+      "ball": "Zachte Pilates-bal uit de Pilates-set",
+      "band": "Weerstandsband uit de Pilates-set",
+      "sliders": "Pilates-sliders uit de Pilates-set",
+      "full-kit": "Pilates-set"
+    }
+  },
+  "promo": {
+    "section": "Begeleide Pilates-routines",
+    "imageAlt": "Vrouw die Pilates doet met een zachte oefenbal",
+    "label": "Inbegrepen bij je set",
+    "title": "Inclusief begeleide routines",
+    "description": "Bij je set krijg je gratis toegang tot begeleide Pilates-routines die je vanaf je eerste sessie met vertrouwen laten bewegen.",
+    "cta": "Ontdek begeleide routines →"
+  },
+  "lifestyle": {
+    "title": "Jouw stijl. Jouw Muuva.",
+    "previous": "Vorige lifestylebeelden",
+    "next": "Volgende lifestylebeelden",
+    "alt": {
+      "1": "Vrouw met de Pilates-set op een oefenmat in een neutrale kleur",
+      "2": "Pilates-accessoires op een zacht oppervlak in neutrale tinten",
+      "3": "Vrouw in Pilates-kleding bij een licht raam met uitzicht op het strand",
+      "4": "Vrouw die de Pilates-set presenteert in een rustige woonomgeving",
+      "5": "Pilates-accessoires in neutrale kleuren samen met dagelijkse benodigdheden",
+      "6": "Details van de Pilates-set in zachte, warme tinten",
+      "7": "Detail van Pilates-producten in een opgeruimd interieur",
+      "8": "Pilates-set en accessoires in een sfeervol gestileerde setting",
+      "default": "Muuva Pilates-essentials in een sfeervol gestileerde setting"
+    }
+  },
+  "footer": {
+    "title": "Blijf in beweging.",
+    "description": "Meld je aan voor exclusieve Muuva-content en Pilates-inspiratie",
+    "success": "Je bent aangemeld voor onze nieuwsbrief.",
+    "email": "E-mailadres",
+    "placeholder": "E-mail",
+    "subscribe": "Aanmelden voor de nieuwsbrief",
+    "navigation": "Footernavigatie",
+    "policies": "Beleid in de footer",
+    "aboutTitle": "Over Muuva",
+    "about": "Vanuit Amsterdam maakt Muuva stijlvol ontworpen en duurzaam geproduceerde Pilates-accessoires voor beweging thuis en in de studio.",
+    "instagram": "Muuva op Instagram",
+    "copyrightPrefix": "© {{year}}, Muuva. Website ontworpen door",
+    "required": "Vul je e-mailadres in.",
+    "invalid": "Vul een geldig e-mailadres in.",
+    "links": {
+      "behind": "Achter Muuva",
+      "contact": "Neem contact op",
+      "wholesale": "Muuva voor retailers",
+      "apply": "Word verkooppunt",
+      "care": "Zorg voor je Muuva",
+      "sustainability": "Onze inzet voor duurzaamheid",
+      "faq": "Veelgestelde vragen",
+      "privacy": "Privacybeleid",
+      "refund": "Terugbetalingsbeleid",
+      "shipping": "Verzendbeleid",
+      "service": "Algemene voorwaarden",
+      "use": "Gebruiksvoorwaarden"
+    }
+  },
+  "routines": {
+    "title": "Begeleide routines",
+    "description": "Beweeg met je essentials. Volg eenvoudige Pilates-sessies die beweging een vast onderdeel van je dag maken.",
+    "filtersLabel": "Routinefilters",
+    "workoutsLabel": "Trainingsroutines",
+    "kitPart": "Onderdeel van de Pilates-set ·",
+    "kitCta": "Ontdek de set →",
+    "back": "← Terug naar begeleide routines",
+    "unavailable": "Routine niet beschikbaar",
+    "notReady": "Deze routine is nog niet beschikbaar.",
+    "empty": "Binnenkort een nieuwe routine.",
+    "open": "{{title}} openen",
+    "play": "Routine afspelen",
+    "video": "Video: {{title}}",
+    "duration": "{{count}} min",
+    "durationLabel": "Duur: ",
+    "intensityLabel": "Intensiteit: ",
+    "muscleLabel": "Spiergroep: ",
+    "equipmentLabel": "Materiaal: ",
+    "medium": "Gemiddeld",
+    "fullBody": "Hele lichaam",
+    "placeholder": "Tijdelijke afbeelding",
+    "missingImage": "Afbeelding niet beschikbaar",
+    "filters": {
+      "all": "Alles",
+      "ring": "Ring",
+      "ball": "Bal",
+      "sliders": "Sliders",
+      "band": "Band",
+      "full-body": "Alle materialen"
+    },
+    "equipment": {
+      "ring": "Ring",
+      "ball": "Bal",
+      "sliders": "Slider",
+      "band": "Weerstandsband"
+    },
+    "categories": {
+      "ring": {
+        "title": "Routines met de Pilates-ring",
+        "description": "Voeg weerstand en controle toe aan vertrouwde bewegingen en activeer je core, benen en bovenlichaam."
+      },
+      "ball": {
+        "title": "Routines met de Pilates-bal",
+        "description": "Klein hulpmiddel, eindeloze mogelijkheden. Gebruik de bal om je stabiliteit, houding en diepe spiercontrole uit te dagen."
+      },
+      "sliders": {
+        "title": "Routines met sliders",
+        "description": "Maak van eenvoudige bewegingen gecontroleerde oefeningen met een volledige bewegingsuitslag en train kracht, stabiliteit en coördinatie."
+      },
+      "band": {
+        "title": "Routines met de weerstandsband",
+        "description": "Voeg precies genoeg weerstand toe om je spieren te versterken en te activeren en bewuster te bewegen."
+      },
+      "full-body": {
+        "title": "Routines voor het hele lichaam",
+        "description": "Evenwichtige sessies die kracht, controle en mobiliteit van top tot teen verbinden."
+      }
+    },
+    "workouts": {
+      "ring": {
+        "title": "Pilates-ringworkout",
+        "thumbnailAlt": "Voorbeeld van de routine met de Pilates-ring"
+      },
+      "ball": {
+        "title": "Pilates-balworkout",
+        "thumbnailAlt": "Voorbeeld van de routine met de Pilates-bal"
+      },
+      "sliders": {
+        "title": "Pilates-slidersworkout",
+        "thumbnailAlt": "Voorbeeld van de routine met sliders"
+      },
+      "band": {
+        "title": "Workout met de weerstandsband",
+        "thumbnailAlt": "Voorbeeld van de routine met de weerstandsband"
+      },
+      "full-body": {
+        "title": "Workout met alle materialen",
+        "thumbnailAlt": "Voorbeeld van de Pilates-routine voor het hele lichaam"
+      }
+    }
+  },
+  "site": {
+    "title": "muuva | Pilates-set"
+  }
+}

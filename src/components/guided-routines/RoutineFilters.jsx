@@ -1,10 +1,13 @@
+import { filterLabelKeys } from "../../data/guidedRoutines.js";
+import { useTranslation } from "react-i18next";
 export default function RoutineFilters({ filters, activeFilter, onFilterChange }) {
+  const { t } = useTranslation();
   return (
     <div className="border-b border-softborder bg-cream">
       <div className="site-container py-6">
         <div
           className="no-scrollbar flex gap-3 overflow-x-auto"
-          aria-label="Routine filters"
+          aria-label={t("routines.filtersLabel")}
           role="group"
         >
           {filters.map((filter) => {
@@ -22,7 +25,7 @@ export default function RoutineFilters({ filters, activeFilter, onFilterChange }
                 aria-pressed={isActive}
                 onClick={() => onFilterChange(filter)}
               >
-                {filter === "Full body" ? "All Equipment" : filter}
+                {t(filterLabelKeys[filter])}
               </button>
             );
           })}

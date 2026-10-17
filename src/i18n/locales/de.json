@@ -1,0 +1,183 @@
+{
+  "header": {
+    "shop": "Shop",
+    "trainingSessions": "Trainingseinheiten",
+    "languageSelector": "Sprache auswählen, aktuelle Sprache: {{language}}",
+    "home": "muuva Startseite"
+  },
+  "languages": {
+    "en": "English",
+    "de": "Deutsch",
+    "nl": "Nederlands",
+    "es": "Español"
+  },
+  "hero": {
+    "section": "muuva im Überblick",
+    "video": "muuva Pilates-Essentials in Bewegung"
+  },
+  "product": {
+    "title": "Hol dir dein Pilates-Set",
+    "buy": "Bei Amazon kaufen →",
+    "discover": "Entdecke das komplette MUUVA Pilates-Set",
+    "viewKit": "Fotos des kompletten Pilates-Sets ansehen",
+    "imageAlt": "MUUVA Pilates-Set mit Ring, Ball, Band, Slidern, Verpackung, Tragetasche, Pumpe und Anleitung mit Smartphone",
+    "gallery": "Produktbildergalerie",
+    "close": "Galerie schließen",
+    "previous": "Vorheriges Bild",
+    "next": "Nächstes Bild",
+    "showImage": "Bild {{number}} anzeigen",
+    "hotspots": {
+      "ring": "Fotos des Pilates-Rings ansehen",
+      "ball": "Fotos des Pilates-Balls ansehen",
+      "band": "Fotos des Widerstandsbands ansehen",
+      "sliders": "Fotos der Pilates-Slider ansehen",
+      "workout-guide": "Fotos der Trainingsanleitung und des kompletten Sets ansehen"
+    },
+    "images": {
+      "ring": "Pilates-Ring aus dem Pilates-Set",
+      "ball": "Weicher Pilates-Ball aus dem Pilates-Set",
+      "band": "Widerstandsband aus dem Pilates-Set",
+      "sliders": "Pilates-Slider aus dem Pilates-Set",
+      "full-kit": "Pilates-Set"
+    }
+  },
+  "promo": {
+    "section": "Angeleitete Pilates-Einheiten",
+    "imageAlt": "Frau beim Pilates mit einem weichen Gymnastikball",
+    "label": "In deinem Set enthalten",
+    "title": "Angeleitete Einheiten inklusive",
+    "description": "Dein Set enthält kostenlosen Zugang zu angeleiteten Pilates-Einheiten, die dir von Anfang an Sicherheit bei jeder Bewegung geben.",
+    "cta": "Angeleitete Einheiten entdecken →"
+  },
+  "lifestyle": {
+    "title": "Dein Stil. Dein Muuva.",
+    "previous": "Vorherige Lifestyle-Bilder",
+    "next": "Nächste Lifestyle-Bilder",
+    "alt": {
+      "1": "Frau mit dem Pilates-Set auf einer Trainingsmatte in neutralem Farbton",
+      "2": "Pilates-Zubehör auf einer weichen, neutralen Oberfläche",
+      "3": "Frau in Pilates-Kleidung an einem hellen Fenster mit Strandblick",
+      "4": "Frau präsentiert das Pilates-Set in einer ruhigen Wohnumgebung",
+      "5": "Pilates-Zubehör in neutralen Farben zusammen mit Alltagsbegleitern arrangiert",
+      "6": "Details des Pilates-Sets in sanften, warmen Farbtönen",
+      "7": "Detailaufnahme von Pilates-Produkten in einem aufgeräumten Innenraum",
+      "8": "Pilates-Set und Zubehör in einer stilvoll arrangierten Alltagsszene",
+      "default": "Muuva Pilates-Essentials in einer stilvoll arrangierten Alltagsszene"
+    }
+  },
+  "footer": {
+    "title": "Bleib in Bewegung.",
+    "description": "Melde dich für exklusive Muuva-Inhalte und Pilates-Inspiration an",
+    "success": "Du hast unseren Newsletter abonniert.",
+    "email": "E-Mail-Adresse",
+    "placeholder": "E-Mail",
+    "subscribe": "Newsletter abonnieren",
+    "navigation": "Navigation im Fußbereich",
+    "policies": "Richtlinien im Fußbereich",
+    "aboutTitle": "Über Muuva",
+    "about": "Muuva entwirft in Amsterdam stilvolles, nachhaltig hergestelltes Pilates-Zubehör für deine Bewegungspraxis zu Hause und im Studio.",
+    "instagram": "Muuva auf Instagram",
+    "copyrightPrefix": "© {{year}}, Muuva. Webdesign von",
+    "required": "Bitte gib deine E-Mail-Adresse ein.",
+    "invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "links": {
+      "behind": "Hinter Muuva",
+      "contact": "Kontakt",
+      "wholesale": "Muuva für Händler",
+      "apply": "Händler werden",
+      "care": "Pflege deiner Muuva-Produkte",
+      "sustainability": "Unser Engagement für Nachhaltigkeit",
+      "faq": "Häufige Fragen",
+      "privacy": "Datenschutzerklärung",
+      "refund": "Rückerstattungsrichtlinie",
+      "shipping": "Versandbedingungen",
+      "service": "Geschäftsbedingungen",
+      "use": "Nutzungsbedingungen"
+    }
+  },
+  "routines": {
+    "title": "Angeleitete Einheiten",
+    "description": "Bewege dich mit deinen Essentials. Entdecke einfache Pilates-Einheiten, die Bewegung zu einem festen Teil deines Alltags machen.",
+    "filtersLabel": "Trainingsfilter",
+    "workoutsLabel": "Trainingseinheiten",
+    "kitPart": "Teil des Pilates-Sets ·",
+    "kitCta": "Entdecke das Set →",
+    "back": "← Zurück zu den angeleiteten Einheiten",
+    "unavailable": "Einheit nicht verfügbar",
+    "notReady": "Diese Einheit ist noch nicht verfügbar.",
+    "empty": "Eine neue Einheit kommt bald.",
+    "open": "{{title}} öffnen",
+    "play": "Einheit abspielen",
+    "video": "Video: {{title}}",
+    "duration": "{{count}} Min.",
+    "durationLabel": "Dauer: ",
+    "intensityLabel": "Intensität: ",
+    "muscleLabel": "Muskelgruppe: ",
+    "equipmentLabel": "Gerät: ",
+    "medium": "Mittel",
+    "fullBody": "Ganzkörper",
+    "placeholder": "Bildplatzhalter",
+    "missingImage": "Bild nicht verfügbar",
+    "filters": {
+      "all": "Alle",
+      "ring": "Ring",
+      "ball": "Ball",
+      "sliders": "Slider",
+      "band": "Band",
+      "full-body": "Alle Geräte"
+    },
+    "equipment": {
+      "ring": "Ring",
+      "ball": "Ball",
+      "sliders": "Slider",
+      "band": "Widerstandsband"
+    },
+    "categories": {
+      "ring": {
+        "title": "Einheiten mit dem Pilates-Ring",
+        "description": "Ergänze vertraute Bewegungen um Widerstand und Kontrolle und aktiviere dabei deine Körpermitte, Beine und deinen Oberkörper."
+      },
+      "ball": {
+        "title": "Einheiten mit dem Pilates-Ball",
+        "description": "Kleiner Helfer, unzählige Möglichkeiten. Trainiere mit dem Ball Stabilität, Ausrichtung und die Kontrolle deiner tiefliegenden Muskeln."
+      },
+      "sliders": {
+        "title": "Einheiten mit Slidern",
+        "description": "Mache aus einfachen Bewegungen kontrollierte Übungen über den vollen Bewegungsumfang und trainiere Kraft, Stabilität und Koordination."
+      },
+      "band": {
+        "title": "Einheiten mit dem Widerstandsband",
+        "description": "Nutze genau den richtigen Widerstand, um deine Muskeln zu kräftigen, zu aktivieren und dich bewusster zu bewegen."
+      },
+      "full-body": {
+        "title": "Ganzkörpereinheiten",
+        "description": "Ausgewogene Einheiten, die Kraft, Kontrolle und Beweglichkeit von Kopf bis Fuß verbinden."
+      }
+    },
+    "workouts": {
+      "ring": {
+        "title": "Pilates-Ring-Workout",
+        "thumbnailAlt": "Vorschaubild der Einheit mit dem Pilates-Ring"
+      },
+      "ball": {
+        "title": "Pilates-Ball-Workout",
+        "thumbnailAlt": "Vorschaubild der Einheit mit dem Pilates-Ball"
+      },
+      "sliders": {
+        "title": "Pilates-Slider-Workout",
+        "thumbnailAlt": "Vorschaubild der Einheit mit Slidern"
+      },
+      "band": {
+        "title": "Workout mit dem Widerstandsband",
+        "thumbnailAlt": "Vorschaubild der Einheit mit dem Widerstandsband"
+      },
+      "full-body": {
+        "title": "Workout mit allen Geräten",
+        "thumbnailAlt": "Vorschaubild der Ganzkörper-Pilates-Einheit"
+      }
+    }
+  },
+  "site": {
+    "title": "muuva | Pilates-Set"
+  }
+}
