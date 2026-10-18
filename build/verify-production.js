@@ -3,11 +3,12 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { createInstance } from "i18next";
-import { resolveConfig } from "vite";
+import { loadEnv, resolveConfig } from "vite";
 import { pagePaths, supportedLanguages } from "../src/routing/routeManifest.js";
 import { parseLocation } from "../src/routing/urls.js";
 import { getMetadata } from "../src/seo/metadata.js";
 import { publicSiteOrigin } from "../src/seo/site.js";
+import { createHostingHeaders } from "./headers.js";
 
 // Read the markup emitted by our generator; this is not a general HTML validator.
 function decode(value) {
@@ -83,7 +84,7 @@ function validateXml(xml) {
   assert.equal(stack.length, 0, "Unclosed sitemap XML tag");
 }
 
-export async function verifyProductionOutput({ directory, base, origin = publicSiteOrigin }) {
+export async function verifyProductionOutput({ directory, base, origin = publicSiteOrigin, staging = false }) {
   publicUrl(origin);
   const expected = new Map();
   const groups = new Set();
@@ -180,6 +181,13 @@ export async function verifyProductionOutput({ directory, base, origin = publicS
   const sitemaps = [...robots.matchAll(/^Sitemap:\s*(\S+)\s*$/gmi)].map((match) => match[1]);
   assert.deepEqual(sitemaps, [new URL(`${base}sitemap.xml`, origin).href], "Incorrect sitemap reference in robots.txt");
   assert(!/^Disallow:\s*\S+/mi.test(robots), "robots.txt blocks production paths");
+  const headers = await readFile(path.join(directory, "_headers"), "utf8").catch((error) => {
+    if (error.code === "ENOENT") return "";
+    throw error;
+  });
+  // Check the generated format exactly: a commercial build must never inherit global noindex.
+  assert.equal(headers.replaceAll("\r\n", "\n"), createHostingHeaders({ base, staging }),
+    "Incorrect hosting headers: staging requires global noindex; root production requires only pages.dev host rules; subpath production requires none");
   return { pages: expected.size, assets: checkedAssets.size };
 }
 
@@ -190,8 +198,9 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
       directory: path.resolve(config.root, config.build.outDir),
       base: config.base,
       origin: new URL(config.env.VITE_PUBLIC_SITE_ORIGIN || publicSiteOrigin).origin,
+      staging: loadEnv(config.mode, config.envDir, "MUUVA_").MUUVA_STAGING === "true",
     });
-    console.log(`Production HTML checks passed: ${result.pages} localized pages, ${result.assets} shared JS/CSS assets, reciprocal hreflang, sitemap.xml and robots.txt.`);
+    console.log(`Production HTML checks passed: ${result.pages} localized pages, ${result.assets} shared JS/CSS assets, reciprocal hreflang, sitemap.xml, robots.txt and hosting headers.`);
   } catch (error) {
     console.error(`Production HTML verification failed: ${error.message}`);
     process.exitCode = 1;

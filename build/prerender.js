@@ -1,11 +1,15 @@
-import { build } from "vite";
+import { build, loadEnv, resolveConfig } from "vite";
 import { mkdir, mkdtemp, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { createSitemap, documentWithMetadata, prerenderDocument } from "./html.js";
+import { createHostingHeaders } from "./headers.js";
+
+const config = await resolveConfig({ mode: "production" }, "build", "production", "production");
+const staging = loadEnv(config.mode, config.envDir, "MUUVA_").MUUVA_STAGING === "true";
 
 await build();
-const output = path.resolve("dist");
+const output = path.resolve(config.root, config.build.outDir);
 const template = await readFile(path.join(output, "index.html"), "utf8");
 const cache = path.resolve("node_modules/.cache");
 await mkdir(cache, { recursive: true });
@@ -36,6 +40,9 @@ try {
   await writeFile(path.join(output, "index.html"), documentWithMetadata(template, pages[0].metadata));
   await writeFile(path.join(output, "sitemap.xml"), createSitemap(pages));
   await writeFile(path.join(output, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${sitemapUrl}\n`);
+  // Vite clears the client output first, preventing headers from a previous environment leaking.
+  const headers = createHostingHeaders({ base: config.base, staging });
+  if (headers) await writeFile(path.join(output, "_headers"), headers);
   console.log(`Prerendered ${pages.length} localized pages with metadata, sitemap.xml and robots.txt.`);
 } finally {
   // Only remove the temporary directory created within our build cache.

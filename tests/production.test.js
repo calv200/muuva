@@ -9,17 +9,17 @@ import { spawnSync } from "node:child_process";
 import { createInstance } from "i18next";
 import { verifyProductionOutput } from "../build/verify-production.js";
 import { createSitemap, escapeMarkup, prerenderDocument } from "../build/html.js";
+import { createHostingHeaders } from "../build/headers.js";
 import { pagePaths, supportedLanguages } from "../src/routing/routeManifest.js";
 import { parseLocation } from "../src/routing/urls.js";
 import { getMetadata } from "../src/seo/metadata.js";
-import { publicSiteOrigin as origin } from "../src/seo/site.js";
+import { publicSiteOrigin } from "../src/seo/site.js";
 
-const base = "/muuva/";
 const locales = Object.fromEntries(supportedLanguages.map((language) => [language,
   JSON.parse(readFileSync(new URL(`../src/i18n/locales/${language}.json`, import.meta.url))),
 ]));
 
-async function fixture(t) {
+async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging = false } = {}) {
   const directory = await mkdtemp(path.join(tmpdir(), "muuva-production-test-"));
   t.after(async () => {
     const relative = path.relative(path.resolve(tmpdir()), path.resolve(directory));
@@ -51,7 +51,9 @@ async function fixture(t) {
   await writeFile(path.join(directory, "index.html"), template);
   await writeFile(path.join(directory, "sitemap.xml"), createSitemap(pages));
   await writeFile(path.join(directory, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${origin}${base}sitemap.xml\n`);
-  return { directory, base, origin };
+  const headers = createHostingHeaders({ base, staging });
+  if (headers) await writeFile(path.join(directory, "_headers"), headers);
+  return { directory, base, origin, staging };
 }
 
 const pageFile = (options) => path.join(options.directory, supportedLanguages[1], pagePaths[0], "index.html");
@@ -63,6 +65,37 @@ test("production verifier accepts the manifest and ignores bootstrap JSON when c
   const options = await fixture(t);
   await edit(pageFile(options), (html) => html.replace("</body>", '<script type="application/json">{"example":"product.title"}</script></body>'));
   assert.deepEqual(await verifyProductionOutput(options), { pages: supportedLanguages.length * pagePaths.length, assets: 2 });
+});
+
+test("staging requires global noindex while preserving root-hosted localized SEO", async (t) => {
+  const options = await fixture(t, { base: "/", origin: "https://muuva.pages.dev", staging: true });
+  const file = path.join(options.directory, "_headers");
+  assert.equal(await readFile(file, "utf8"), "/*\n  X-Robots-Tag: noindex, nofollow\n");
+  assert.equal((await verifyProductionOutput(options)).pages, 28);
+  await unlink(file);
+  await assert.rejects(verifyProductionOutput(options), /Incorrect hosting headers/);
+});
+
+test("commercial headers protect project and preview hosts without a custom-domain or global rule", async (t) => {
+  const options = await fixture(t, { base: "/", origin: "https://muuva.nl" });
+  const file = path.join(options.directory, "_headers");
+  const headers = await readFile(file, "utf8");
+  assert.deepEqual(headers.trim().split("\n\n").map((block) => block.split("\n").map((line) => line.trim())), [
+    ["https://:project.pages.dev/*", "X-Robots-Tag: noindex, nofollow"],
+    ["https://:version.:project.pages.dev/*", "X-Robots-Tag: noindex, nofollow"],
+  ]);
+  assert.equal(createHostingHeaders({ base: "/", staging: false }), createHostingHeaders({ base: "/" }));
+  assert.equal((await verifyProductionOutput(options)).pages, 28);
+
+  for (const invalid of [
+    "/*\n  X-Robots-Tag: noindex, nofollow\n",
+    headers.split("\n\n")[0] + "\n", // Missing preview protection.
+    headers + "\nhttps://muuva.nl/*\n  X-Robots-Tag: noindex\n",
+    "", // Missing temporary-domain protection entirely.
+  ]) {
+    await writeFile(file, invalid);
+    await assert.rejects(verifyProductionOutput(options), /Incorrect hosting headers/);
+  }
 });
 
 const corruptions = {
@@ -88,6 +121,7 @@ const corruptions = {
   "malformed sitemap XML": async (o) => edit(path.join(o.directory, "sitemap.xml"), (s) => s.replace("</urlset>", "</broken>")),
   "the wrong robots sitemap": async (o) => edit(path.join(o.directory, "robots.txt"), (s) => s.replace("sitemap.xml", "wrong.xml")),
   "robots blocking public paths": async (o) => edit(path.join(o.directory, "robots.txt"), (s) => `${s}Disallow: /\n`),
+  "staging headers leaking into GitHub Pages": async (o) => writeFile(path.join(o.directory, "_headers"), "/*\n  X-Robots-Tag: noindex, nofollow\n"),
 };
 
 for (const [name, corrupt] of Object.entries(corruptions)) {
