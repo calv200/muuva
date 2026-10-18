@@ -1,20 +1,27 @@
 # Copy authority and localization
 
-The approved website interface is available in English, German, Dutch, and Spanish. Runtime copy is authoritative in `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json`. The English excerpts below summarize the approved editorial content; update the JSON files whenever copy changes and keep this reference aligned. Do not copy the complete translated catalogs into this document.
+The approved website interface is available in English, German, Dutch, and Spanish. Runtime and pre-rendered copy is authoritative in `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json`. The English excerpts below summarize the approved editorial content; update the JSON files whenever copy changes and keep this reference aligned. Do not copy the complete translated catalogs into this document.
 
 | Locale key group | Content |
 | --- | --- |
-| `header`, `languages`, `site` | Navigation, native language names, selector labels, document title |
+| `header`, `languages` | Navigation, native language names and selector labels |
 | `hero` | Homepage hero/video accessibility labels |
 | `product` | Purchase title and CTA, gallery controls, five hotspots and image descriptions |
 | `promo` | Homepage Guided Routines promotion |
 | `lifestyle` | Styled by You heading, image descriptions and carousel controls |
 | `footer` | Newsletter, navigation, policies, about text, legal credit and form messaging |
 | `routines` | Listing and category heroes, filter labels, workouts, metadata, player title, back links, placeholders and unavailable states |
+| `seo` | Localized page titles and meta descriptions for static output and browser navigation |
+
+The retained `site.title` entry is legacy copy; active document titles come from `seo`.
 
 MUUVA/Muuva and Calv200 remain unchanged. Translate interface copy, not URLs, filenames, asset paths, category IDs, route slugs, or YouTube IDs. Keep interpolation variables unchanged across languages. See `PROJECT_BRIEF.md` section 8.1 for detection, persistence, terminology, and maintenance rules.
 
 Before publishing, request native-language brand review of the translated kit heading, promotional descriptions, newsletter heading, and Styled by You adaptations. The DE/NL/ES carousel headings adapt the English phrase to “Your style. Your Muuva.” rather than translate it literally. Preserve the implemented wording until an editorial change is approved.
+
+## SEO copy maintenance
+
+Maintain `seo.home` and `seo.routines` titles/descriptions in all four catalogs. Workout titles use the `seo.workout.title` template with the translated `routines.workouts.<slug>.title`; workout descriptions use `seo.workout.descriptions.<slug>`. Preserve interpolation variables. New public pages or languages need matching SEO copy and review of generated routes and metadata. Canonical URLs, alternates, and sitemap URLs come from shared code/configuration, not translated strings. See `PROJECT_BRIEF.md` sections 8.4–8.5 for SEO and verification rules.
 
 # Shared Header and Hero Copy
 
@@ -122,7 +129,7 @@ The displayed titles and thumbnail descriptions use `routines.workouts.<slug>`, 
 - Empty collection: New routine coming soon.
 - Missing asset: Image placeholder / Image unavailable
 
-Video audio, embedded player controls, and text printed into thumbnails or other media are not translated by these interface catalogs. See the media QA findings in `PROJECT_BRIEF.md`: the Sliders video currently reports private, and several live video titles differ from the approved card metadata. Verify media ownership, availability, and intended destinations before publishing; this synchronization preserves the current video IDs and card copy.
+Video audio, embedded player controls, and text printed into thumbnails or other media are not translated by these interface catalogs. See the dated media QA findings in `PROJECT_BRIEF.md`: the recorded checks found the Sliders video private and several video titles different from the approved card metadata. Verify media ownership, availability, and intended destinations before publishing; this synchronization preserves the current video IDs and card copy.
 
 # Lifestyle Carousel Section Copy
 

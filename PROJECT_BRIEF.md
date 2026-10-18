@@ -23,7 +23,7 @@ The website should feel closer to a modern lifestyle / design brand than to a co
 
 A separate **Guided Routines page** now exists as a GitHub Pages-safe routed experience and can continue to be refined after visual review.
 
-The homepage, Guided Routines listing and detail pages, and shared interfaces support English, German, Dutch, and Spanish. Section 8.1 describes the approved localization implementation and maintenance conventions.
+The homepage, Guided Routines listing and detail pages, and shared interfaces support English, German, Dutch, and Spanish. Sections 8.1–8.5 describe localization, localized routing, pre-rendering, SEO, and verification conventions.
 
 ---
 
@@ -396,20 +396,12 @@ This sketch defines the desired layout direction for the hero section, including
 ### 6.4 Guided Routines Page
 
 - Page route
-Use a GitHub Pages-safe hash route:
-`#/guided-routines`
-
-Routine detail pages use:
-`#/guided-routines/ring`
-`#/guided-routines/ball`
-`#/guided-routines/band`
-`#/guided-routines/sliders`
-`#/guided-routines/full-body`
+Use the localized listing path `/muuva/{language}/guided-routines/` and detail path `/muuva/{language}/guided-routines/{slug}/`. Supported languages and stable workout slugs come from `src/routing/routeManifest.js`; see section 8.2.
 
 The Sliders routine is available in All and Sliders, using its existing thumbnail and the video URL listed below.
 
 - Routing decision
-The project is deployed as a static Vite build through GitHub Pages. Use lightweight hash routing in React instead of `BrowserRouter` so direct entry to the deployed site does not require a server-side fallback.
+The project is deployed as a static Vite build through GitHub Pages. Shared routing utilities handle browser history navigation, and pre-rendered HTML files support direct entry and refresh for every manifest route without a server-side fallback. Hash page routes remain supported only as legacy links; see sections 8.2–8.3.
 
 - Page structure
     ```text
@@ -498,7 +490,7 @@ Clicking a valid routine opens a detail page with:
 
 The category hero remains above the video in the document. When a detail page opens, automatically position the video section in the viewport using immediate scroll behavior so the visitor does not need to manually scroll down. The video section should use a viewport-aware minimum height and center the responsive 16:9 iframe comfortably.
 
-The back link should look like an inactive filter pill and return to `#/guided-routines`, preserving the active filter when possible, for example `#/guided-routines?filter=Ring`.
+The back link should look like an inactive filter pill and return to the localized Guided Routines listing, preserving the current language and active filter when possible, for example `/muuva/en/guided-routines/?filter=Ring`.
 
 - Video data
 Keep routine data and video URLs centralized in:
@@ -532,7 +524,7 @@ Thumbnails:
 All listed assets currently exist as `.png` files. The asset lookup also accepts `.webp` names, and missing assets render neutral placeholders without breaking the build.
 
 - How to add another routine
-Add or update one object in `src/data/guidedRoutines.js` with the routine `id`, `slug`, `titleKey`, `durationMinutes`, `intensity`, `muscleGroups`, `equipment`, `filters`, thumbnail filename, `thumbnailAltKey`, YouTube URLs, and matching category hero. Hero copy uses `titleKey` and `descriptionKey`. Add matching text entries to all four locale files. Keep equipment display labels separate from filter identifiers. Add the expected image file to the relevant `guided-routines` asset folder when ready.
+Add or update one object in `src/data/guidedRoutines.js` with the routine `id`, `slug`, `titleKey`, `durationMinutes`, `intensity`, `muscleGroups`, `equipment`, `filters`, thumbnail filename, `thumbnailAltKey`, YouTube URLs, and matching category hero. Hero copy uses `titleKey` and `descriptionKey`. Add matching text entries, including SEO copy, to all four locale files. Keep equipment display labels separate from filter identifiers. Add the expected image file to the relevant `guided-routines` asset folder when ready. For a new public detail page, update the shared workout-slug manifest and assess pre-rendering, canonical/alternate links, sitemap generation, and production verification as described in sections 8.2–8.5.
 
 - Visual direction
 The page should feel curated, editorial, premium, and calm. Use the approved duration and intensity metadata above; do not invent additional values. Do not add search, ratings, progress UI, extra filters, YouTube UI in cards, or dense fitness-platform styling.
@@ -570,37 +562,123 @@ The page should feel curated, editorial, premium, and calm. Use the approved dur
 
 ### 8.1 Multilingual implementation
 
-Supported languages are English (`en`), German (`de`), Dutch (`nl`), and Spanish (`es`). The implementation uses the existing React components with `i18next`, `react-i18next`, and `i18next-browser-languagedetector`; there are no duplicated pages or language-specific routes.
+The homepage, Guided Routines listing and workout details, and shared interfaces support English (`en`), German (`de`), Dutch (`nl`), and Spanish (`es`). The same React components use `i18next`, `react-i18next`, and `i18next-browser-languagedetector`; language-specific URLs do not require duplicated page components.
 
 #### Translation sources and coverage
 
-- `src/i18n/index.js` initializes i18next once through `src/main.jsx`.
-- `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json` are the authoritative runtime copy. English preserves the approved source copy; `CONTENT.md` is an editorial reference and key map rather than a second translation catalog.
-- Keys are grouped under `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, and `site`. Each language currently has 127 string entries.
-- Coverage includes the homepage, all Guided Routines heroes/cards/detail states, shared header/footer, gallery controls, hotspots, carousel descriptions and controls, newsletter placeholder/validation/confirmation, accessible labels, image descriptions, and browser document title.
-- The Product Purchase heading remains `Get Your Pilates Kit` in English, with no subtitle. Its square container remains uniformly `#F2EFE9`; localization does not change the kit composition, five hotspot coordinates, or Amazon destination.
+- `src/i18n/index.js` initializes the browser instance through `src/main.jsx`. `src/i18n/resources.js` supplies the shared resources and translation options for browser rendering and static generation. All four catalogs are bundled; no translation server or runtime locale-file request is required.
+- `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json` are authoritative for implemented interface and SEO copy. English preserves the approved source wording; `CONTENT.md` provides editorial excerpts and a key map rather than a second catalog.
+- Active groups are `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, and `seo`. The older `site.title` entry remains in the catalogs; generated and browser document titles now use `seo.*`.
+- Coverage includes all page copy, filter and metadata labels, header/footer, gallery and hotspot controls, carousel descriptions, form placeholders/validation/confirmation, accessible labels, and SEO titles/descriptions.
+- Product Purchase retains the English heading `Get Your Pilates Kit`, no subtitle, and the square uniform `#F2EFE9` container. Localization does not change the kit image, five hotspot coordinates, or Amazon destination.
 
-#### Detection, persistence, and switching
+#### Detection, persistence, and synchronization
 
-1. Read the manual preference from localStorage key `muuva.language`, if it contains a supported language.
-2. Otherwise use the first supported entry in `navigator.languages`, or `navigator.language` when the list is absent or empty. Normalize case, underscores, and regional tags to the base language, for example `de-AT` → `de`, `nl-BE` → `nl`, and `es-MX` → `es`.
-3. Fall back to English when no supported preference is available. i18next also uses English as the missing-key fallback; this is a safeguard, not permission to omit translations.
+Language precedence is:
 
-Automatic detection does not write a preference. A manual selection saves the base language. Both storage reads and writes are guarded: if storage is unavailable, detection and switching still work during the current page session, but a manual choice cannot persist across reloads.
+1. Explicit supported language in the URL.
+2. Supported manual preference saved under localStorage key `muuva.language`.
+3. First supported entry in `navigator.languages`, falling back to `navigator.language` if the list is absent or empty.
+4. English when no supported preference is available.
 
-`LanguageSelector.jsx` shows a globe, current uppercase language code, and dropdown chevron. The menu uses native language names and radio-menu semantics with the active option marked. It supports keyboard opening, arrow keys, Home/End, Enter/Space selection, Escape, Tab dismissal, and outside clicks. Closing by selection or Escape restores trigger focus. Controls have visible keyboard focus styles and at least 44px menu/trigger height.
+Browser and saved-preference normalization handles case, underscores, and regional tags, for example `de-AT` → `de`, `nl-BE` → `nl`, and `es-MX` → `es`. Public route prefixes use the four supported base codes. English is also the missing-key fallback, a safeguard rather than permission to omit translations.
 
-Language changes update React text, the visible header code, `<html lang>`, and `document.title` without reloading or redirecting. They preserve the route, selected filter, current workout, and mounted video iframe. The mobile header retains the existing hidden navigation links below 640px; the selector remains available.
+Automatic detection does not save a preference. Manual selection saves the language and navigates to the equivalent localized URL. Storage access is guarded: switching still works when storage is unavailable, and the explicit selected URL survives refresh; an unsaved preference cannot influence a later unlocalized entry.
 
-#### Translation conventions and maintenance
+`synchronizeLocation()` in `src/routing/navigation.js` reads the route, normalizes root/legacy links in place, and updates i18next only when its language differs from the URL. The App subscribes to navigation, `popstate`, and `hashchange` events. This keeps language and route state aligned without a route/i18next update loop. HTML `lang` updates with language selection; the SEO layer updates document title, description, canonical, and alternate links.
 
-- Add or edit strings in all four locale files together and consume them with `useTranslation()`. Preserve English wording unless a content change is approved. Translate complete phrases, including accessible labels and form messages.
-- Keep interpolation variables identical across languages: `{{language}}`, `{{number}}`, `{{year}}`, `{{title}}`, and `{{count}}`. React handles escaping; locale values are plain text, not HTML. Duration is interpolated from unchanged numeric workout metadata.
-- Do not translate MUUVA/Muuva, Calv200, domains, URLs, video IDs, data IDs, route slugs, filenames, or asset paths. Language names remain in their native spelling. Shared words such as Ring, Shop, Slider, or min can correctly match English in another language.
-- Filtering uses fixed IDs `All`, `Ring`, `Ball`, `Sliders`, `Band`, and `Full body`. `filterLabelKeys` maps these IDs to translated UI labels. Preserve these IDs in query strings for existing links; `Full body` displays as All Equipment in English and is distinct from the `fullBody` muscle-group ID.
-- Keep workout data and hero objects stable. Translate their keys at render time; do not reconstruct data or change React keys when switching language. Preserve video URLs and iframe identity.
-- Use natural wrapping and responsive layout constraints rather than language-specific positions or reduced font sizes. Retain Newsreader and Manrope.
-- After editing, compare key sets and interpolation variables, check duplicate keys, and review all languages on home, listing, filtered, detail, unavailable, and form states. Test keyboard controls, manual persistence, filters, gallery, and video continuity. Run `npm run build` and `git diff --check`.
+`LanguageSelector.jsx` retains the globe, uppercase active code, and chevron. Its radio menu lists English, Deutsch, Nederlands, and Español, marks the active option, and supports keyboard opening, arrows, Home/End, Enter/Space, Escape, Tab dismissal, and outside clicks. Selection/Escape restores trigger focus. Trigger/menu targets are at least 44px high with visible keyboard focus styles. Below 640px, the existing header navigation links remain hidden while the selector stays available.
+
+#### Translation maintenance
+
+- Update all four catalogs when changing headings, CTAs, navigation, accessible labels, form messages, or SEO copy. Consume complete phrases through `useTranslation()`; preserve approved English unless a content change is requested.
+- Preserve interpolation names across languages: `{{language}}`, `{{number}}`, `{{year}}`, `{{title}}`, and `{{count}}`. Catalog values are plain text; React escapes rendered content. Durations remain numeric workout data, not translated identifiers.
+- Do not translate MUUVA/Muuva, Calv200, domains, URLs, video IDs, route/category IDs, slugs, filenames, or asset paths. Language names remain native. Shared words such as Ring, Shop, Slider, or min may correctly match English.
+- Filtering uses fixed IDs `All`, `Ring`, `Ball`, `Sliders`, `Band`, and `Full body`. `filterLabelKeys` maps them to display text. The last filter displays All Equipment in English and is distinct from the `fullBody` muscle-group metadata ID.
+- Keep workout objects, React keys, and video URLs stable when switching language. Resolve text at render time rather than reconstructing language-specific data or remounting the iframe.
+- Use natural responsive wrapping with Newsreader and Manrope rather than language-specific coordinates or reduced font sizes. Follow section 8.5 for verification, including separate browser checks.
+- After translation edits, compare key sets and interpolation variables, check duplicate keys, and review all languages on home, listing, filtered, detail, unavailable, and form states. Test keyboard controls, manual persistence, gallery, filters, and video continuity.
+
+### 8.2 Localized URL architecture
+
+The current GitHub Pages site uses Vite base `/muuva/`, configured once in `vite.config.js`. It is a project-hosting prefix, not a permanent domain requirement. The public route patterns are:
+
+| Page | Pattern under the current base | Example |
+| --- | --- | --- |
+| Homepage | `/muuva/{language}/` | `/muuva/de/` |
+| Guided Routines | `/muuva/{language}/guided-routines/` | `/muuva/nl/guided-routines/` |
+| Workout detail | `/muuva/{language}/guided-routines/{slug}/` | `/muuva/es/guided-routines/ring/` |
+
+`/muuva/en/` is the English homepage. `src/routing/routeManifest.js` defines supported languages, stable `routineSlugs`, and public `pagePaths`; workout data imports its slug definitions. Slugs and filter IDs stay independent of translated labels.
+
+`src/routing/urls.js` parses locations and generates base-aware localized URLs and filter queries. `src/routing/navigation.js` implements browser-history navigation and compatibility normalization. `src/routing/RouteContext.jsx` shares the current route, including query state, with page components. Use these utilities instead of concatenating the deployment base in components.
+
+Internal links have real localized `href` values. Ordinary same-origin app clicks use `history.pushState` and update the mounted App; modified clicks, new tabs, downloads, and external links retain native behavior. Back/Forward updates the page, filter, and URL language. Language switching preserves the equivalent page, workout slug, query values, and section anchor without reloading or unnecessarily replacing an active video iframe.
+
+Filter state uses query parameters, for example `/muuva/en/guided-routines/?filter=Ring`. `filterQuery()` changes or removes only the filter parameter, preserving unrelated query values. All resets to the complete collection; workout cards and the back link retain the applicable filter.
+
+The unlocalized `/muuva/` entry chooses a language using section 8.1. Existing `#/`, `#/guided-routines`, detail hash routes, and filtered hash links are parsed for backward compatibility and replaced in browser history with their equivalent localized paths. Compatibility normalization uses `replaceState`, not an HTTP redirect or a generic 404 fallback. Old hash-query values take precedence if the outer query repeats the same key. Ordinary section anchors such as `#product` remain separate from legacy page hashes; Shop links target the localized homepage's Product Purchase section.
+
+New navigation must not reintroduce hash-based page routes. Static files support direct entry and refresh for every manifest route; unknown slugs are not generated. A future `muuva.nl` root deployment may use Vite base `/`, but that migration is not implemented.
+
+### 8.3 Static pre-rendering and hydration
+
+The route manifest currently produces **28 localized public HTML pages**: four homepages, four Guided Routines listings, and twenty detail pages (five workout slugs in four languages). The separate `dist/index.html` remains a compatibility/language-detection entry, with its canonical pointing to the English homepage; it is not an additional localized page or sitemap entry.
+
+`npm run build` runs `build/prerender.js`:
+
+1. Vite builds the client application and base-aware hashed assets. `build/localizedEntries.js` emits the manifest's initial HTML entry shells.
+2. A separate Vite server bundle compiles `src/entry-server.jsx` into a temporary build-cache directory. For each manifest route, `renderPage()` creates a fresh i18next instance with an explicit language and renders the existing React components through `I18nextProvider` and `renderToString`.
+3. The build replaces each localized shell with real page HTML and embedded canonical route state. Browser-only operations remain in browser callbacks/effects or guarded initialization; the server render does not depend on browser detection or storage. Per-page instances prevent one generated language from leaking into another.
+4. `build/html.js` inserts localized `lang`, title, description, canonical, and language-alternate tags, preserving Vite's client asset references. The root compatibility entry receives English-home metadata.
+5. The same public route definitions generate `dist/sitemap.xml` and `dist/robots.txt`. Temporary server output is cleaned from the build cache.
+
+The final localized files contain readable translated main content and metadata in the initial HTML response, rather than an empty client-only React root. No running server renderer, SPA rewrite rule, or 404 fallback is needed on GitHub Pages.
+
+`src/main.jsx` first synchronizes the browser location. Generated pages embed route JSON in `#muuva-prerender`; the client initially renders that same canonical route and calls `hydrateRoot` against the existing HTML. The App then applies the actual query/filter and anchor state after hydration, avoiding a mismatch between the static unfiltered page and a filtered request. `RouteContext` supplies route data without browser-only reads during rendering. Entries without pre-rendered state use `createRoot`, including the compatibility shell and development entry.
+
+Adding a public page or language requires assessing the shared manifest, component/data mappings, all locale/SEO entries, pre-rendering, and verification expectations together. Generated pages, navigation, metadata, and sitemap must remain synchronized; do not maintain a separate manual list of workout URLs.
+
+### 8.4 Multilingual SEO
+
+`seo.*` in all four locale JSON files owns SEO copy. `seo.home` and `seo.routines` supply page-specific titles and descriptions. `seo.workout.title` interpolates the translated workout name; `seo.workout.descriptions.<slug>` provides the relevant workout description. The title metadata does not replace the approved visible page headings.
+
+`src/seo/metadata.js` computes shared metadata for static generation and the browser. Each supported localized page has one self-canonical absolute URL and five alternate links: `en`, `de`, `nl`, `es`, and `x-default`. Each alternate points to the equivalent page and workout slug; `x-default` points to that page's English version. Relationships are reciprocal and reference generated public routes. Filter queries and section anchors are omitted from canonical and alternate URLs.
+
+`src/seo/SeoMetadata.jsx` updates the browser head after page or language navigation without accumulating duplicate canonical/description/alternate tags. Generated HTML already has the correct localized metadata and HTML `lang` before JavaScript runs.
+
+`src/seo/site.js` centralizes the public origin, currently `https://calv200.github.io`, with a `VITE_PUBLIC_SITE_ORIGIN` override. Canonical, alternate, and sitemap URLs combine it with the configured Vite base and route helpers. A hosting/domain migration must update and verify both the public origin and base; changing display copy does not change deployment URLs.
+
+The sitemap includes exactly the public localized canonical routes, with language alternates in the XHTML namespace. It excludes filter URLs, invalid slugs, development routes, and root/legacy compatibility URLs. The generated robots file allows crawling and references the absolute sitemap URL, currently `https://calv200.github.io/muuva/sitemap.xml`. Under project hosting, this file is served at `/muuva/robots.txt`; it does not configure the hostname's root `/robots.txt`.
+
+New public pages or languages must receive appropriate SEO copy and equivalent canonical/alternate relationships, appear in pre-rendering and sitemap output, and pass production verification. Metadata, routes, and sitemap are derived from shared definitions rather than copied across components.
+
+### 8.5 Production verification and deployment
+
+For application changes, run:
+
+```sh
+npm test
+npm run build
+npm run test:production
+git diff --check
+```
+
+Routing tests cover URL generation, compatibility, queries, stable filters, and base paths. SEO tests cover translated metadata, canonical/alternate relationships, HTML insertion, and sitemap generation. Production-verifier tests use temporary fixtures and intentional defects, including confirmation that the command fails with a nonzero exit status.
+
+`build/verify-production.js` inspects actual generated output against the shared manifest, SEO helpers, and locale files. It checks the expected localized HTML files, rendered main content/headings, language, localized titles/descriptions, single canonical, reciprocal hreflang, resolvable local JS/CSS references, sitemap routes/alternates, robots configuration, unresolved keys/interpolation, development addresses, and unwanted noindex directives. It reads generated markup; it does not execute browser interactions or verify the live host.
+
+`.github/workflows/deploy-pages.yml` uses Node 20 and runs `npm ci`, `npm test`, `npm run build`, and `npm run test:production` before uploading `dist`. A required failure prevents artifact upload and the dependent deployment job. Deployment is configured for pushes to `main` and manual workflow dispatch. `git diff --check` is a separate local review check, not a step in that workflow.
+
+See [production verification instructions](docs/production-verification.md) for the detailed checklist and browser/live-host checks. Local automated success does not establish that a hosted workflow, deployment, or search-engine indexing has succeeded.
+
+### 8.6 Known limitations and pending launch work
+
+GitHub Pages is the current hosting environment. Cloudflare Pages has been discussed but is not implemented; the final `muuva.nl` domain migration is also pending. Moving hosts requires verifying the public origin, Vite base, generated links/assets, canonical/hreflang URLs, sitemap, and robots configuration. These routing and SEO passes do not establish analytics, a newsletter-service backend, or additional security integrations as completed features. The newsletter remains local UI confirmation, and footer policy/navigation links remain placeholders.
+
+Static verification is separate from browser checks for hydration, language/storage behavior, Back/Forward, anchors, filters, active videos, focus, galleries, forms, carousel, and responsive layout. Third-party playback/audio and actual hosted responses/caching require separate validation. The production verifier targets the known generated markup format, not general-purpose HTML validation.
+
+Pre-rendering provides translated initial content and discoverable canonical URLs, but search-engine crawling and indexing are not guaranteed. The unlocalized compatibility entry and legacy migration still rely on browser JavaScript; only the localized manifest routes are included in the sitemap. No live deployment or indexing result should be claimed from local output checks alone.
 
 #### Media and editorial limitations
 
@@ -609,11 +687,3 @@ Product packaging, printed guides, phone screens, photographs, and video imagery
 Final QA on 2026-10-17 found the Sliders embed (`hcx_IU7NLf8`) reporting a private video. Other live YouTube titles also differ from approved card metadata: Ring and Ball refer to 20-minute videos while the cards show 15 minutes; Band refers to a no-equipment workout; All Equipment refers to a 30-minute dumbbell workout while its card shows 20 minutes and the kit equipment. IDs and card metadata were preserved. The owner should verify availability and intended destinations before publishing. The live embeds loaded, but playback did not advance in the automated Chromium check; uninterrupted playback and audio still require a manual browser/device check.
 
 Native-language brand review is recommended for the localized Product Purchase heading, Styled by You adaptations, newsletter heading, and promotional descriptions. In particular, the DE/NL/ES carousel headings adapt the English phrase to “Your style. Your Muuva.” These are implemented editorial choices, not literal translations; final QA does not replace a native editor's brand-voice review.
-
-### 8.2 GitHub Pages and localization limits
-
-`vite.config.js` uses base `/muuva/`. `.github/workflows/deploy-pages.yml` builds with Node 20 and `npm ci`, uploads `dist`, and deploys through GitHub Pages on a push to `main` or manual workflow dispatch. All four JSON catalogs are imported into the JavaScript bundle; no translation-server endpoint or runtime locale-file request is required.
-
-Use hash URLs such as `/muuva/#/guided-routines` and `/muuva/#/guided-routines/ring?filter=Ring`. The server always receives the existing `/muuva/` document path, so direct entry and reload work without server rewrite rules. Clean path URLs such as `/muuva/guided-routines/ring` are not implemented. Production-preview QA verified bundled resources, image loading, language switching, and hash deep-link reloads under the configured base; it did not deploy or validate a live GitHub Pages release.
-
-Localization is client-side and uses a saved or detected language at one URL. There are no independently addressable language pages, `hreflang` alternates, localized canonical URLs, or prerendered translations. Initial HTML still has the English title, description, and `lang`; JavaScript updates the title and `lang`, while the static meta description remains English. Crawlers and shared previews may therefore receive English/default metadata, and this setup does not provide separate per-language indexing. Language-specific SEO would require a separately scoped project.

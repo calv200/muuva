@@ -1,6 +1,6 @@
 # Production verification
 
-Run the same sequence as the GitHub Pages build job:
+Run the GitHub Pages build-job commands, followed by a local whitespace check:
 
 ```sh
 npm ci
