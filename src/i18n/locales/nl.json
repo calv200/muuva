@@ -179,5 +179,25 @@
   },
   "site": {
     "title": "muuva | Pilates-set"
+  },
+  "seo": {
+    "home": {
+      "title": "MUUVA | Pilates-set voor thuis",
+      "description": "Ontdek de MUUVA Pilates-set met ring, bal, weerstandsband en sliders. Volg begeleide routines voor bewuste beweging thuis."
+    },
+    "routines": {
+      "title": "Begeleide Pilates-routines | MUUVA",
+      "description": "Ontdek begeleide Pilates-workouts met je MUUVA set: routines met ring, bal, weerstandsband en sliders, en sessies met alle materialen."
+    },
+    "workout": {
+      "title": "{{title}} | MUUVA",
+      "descriptions": {
+        "ring": "Volg een begeleide Pilates-ringworkout met MUUVA. Voeg weerstand en controle toe aan bewegingen voor je core, benen en bovenlichaam.",
+        "ball": "Ontdek een begeleide Pilates-balworkout met MUUVA. Oefen stabiliteit, houding en gecontroleerde beweging thuis.",
+        "sliders": "Volg een begeleide Pilates-slidersworkout met MUUVA. Train kracht, stabiliteit en coördinatie met gecontroleerde bewegingen.",
+        "band": "Ontdek een begeleide workout met de weerstandsband van MUUVA. Voeg weerstand toe aan je Pilates-routine en beweeg bewust.",
+        "full-body": "Ontdek een begeleide Pilates-workout met alle materialen uit je MUUVA set. Verbind kracht, controle en mobiliteit in één sessie."
+      }
+    }
   }
 }

@@ -3,16 +3,20 @@ import { useEffect, useRef } from "react";
 import GuidedRoutineHero from "../components/guided-routines/GuidedRoutineHero.jsx";
 import RoutineVideo from "../components/guided-routines/RoutineVideo.jsx";
 import { routines } from "../data/guidedRoutines.js";
+import { filterQuery, localizedUrl } from "../routing/urls.js";
+import { useRoute } from "../routing/RouteContext.jsx";
 
 export default function GuidedRoutineDetailPage({ slug, returnFilter = "" }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { search } = useRoute();
   const videoSectionRef = useRef(null);
   const routine = routines.find(
     (item) => item.slug === slug && item.youtubeEmbedUrl
   );
-  const backHref = returnFilter
-    ? `#/guided-routines?filter=${encodeURIComponent(returnFilter)}`
-    : "#/guided-routines";
+  const backHref = localizedUrl(i18n.resolvedLanguage, {
+    page: "guided-routines",
+    search: filterQuery(search, returnFilter),
+  });
 
   useEffect(() => {
     if (!routine) return;
@@ -38,7 +42,7 @@ export default function GuidedRoutineDetailPage({ slug, returnFilter = "" }) {
             </p>
             <a
               className="muuva-ui mt-8 inline-flex min-h-11 items-center rounded-full border border-softborder bg-warm px-5 text-ink transition hover:border-brand/40 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-              href="#/guided-routines"
+              href={backHref}
             >
               {t("routines.back")}
             </a>

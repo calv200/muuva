@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { normalizeLanguage, saveManualLanguage, supportedLanguages } from "../i18n/index.js";
+import { localizedUrl, parseLocation } from "../routing/urls.js";
+import { navigate } from "../routing/navigation.js";
 
 function GlobeIcon() {
   return (
@@ -51,7 +53,7 @@ export default function LanguageSelector() {
 
   const selectLanguage = (language) => {
     saveManualLanguage(language);
-    void i18n.changeLanguage(language);
+    navigate(localizedUrl(language, parseLocation(window.location)));
     closeAndFocusTrigger();
   };
 

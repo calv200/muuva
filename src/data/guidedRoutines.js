@@ -1,3 +1,5 @@
+import { routineSlugs } from "../routing/routeManifest.js";
+
 const headerAssets = import.meta.glob(
   "../assets/images/guided-routines/headers/*",
   {
@@ -103,7 +105,7 @@ export const categoryHeroes = {
 export const routines = [
   {
     id: "ring-routine",
-    slug: "ring",
+    slug: routineSlugs.ring,
     titleKey: "routines.workouts.ring.title",
     durationMinutes: 15,
     intensity: "medium",
@@ -122,7 +124,7 @@ export const routines = [
   },
   {
     id: "ball-routine",
-    slug: "ball",
+    slug: routineSlugs.ball,
     titleKey: "routines.workouts.ball.title",
     durationMinutes: 15,
     intensity: "medium",
@@ -141,7 +143,7 @@ export const routines = [
   },
   {
     id: "sliders-routine",
-    slug: "sliders",
+    slug: routineSlugs.sliders,
     titleKey: "routines.workouts.sliders.title",
     durationMinutes: 15,
     intensity: "medium",
@@ -160,7 +162,7 @@ export const routines = [
   },
   {
     id: "band-routine",
-    slug: "band",
+    slug: routineSlugs.band,
     titleKey: "routines.workouts.band.title",
     durationMinutes: 15,
     intensity: "medium",
@@ -179,7 +181,7 @@ export const routines = [
   },
   {
     id: "full-body-routine",
-    slug: "full-body",
+    slug: routineSlugs.fullBody,
     titleKey: "routines.workouts.full-body.title",
     durationMinutes: 20,
     intensity: "medium",

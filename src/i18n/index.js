@@ -1,12 +1,11 @@
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-import en from "./locales/en.json";
-import de from "./locales/de.json";
-import nl from "./locales/nl.json";
-import es from "./locales/es.json";
+import { translationOptions } from "./resources.js";
+import { supportedLanguages } from "../routing/routeManifest.js";
+import { languageFromPath } from "../routing/urls.js";
 
-export const supportedLanguages = ["en", "de", "nl", "es"];
+export { supportedLanguages };
 export const languageStorageKey = "muuva.language";
 
 export function normalizeLanguage(value) {
@@ -25,7 +24,15 @@ export function saveManualLanguage(language) {
   }
 }
 
+const isBrowser = typeof window !== "undefined";
 const detector = new LanguageDetector();
+
+detector.addDetector({
+  name: "muuvaUrl",
+  lookup() {
+    return languageFromPath(window.location.pathname);
+  },
+});
 
 detector.addDetector({
   name: "muuvaManual",
@@ -49,32 +56,20 @@ detector.addDetector({
 });
 
 i18n.on("languageChanged", (language) => {
-  document.documentElement.lang = normalizeLanguage(language) ?? "en";
-  document.title = i18n.t("site.title");
+  if (isBrowser) document.documentElement.lang = normalizeLanguage(language) ?? "en";
 });
 
-i18n
-  .use(detector)
-  .use(initReactI18next)
-  .init({
-    resources: {
-      en: { translation: en },
-      de: { translation: de },
-      nl: { translation: nl },
-      es: { translation: es },
-    },
-    supportedLngs: supportedLanguages,
-    fallbackLng: "en",
-    load: "languageOnly",
-    detection: {
-      order: ["muuvaManual", "muuvaBrowserPreferences"],
-      caches: [],
-    },
-    interpolation: { escapeValue: false },
-    initImmediate: false,
-  });
+if (isBrowser) i18n.use(detector).use(initReactI18next);
 
-document.documentElement.lang = normalizeLanguage(i18n.language) ?? "en";
-document.title = i18n.t("site.title");
+i18n.init({
+  ...translationOptions,
+  ...(isBrowser ? {} : { lng: "en" }),
+  detection: {
+    order: ["muuvaUrl", "muuvaManual", "muuvaBrowserPreferences"],
+    caches: [],
+  },
+});
+
+if (isBrowser) document.documentElement.lang = normalizeLanguage(i18n.language) ?? "en";
 
 export default i18n;

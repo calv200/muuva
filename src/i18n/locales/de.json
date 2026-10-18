@@ -179,5 +179,25 @@
   },
   "site": {
     "title": "muuva | Pilates-Set"
+  },
+  "seo": {
+    "home": {
+      "title": "MUUVA | Pilates-Set für zu Hause",
+      "description": "Entdecke das MUUVA Pilates-Set mit Ring, Ball, Widerstandsband und Slidern. Angeleitete Einheiten begleiten dich bei bewusster Bewegung zu Hause."
+    },
+    "routines": {
+      "title": "Angeleitete Pilates-Einheiten | MUUVA",
+      "description": "Entdecke angeleitete Pilates-Workouts mit deinem MUUVA Set: Einheiten mit Ring, Ball, Widerstandsband und Slidern sowie mit allen Geräten."
+    },
+    "workout": {
+      "title": "{{title}} | MUUVA",
+      "descriptions": {
+        "ring": "Entdecke ein angeleitetes Pilates-Ring-Workout mit MUUVA. Trainiere deine Körpermitte, Beine und deinen Oberkörper mit Widerstand und Kontrolle.",
+        "ball": "Entdecke ein angeleitetes Pilates-Ball-Workout mit MUUVA. Übe Stabilität, Ausrichtung und kontrollierte Bewegung zu Hause.",
+        "sliders": "Entdecke ein angeleitetes Pilates-Slider-Workout mit MUUVA. Trainiere Kraft, Stabilität und Koordination mit kontrollierten Bewegungen.",
+        "band": "Entdecke ein angeleitetes Workout mit dem Widerstandsband von MUUVA. Ergänze deine Pilates-Praxis um Widerstand und bewusste Bewegung.",
+        "full-body": "Entdecke ein angeleitetes Pilates-Workout mit allen Geräten aus deinem MUUVA Set. Verbinde Kraft, Kontrolle und Beweglichkeit in einer Einheit."
+      }
+    }
   }
 }

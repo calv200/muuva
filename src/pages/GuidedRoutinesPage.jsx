@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import GuidedRoutineHero from "../components/guided-routines/GuidedRoutineHero.jsx";
 import RoutineFilters from "../components/guided-routines/RoutineFilters.jsx";
 import RoutineGrid from "../components/guided-routines/RoutineGrid.jsx";
+import { filterQuery, localizedUrl } from "../routing/urls.js";
+import { navigate } from "../routing/navigation.js";
 import {
   allFilter,
   categoryHeroes,
@@ -16,7 +18,7 @@ function getValidFilter(filter) {
 }
 
 export default function GuidedRoutinesPage({ initialFilter = allFilter }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState(getValidFilter(initialFilter));
   const activeHero = activeFilter !== allFilter
     ? categoryHeroes[slugForFilter(activeFilter)]
@@ -38,9 +40,10 @@ export default function GuidedRoutinesPage({ initialFilter = allFilter }) {
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
-    window.location.hash = filter && filter !== allFilter
-      ? `/guided-routines?filter=${encodeURIComponent(filter)}`
-      : "/guided-routines";
+    navigate(localizedUrl(i18n.resolvedLanguage, {
+      page: "guided-routines",
+      search: filterQuery(window.location.search, filter),
+    }));
   };
 
   return (

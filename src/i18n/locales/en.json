@@ -179,5 +179,25 @@
   },
   "site": {
     "title": "muuva | Pilates Essential Kit"
+  },
+  "seo": {
+    "home": {
+      "title": "MUUVA | Pilates Kit for Home Workouts",
+      "description": "Discover the MUUVA Pilates Essential Kit with ring, ball, resistance band and sliders. Explore guided routines for mindful movement at home."
+    },
+    "routines": {
+      "title": "Guided Pilates Routines | MUUVA",
+      "description": "Explore guided Pilates workouts with your MUUVA kit. Find routines for the ring, ball, resistance band and sliders, plus sessions using all equipment."
+    },
+    "workout": {
+      "title": "{{title}} | MUUVA",
+      "descriptions": {
+        "ring": "Follow a guided Pilates ring workout with MUUVA. Add resistance and control to movements for your core, legs and upper body.",
+        "ball": "Explore a guided Pilates ball workout with MUUVA. Practice stability, alignment and controlled movement at home.",
+        "sliders": "Follow a guided Pilates sliders workout with MUUVA. Explore controlled movements that challenge strength, stability and coordination.",
+        "band": "Explore a guided resistance band workout with MUUVA. Add resistance to your Pilates practice and move with intention.",
+        "full-body": "Explore a guided Pilates workout using all the equipment in your MUUVA kit. Connect strength, control and mobility in one session."
+      }
+    }
   }
 }

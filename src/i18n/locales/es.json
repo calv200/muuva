@@ -179,5 +179,25 @@
   },
   "site": {
     "title": "muuva | Kit de Pilates"
+  },
+  "seo": {
+    "home": {
+      "title": "MUUVA | Kit de Pilates para casa",
+      "description": "Descubre el kit de Pilates de MUUVA con aro, pelota, banda de resistencia y discos deslizantes. Sigue rutinas guiadas para moverte con atención en casa."
+    },
+    "routines": {
+      "title": "Rutinas guiadas de Pilates | MUUVA",
+      "description": "Descubre entrenamientos guiados de Pilates con tu kit MUUVA: rutinas con aro, pelota, banda de resistencia y discos deslizantes, y con todo el equipo."
+    },
+    "workout": {
+      "title": "{{title}} | MUUVA",
+      "descriptions": {
+        "ring": "Sigue un entrenamiento guiado con aro de Pilates de MUUVA. Añade resistencia y control a movimientos para el abdomen, las piernas y el tren superior.",
+        "ball": "Descubre un entrenamiento guiado con pelota de Pilates de MUUVA. Practica estabilidad, alineación y movimientos controlados en casa.",
+        "sliders": "Sigue un entrenamiento guiado con discos deslizantes de Pilates de MUUVA. Trabaja fuerza, estabilidad y coordinación con movimientos controlados.",
+        "band": "Descubre un entrenamiento guiado con banda de resistencia de MUUVA. Añade resistencia a tu práctica de Pilates y muévete de forma consciente.",
+        "full-body": "Descubre un entrenamiento guiado de Pilates con todo el equipo de tu kit MUUVA. Conecta fuerza, control y movilidad en una sesión."
+      }
+    }
   }
 }

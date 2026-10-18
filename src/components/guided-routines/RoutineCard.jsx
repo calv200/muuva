@@ -2,6 +2,8 @@ import { allFilter } from "../../data/guidedRoutines.js";
 import { useTranslation } from "react-i18next";
 import AssetPlaceholder from "./AssetPlaceholder.jsx";
 import "./RoutineCard.css";
+import { filterQuery, localizedUrl } from "../../routing/urls.js";
+import { useRoute } from "../../routing/RouteContext.jsx";
 
 function MetadataPill({ kind, children }) {
   return <span className={`workout-pill workout-pill--${kind}`}>{children}</span>;
@@ -21,12 +23,13 @@ function PlayIcon() {
 }
 
 export default function RoutineCard({ routine, activeFilter }) {
-  const { t } = useTranslation();
-  const href = `#/guided-routines/${routine.slug}${
-    activeFilter && activeFilter !== allFilter
-      ? `?filter=${encodeURIComponent(activeFilter)}`
-      : ""
-  }`;
+  const { t, i18n } = useTranslation();
+  const { search } = useRoute();
+  const href = localizedUrl(i18n.resolvedLanguage, {
+    page: "routine-detail",
+    slug: routine.slug,
+    search: filterQuery(search, activeFilter === allFilter ? "" : activeFilter),
+  });
 
   return (
     <a
