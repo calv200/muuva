@@ -32,6 +32,24 @@ test("URL helpers support a different project base and root hosting", () => {
   assert.equal(languageFromPath("/de/", "/"), "de");
 });
 
+test("root-hosted manifest routes preserve language, filters, queries, and anchors", () => {
+  for (const language of supportedLanguages) {
+    for (const path of pagePaths) {
+      const url = `/${language}/${path}?filter=Full%20body&tag=a&tag=b#video`;
+      const route = parseLocation(new URL(url, "https://muuva.pages.dev"), "/");
+      assert.equal(route.language, language);
+      assert.equal(route.filter, "Full body");
+      assert.equal(localizedUrl(language, route, "/"), url);
+      const switched = parseLocation(new URL(localizedUrl("de", route, "/"), "https://muuva.pages.dev"), "/");
+      assert.equal(switched.language, "de");
+      assert.equal(switched.page, route.page);
+      assert.equal(switched.slug, route.slug);
+      assert.equal(switched.search, route.search);
+      assert.equal(switched.hash, route.hash);
+    }
+  }
+});
+
 test("switching language preserves workout, all query values, and section anchor", () => {
   const route = parse("/muuva/en/guided-routines/full-body/?filter=Full%20body&tag=a&tag=b#video");
   const switched = localizedUrl("de", route, base);

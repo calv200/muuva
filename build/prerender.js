@@ -1,8 +1,10 @@
-import { build } from "vite";
+import { build, loadEnv } from "vite";
 import { mkdir, mkdtemp, readFile, writeFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { createSitemap, documentWithMetadata, prerenderDocument } from "./html.js";
+
+const staging = loadEnv("production", process.cwd(), "MUUVA_").MUUVA_STAGING === "true";
 
 await build();
 const output = path.resolve("dist");
@@ -36,6 +38,11 @@ try {
   await writeFile(path.join(output, "index.html"), documentWithMetadata(template, pages[0].metadata));
   await writeFile(path.join(output, "sitemap.xml"), createSitemap(pages));
   await writeFile(path.join(output, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${sitemapUrl}\n`);
+  // Cloudflare applies this wildcard to all static routes, including localized pages.
+  // Vite clears dist on each client build, so normal builds retain no staging headers.
+  if (staging) {
+    await writeFile(path.join(output, "_headers"), "/*\n  X-Robots-Tag: noindex, nofollow\n");
+  }
   console.log(`Prerendered ${pages.length} localized pages with metadata, sitemap.xml and robots.txt.`);
 } finally {
   // Only remove the temporary directory created within our build cache.
