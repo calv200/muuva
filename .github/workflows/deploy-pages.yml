@@ -32,8 +32,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run tests
+        run: npm test
+
       - name: Build
         run: npm run build
+
+      - name: Verify production HTML
+        run: npm run test:production
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

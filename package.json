@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "node build/prerender.js",
     "test": "node --test",
+    "test:production": "node build/verify-production.js",
     "preview": "vite preview"
   },
   "dependencies": {
