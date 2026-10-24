@@ -1,6 +1,5 @@
 {
   "header": {
-    "topBar": "test",
     "shop": "Shop",
     "trainingSessions": "Trainingssessies",
     "languageSelector": "Taal kiezen, huidige taal: {{language}}",
