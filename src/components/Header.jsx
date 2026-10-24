@@ -8,6 +8,9 @@ export default function Header() {
   const { t, i18n } = useTranslation();
   return (
     <header className="sticky top-0 z-30 bg-warm backdrop-blur-sm">
+      <div className="bg-[#EAF0F2] text-center text-sm leading-[1.5] text-ink">
+        {t("header.topBar")}
+      </div>
       <SiteContainer className="flex h-16 items-center justify-between">
         <a href={localizedUrl(i18n.resolvedLanguage)} className="inline-flex items-center" aria-label={t("header.home")}>
           <img
