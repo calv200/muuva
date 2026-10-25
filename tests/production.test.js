@@ -37,7 +37,7 @@ async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging
     i18n.init({ lng: language, resources: { [language]: { translation: locales[language] } }, initImmediate: false });
     for (const pagePath of pagePaths) {
       const route = parseLocation(new URL(`${base}${language}/${pagePath}`, origin), base);
-      const heading = i18n.t(route.page === "home" ? "product.title" : route.page === "guided-routines" ? "routines.title" : `routines.categories.${route.slug}.title`);
+      const heading = i18n.t(route.page === "privacy" ? "privacy.title" : route.page === "home" ? "product.title" : route.page === "guided-routines" ? "routines.title" : `routines.categories.${route.slug}.title`);
       const page = {
         route,
         metadata: getMetadata(language, route, i18n.t.bind(i18n), { origin, base }),
@@ -60,7 +60,7 @@ async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging
 test("enabled analytics verifies every localized page and compatibility root, rejecting duplicate or missing scripts", async (t) => {
   const analytics = analyticsConfig({ VITE_UMAMI_ENABLED: "true", VITE_UMAMI_WEBSITE_ID: "8963af84-1a22-4cad-a8ef-413afe485468", VITE_PUBLIC_SITE_ORIGIN: "https://muuva.nl" }, { base: "/" });
   const options = await fixture(t, { base: "/", origin: "https://muuva.nl", analytics });
-  assert.equal((await verifyProductionOutput(options)).pages, 28);
+  assert.equal((await verifyProductionOutput(options)).pages, 32);
   const file = path.join(options.directory, "index.html");
   const original = await readFile(file, "utf8");
   await writeFile(file, original.replace("</head>", '<script src="https://cloud.umami.is/script.js"></script></head>'));
@@ -91,7 +91,7 @@ test("staging requires global noindex while preserving root-hosted localized SEO
   const options = await fixture(t, { base: "/", origin: "https://muuva.pages.dev", staging: true });
   const file = path.join(options.directory, "_headers");
   assert.equal(await readFile(file, "utf8"), "/*\n  X-Robots-Tag: noindex, nofollow\n");
-  assert.equal((await verifyProductionOutput(options)).pages, 28);
+  assert.equal((await verifyProductionOutput(options)).pages, 32);
   await unlink(file);
   await assert.rejects(verifyProductionOutput(options), /Incorrect hosting headers/);
 });
@@ -105,7 +105,7 @@ test("commercial headers protect project and preview hosts without a custom-doma
     ["https://:version.:project.pages.dev/*", "X-Robots-Tag: noindex, nofollow"],
   ]);
   assert.equal(createHostingHeaders({ base: "/", staging: false }), createHostingHeaders({ base: "/" }));
-  assert.equal((await verifyProductionOutput(options)).pages, 28);
+  assert.equal((await verifyProductionOutput(options)).pages, 32);
 
   for (const invalid of [
     "/*\n  X-Robots-Tag: noindex, nofollow\n",

@@ -1,0 +1,60 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { readFileSync } from "node:fs";
+import { createServer } from "vite";
+import { privacyLinks, privacySections, privacyUpdatedOn } from "../src/data/privacy.js";
+import { localizedUrl, parseLocation } from "../src/routing/urls.js";
+import { supportedLanguages } from "../src/routing/routeManifest.js";
+import { escapeMarkup } from "../build/html.js";
+
+test("privacy URLs preserve page identity when switching languages, including root hosting and trailing slashes", () => {
+  for (const base of ["/", "/muuva/"]) {
+    for (const language of supportedLanguages) {
+      const route = parseLocation(new URL(`https://example.com${base}${language}/privacy?source=saved#privacy-rights`), base);
+      assert.equal(route.page, "privacy");
+      for (const target of supportedLanguages) {
+        assert.equal(localizedUrl(target, route, base), `${base}${target}/privacy/?source=saved#privacy-rights`);
+      }
+    }
+  }
+});
+
+test("all 32 real server-rendered pages have localized footer links and privacy pages contain complete translated drafts", async () => {
+  const server = await createServer({ server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
+  try {
+    const { renderPage, getPublicPages } = await server.ssrLoadModule("/src/entry-server.jsx");
+    const pages = getPublicPages();
+    assert.equal(pages.length, 32);
+    const titles = new Set();
+    for (const { language, path } of pages) {
+      const locale = JSON.parse(readFileSync(new URL(`../src/i18n/locales/${language}.json`, import.meta.url), "utf8"));
+      const { html, route, metadata } = renderPage(language, path);
+      const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)?.[0];
+      assert(footer?.includes(`href="${localizedUrl(language, { page: "privacy" }, server.config.base)}"`));
+      assert(footer.includes(escapeMarkup(locale.footer.links.privacy)));
+      if (route.page !== "privacy") continue;
+      titles.add(metadata.title);
+      assert.equal(metadata.title, locale.seo.privacy.title);
+      assert.equal(metadata.description, locale.seo.privacy.description);
+      assert(html.toLowerCase().includes(`datetime="${privacyUpdatedOn}"`));
+      for (const key of ["title", "draft", "intro", "updated"]) assert(html.includes(escapeMarkup(locale.privacy[key])));
+      for (const { id, paragraphs, links } of privacySections) {
+        assert(html.includes(`aria-labelledby="privacy-${id}"`));
+        assert(html.includes(escapeMarkup(locale.privacy.sections[id].title)));
+        for (let n = 1; n <= paragraphs; n++) {
+          const paragraph = locale.privacy.sections[id][`p${n}`];
+          assert(paragraph?.length > 60, `${language}/${id}/p${n} missing substantive copy`);
+          assert(html.includes(escapeMarkup(paragraph)), `${language}/${id}/p${n} missing from SSR`);
+        }
+        for (const link of links) {
+          assert(html.includes(`href="${privacyLinks[link]}"`));
+          assert(html.includes(escapeMarkup(locale.privacy.links[link])));
+        }
+      }
+      assert(!/privacy\.(?:sections|links|title|draft)|\{\{/.test(html));
+    }
+    assert.equal(titles.size, 4);
+  } finally {
+    await server.close();
+  }
+});

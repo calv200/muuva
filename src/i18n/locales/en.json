@@ -198,6 +198,69 @@
         "band": "Explore a guided resistance band workout with MUUVA. Add resistance to your Pilates practice and move with intention.",
         "full-body": "Explore a guided Pilates workout using all the equipment in your MUUVA kit. Connect strength, control and mobility in one session."
       }
+    },
+    "privacy": {
+      "title": "Privacy Policy | MUUVA",
+      "description": "Read the draft MUUVA privacy notice covering website visits, external services, language preferences and planned analytics."
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "draft": "Draft for review",
+    "intro": "This draft explains how information is handled when you visit MUUVA, explore products or use Guided Routines. It describes the current website and the analytics planned for a later stage. It is awaiting final review before publication.",
+    "updated": "Draft last updated:",
+    "sections": {
+      "operator": {
+        "title": "Who we are",
+        "p1": "MUUVA is a business established in the Netherlands. This notice concerns the MUUVA website. External services have their own privacy practices, which MUUVA does not control."
+      },
+      "hosting": {
+        "title": "Visiting the website",
+        "p1": "The website is delivered through Cloudflare Pages. Loading a page involves network requests that can include your IP address, browser information, the requested resource and the time of the request. Hosting and security services may process technical logs to deliver the website and protect it against abuse.",
+        "p2": "This operational processing is separate from optional audience analytics. Turning analytics off does not prevent the technical requests needed to display the website or requests to embedded external services."
+      },
+      "storage": {
+        "title": "Cookies and your language choice",
+        "p1": "When you manually select a language, MUUVA saves that choice in your browser’s localStorage under muuva.language. It remains until you change it or clear the website’s stored data in your browser. The language in the page URL takes priority. Automatic language detection does not save a preference.",
+        "p2": "The planned Umami configuration does not use analytics cookies. This does not mean the whole website is cookie-free: embedded third-party services may use cookies or similar technologies, depending on their settings and your browser."
+      },
+      "analytics": {
+        "title": "Planned audience analytics",
+        "p1": "Umami Analytics is not currently enabled. The intended service is Umami Cloud, with the EU region selected for analytics storage. Its purpose is to understand which public pages are visited and how the website is used, rather than to build advertising profiles.",
+        "p2": "The approved configuration sends only the website identifier, hostname, approved public page path, approved localized page title, permitted campaign values and the origin of an external referring website. Other query values and anchors are removed. It excludes browser language and screen size, custom visitor identifiers, custom events, advertising pixels and session recordings. It respects the browser’s Do Not Track signal.",
+        "p3": "Umami can process IP addresses and User-Agent information to calculate hashed session identifiers and derive metrics such as browser and device type. These identifiers are not a guarantee of anonymity. IP addresses may also occur in operational or security logs. EU analytics storage does not mean that every processing activity takes place within the EU. Activation remains subject to the privacy review."
+      },
+      "videos": {
+        "title": "YouTube Guided Routines",
+        "p1": "Workout pages contain standard YouTube embedded players. Your browser contacts YouTube when the player loads, before you press Play. Google may receive your IP address, browser and request information, and may use cookies or associate activity with an account depending on its settings and your sign-in status.",
+        "p2": "YouTube’s independent processing is governed by Google’s privacy information. Privacy-enhanced embedding and a choice to load the player only after a visitor’s action are being assessed; they are not implemented on the current website."
+      },
+      "services": {
+        "title": "Fonts and external links",
+        "p1": "The website loads fonts from Google Fonts when a page is opened. Your browser sends requests to Google’s font servers, which receive the IP address and technical information needed to deliver those resources.",
+        "p2": "Amazon purchase links and Instagram links take you to external websites when you choose to follow them. They are links, rather than embedded advertising or social tracking scripts. Purchases take place on Amazon. Those services apply their own privacy terms."
+      },
+      "newsletter": {
+        "title": "The newsletter form",
+        "p1": "The current footer form checks the email field in your browser and shows a confirmation. It is not connected to a subscription service: submitting it does not send your email to MUUVA or register you for a newsletter. The confirmation does not represent a completed subscription."
+      },
+      "retention": {
+        "title": "Retention, legal grounds and transfers",
+        "p1": "Your stored language choice remains in your browser until changed or cleared. There are currently no MUUVA analytics records from this implementation because analytics is disabled. Hosting and external services have separate retention arrangements for operational information.",
+        "p2": "The applicable legal grounds, provider retention periods and safeguards for processing outside the European Economic Area are under review. Any future analytics activation requires an approved purpose, legal basis and consent assessment. A cookie-free service does not by itself establish a consent exemption."
+      },
+      "rights": {
+        "title": "Your privacy rights",
+        "p1": "Depending on the processing and applicable conditions, you may request access to your personal data, correction, erasure, restriction or portability, and you may object to processing. Where consent is the basis, you may withdraw it without affecting the lawfulness of earlier processing. Privacy requests concerning MUUVA should be addressed to MUUVA as the website operator; the contact arrangements remain part of the final review.",
+        "p2": "You may complain to the Dutch Autoriteit Persoonsgegevens or the supervisory authority in the country where you live or work, or where an alleged infringement occurred. Requests about a provider’s independent processing can also be directed to that provider."
+      }
+    },
+    "links": {
+      "cloudflare": "Cloudflare privacy information",
+      "umami": "Umami privacy information",
+      "google": "Google privacy policy",
+      "fonts": "Google Fonts privacy information",
+      "authority": "Dutch data protection authority"
     }
   }
 }

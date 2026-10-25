@@ -198,6 +198,69 @@
         "band": "Ontdek een begeleide workout met de weerstandsband van MUUVA. Voeg weerstand toe aan je Pilates-routine en beweeg bewust.",
         "full-body": "Ontdek een begeleide Pilates-workout met alle materialen uit je MUUVA set. Verbind kracht, controle en mobiliteit in één sessie."
       }
+    },
+    "privacy": {
+      "title": "Privacybeleid | MUUVA",
+      "description": "Lees het conceptprivacybeleid van MUUVA over websitebezoeken, externe diensten, taalvoorkeuren en geplande analytics."
+    }
+  },
+  "privacy": {
+    "title": "Privacybeleid",
+    "draft": "Concept ter beoordeling",
+    "intro": "Dit concept legt uit hoe informatie wordt verwerkt wanneer je MUUVA bezoekt, producten bekijkt of Guided Routines gebruikt. Het beschrijft de huidige website en de analytics die voor een later moment zijn voorzien. De definitieve beoordeling vóór publicatie moet nog plaatsvinden.",
+    "updated": "Concept laatst bijgewerkt:",
+    "sections": {
+      "operator": {
+        "title": "Over MUUVA",
+        "p1": "MUUVA is een onderneming gevestigd in Nederland. Dit beleid gaat over de MUUVA-website. Externe diensten hanteren hun eigen privacypraktijken, waarover MUUVA geen zeggenschap heeft."
+      },
+      "hosting": {
+        "title": "Een bezoek aan de website",
+        "p1": "De website wordt aangeboden via Cloudflare Pages. Bij het laden van een pagina worden netwerkverzoeken verstuurd die onder meer je IP-adres, browserinformatie, de opgevraagde bron en het tijdstip kunnen bevatten. Hosting- en beveiligingsdiensten kunnen technische loggegevens verwerken om de website te leveren en misbruik tegen te gaan.",
+        "p2": "Deze operationele verwerking staat los van optionele bezoekersstatistieken. Ook als analytics uitstaat, blijven technische verzoeken nodig om de website te tonen en kunnen verzoeken naar ingesloten externe diensten plaatsvinden."
+      },
+      "storage": {
+        "title": "Cookies en je taalkeuze",
+        "p1": "Wanneer je zelf een taal kiest, bewaart MUUVA die keuze in de localStorage van je browser onder muuva.language. De keuze blijft staan totdat je deze wijzigt of de opgeslagen websitegegevens in je browser wist. De taal in het pagina-adres heeft voorrang. Automatische taaldetectie slaat geen voorkeur op.",
+        "p2": "De geplande Umami-configuratie gebruikt geen analyticscookies. Dat betekent niet dat de hele website cookievrij is: ingesloten diensten van derden kunnen cookies of vergelijkbare technieken gebruiken, afhankelijk van hun instellingen en je browser."
+      },
+      "analytics": {
+        "title": "Geplande bezoekersstatistieken",
+        "p1": "Umami Analytics is momenteel niet ingeschakeld. De beoogde dienst is Umami Cloud, met de EU als gekozen opslagregio voor analyticsgegevens. Het doel is inzicht te krijgen in bezoeken aan openbare pagina’s en het gebruik van de website, zonder advertentieprofielen op te bouwen.",
+        "p2": "De goedgekeurde configuratie verstuurt uitsluitend de websitecode, hostnaam, goedgekeurde openbare paginapaden en vertaalde paginatitels, toegestane campagnewaarden en de oorsprong van een externe verwijzende website. Andere querywaarden en ankers worden verwijderd. Browsertaal, schermgrootte, eigen bezoekerscodes, aangepaste gebeurtenissen, advertentiepixels en sessieopnamen worden uitgesloten. Het Do Not Track-signaal van de browser wordt gerespecteerd.",
+        "p3": "Umami kan IP-adressen en User-Agent-informatie verwerken om gehashte sessiecodes te berekenen en statistieken zoals browser en apparaattype af te leiden. Deze codes garanderen geen anonimiteit. IP-adressen kunnen ook in operationele of beveiligingslogs voorkomen. Opslag van analyticsgegevens in de EU betekent niet dat alle verwerking uitsluitend binnen de EU plaatsvindt. Activering blijft afhankelijk van de privacybeoordeling."
+      },
+      "videos": {
+        "title": "YouTube Guided Routines",
+        "p1": "Trainingspagina’s bevatten standaard ingesloten YouTube-spelers. Je browser maakt al contact met YouTube wanneer de speler laadt, voordat je op Play drukt. Google kan je IP-adres, browser- en verzoekinformatie ontvangen en, afhankelijk van instellingen en je aanmeldstatus, cookies gebruiken of activiteit aan een account koppelen.",
+        "p2": "Voor de zelfstandige verwerking door YouTube geldt de privacyinformatie van Google. De privacymodus voor ingesloten video’s en het pas laden van de speler na een bewuste handeling worden onderzocht; deze zijn nog niet toegepast op de huidige website."
+      },
+      "services": {
+        "title": "Lettertypen en externe links",
+        "p1": "Bij het openen van een pagina laadt de website lettertypen van Google Fonts. Je browser stuurt verzoeken naar de fontservers van Google, die daarbij het IP-adres en technische informatie ontvangen om deze bestanden te leveren.",
+        "p2": "Amazon-kooplinks en Instagram-links brengen je naar externe websites wanneer je ervoor kiest ze te volgen. Het zijn links, geen ingesloten advertentie- of socialetracking-scripts. Aankopen vinden plaats bij Amazon. Deze diensten hanteren hun eigen privacyvoorwaarden."
+      },
+      "newsletter": {
+        "title": "Het nieuwsbriefformulier",
+        "p1": "Het huidige formulier in de footer controleert het e-mailveld in je browser en toont een bevestiging. Het is niet gekoppeld aan een abonnementsdienst: je e-mailadres wordt hierdoor niet naar MUUVA verstuurd en je wordt niet voor een nieuwsbrief ingeschreven. De bevestiging betekent dus niet dat een inschrijving is voltooid."
+      },
+      "retention": {
+        "title": "Bewaartermijnen, grondslagen en doorgifte",
+        "p1": "Je taalkeuze blijft in je browser staan totdat je die wijzigt of wist. Er zijn momenteel geen MUUVA-analyticsgegevens uit deze implementatie, omdat analytics uitstaat. Voor operationele informatie van hosting- en externe diensten gelden afzonderlijke bewaartermijnen.",
+        "p2": "De toepasselijke juridische grondslagen, bewaartermijnen van aanbieders en waarborgen voor verwerking buiten de Europese Economische Ruimte worden nog beoordeeld. Een latere activering van analytics vereist een goedgekeurd doel, een grondslag en een beoordeling van eventuele toestemmingseisen. Alleen het ontbreken van cookies geeft geen vrijstelling van toestemming."
+      },
+      "rights": {
+        "title": "Je privacyrechten",
+        "p1": "Afhankelijk van de verwerking en de wettelijke voorwaarden kun je vragen om inzage, correctie, verwijdering, beperking of overdraagbaarheid van je persoonsgegevens, en bezwaar maken tegen verwerking. Als toestemming de grondslag is, kun je die intrekken zonder dat dit de rechtmatigheid van eerdere verwerking aantast. Privacyverzoeken over MUUVA richt je aan MUUVA als websitebeheerder; de contactmogelijkheden vallen nog onder de definitieve beoordeling.",
+        "p2": "Je kunt een klacht indienen bij de Autoriteit Persoonsgegevens of bij de toezichthouder in het land waar je woont of werkt, of waar een vermoedelijke overtreding plaatsvond. Vragen over de zelfstandige verwerking door een aanbieder kun je ook rechtstreeks aan die aanbieder stellen."
+      }
+    },
+    "links": {
+      "cloudflare": "Privacyinformatie van Cloudflare",
+      "umami": "Privacyinformatie van Umami",
+      "google": "Privacybeleid van Google",
+      "fonts": "Privacyinformatie over Google Fonts",
+      "authority": "Autoriteit Persoonsgegevens"
     }
   }
 }

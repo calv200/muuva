@@ -4,11 +4,11 @@ import { publicSiteOrigin } from "./site.js";
 
 export function getMetadata(language, route, t, { origin = publicSiteOrigin, base } = {}) {
   const validDetail = route.page === "routine-detail" && Object.values(routineSlugs).includes(route.slug);
-  const page = validDetail ? "routine-detail" : route.page === "home" ? "home" : "guided-routines";
+  const page = validDetail ? "routine-detail" : route.page === "privacy" ? "privacy" : route.page === "home" ? "home" : "guided-routines";
   // Queries and anchors never participate in canonical or alternate URLs.
   const canonicalRoute = { page, slug: validDetail ? route.slug : "" };
   const absolute = (lang) => `${origin}${localizedUrl(lang, canonicalRoute, base)}`;
-  const key = page === "home" ? "home" : "routines";
+  const key = page === "home" ? "home" : page === "privacy" ? "privacy" : "routines";
   return {
     language,
     title: validDetail

@@ -10,6 +10,20 @@ import { getMetadata } from "../src/seo/metadata.js";
 const env = { VITE_UMAMI_ENABLED: "true", VITE_UMAMI_WEBSITE_ID: "8963af84-1a22-4cad-a8ef-413afe485468", VITE_PUBLIC_SITE_ORIGIN: "https://muuva.nl" };
 const config = analyticsConfig(env, { base: "/" });
 
+test("privacy routes retain approved titles and sanitized URLs while duplicate attempts are rejected", () => {
+  for (const language of ["en", "de", "nl", "es"]) {
+    const pathname = `/${language}/privacy/`;
+    assert(config.paths.includes(pathname));
+    const { send } = browser(`https://muuva.nl${pathname}?utm_source=instagram&email=alice@example.com#secret`);
+    const payload = send({ title: "Alice private account", referrer: "https://example.com/alice?secret=1" });
+    assert.equal(payload.url, `${pathname}?utm_source=instagram`);
+    assert.equal(payload.referrer, "https://example.com");
+    assert.equal(payload.title, config.titles[pathname]);
+    assert(!JSON.stringify(payload).includes("Alice"));
+    assert.equal(send(), false);
+  }
+});
+
 function browser(href = "https://muuva.nl/en/", dnt) {
   const listeners = {};
   const window = { location: new URL(href), addEventListener: (name, handler) => { listeners[name] = handler; } };
@@ -42,8 +56,8 @@ test("preview, localhost, GitHub Pages, www and DNT never pass the send hook", (
   for (const dnt of ["1", 1, "yes"]) assert.equal(browser(undefined, dnt).send(), false);
 });
 
-test("all 28 public paths pass without arbitrary payload properties or identifiers", () => {
-  assert.equal(config.paths.length, 28);
+test("all 32 public paths pass without arbitrary payload properties or identifiers", () => {
+  assert.equal(config.paths.length, 32);
   for (const path of config.paths) {
     const result = browser(`https://muuva.nl${path}`).send({ title: "Private name", id: "user", data: { email: "name@example.com" }, screen: "123x456", language: "en" });
     assert.deepEqual(JSON.parse(JSON.stringify(result)), { website: config.website, hostname: "muuva.nl", url: path, referrer: "", title: config.titles[path] });

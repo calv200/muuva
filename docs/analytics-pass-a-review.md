@@ -34,7 +34,7 @@ Disabled output has neither script. An enabled artifact served on another host
 may download the official script, but both `data-domains="muuva.nl"` and the hook
 prevent analytics submission. Supported DNT signals also prevent submission.
 
-The hook accepts pageviews only for the 28 manifest paths, on the exact hostname
+The hook accepts pageviews only for the 32 manifest paths, on the exact hostname
 `muuva.nl`. It sends only the configured website, hostname, sanitized relative URL,
 external referrer origin and approved localized title. Titles are resolved at build
 time from the route manifest, existing locale catalogs and shared SEO metadata
@@ -125,7 +125,9 @@ Sources reviewed:
 
 ## Privacy Notice draft checklist: launch blocker
 
-The current footer Privacy Policy links to `#`; no functioning Privacy Notice
+Pass A.2 replaces the footer placeholder with four localized Privacy Notice staging drafts.
+They are not approved for publication; see [the compliance review](privacy-compliance-review.md).
+At the time of Pass A, no functioning Privacy Notice
 was found. Publish an approved, accessible localized notice before activation.
 The notice needs reviewed statements covering:
 

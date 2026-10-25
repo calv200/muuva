@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef, useState } from "react";
 import SiteContainer from "./SiteContainer.jsx";
+import { localizedUrl } from "../routing/urls.js";
 
 const navigationLinks = [
   "footer.links.behind",
@@ -68,7 +69,7 @@ function InstagramIcon() {
 }
 
 function FooterLinkList({ links, ariaLabel }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <nav aria-label={ariaLabel}>
       <ul className="space-y-3 text-muted sm:space-y-3.5">
@@ -76,7 +77,7 @@ function FooterLinkList({ links, ariaLabel }) {
           <li key={link}>
             <a
               className="muuva-footer-link transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-              href="#"
+              href={link === "footer.links.privacy" ? localizedUrl(i18n.resolvedLanguage, { page: "privacy" }) : "#"}
             >
               {t(link)}
             </a>

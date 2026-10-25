@@ -11,6 +11,7 @@ import ProductPurchase from "./components/ProductPurchase.jsx";
 import Footer from "./components/Footer.jsx";
 import GuidedRoutineDetailPage from "./pages/GuidedRoutineDetailPage.jsx";
 import GuidedRoutinesPage from "./pages/GuidedRoutinesPage.jsx";
+import PrivacyPage from "./pages/PrivacyPage.jsx";
 
 function HomePage() {
   return (
@@ -42,10 +43,11 @@ export default function App({ initialRoute }) {
       });
       return () => window.cancelAnimationFrame(frame);
     }
-    if (route.page === "home") window.scrollTo({ top: 0, behavior: "auto" });
+    if (route.page === "home" || route.page === "privacy") window.scrollTo({ top: 0, behavior: "auto" });
   }, [route.page, route.slug, route.hash]);
 
   const renderPage = () => {
+    if (route.page === "privacy") return <PrivacyPage />;
     if (route.page === "guided-routines") {
       return <GuidedRoutinesPage initialFilter={route.filter} />;
     }

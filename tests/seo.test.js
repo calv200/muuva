@@ -73,7 +73,7 @@ test("sitemap contains precisely the public manifest with valid language alterna
   const pages = supportedLanguages.flatMap((language) => pagePaths.map((path) => ({ metadata: metadataFor(language, path) })));
   const xml = createSitemap(pages);
   assert(xml.includes('xmlns:xhtml="http://www.w3.org/1999/xhtml"'));
-  assert.equal((xml.match(/<loc>/g) || []).length, 28);
-  assert.equal((xml.match(/<xhtml:link /g) || []).length, 140);
+  assert.equal((xml.match(/<loc>/g) || []).length, 32);
+  assert.equal((xml.match(/<xhtml:link /g) || []).length, 160);
   assert(!xml.includes('filter=') && !xml.includes('#/') && !xml.includes('localhost'));
 });
