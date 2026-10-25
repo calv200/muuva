@@ -4,13 +4,15 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { createSitemap, documentWithMetadata, prerenderDocument } from "./html.js";
 import { createHostingHeaders } from "./headers.js";
+import { analyticsConfig, documentWithAnalytics } from "./analytics.js";
 
 const config = await resolveConfig({ mode: "production" }, "build", "production", "production");
 const staging = loadEnv(config.mode, config.envDir, "MUUVA_").MUUVA_STAGING === "true";
+const analytics = analyticsConfig(config.env, { staging, base: config.base });
 
 await build();
 const output = path.resolve(config.root, config.build.outDir);
-const template = await readFile(path.join(output, "index.html"), "utf8");
+const template = documentWithAnalytics(await readFile(path.join(output, "index.html"), "utf8"), analytics);
 const cache = path.resolve("node_modules/.cache");
 await mkdir(cache, { recursive: true });
 const serverOutput = await mkdtemp(path.join(cache, "muuva-prerender-"));

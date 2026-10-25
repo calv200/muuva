@@ -9,6 +9,7 @@ import { parseLocation } from "../src/routing/urls.js";
 import { getMetadata } from "../src/seo/metadata.js";
 import { publicSiteOrigin } from "../src/seo/site.js";
 import { createHostingHeaders } from "./headers.js";
+import { analyticsConfig, analyticsHead, umamiScript } from "./analytics.js";
 
 // Read the markup emitted by our generator; this is not a general HTML validator.
 function decode(value) {
@@ -84,7 +85,7 @@ function validateXml(xml) {
   assert.equal(stack.length, 0, "Unclosed sitemap XML tag");
 }
 
-export async function verifyProductionOutput({ directory, base, origin = publicSiteOrigin, staging = false }) {
+export async function verifyProductionOutput({ directory, base, origin = publicSiteOrigin, staging = false, analytics = null }) {
   publicUrl(origin);
   const expected = new Map();
   const groups = new Set();
@@ -104,6 +105,15 @@ export async function verifyProductionOutput({ directory, base, origin = publicS
   // The compatibility root is deliberately not another localized public page.
   const actual = (await htmlFiles(directory)).filter((file) => file !== "index.html").sort();
   assert.deepEqual(actual, [...expected.keys()].sort(), "Localized HTML routes differ from the route manifest");
+  for (const filename of ["index.html", ...actual]) {
+    const html = await readFile(path.join(directory, filename), "utf8");
+    const head = only(elements(html, "head"), "head");
+    const trackers = tags(html, "script").filter((tag) => tag.src === umamiScript);
+    assert.equal(trackers.length, analytics ? 1 : 0, `${filename}: Incorrect Umami script count`);
+    assert.equal(tags(html, "script").filter((tag) => tag.id === "muuva-analytics-privacy").length, analytics ? 1 : 0,
+      `${filename}: Incorrect Umami privacy hook count`);
+    if (analytics) assert(head.includes(analyticsHead(analytics)), `${filename}: Incorrect Umami configuration or privacy hook`);
+  }
   const rawKey = new RegExp(`\\b(?:${[...groups].join("|")})\\.[\\w.-]+|\\{\\{|\\}\\}`, "i");
   const checkedAssets = new Set();
   const actualAlternates = new Map();
@@ -199,6 +209,10 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
       base: config.base,
       origin: new URL(config.env.VITE_PUBLIC_SITE_ORIGIN || publicSiteOrigin).origin,
       staging: loadEnv(config.mode, config.envDir, "MUUVA_").MUUVA_STAGING === "true",
+      analytics: analyticsConfig(config.env, {
+        base: config.base,
+        staging: loadEnv(config.mode, config.envDir, "MUUVA_").MUUVA_STAGING === "true",
+      }),
     });
     console.log(`Production HTML checks passed: ${result.pages} localized pages, ${result.assets} shared JS/CSS assets, reciprocal hreflang, sitemap.xml, robots.txt and hosting headers.`);
   } catch (error) {

@@ -14,12 +14,13 @@ import { pagePaths, supportedLanguages } from "../src/routing/routeManifest.js";
 import { parseLocation } from "../src/routing/urls.js";
 import { getMetadata } from "../src/seo/metadata.js";
 import { publicSiteOrigin } from "../src/seo/site.js";
+import { analyticsConfig, documentWithAnalytics } from "../build/analytics.js";
 
 const locales = Object.fromEntries(supportedLanguages.map((language) => [language,
   JSON.parse(readFileSync(new URL(`../src/i18n/locales/${language}.json`, import.meta.url))),
 ]));
 
-async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging = false } = {}) {
+async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging = false, analytics = null } = {}) {
   const directory = await mkdtemp(path.join(tmpdir(), "muuva-production-test-"));
   t.after(async () => {
     const relative = path.relative(path.resolve(tmpdir()), path.resolve(directory));
@@ -29,7 +30,7 @@ async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging
   await mkdir(path.join(directory, "assets"));
   await writeFile(path.join(directory, "assets/app.js"), "/* fixture */");
   await writeFile(path.join(directory, "assets/app.css"), "/* fixture */");
-  const template = `<!doctype html><html lang="en"><head><title>Old</title><meta name="description" content="Old"><script type="module" src="${base}assets/app.js"></script><link rel="stylesheet" href="${base}assets/app.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope"></head><body><div id="root"></div></body></html>`;
+  const template = documentWithAnalytics(`<!doctype html><html lang="en"><head><title>Old</title><meta name="description" content="Old"><script type="module" src="${base}assets/app.js"></script><link rel="stylesheet" href="${base}assets/app.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope"></head><body><div id="root"></div></body></html>`, analytics);
   const pages = [];
   for (const language of supportedLanguages) {
     const i18n = createInstance();
@@ -53,8 +54,27 @@ async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging
   await writeFile(path.join(directory, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${origin}${base}sitemap.xml\n`);
   const headers = createHostingHeaders({ base, staging });
   if (headers) await writeFile(path.join(directory, "_headers"), headers);
-  return { directory, base, origin, staging };
+  return { directory, base, origin, staging, analytics };
 }
+
+test("enabled analytics verifies every localized page and compatibility root, rejecting duplicate or missing scripts", async (t) => {
+  const analytics = analyticsConfig({ VITE_UMAMI_ENABLED: "true", VITE_UMAMI_WEBSITE_ID: "8963af84-1a22-4cad-a8ef-413afe485468", VITE_PUBLIC_SITE_ORIGIN: "https://muuva.nl" }, { base: "/" });
+  const options = await fixture(t, { base: "/", origin: "https://muuva.nl", analytics });
+  assert.equal((await verifyProductionOutput(options)).pages, 28);
+  const file = path.join(options.directory, "index.html");
+  const original = await readFile(file, "utf8");
+  await writeFile(file, original.replace("</head>", '<script src="https://cloud.umami.is/script.js"></script></head>'));
+  await assert.rejects(verifyProductionOutput(options), /Incorrect Umami script count/);
+  await writeFile(file, original.replace(/<script defer[^>]*><\/script>/, ""));
+  await assert.rejects(verifyProductionOutput(options), /Incorrect Umami script count/);
+});
+
+test("disabled output rejects an accidentally installed tracker on the compatibility root", async (t) => {
+  const options = await fixture(t);
+  const file = path.join(options.directory, "index.html");
+  await writeFile(file, (await readFile(file, "utf8")).replace("</head>", '<script src="https://cloud.umami.is/script.js"></script></head>'));
+  await assert.rejects(verifyProductionOutput(options), /Incorrect Umami script count/);
+});
 
 const pageFile = (options) => path.join(options.directory, supportedLanguages[1], pagePaths[0], "index.html");
 async function edit(file, change) {
