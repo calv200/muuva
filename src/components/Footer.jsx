@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useEffect, useRef, useState } from "react";
 import SiteContainer from "./SiteContainer.jsx";
 import { localizedUrl } from "../routing/urls.js";
 
@@ -20,36 +19,6 @@ const policyLinks = [
   "footer.links.service",
   "footer.links.use",
 ];
-
-function ArrowIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-4 w-4"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="1.6"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-4 w-4"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="1.8"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="m5 12 4 4L19 6" />
-    </svg>
-  );
-}
 
 function InstagramIcon() {
   return (
@@ -90,21 +59,6 @@ function FooterLinkList({ links, ariaLabel }) {
 
 export default function Footer() {
   const { t } = useTranslation();
-  const emailRef = useRef(null);
-  useEffect(() => {
-    const input = emailRef.current;
-    if (input?.validity.customError) {
-      input.setCustomValidity(t(input.validity.valueMissing ? "footer.required" : "footer.invalid"));
-    }
-  }, [t]);
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsSubscribed(true);
-    event.currentTarget.reset();
-  };
-
   return (
     <footer className="bg-warm py-16 text-ink sm:py-20 lg:py-24">
       <SiteContainer>
@@ -117,47 +71,7 @@ export default function Footer() {
               {t("footer.description")}
             </p>
 
-            {isSubscribed ? (
-              <div
-                className="muuva-ui mt-8 inline-flex min-h-12 w-full max-w-md items-center gap-3 border border-brand/20 bg-brand/10 px-5 text-ink/75"
-                role="status"
-                aria-live="polite"
-              >
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand/15 text-brand">
-                  <CheckIcon />
-                </span>
-                <span>{t("footer.success")}</span>
-              </div>
-            ) : (
-              <form className="mt-8 max-w-md" onSubmit={handleSubmit}>
-                <label className="sr-only" htmlFor="footer-email">
-                  {t("footer.email")}
-                </label>
-                <div className="flex h-14 items-center border border-softborder bg-cream transition focus-within:border-brand/60">
-                  <input
-                    className="muuva-ui h-full min-w-0 flex-1 bg-transparent px-5 text-ink placeholder:text-muted/70 focus:outline-none"
-                    ref={emailRef}
-                    onInvalid={(event) => {
-                      const input = event.currentTarget;
-                      input.setCustomValidity(t(input.validity.valueMissing ? "footer.required" : "footer.invalid"));
-                    }}
-                    onInput={(event) => event.currentTarget.setCustomValidity("")}
-                    id="footer-email"
-                    name="email"
-                    type="email"
-                    placeholder={t("footer.placeholder")}
-                    required
-                  />
-                  <button
-                    className="mr-3 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/[0.06] text-muted transition hover:bg-ink/10 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-3 focus-visible:outline-brand"
-                    type="submit"
-                    aria-label={t("footer.subscribe")}
-                  >
-                    <ArrowIcon />
-                  </button>
-                </div>
-              </form>
-            )}
+            <p className="muuva-label mt-8 text-brand">{t("footer.comingSoon")}</p>
           </div>
 
           <FooterLinkList links={navigationLinks} ariaLabel={t("footer.navigation")} />

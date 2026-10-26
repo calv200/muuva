@@ -67,19 +67,13 @@
   },
   "footer": {
     "title": "Blijf in beweging.",
-    "description": "Meld je aan voor exclusieve Muuva-content en Pilates-inspiratie",
-    "success": "Je bent aangemeld voor onze nieuwsbrief.",
-    "email": "E-mailadres",
-    "placeholder": "E-mail",
-    "subscribe": "Aanmelden voor de nieuwsbrief",
+    "description": "Pilates-inspiratie, bewegingstips en meer komen eraan.",
     "navigation": "Footernavigatie",
     "policies": "Beleid in de footer",
     "aboutTitle": "Over Muuva",
     "about": "Vanuit Amsterdam maakt Muuva stijlvol ontworpen en duurzaam geproduceerde Pilates-accessoires voor beweging thuis en in de studio.",
     "instagram": "Muuva op Instagram",
     "copyrightPrefix": "© {{year}}, Muuva. Website ontworpen door",
-    "required": "Vul je e-mailadres in.",
-    "invalid": "Vul een geldig e-mailadres in.",
     "links": {
       "behind": "Achter Muuva",
       "contact": "Neem contact op",
@@ -93,7 +87,8 @@
       "shipping": "Verzendbeleid",
       "service": "Algemene voorwaarden",
       "use": "Gebruiksvoorwaarden"
-    }
+    },
+    "comingSoon": "Binnenkort"
   },
   "routines": {
     "title": "Begeleide routines",
@@ -201,18 +196,18 @@
     },
     "privacy": {
       "title": "Privacybeleid | MUUVA",
-      "description": "Lees het conceptprivacybeleid van MUUVA over websitebezoeken, externe diensten, taalvoorkeuren en geplande analytics."
+      "description": "Lees het conceptprivacybeleid van MUUVA over websitebezoeken, lokaal gehoste lettertypen, externe diensten en websitestatistieken."
     }
   },
   "privacy": {
     "title": "Privacybeleid",
     "draft": "Concept ter beoordeling",
-    "intro": "Dit concept legt uit hoe informatie wordt verwerkt wanneer je MUUVA bezoekt, producten bekijkt of Guided Routines gebruikt. Het beschrijft de huidige website en de analytics die voor een later moment zijn voorzien. De definitieve beoordeling vóór publicatie moet nog plaatsvinden.",
+    "intro": "Dit concept legt uit hoe informatie wordt verwerkt wanneer je MUUVA bezoekt, producten bekijkt of Guided Routines gebruikt. Het beschrijft de website en de beoogde analyticsconfiguratie voor productie. De volledige gegevens van de verwerkingsverantwoordelijke en de juridische beoordeling zijn vóór publicatie nog nodig.",
     "updated": "Concept laatst bijgewerkt:",
     "sections": {
       "operator": {
         "title": "Over MUUVA",
-        "p1": "MUUVA is een onderneming gevestigd in Nederland. Dit beleid gaat over de MUUVA-website. Externe diensten hanteren hun eigen privacypraktijken, waarover MUUVA geen zeggenschap heeft."
+        "p1": "MUUVA is de handelsnaam van een eenmanszaak gevestigd in Nederland, ingeschreven bij de Kamer van Koophandel onder KvK 99637588. Dit beleid gaat over https://muuva.nl. Voor privacyvragen of verzoeken kun je mailen naar contact@muuva.nl."
       },
       "hosting": {
         "title": "Een bezoek aan de website",
@@ -222,36 +217,36 @@
       "storage": {
         "title": "Cookies en je taalkeuze",
         "p1": "Wanneer je zelf een taal kiest, bewaart MUUVA die keuze in de localStorage van je browser onder muuva.language. De keuze blijft staan totdat je deze wijzigt of de opgeslagen websitegegevens in je browser wist. De taal in het pagina-adres heeft voorrang. Automatische taaldetectie slaat geen voorkeur op.",
-        "p2": "De geplande Umami-configuratie gebruikt geen analyticscookies. Dat betekent niet dat de hele website cookievrij is: ingesloten diensten van derden kunnen cookies of vergelijkbare technieken gebruiken, afhankelijk van hun instellingen en je browser."
+        "p2": "De Umami-implementatie van MUUVA plaatst geen analyticscookies. Dat betekent niet dat de hele website cookievrij is: ingesloten diensten van derden kunnen cookies of vergelijkbare technieken gebruiken, afhankelijk van hun instellingen en je browser."
       },
       "analytics": {
-        "title": "Geplande bezoekersstatistieken",
-        "p1": "Umami Analytics is momenteel niet ingeschakeld. De beoogde dienst is Umami Cloud, met de EU als gekozen opslagregio voor analyticsgegevens. Het doel is inzicht te krijgen in bezoeken aan openbare pagina’s en het gebruik van de website, zonder advertentieprofielen op te bouwen.",
+        "title": "Websitestatistieken",
+        "p1": "De productieconfiguratie voor muuva.nl gebruikt Umami Cloud met het Hobby-abonnement en opslag van analyticsgegevens in de EU, voor websitestatistieken, toewijzing van verkeersbronnen en analyse van de navigatie. Tracking is beperkt tot de exacte hostnaam muuva.nl. In lokale en Preview-builds blijft analytics uitgeschakeld. Activering in productie is een afzonderlijke stap na beoordeling; dit concept bevestigt niet dat tracking al actief is.",
         "p2": "De goedgekeurde configuratie verstuurt uitsluitend de websitecode, hostnaam, goedgekeurde openbare paginapaden en vertaalde paginatitels, toegestane campagnewaarden en de oorsprong van een externe verwijzende website. Andere querywaarden en ankers worden verwijderd. Browsertaal, schermgrootte, eigen bezoekerscodes, aangepaste gebeurtenissen, advertentiepixels en sessieopnamen worden uitgesloten. Het Do Not Track-signaal van de browser wordt gerespecteerd.",
         "p3": "Umami kan IP-adressen en User-Agent-informatie verwerken om gehashte sessiecodes te berekenen en statistieken zoals browser en apparaattype af te leiden. Deze codes garanderen geen anonimiteit. IP-adressen kunnen ook in operationele of beveiligingslogs voorkomen. Opslag van analyticsgegevens in de EU betekent niet dat alle verwerking uitsluitend binnen de EU plaatsvindt. Activering blijft afhankelijk van de privacybeoordeling."
       },
       "videos": {
         "title": "YouTube Guided Routines",
         "p1": "Trainingspagina’s bevatten standaard ingesloten YouTube-spelers. Je browser maakt al contact met YouTube wanneer de speler laadt, voordat je op Play drukt. Google kan je IP-adres, browser- en verzoekinformatie ontvangen en, afhankelijk van instellingen en je aanmeldstatus, cookies gebruiken of activiteit aan een account koppelen.",
-        "p2": "Voor de zelfstandige verwerking door YouTube geldt de privacyinformatie van Google. De privacymodus voor ingesloten video’s en het pas laden van de speler na een bewuste handeling worden onderzocht; deze zijn nog niet toegepast op de huidige website."
+        "p2": "Voor de zelfstandige verwerking door YouTube geldt de privacyinformatie van Google. De beoordeling van de privacymodus voor ingesloten video’s en het pas laden na een bewuste handeling is uitgesteld. Deze wijzigingen zijn nog niet toegepast op de huidige website."
       },
       "services": {
         "title": "Lettertypen en externe links",
-        "p1": "Bij het openen van een pagina laadt de website lettertypen van Google Fonts. Je browser stuurt verzoeken naar de fontservers van Google, die daarbij het IP-adres en technische informatie ontvangen om deze bestanden te leveren.",
+        "p1": "Manrope en Newsreader worden samen met de MUUVA-website gehost. Je browser downloadt deze lettertypebestanden vanaf dezelfde oorsprong als de website, zonder contact met Google Fonts. Voor deze verzoeken geldt de bovenstaande informatie over het leveren van de website.",
         "p2": "Amazon-kooplinks en Instagram-links brengen je naar externe websites wanneer je ervoor kiest ze te volgen. Het zijn links, geen ingesloten advertentie- of socialetracking-scripts. Aankopen vinden plaats bij Amazon. Deze diensten hanteren hun eigen privacyvoorwaarden."
       },
       "newsletter": {
-        "title": "Het nieuwsbriefformulier",
-        "p1": "Het huidige formulier in de footer controleert het e-mailveld in je browser en toont een bevestiging. Het is niet gekoppeld aan een abonnementsdienst: je e-mailadres wordt hierdoor niet naar MUUVA verstuurd en je wordt niet voor een nieuwsbrief ingeschreven. De bevestiging betekent dus niet dat een inschrijving is voltooid."
+        "title": "Nieuwsbrief",
+        "p1": "De nieuwsbrief is nog niet beschikbaar. De footer toont een aankondiging met Binnenkort, zonder inschrijfformulier. MUUVA verzamelt op deze website geen e-mailadressen via een nieuwsbriefformulier en registreert geen nieuwsbriefinschrijvingen."
       },
       "retention": {
         "title": "Bewaartermijnen, grondslagen en doorgifte",
-        "p1": "Je taalkeuze blijft in je browser staan totdat je die wijzigt of wist. Er zijn momenteel geen MUUVA-analyticsgegevens uit deze implementatie, omdat analytics uitstaat. Voor operationele informatie van hosting- en externe diensten gelden afzonderlijke bewaartermijnen.",
-        "p2": "De toepasselijke juridische grondslagen, bewaartermijnen van aanbieders en waarborgen voor verwerking buiten de Europese Economische Ruimte worden nog beoordeeld. Een latere activering van analytics vereist een goedgekeurd doel, een grondslag en een beoordeling van eventuele toestemmingseisen. Alleen het ontbreken van cookies geeft geen vrijstelling van toestemming."
+        "p1": "Voor Umami Hobby geldt een standaardbewaartermijn van zes maanden voor analyticsgegevens. Dit staat los van operationele en beveiligingslogs en back-ups, waarvan de toepasselijke termijnen nog moeten worden bevestigd. Je taalkeuze blijft in je browser totdat je die wijzigt of wist. Hosting- en externe diensten hanteren afzonderlijke bewaartermijnen.",
+        "p2": "MUUVA stelt gerechtvaardigd belang onder artikel 6 lid 1 onder f AVG voor als grondslag om websitegebruik te begrijpen en de navigatie te verbeteren, onder voorbehoud van de vereiste beoordeling. Ook de Nederlandse uitzondering voor analytics met beperkte privacygevolgen wordt nog beoordeeld; er is niet vastgesteld dat toestemming overbodig is. De grondslagen, bewaartermijnen van aanbieders en waarborgen voor verwerking buiten de Europese Economische Ruimte moeten vóór publicatie en activering worden afgerond."
       },
       "rights": {
         "title": "Je privacyrechten",
-        "p1": "Afhankelijk van de verwerking en de wettelijke voorwaarden kun je vragen om inzage, correctie, verwijdering, beperking of overdraagbaarheid van je persoonsgegevens, en bezwaar maken tegen verwerking. Als toestemming de grondslag is, kun je die intrekken zonder dat dit de rechtmatigheid van eerdere verwerking aantast. Privacyverzoeken over MUUVA richt je aan MUUVA als websitebeheerder; de contactmogelijkheden vallen nog onder de definitieve beoordeling.",
+        "p1": "Afhankelijk van de verwerking en de wettelijke voorwaarden kun je vragen om inzage, correctie, verwijdering, beperking of overdraagbaarheid van je persoonsgegevens, en bezwaar maken tegen verwerking. Als toestemming de grondslag is, kun je die intrekken zonder dat dit de rechtmatigheid van eerdere verwerking aantast. Mail voor privacyvragen of het uitoefenen van je rechten naar contact@muuva.nl en beschrijf je verzoek.",
         "p2": "Je kunt een klacht indienen bij de Autoriteit Persoonsgegevens of bij de toezichthouder in het land waar je woont of werkt, of waar een vermoedelijke overtreding plaatsvond. Vragen over de zelfstandige verwerking door een aanbieder kun je ook rechtstreeks aan die aanbieder stellen."
       }
     },
@@ -259,8 +254,8 @@
       "cloudflare": "Privacyinformatie van Cloudflare",
       "umami": "Privacyinformatie van Umami",
       "google": "Privacybeleid van Google",
-      "fonts": "Privacyinformatie over Google Fonts",
-      "authority": "Autoriteit Persoonsgegevens"
+      "authority": "Autoriteit Persoonsgegevens",
+      "contact": "Mail naar contact@muuva.nl"
     }
   }
 }

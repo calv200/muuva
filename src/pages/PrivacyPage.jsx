@@ -38,7 +38,7 @@ export default function PrivacyPage() {
                 ))}
               </div>
               {links.map((link) => (
-                <a key={link} href={privacyLinks[link]} className="mt-5 inline-flex min-h-11 items-center text-sm font-medium leading-relaxed text-brand underline underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand">
+                <a key={link} href={privacyLinks[link]} className="mr-6 mt-5 inline-flex min-h-11 items-center text-sm font-medium leading-relaxed text-brand underline underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand">
                   {t(`privacy.links.${link}`)}
                 </a>
               ))}

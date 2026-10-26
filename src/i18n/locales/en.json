@@ -67,19 +67,13 @@
   },
   "footer": {
     "title": "Stay in the move.",
-    "description": "Sign up for exclusive Muuva content and pilates inspiration",
-    "success": "You have been subscribed to our newsletter.",
-    "email": "Email address",
-    "placeholder": "E-mail",
-    "subscribe": "Subscribe to newsletter",
+    "description": "Pilates inspiration, movement tips and more are on the way.",
     "navigation": "Footer navigation",
     "policies": "Footer policies",
     "aboutTitle": "About Muuva",
     "about": "Based in Amsterdam, Muuva creates beautifully designed and sustainably made Pilates gear for movement practices at home and in the studio.",
     "instagram": "Muuva on Instagram",
     "copyrightPrefix": "© {{year}}, Muuva. Website designed by",
-    "required": "Please enter your email address.",
-    "invalid": "Please enter a valid email address.",
     "links": {
       "behind": "Behind Muuva",
       "contact": "Contact Us",
@@ -93,7 +87,8 @@
       "shipping": "Shipping Policy",
       "service": "Terms of Service",
       "use": "Terms of Use"
-    }
+    },
+    "comingSoon": "Coming soon"
   },
   "routines": {
     "title": "Guided routines",
@@ -201,18 +196,18 @@
     },
     "privacy": {
       "title": "Privacy Policy | MUUVA",
-      "description": "Read the draft MUUVA privacy notice covering website visits, external services, language preferences and planned analytics."
+      "description": "Read MUUVA’s draft privacy notice about website visits, locally hosted fonts, external services and production analytics."
     }
   },
   "privacy": {
     "title": "Privacy Policy",
     "draft": "Draft for review",
-    "intro": "This draft explains how information is handled when you visit MUUVA, explore products or use Guided Routines. It describes the current website and the analytics planned for a later stage. It is awaiting final review before publication.",
+    "intro": "This draft explains how information is handled when you visit MUUVA, explore products or use Guided Routines. It covers the website and the intended production analytics configuration. Final controller information and the legal assessment are still pending before publication.",
     "updated": "Draft last updated:",
     "sections": {
       "operator": {
         "title": "Who we are",
-        "p1": "MUUVA is a business established in the Netherlands. This notice concerns the MUUVA website. External services have their own privacy practices, which MUUVA does not control."
+        "p1": "MUUVA is the trading name of a sole proprietorship (eenmanszaak) established in the Netherlands, registered with the Dutch Chamber of Commerce under KvK 99637588. This notice concerns https://muuva.nl. For privacy questions or requests, contact contact@muuva.nl."
       },
       "hosting": {
         "title": "Visiting the website",
@@ -222,36 +217,36 @@
       "storage": {
         "title": "Cookies and your language choice",
         "p1": "When you manually select a language, MUUVA saves that choice in your browser’s localStorage under muuva.language. It remains until you change it or clear the website’s stored data in your browser. The language in the page URL takes priority. Automatic language detection does not save a preference.",
-        "p2": "The planned Umami configuration does not use analytics cookies. This does not mean the whole website is cookie-free: embedded third-party services may use cookies or similar technologies, depending on their settings and your browser."
+        "p2": "MUUVA’s Umami implementation does not set analytics cookies. This does not mean the whole website is cookie-free: embedded third-party services may use cookies or similar technologies, depending on their settings and your browser."
       },
       "analytics": {
-        "title": "Planned audience analytics",
-        "p1": "Umami Analytics is not currently enabled. The intended service is Umami Cloud, with the EU region selected for analytics storage. Its purpose is to understand which public pages are visited and how the website is used, rather than to build advertising profiles.",
+        "title": "Website analytics",
+        "p1": "The production configuration for muuva.nl uses Umami Cloud on the Hobby plan, with analytics storage in the EU, for website analytics, traffic attribution and navigation analysis. Tracking is restricted to the exact hostname muuva.nl. Local and Preview builds remain disabled. Production activation is a separate step after review; this draft does not confirm that tracking is live.",
         "p2": "The approved configuration sends only the website identifier, hostname, approved public page path, approved localized page title, permitted campaign values and the origin of an external referring website. Other query values and anchors are removed. It excludes browser language and screen size, custom visitor identifiers, custom events, advertising pixels and session recordings. It respects the browser’s Do Not Track signal.",
         "p3": "Umami can process IP addresses and User-Agent information to calculate hashed session identifiers and derive metrics such as browser and device type. These identifiers are not a guarantee of anonymity. IP addresses may also occur in operational or security logs. EU analytics storage does not mean that every processing activity takes place within the EU. Activation remains subject to the privacy review."
       },
       "videos": {
         "title": "YouTube Guided Routines",
         "p1": "Workout pages contain standard YouTube embedded players. Your browser contacts YouTube when the player loads, before you press Play. Google may receive your IP address, browser and request information, and may use cookies or associate activity with an account depending on its settings and your sign-in status.",
-        "p2": "YouTube’s independent processing is governed by Google’s privacy information. Privacy-enhanced embedding and a choice to load the player only after a visitor’s action are being assessed; they are not implemented on the current website."
+        "p2": "YouTube’s independent processing is governed by Google’s privacy information. The review of privacy-enhanced embedding and loading only after a visitor’s action has been postponed. Neither change is implemented on the current website."
       },
       "services": {
         "title": "Fonts and external links",
-        "p1": "The website loads fonts from Google Fonts when a page is opened. Your browser sends requests to Google’s font servers, which receive the IP address and technical information needed to deliver those resources.",
+        "p1": "Manrope and Newsreader are hosted with the MUUVA website. Your browser downloads these font files from the website’s own origin, without contacting Google Fonts. Hosting-related requests are covered by the website delivery information above.",
         "p2": "Amazon purchase links and Instagram links take you to external websites when you choose to follow them. They are links, rather than embedded advertising or social tracking scripts. Purchases take place on Amazon. Those services apply their own privacy terms."
       },
       "newsletter": {
-        "title": "The newsletter form",
-        "p1": "The current footer form checks the email field in your browser and shows a confirmation. It is not connected to a subscription service: submitting it does not send your email to MUUVA or register you for a newsletter. The confirmation does not represent a completed subscription."
+        "title": "Newsletter",
+        "p1": "The newsletter is not yet available. The footer displays a Coming soon message, with no subscription form. MUUVA does not collect email addresses through a newsletter form or register newsletter subscriptions on this website."
       },
       "retention": {
         "title": "Retention, legal grounds and transfers",
-        "p1": "Your stored language choice remains in your browser until changed or cleared. There are currently no MUUVA analytics records from this implementation because analytics is disabled. Hosting and external services have separate retention arrangements for operational information.",
-        "p2": "The applicable legal grounds, provider retention periods and safeguards for processing outside the European Economic Area are under review. Any future analytics activation requires an approved purpose, legal basis and consent assessment. A cookie-free service does not by itself establish a consent exemption."
+        "p1": "Umami Hobby has a standard analytics retention period of six months. This is separate from operational or security logs and backup retention, whose applicable periods still require confirmation. Your language preference remains in your browser until changed or cleared. Hosting and external services have separate retention arrangements.",
+        "p2": "MUUVA proposes legitimate interests under GDPR Article 6(1)(f) for understanding website use and improving navigation, subject to the required assessment. The Dutch exception for analytics with limited privacy impact is also under assessment; no conclusion that consent is unnecessary has been approved. Relevant legal bases, provider retention details and safeguards for processing outside the European Economic Area must be finalized before publication and activation."
       },
       "rights": {
         "title": "Your privacy rights",
-        "p1": "Depending on the processing and applicable conditions, you may request access to your personal data, correction, erasure, restriction or portability, and you may object to processing. Where consent is the basis, you may withdraw it without affecting the lawfulness of earlier processing. Privacy requests concerning MUUVA should be addressed to MUUVA as the website operator; the contact arrangements remain part of the final review.",
+        "p1": "Depending on the processing and applicable conditions, you may request access to your personal data, correction, erasure, restriction or portability, and you may object to processing. Where consent is the basis, you may withdraw it without affecting the lawfulness of earlier processing. For privacy questions or to exercise your rights, email contact@muuva.nl and describe your request.",
         "p2": "You may complain to the Dutch Autoriteit Persoonsgegevens or the supervisory authority in the country where you live or work, or where an alleged infringement occurred. Requests about a provider’s independent processing can also be directed to that provider."
       }
     },
@@ -259,8 +254,8 @@
       "cloudflare": "Cloudflare privacy information",
       "umami": "Umami privacy information",
       "google": "Google privacy policy",
-      "fonts": "Google Fonts privacy information",
-      "authority": "Dutch data protection authority"
+      "authority": "Dutch data protection authority",
+      "contact": "Email contact@muuva.nl"
     }
   }
 }

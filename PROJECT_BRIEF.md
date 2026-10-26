@@ -21,7 +21,7 @@ The website should feel closer to a modern lifestyle / design brand than to a co
 5. Styled by You lifestyle image carousel
 6. Footer
 
-A separate **Guided Routines page** now exists as a GitHub Pages-safe routed experience and can continue to be refined after visual review.
+A separate **Guided Routines page** now exists as a statically generated, history-routed experience and can continue to be refined after visual review.
 
 The homepage, Guided Routines listing and detail pages, and shared interfaces support English, German, Dutch, and Spanish. Sections 8.1–8.5 describe localization, localized routing, pre-rendering, SEO, and verification conventions.
 
@@ -44,7 +44,7 @@ This section defines the visual rules that should be reused across the landing p
 
 ### 5.2 Typography System
 
-Use only two main font families across the website.
+Use only two main font families across the website. Both are self-hosted variable WOFF2 fonts in `src/assets/fonts/`, loaded through `src/index.css` with `font-display: swap`. Latin and Latin Extended subsets cover the four locales; licenses and download provenance accompany the files. Manrope supports 400-600 and Newsreader 400-500 with optical sizing retained. No italic styling is currently used. There are no Google Fonts stylesheet, preconnect or runtime font requests.
 
 #### Display / editorial font
 **Newsreader**
@@ -401,7 +401,7 @@ Use the localized listing path `/muuva/{language}/guided-routines/` and detail p
 The Sliders routine is available in All and Sliders, using its existing thumbnail and the video URL listed below.
 
 - Routing decision
-The project is deployed as a static Vite build through GitHub Pages. Shared routing utilities handle browser history navigation, and pre-rendered HTML files support direct entry and refresh for every manifest route without a server-side fallback. Hash page routes remain supported only as legacy links; see sections 8.2–8.3.
+The current hosting architecture is Cloudflare Pages at `https://muuva.nl`, as confirmed by the owner. The repository retains GitHub Pages compatibility and its existing workflow; this local pass does not deploy either host. Shared routing utilities handle browser history navigation, and pre-rendered HTML files support direct entry and refresh for every manifest route without a server-side fallback. Hash page routes remain supported only as legacy links; see sections 8.2–8.3.
 
 - Page structure
     ```text
@@ -568,8 +568,8 @@ The homepage, Guided Routines listing and workout details, and shared interfaces
 
 - `src/i18n/index.js` initializes the browser instance through `src/main.jsx`. `src/i18n/resources.js` supplies the shared resources and translation options for browser rendering and static generation. All four catalogs are bundled; no translation server or runtime locale-file request is required.
 - `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json` are authoritative for implemented interface and SEO copy. English preserves the approved source wording; `CONTENT.md` provides editorial excerpts and a key map rather than a second catalog.
-- Active groups are `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, and `seo`. The older `site.title` entry remains in the catalogs; generated and browser document titles now use `seo.*`.
-- Coverage includes all page copy, filter and metadata labels, header/footer, gallery and hotspot controls, carousel descriptions, form placeholders/validation/confirmation, accessible labels, and SEO titles/descriptions.
+- Active groups are `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, `privacy`, and `seo`. The older `site.title` entry remains in the catalogs; generated and browser document titles now use `seo.*`.
+- Coverage includes all page copy, filter and metadata labels, header/footer, gallery and hotspot controls, carousel descriptions, newsletter Coming soon copy, Privacy drafts, accessible labels, and SEO titles/descriptions.
 - Product Purchase retains the English heading `Get Your Pilates Kit`, no subtitle, and the square uniform `#F2EFE9` container. Localization does not change the kit image, five hotspot coordinates, or Amazon destination.
 
 #### Detection, persistence, and synchronization
@@ -601,15 +601,16 @@ Automatic detection does not save a preference. Manual selection saves the langu
 
 ### 8.2 Localized URL architecture
 
-The current GitHub Pages site uses Vite base `/muuva/`, configured once in `vite.config.js`. It is a project-hosting prefix, not a permanent domain requirement. The public route patterns are:
+Cloudflare production uses Vite base `/` and public origin `https://muuva.nl`. The unchanged repository defaults (`/muuva/`, `https://calv200.github.io`) retain compatibility when no overrides are provided. Use command/environment overrides for the deployment target. The production route patterns are:
 
 | Page | Pattern under the current base | Example |
 | --- | --- | --- |
-| Homepage | `/muuva/{language}/` | `/muuva/de/` |
-| Guided Routines | `/muuva/{language}/guided-routines/` | `/muuva/nl/guided-routines/` |
-| Workout detail | `/muuva/{language}/guided-routines/{slug}/` | `/muuva/es/guided-routines/ring/` |
+| Homepage | `/{language}/` | `/de/` |
+| Guided Routines | `/{language}/guided-routines/` | `/nl/guided-routines/` |
+| Workout detail | `/{language}/guided-routines/{slug}/` | `/es/guided-routines/ring/` |
+| Privacy | `/{language}/privacy/` | `/de/privacy/` |
 
-`/muuva/en/` is the English homepage. `src/routing/routeManifest.js` defines supported languages, stable `routineSlugs`, and public `pagePaths`; workout data imports its slug definitions. Slugs and filter IDs stay independent of translated labels.
+`/en/` is the production English homepage (`/muuva/en/` with the compatibility base). `src/routing/routeManifest.js` defines supported languages, stable `routineSlugs`, and public `pagePaths`; workout data imports its slug definitions. Slugs and filter IDs stay independent of translated labels.
 
 `src/routing/urls.js` parses locations and generates base-aware localized URLs and filter queries. `src/routing/navigation.js` implements browser-history navigation and compatibility normalization. `src/routing/RouteContext.jsx` shares the current route, including query state, with page components. Use these utilities instead of concatenating the deployment base in components.
 
@@ -619,11 +620,11 @@ Filter state uses query parameters, for example `/muuva/en/guided-routines/?filt
 
 The unlocalized `/muuva/` entry chooses a language using section 8.1. Existing `#/`, `#/guided-routines`, detail hash routes, and filtered hash links are parsed for backward compatibility and replaced in browser history with their equivalent localized paths. Compatibility normalization uses `replaceState`, not an HTTP redirect or a generic 404 fallback. Old hash-query values take precedence if the outer query repeats the same key. Ordinary section anchors such as `#product` remain separate from legacy page hashes; Shop links target the localized homepage's Product Purchase section.
 
-New navigation must not reintroduce hash-based page routes. Static files support direct entry and refresh for every manifest route; unknown slugs are not generated. A future `muuva.nl` root deployment may use Vite base `/`, but that migration is not implemented.
+New navigation must not reintroduce hash-based page routes. Static files support direct entry and refresh for every manifest route; unknown slugs are not generated. Cloudflare production uses root base `/`; the `/muuva/` examples document retained subpath compatibility.
 
 ### 8.3 Static pre-rendering and hydration
 
-The route manifest currently produces **28 localized public HTML pages**: four homepages, four Guided Routines listings, and twenty detail pages (five workout slugs in four languages). The separate `dist/index.html` remains a compatibility/language-detection entry, with its canonical pointing to the English homepage; it is not an additional localized page or sitemap entry.
+The route manifest currently produces **32 localized public HTML pages**: four homepages, four Guided Routines listings, twenty detail pages (five workout slugs in four languages), and four Privacy pages. The separate `dist/index.html` remains a compatibility/language-detection entry, with its canonical pointing to the English homepage; it is not an additional localized page or sitemap entry.
 
 `npm run build` runs `build/prerender.js`:
 
@@ -647,9 +648,9 @@ Adding a public page or language requires assessing the shared manifest, compone
 
 `src/seo/SeoMetadata.jsx` updates the browser head after page or language navigation without accumulating duplicate canonical/description/alternate tags. Generated HTML already has the correct localized metadata and HTML `lang` before JavaScript runs.
 
-`src/seo/site.js` centralizes the public origin, currently `https://calv200.github.io`, with a `VITE_PUBLIC_SITE_ORIGIN` override. Canonical, alternate, and sitemap URLs combine it with the configured Vite base and route helpers. A hosting/domain migration must update and verify both the public origin and base; changing display copy does not change deployment URLs.
+`src/seo/site.js` centralizes the public origin, defaulting to `https://calv200.github.io`, with production using `VITE_PUBLIC_SITE_ORIGIN=https://muuva.nl`. Canonical, alternate, and sitemap URLs combine it with the configured Vite base and route helpers. A hosting/domain migration must update and verify both the public origin and base; changing display copy does not change deployment URLs.
 
-The sitemap includes exactly the public localized canonical routes, with language alternates in the XHTML namespace. It excludes filter URLs, invalid slugs, development routes, and root/legacy compatibility URLs. The generated robots file allows crawling and references the absolute sitemap URL, currently `https://calv200.github.io/muuva/sitemap.xml`. Under project hosting, this file is served at `/muuva/robots.txt`; it does not configure the hostname's root `/robots.txt`.
+The sitemap includes exactly the public localized canonical routes, with language alternates in the XHTML namespace. It excludes filter URLs, invalid slugs, development routes, and root/legacy compatibility URLs. The generated robots file allows crawling and references the absolute sitemap URL, `https://muuva.nl/sitemap.xml` in production. Under project hosting, this file is served at `/muuva/robots.txt`; it does not configure the hostname's root `/robots.txt`.
 
 New public pages or languages must receive appropriate SEO copy and equivalent canonical/alternate relationships, appear in pre-rendering and sitemap output, and pass production verification. Metadata, routes, and sitemap are derived from shared definitions rather than copied across components.
 
@@ -672,9 +673,17 @@ Routing tests cover URL generation, compatibility, queries, stable filters, and 
 
 See [production verification instructions](docs/production-verification.md) for the detailed checklist and browser/live-host checks. Local automated success does not establish that a hosted workflow, deployment, or search-engine indexing has succeeded.
 
-### 8.6 Known limitations and pending launch work
+### 8.6 Privacy and analytics readiness
 
-GitHub Pages is the current hosting environment. Cloudflare Pages has been discussed but is not implemented; the final `muuva.nl` domain migration is also pending. Moving hosts requires verifying the public origin, Vite base, generated links/assets, canonical/hreflang URLs, sitemap, and robots configuration. These routing and SEO passes do not establish analytics, a newsletter-service backend, or additional security integrations as completed features. The newsletter remains local UI confirmation, and footer policy/navigation links remain placeholders.
+Confirmed by the owner: MUUVA is a Netherlands sole proprietorship (eenmanszaak), KvK 99637588, privacy contact `contact@muuva.nl`, website `https://muuva.nl`. Full proprietor identity and the required postal address remain unverified; do not publish a residential address without approval. Privacy pages retain their draft label and draft-update date.
+
+The existing Umami Cloud integration uses Hobby, EU analytics storage and six-month standard analytics retention. Operational/security logs and backup retention remain separate and unverified. It is disabled by default and excluded from Preview; intended production configuration and manual activation steps are in [production verification](docs/production-verification.md). The hook retains only `website`, `hostname`, `url`, `referrer`, `title`, with approved routes/titles, filtered campaigns, origin-only external referrers, DNT and navigation deduplication. No custom visitor IDs/events, ad pixels or recordings are added. Provider IP/User-Agent processing and non-EU operations remain possible.
+
+The owner intends to pursue the Dutch limited-impact analytics exception and GDPR Article 6(1)(f); neither assessment is complete. Consent-management work and the standard YouTube embed privacy review are postponed, not legally resolved. No cookie banner or player changes are implemented. See [the compliance review](docs/privacy-compliance-review.md) for DPA/transfers/retention and publication blockers. Technical readiness is not legal approval.
+
+### 8.7 Known limitations and pending launch work
+
+Cloudflare Pages is the current host. Pass A.3 is implemented locally on staging only; deployment and analytics activation are separate owner actions. The Privacy drafts are available at `/en/privacy/`, `/de/privacy/`, `/nl/privacy/`, `/es/privacy/` through one shared component, with localized footer links, static HTML and SEO. The newsletter form has been removed in favor of a noninteractive Coming soon teaser; no subscription backend or email collection exists. Other footer navigation/policy placeholders remain unchanged.
 
 Static verification is separate from browser checks for hydration, language/storage behavior, Back/Forward, anchors, filters, active videos, focus, galleries, forms, carousel, and responsive layout. Third-party playback/audio and actual hosted responses/caching require separate validation. The production verifier targets the known generated markup format, not general-purpose HTML validation.
 

@@ -67,19 +67,13 @@
   },
   "footer": {
     "title": "Bleib in Bewegung.",
-    "description": "Melde dich für exklusive Muuva-Inhalte und Pilates-Inspiration an",
-    "success": "Du hast unseren Newsletter abonniert.",
-    "email": "E-Mail-Adresse",
-    "placeholder": "E-Mail",
-    "subscribe": "Newsletter abonnieren",
+    "description": "Pilates-Inspiration, Bewegungstipps und mehr sind bald für dich da.",
     "navigation": "Navigation im Fußbereich",
     "policies": "Richtlinien im Fußbereich",
     "aboutTitle": "Über Muuva",
     "about": "Muuva entwirft in Amsterdam stilvolles, nachhaltig hergestelltes Pilates-Zubehör für deine Bewegungspraxis zu Hause und im Studio.",
     "instagram": "Muuva auf Instagram",
     "copyrightPrefix": "© {{year}}, Muuva. Webdesign von",
-    "required": "Bitte gib deine E-Mail-Adresse ein.",
-    "invalid": "Bitte gib eine gültige E-Mail-Adresse ein.",
     "links": {
       "behind": "Hinter Muuva",
       "contact": "Kontakt",
@@ -93,7 +87,8 @@
       "shipping": "Versandbedingungen",
       "service": "Geschäftsbedingungen",
       "use": "Nutzungsbedingungen"
-    }
+    },
+    "comingSoon": "Demnächst"
   },
   "routines": {
     "title": "Angeleitete Einheiten",
@@ -201,18 +196,18 @@
     },
     "privacy": {
       "title": "Datenschutzerklärung | MUUVA",
-      "description": "Der Entwurf der MUUVA-Datenschutzerklärung erläutert Website-Besuche, externe Dienste, Sprachwahl und geplante Analysen."
+      "description": "Der Entwurf der MUUVA-Datenschutzerklärung erläutert Website-Besuche, lokal gehostete Schriften, externe Dienste und Website-Analysen."
     }
   },
   "privacy": {
     "title": "Datenschutzerklärung",
     "draft": "Entwurf zur Prüfung",
-    "intro": "Dieser Entwurf erläutert den Umgang mit Informationen beim Besuch der MUUVA-Website, beim Entdecken unserer Produkte und bei der Nutzung der Guided Routines. Er beschreibt die aktuelle Website sowie die für später geplante Reichweitenanalyse. Die abschließende Prüfung vor der Veröffentlichung steht noch aus.",
+    "intro": "Dieser Entwurf erläutert den Umgang mit Informationen beim Besuch von MUUVA, beim Entdecken unserer Produkte und bei der Nutzung der Guided Routines. Er beschreibt die Website und die vorgesehene Analysekonfiguration für den Produktivbetrieb. Vollständige Angaben zum Verantwortlichen und die rechtliche Prüfung stehen vor der Veröffentlichung noch aus.",
     "updated": "Entwurf zuletzt aktualisiert:",
     "sections": {
       "operator": {
         "title": "Über MUUVA",
-        "p1": "MUUVA ist ein in den Niederlanden ansässiges Unternehmen. Diese Erklärung betrifft die MUUVA-Website. Externe Dienste haben eigene Datenschutzpraktiken, auf die MUUVA keinen Einfluss hat."
+        "p1": "MUUVA ist der Handelsname eines in den Niederlanden ansässigen Einzelunternehmens (eenmanszaak), eingetragen bei der niederländischen Handelskammer unter KvK 99637588. Diese Erklärung betrifft https://muuva.nl. Bei Datenschutzfragen oder zur Ausübung Ihrer Rechte erreichen Sie uns unter contact@muuva.nl."
       },
       "hosting": {
         "title": "Beim Besuch der Website",
@@ -222,36 +217,36 @@
       "storage": {
         "title": "Cookies und Ihre Sprachwahl",
         "p1": "Wenn Sie eine Sprache manuell auswählen, speichert MUUVA diese Auswahl im localStorage Ihres Browsers unter muuva.language. Sie bleibt gespeichert, bis Sie sie ändern oder die Website-Daten im Browser löschen. Die Sprache in der Seitenadresse hat Vorrang. Die automatische Spracherkennung speichert keine Präferenz.",
-        "p2": "Die geplante Umami-Konfiguration verwendet keine Analyse-Cookies. Das bedeutet nicht, dass die gesamte Website ohne Cookies auskommt: Eingebundene Drittanbieter können je nach Einstellungen und Browser Cookies oder ähnliche Technologien einsetzen."
+        "p2": "Die Umami-Implementierung von MUUVA setzt keine Analyse-Cookies. Das bedeutet nicht, dass die gesamte Website ohne Cookies auskommt: Eingebundene Drittanbieter können je nach Einstellungen und Browser Cookies oder ähnliche Technologien einsetzen."
       },
       "analytics": {
-        "title": "Geplante Reichweitenanalyse",
-        "p1": "Umami Analytics ist derzeit nicht aktiviert. Vorgesehen ist Umami Cloud mit der EU als ausgewählter Speicherregion für Analysedaten. Ziel ist es, Besuche öffentlicher Seiten und die Nutzung der Website besser zu verstehen, ohne Werbeprofile zu erstellen.",
+        "title": "Website-Analyse",
+        "p1": "Die Produktivkonfiguration für muuva.nl nutzt Umami Cloud im Hobby-Tarif mit Speicherung der Analysedaten in der EU für Website-Statistiken, die Zuordnung von Zugriffsquellen und die Analyse der Navigation. Die Erfassung ist auf den exakten Hostnamen muuva.nl beschränkt. In lokalen und Preview-Builds bleibt sie deaktiviert. Die Produktivaktivierung erfolgt gesondert nach der Prüfung; dieser Entwurf bestätigt keinen laufenden Analysebetrieb.",
         "p2": "Die freigegebene Konfiguration übermittelt ausschließlich die Website-Kennung, den Hostnamen, freigegebene öffentliche Seitenpfade und übersetzte Seitentitel, zugelassene Kampagnenwerte sowie den Ursprung einer externen verweisenden Website. Andere Abfragewerte und Sprungmarken werden entfernt. Browsersprache, Bildschirmgröße, eigene Besucherkennungen, benutzerdefinierte Ereignisse, Werbepixel und Sitzungsaufzeichnungen werden ausgeschlossen. Das Do-Not-Track-Signal des Browsers wird berücksichtigt.",
         "p3": "Umami kann IP-Adressen und User-Agent-Informationen verarbeiten, um gehashte Sitzungskennungen zu berechnen und Kennzahlen wie Browser und Gerätetyp abzuleiten. Diese Kennungen garantieren keine Anonymität. IP-Adressen können auch in Betriebs- oder Sicherheitsprotokollen vorkommen. Die Speicherung von Analysedaten in der EU bedeutet nicht, dass sämtliche Verarbeitung ausschließlich dort stattfindet. Die Aktivierung setzt die Datenschutzprüfung voraus."
       },
       "videos": {
         "title": "Guided Routines auf YouTube",
         "p1": "Die Trainingsseiten enthalten standardmäßige eingebettete YouTube-Player. Ihr Browser stellt bereits beim Laden des Players eine Verbindung zu YouTube her, bevor Sie auf Play drücken. Google kann Ihre IP-Adresse sowie Browser- und Anfrageinformationen erhalten und je nach Einstellungen und Anmeldestatus Cookies verwenden oder Aktivitäten einem Konto zuordnen.",
-        "p2": "Für die eigenständige Verarbeitung durch YouTube gelten die Datenschutzhinweise von Google. Der erweiterte Datenschutzmodus und ein Laden des Players erst nach einer bewussten Nutzeraktion werden geprüft; beides ist auf der aktuellen Website noch nicht umgesetzt."
+        "p2": "Für die eigenständige Verarbeitung durch YouTube gelten die Datenschutzhinweise von Google. Die Prüfung des erweiterten Datenschutzmodus und eines Ladens erst nach einer bewussten Nutzeraktion wurde verschoben. Beides ist auf der aktuellen Website noch nicht umgesetzt."
       },
       "services": {
         "title": "Schriftarten und externe Links",
-        "p1": "Beim Öffnen einer Seite lädt die Website Schriftarten von Google Fonts. Ihr Browser sendet Anfragen an die Font-Server von Google, die dabei Ihre IP-Adresse und technische Informationen zur Bereitstellung dieser Ressourcen erhalten.",
+        "p1": "Manrope und Newsreader werden gemeinsam mit der MUUVA-Website gehostet. Ihr Browser lädt die Schriftdateien vom selben Ursprung wie die Website, ohne Google Fonts zu kontaktieren. Für diese Anfragen gelten die oben beschriebenen Informationen zur Bereitstellung der Website.",
         "p2": "Amazon-Kauflinks und Instagram-Links führen erst dann zu externen Websites, wenn Sie ihnen folgen. Es handelt sich um Links, nicht um eingebundene Werbe- oder Social-Tracking-Skripte. Käufe erfolgen bei Amazon. Für diese Dienste gelten deren eigene Datenschutzbestimmungen."
       },
       "newsletter": {
-        "title": "Das Newsletter-Formular",
-        "p1": "Das Formular im Footer prüft die E-Mail-Eingabe im Browser und zeigt eine Bestätigung an. Es ist nicht an einen Abonnementdienst angebunden: Ihre E-Mail-Adresse wird dadurch weder an MUUVA gesendet noch für einen Newsletter registriert. Die Bestätigung bedeutet daher keine erfolgreiche Anmeldung."
+        "title": "Newsletter",
+        "p1": "Der Newsletter ist noch nicht verfügbar. Im Footer steht ein Hinweis auf den bevorstehenden Start; ein Anmeldeformular gibt es nicht. MUUVA erhebt auf dieser Website keine E-Mail-Adressen über ein Newsletter-Formular und registriert keine Newsletter-Abonnements."
       },
       "retention": {
         "title": "Speicherdauer, Rechtsgrundlagen und Übermittlungen",
-        "p1": "Ihre Sprachwahl bleibt im Browser gespeichert, bis sie geändert oder gelöscht wird. Aus dieser Implementierung liegen derzeit keine MUUVA-Analysedaten vor, da die Analyse deaktiviert ist. Für betriebliche Informationen der Hosting- und externen Dienste gelten gesonderte Speicherregelungen.",
-        "p2": "Die einschlägigen Rechtsgrundlagen, Speicherfristen der Anbieter und Schutzmaßnahmen für Verarbeitungen außerhalb des Europäischen Wirtschaftsraums werden noch geprüft. Eine spätere Analyseaktivierung erfordert einen freigegebenen Zweck, eine Rechtsgrundlage und die Prüfung etwaiger Einwilligungspflichten. Der Verzicht auf Cookies begründet allein keine Ausnahme von einer Einwilligungspflicht."
+        "p1": "Für Umami Hobby beträgt die reguläre Speicherdauer der Analysedaten sechs Monate. Davon zu unterscheiden sind Betriebs- und Sicherheitsprotokolle sowie Sicherungskopien, deren einschlägige Fristen noch zu bestätigen sind. Ihre Sprachwahl bleibt im Browser, bis sie geändert oder gelöscht wird. Hosting- und externe Dienste haben gesonderte Speicherregelungen.",
+        "p2": "MUUVA erwägt berechtigte Interessen nach Artikel 6 Absatz 1 Buchstabe f DSGVO als Grundlage, um die Website-Nutzung zu verstehen und die Navigation zu verbessern. Die erforderliche Prüfung steht noch aus. Auch die niederländische Ausnahme für Analysen mit geringen Auswirkungen auf die Privatsphäre wird noch geprüft; eine Befreiung von der Einwilligungspflicht wurde nicht festgestellt. Rechtsgrundlagen, Speicherfristen der Anbieter und Schutzmaßnahmen für Verarbeitungen außerhalb des Europäischen Wirtschaftsraums müssen vor Veröffentlichung und Aktivierung abschließend geklärt werden."
       },
       "rights": {
         "title": "Ihre Datenschutzrechte",
-        "p1": "Je nach Verarbeitung und gesetzlichen Voraussetzungen können Sie Auskunft, Berichtigung, Löschung, Einschränkung oder Datenübertragbarkeit verlangen und der Verarbeitung widersprechen. Soweit eine Einwilligung die Grundlage bildet, können Sie diese widerrufen; die Rechtmäßigkeit der vorherigen Verarbeitung bleibt unberührt. Datenschutzanfragen zu MUUVA richten sich an MUUVA als Website-Betreiber. Die Kontaktmöglichkeiten sind noch Gegenstand der abschließenden Prüfung.",
+        "p1": "Je nach Verarbeitung und gesetzlichen Voraussetzungen können Sie Auskunft, Berichtigung, Löschung, Einschränkung oder Datenübertragbarkeit verlangen und der Verarbeitung widersprechen. Soweit eine Einwilligung die Grundlage bildet, können Sie diese widerrufen; die Rechtmäßigkeit der vorherigen Verarbeitung bleibt unberührt. Für Datenschutzfragen oder zur Ausübung Ihrer Rechte schreiben Sie an contact@muuva.nl und beschreiben Sie Ihr Anliegen.",
         "p2": "Sie können sich bei der niederländischen Autoriteit Persoonsgegevens oder bei der Aufsichtsbehörde an Ihrem Wohnort, Arbeitsort oder am Ort eines vermuteten Verstoßes beschweren. Anfragen zur eigenständigen Verarbeitung durch einen Anbieter können Sie auch direkt an diesen richten."
       }
     },
@@ -259,8 +254,8 @@
       "cloudflare": "Datenschutzhinweise von Cloudflare",
       "umami": "Datenschutzhinweise von Umami",
       "google": "Datenschutzerklärung von Google",
-      "fonts": "Datenschutzhinweise zu Google Fonts",
-      "authority": "Niederländische Datenschutzaufsicht"
+      "authority": "Niederländische Datenschutzaufsicht",
+      "contact": "E-Mail an contact@muuva.nl"
     }
   }
 }

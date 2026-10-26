@@ -29,8 +29,9 @@ async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging
   });
   await mkdir(path.join(directory, "assets"));
   await writeFile(path.join(directory, "assets/app.js"), "/* fixture */");
-  await writeFile(path.join(directory, "assets/app.css"), "/* fixture */");
-  const template = documentWithAnalytics(`<!doctype html><html lang="en"><head><title>Old</title><meta name="description" content="Old"><script type="module" src="${base}assets/app.js"></script><link rel="stylesheet" href="${base}assets/app.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope"></head><body><div id="root"></div></body></html>`, analytics);
+  await writeFile(path.join(directory, "assets/app.css"), ["Manrope", "Newsreader"].map((family) => `@font-face { font-family: "${family}"; src: url(./font.woff2); font-display: swap; }`).join("\n"));
+  await writeFile(path.join(directory, "assets/font.woff2"), "wOF2fixture");
+  const template = documentWithAnalytics(`<!doctype html><html lang="en"><head><title>Old</title><meta name="description" content="Old"><script type="module" src="${base}assets/app.js"></script><link rel="stylesheet" href="${base}assets/app.css"></head><body><div id="root"></div></body></html>`, analytics);
   const pages = [];
   for (const language of supportedLanguages) {
     const i18n = createInstance();
@@ -84,7 +85,7 @@ async function edit(file, change) {
 test("production verifier accepts the manifest and ignores bootstrap JSON when checking visible translation keys", async (t) => {
   const options = await fixture(t);
   await edit(pageFile(options), (html) => html.replace("</body>", '<script type="application/json">{"example":"product.title"}</script></body>'));
-  assert.deepEqual(await verifyProductionOutput(options), { pages: supportedLanguages.length * pagePaths.length, assets: 2 });
+  assert.deepEqual(await verifyProductionOutput(options), { pages: supportedLanguages.length * pagePaths.length, assets: 3 });
 });
 
 test("staging requires global noindex while preserving root-hosted localized SEO", async (t) => {
@@ -119,6 +120,10 @@ test("commercial headers protect project and preview hosts without a custom-doma
 });
 
 const corruptions = {
+  "an external Google font stylesheet": async (o) => edit(pageFile(o), (s) => s.replace("</head>", '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope"></head>')),
+  "an external font URL in CSS": async (o) => edit(path.join(o.directory, "assets/app.css"), (s) => s.replaceAll("./font.woff2", "https://fonts.gstatic.com/font.woff2")),
+  "a missing font file": async (o) => unlink(path.join(o.directory, "assets/font.woff2")),
+  "an invalid font file": async (o) => writeFile(path.join(o.directory, "assets/font.woff2"), "<html>not a font</html>"),
   "a missing localized page": async (o) => unlink(pageFile(o)),
   "an extra unlisted HTML route": async (o) => writeFile(path.join(o.directory, "unexpected.html"), "extra"),
   "an empty React shell": async (o) => edit(pageFile(o), (s) => s.replace(/<div id="root">[\s\S]*?<\/div>/, '<div id="root"></div>')),

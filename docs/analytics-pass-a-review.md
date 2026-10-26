@@ -143,18 +143,11 @@ The notice needs reviewed statements covering:
   consent or an additional control is required before loading the provider script.
 - DNT handling and the limitations of that browser signal.
 
-No business contacts, retention periods, legal guarantees or consent exemption
-are assumed here. Obtain privacy review and confirm the EU-region account/DPA
-settings; cookie-free operation alone does not settle consent requirements.
+Pass A.3 owner-confirmed facts: Netherlands eenmanszaak, KvK 99637588, contact@muuva.nl; Umami Cloud Hobby, EU analytics storage and six-month standard analytics retention. This is owner confirmation, not account inspection. Full proprietor identity/address, DPA/transfer review, operational-log/backup retention and the legal basis/consent decision remain unresolved. The owner intends to pursue the Dutch limited-analytics exception and Article 6(1)(f), and has postponed consent-management work and YouTube review. Cookie-free operation alone does not settle consent requirements.
 
-## Documentation after approval
+## Pass A.3 synchronization
 
-Update `PROJECT_BRIEF.md` with the approved analytics architecture, environment
-requirements, verified deployment state, data boundaries and verification steps.
-Update `CONTENT.md` and all four catalogs when approved visitor-facing Privacy
-Notice content/navigation is implemented. Those two documents remain unchanged
-for this implementation pass. Cloudflare dashboard and DNS changes remain out
-of scope.
+`PROJECT_BRIEF.md`, `CONTENT.md` and the compliance review now describe the approved local implementation, owner-confirmed business/account facts, local fonts and the newsletter teaser. Privacy remains draft. No analytics code changes, account settings or deployments were needed. See [production verification](production-verification.md) for exact Production/Preview variables, local simulations and remaining manual steps. The older verification records below describe earlier passes, not current route counts or deployment status.
 
 ## Implementation-pass verification
 

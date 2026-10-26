@@ -32,7 +32,13 @@ test("all 32 real server-rendered pages have localized footer links and privacy 
       const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)?.[0];
       assert(footer?.includes(`href="${localizedUrl(language, { page: "privacy" }, server.config.base)}"`));
       assert(footer.includes(escapeMarkup(locale.footer.links.privacy)));
+      assert(footer.includes(escapeMarkup(locale.footer.description)));
+      assert(footer.includes(escapeMarkup(locale.footer.comingSoon)));
+      assert(!/<(?:form|input|button)\b|role="(?:button|status)"|aria-live=/i.test(footer), "Footer teaser must not collect email or imply a subscription");
+      assert.equal(locale.footer.success, undefined);
       if (route.page !== "privacy") continue;
+      assert(html.includes('href="mailto:contact@muuva.nl"'));
+      assert(html.includes("KvK 99637588"));
       titles.add(metadata.title);
       assert.equal(metadata.title, locale.seo.privacy.title);
       assert.equal(metadata.description, locale.seo.privacy.description);

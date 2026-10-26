@@ -1,103 +1,78 @@
-# MUUVA privacy notice — publication review
+# MUUVA privacy notice - publication review
 
-Prepared 25 October 2026 for Pass A.2 on `staging`. **Not approved for publication or analytics activation.** The four public-page implementations are visibly labelled staging drafts. Their displayed date records preparation of this draft, not an effective date or legal approval. This repository document is a review checklist, not part of the rendered policy. Do not put confidential business evidence here if the repository is public.
+Updated 25 October 2026 for Pass A.3, implemented locally on `staging`. **Privacy remains draft; publication and analytics activation are not approved by this technical review.** The visible date is a draft-update date, not an effective date. No account, DNS or deployment settings were changed. Keep confidential business evidence outside a public repository.
 
-## 1. Confirmed implementation and evidence boundaries
+## Confirmed facts and evidence boundaries
 
-- One shared Privacy component and translated content serve `/en/privacy/`, `/de/privacy/`, `/nl/privacy/`, `/es/privacy/` (with the configured Vite base). The existing footer links to the current language. The route manifest now has 32 localized pages; metadata, static HTML, sitemap and analytics paths derive from that manifest.
-- Analytics remains opt-in and disabled in the build. No production deployment or account inspection was performed. The requester reports that production analytics has not been enabled and that MUUVA is established in the Netherlands.
-- The approved Umami hook retains exactly `website`, `hostname`, `url`, `referrer`, `title`. The URL contains an approved manifest path and only validated campaign parameters; titles come from approved route metadata, never `document.title`. External referrers contain at most an HTTP(S) origin. Queries outside the campaign rules and fragments are removed. There are no custom events or visitor IDs, screen/language fields, ad pixels or session replay. DNT is respected; only exact `muuva.nl` is eligible. Staging, localhost and disabled builds are excluded. The existing history recovery and duplicate suppression are unchanged.
-- `src/i18n/index.js` stores only a manual language selection as `muuva.language` in localStorage. It has no expiry; changing the selection replaces it and clearing site data removes it. URL language takes precedence; automatic detection does not store a preference. No first-party cookie setter was found in the application source.
-- `index.html` requests Google Fonts CSS and fonts on page load. `RoutineVideo.jsx` loads standard `youtube.com/embed` iframes immediately on workout pages, before playback. These are direct third-party requests, independent of analytics.
-- Amazon and Instagram are outbound links, not embedded tracking integrations. Checkout is external to MUUVA. No URLs were changed.
-- The footer newsletter validates locally, changes React state and resets the input. There is no subscription request, backend or implemented email marketing database.
-- Cloudflare Pages is the hosting context supplied for this task. Repository hosting headers support that context, but the account, deployed configuration and log controls were not inspected. `PROJECT_BRIEF.md` retains an older hosting description; it was deliberately not synchronized in this refinement pass. Default `/muuva/` build compatibility remains intact.
+The owner confirmed the following in Pass A.3; these are not results of a registry search or authenticated account inspection:
 
-Source inspection establishes integration behavior, not a complete inventory of provider cookies, logs or account-specific processing. Such behavior can depend on region, browser, login and provider consent settings. Complete that inventory before approval.
-
-## 2. Authoritative provider and regulatory sources
-
-Reviewed on 25 October 2026; recheck at approval because provider terms can change.
-
-| Source | Relevant finding and limit |
+| Item | Confirmed information |
 | --- | --- |
-| [Umami Cloud FAQ](https://docs.umami.is/docs/cloud/faq) | EU/US selection concerns analytics storage; other operations may occur elsewhere. Published Hobby retention is six months. Account settings and agreement must establish MUUVA's actual region, plan and retention. |
-| [Umami privacy policy](https://umami.is/privacy) and [metric definitions](https://docs.umami.is/docs/metric-definitions) | IP and User-Agent can participate in hashed session identifiers and derived metrics; infrastructure/security processing is separate. Do not assert that IP is never processed, all data is anonymous, or all processing stays in the EU. |
-| [Umami DPA](https://umami.is/dpa) and [subprocessors](https://umami.is/subprocessors) | Review contractual processor duties, deletion, subprocessors and international transfers against the actual agreement and services used. |
-| [Cloudflare privacy policy](https://www.cloudflare.com/privacypolicy/) | End-user requests can include IP, traffic routing and system information. Hosting/security can generate logs; absence of analytics is not absence of operational data. |
-| [Google Fonts team privacy explanation](https://fonts.googleblog.com/2022/11/your-privacy-and-google-fonts.html) | Google receives IP information to deliver requested fonts. This explanation is not an account-specific retention guarantee. |
-| [YouTube embedding help](https://support.google.com/youtube/answer/171780) and [Google privacy policy](https://policies.google.com/privacy) | Privacy-enhanced embedding uses `youtube-nocookie.com` and limits personalization effects. It does not eliminate the network request or establish a blanket consent exemption. |
-| [AP information requirements](https://autoriteitpersoonsgegevens.nl/nl/zelf-doen/privacyrechten/recht-op-informatie), [AP cookies guidance](https://autoriteitpersoonsgegevens.nl/en/themes/internet-and-smart-devices/cookies), [ACM cookies guidance](https://www.acm.nl/nl/verkoop-aan-consumenten/reclame-en-verleiden/online-beinvloeden/cookies-plaatsen) | Provide meaningful controller/purpose/rights information; assess cookies and similar technologies, including whether analytics has no or little privacy impact. A cookie-free label alone does not settle the assessment. |
-| [GDPR official text](https://eur-lex.europa.eu/eli/reg/2016/679/oj) | Articles 6, 12–22, 28, 44 onwards and 77 inform lawful basis, transparency, rights, processors, transfers and complaints. |
+| Business | MUUVA, Netherlands, sole proprietorship (eenmanszaak), KvK 99637588 |
+| Privacy contact | contact@muuva.nl, linked with mailto in all four notices |
+| Website/hosting | https://muuva.nl, Cloudflare Pages |
+| Analytics account | Umami Cloud, Hobby plan, EU analytics storage |
+| Standard analytics retention | Six months; does not establish log or backup retention |
+| Purpose | Website analytics, traffic attribution and navigation analysis |
 
-## 3. Open operational questions
+Full legal proprietor identity and the required postal address are unavailable in the reviewed repository/documentation. The trading name and KvK do not complete the controller disclosure. Obtain verified details and approval before publishing an address; do not automatically publish a residential address. The confirmed email resolves the missing-contact issue, but the identity/address blocker remains.
 
-- Confirm the deployed host and third-party request inventory across ordinary visits, video visits, browser/login states and consent choices. Record actual Cloudflare log products, settings, recipients, retention and access controls.
-- Obtain account evidence of the Umami EU region (Settings → Account → Data region), plan, retention and contracting entity. EU storage is reported/intended, not independently account-verified in this pass.
-- Confirm who handles privacy requests and how requests, objections, erasure and processor assistance will be handled. MUUVA does not supply its own visitor ID; establish realistic identification limits without collecting unnecessary additional data.
-- Decide the lawful purposes and necessity of each integration. Identify applicable EEA/non-EEA operations and any controller/processor distinctions.
-- Check the separate footer Terms, Cookie Policy and navigation placeholder links. They remain `#`; only Privacy was in scope.
+## Verified local implementation
 
-## 4. Required business/controller details — publication blockers
+- Four Privacy routes use one component and four locale catalogs. All 32 public pages have pre-rendered content, localized SEO, canonical/hreflang and sitemap entries. Draft labels and draft SEO descriptions remain.
+- Manrope and Newsreader are self-hosted variable WOFF2 Latin/Latin Extended assets. Google Fonts stylesheet/preconnects are removed. Fonts load from the website origin. Licenses, sources and hashes are in `src/assets/fonts/`.
+- The newsletter form, email input, submit button, success message/state and validation handlers are removed. The footer preserves its grid and branding with translated description and a noninteractive Coming soon label. There is no newsletter email collection or backend.
+- Standard YouTube embeds still load on workout pages before Play. Player behavior is unchanged. Amazon and Instagram remain voluntary outbound links with unchanged destinations.
+- Manual language choice uses localStorage `muuva.language` until changed/cleared. URL language wins; automatic detection does not save. No first-party cookie setter was found. This does not make the entire website cookie-free.
+- Cloudflare hosting involves normal network metadata and may involve operational/security logs. Account-specific products, settings, access controls and retention were not inspected.
 
-Obtain and approve the controller's full legal name and legal form, trading-name relationship to MUUVA, business/postal address, working privacy contact channel and applicable business registration details (including KvK where required). Confirm whether a representative or DPO is legally required or appointed; do not invent one. Confirm the Netherlands establishment claim and relevant jurisdiction. Publish the verified identity/contact information in all four drafts before approval, including an actionable contact method in the rights section. Current drafts intentionally contain no fictional email/address and are not complete Article 13 notices.
+## Analytics boundaries and deployment status
 
-## 5. Proposed lawful bases — not adopted decisions
+The integration is unchanged: disabled by default, exact `muuva.nl` restriction, staging/localhost exclusion, DNT support and navigation duplicate suppression/recovery. Retained fields are only `website`, `hostname`, `url`, `referrer`, `title`: approved routes/titles, sanitized campaigns and origin-only external referrers. Screen/browser language, custom visitor IDs/events, advertising pixels and recordings are excluded.
 
-| Processing | Candidate rationale requiring approval |
-| --- | --- |
-| Website delivery and proportionate security logs | Legitimate interests in delivering a reliable, secure site may be appropriate. Document necessity, proportionality, retention and balancing; do not assume every provider purpose shares this basis. |
-| Explicit language preference | Assess necessary functional storage for the service requested by the visitor and an appropriate GDPR basis. Keep the value limited to the selected language. |
-| Limited audience analytics | Legitimate interests is a candidate only after a documented purpose/necessity/balancing assessment and separate Dutch terminal-access/consent assessment. Cookie-free, hashed sessions and minimized payloads are relevant safeguards, not automatic legal conclusions. |
-| External fonts and embedded YouTube | Assess each transfer, purpose and storage/access operation. Consider less intrusive alternatives. Obtain prior consent where required; independent provider processing needs separate analysis. |
-| Newsletter | No operational subscription service exists. Define its basis, consent/marketing requirements, provider and retention only if a future implementation is approved. |
+UTM syntax filtering cannot recognize every personal name inside an otherwise valid campaign label; marketing must keep labels nonpersonal. Umami may process IP/User-Agent for session hashing and derived metrics. Hashing does not guarantee anonymity; EU analytics storage does not guarantee EU-only processing. User-Agent-derived broad device reporting remains; screen resolution and laptop heuristics are intentionally omitted.
 
-The final notice needs settled bases per purpose, including the specific legitimate interests relied on. It must also state applicable rights, recipients, retention and transfer information in a usable form. The current prospective language is explicitly pending review.
+Production activation is a separate owner action after review. Local enabled simulations do not mean production tracking is live. Exact Production/Preview variables, rollback and manual steps are in [production verification](production-verification.md). No shared environment file has been enabled.
 
-## 6. Dutch consent/ePrivacy decision pending
+## Proposed lawful bases and Dutch consent decision - pending
 
-Document whether this exact Umami deployment qualifies for the Dutch limited-analytics exception under Telecommunications Act Article 11.7a: effects on privacy, session hashing/IP use, provider reuse, data sharing, retention, necessity and access to terminal information must be considered. GDPR obligations remain even if consent is not required under that rule. Excluding screen/language reduces collection; User-Agent-derived device reporting still exists, while omitted screen size prevents a separate laptop classification. There is no need to restore fields for this notice.
+The owner intends to pursue the Dutch limited-impact analytics exception and legitimate interests under GDPR Article 6(1)(f). This is a proposed direction, **not a completed assessment**. Document purposes, necessity, proportionality and balancing for the actual deployment, including identifiers, IP use, provider reuse, sharing, retention and safeguards. Separately assess terminal access/storage and the Dutch Telecommunications Act Article 11.7a exception. Cookie-free configuration alone does not settle either question.
 
-If the assessment does not support the exception, implement and test prior consent before loading analytics, with withdrawal and refusal working correctly, in a separately approved task. Do not activate analytics while this is unresolved. No cookie banner was added here because no consent design has been approved. This does not conclude that the current third-party embeds require no consent.
+Possible legitimate interests for proportionate delivery/security and functional storage for the visitor's explicit language choice also need purpose/basis documentation. Final public disclosures must state approved bases and interests per purpose. No conclusion that visitor consent is never needed has been approved.
 
-## 7. Umami DPA, processors and transfers
+Consent-management implementation is postponed at the owner's direction. No banner, consent UI or new opt-out system was added. If the assessment requires consent or another control, it must be implemented in an approved later task before the affected processing is activated. Postponement is not an exemption.
 
-Umami's published DPA addresses customer data processing; agreement/account acceptance can incorporate it without a separately signed paper document. Verify the customer entity, accepted agreement/version, applicability and evidence of acceptance rather than assuming an unsigned copy means no DPA. Distinguish customer analytics processing from Umami's separate account/security purposes.
+## DPA, subprocessors, transfers and retention
 
-The published subprocessor list includes providers in the US and EU (including infrastructure/CDN, logging and database providers). Not every listed service necessarily receives MUUVA visitor data; establish applicability by feature, region and contract. Review subprocessor notifications, objection procedures, assistance, deletion/return and breach arrangements. EU analytics storage is not a promise of EU-only CDN, security, logs, support or account operations.
+The [Umami Cloud FAQ](https://docs.umami.is/docs/cloud/faq), rechecked 25 October 2026, reports six months for Hobby analytics and distinguishes storage region from other operations and backups. This agrees with the owner's account confirmation. Operational/security logs, support records and backup deletion cycles remain separate and unverified. Confirm meaningful periods or determination criteria for Cloudflare and other relevant processing too.
 
-Identify actual transfers outside the EEA, the contractual mechanism and relevant safeguards (including applicable standard contractual clauses and any required transfer assessment). Obtain evidence; do not infer adequacy or completed safeguards from the EU storage selection. Apply an equivalent review to Cloudflare and relevant Google services.
+Review the applicable [Umami DPA](https://umami.is/dpa), accepted agreement/version and customer entity. Incorporation through account/agreement acceptance can matter without a separately signed document. Confirm assistance, deletion/return, breach handling and backup/legal-retention exceptions. Distinguish customer analytics processing from separate provider account/security purposes.
 
-## 8. Retention confirmation
+Review [Umami subprocessors](https://umami.is/subprocessors) against the actual features/region used. The list includes US and EU providers; do not assume every listed service receives MUUVA visitor data. Establish actual non-EEA destinations, transfer mechanisms and safeguards, including applicable SCCs and any required transfer assessment. EU storage alone is insufficient evidence. Review Cloudflare and YouTube/Google processing as appropriate.
 
-The Cloud FAQ currently reports **six months for Hobby**, two years for Pro, five years for Business and custom Enterprise retention. MUUVA's actual plan and retention are **not account-confirmed**. Do not publish six months as a verified MUUVA period until confirmed. Production analytics retention does not automatically describe backup, support, security or infrastructure-log retention. The DPA allows backup/legal-retention qualifications; determine actual deletion cycles and any exceptions. No precise universal operational-log retention period was established here.
+## YouTube review postponed; fonts and newsletter corrected
 
-Confirm and document Cloudflare retention for enabled products, applicable Google processing and any later privacy-request records. Language preference persists client-side until changed/cleared. Analytics is disabled, so this implementation is not currently collecting analytics records. Final public text must provide verified periods or meaningful determination criteria for each relevant purpose.
+The owner postponed the YouTube privacy assessment and prohibited player changes. Existing players make requests before playback. Privacy-enhanced embedding and a user-initiated loading gate remain proposals, not implemented features or a consent exemption. Assess cookies/terminal access, account association and independent provider processing before final legal approval. A click alone is not automatically informed consent.
 
-## 9. YouTube and Google Fonts assessment
+Self-hosted fonts resolve the previous Google Fonts request issue in this implementation. Removing the newsletter form resolves its misleading success confirmation. These fixes do not resolve the separate YouTube/analytics decisions. No new external service was added.
 
-Current standard YouTube players make a third-party request before Play. Assess privacy-enhanced embeds plus a user-initiated loading gate, with consent before loading where required. A click alone is not automatically valid informed consent; provide an approved explanation and choices. Preserve workout navigation and accessibility when implementing a later approved solution. No player changes were made in this pass; the unresolved assessment is a publication/readiness blocker, not a declaration that existing loading is compliant.
+## Authoritative references
 
-Consider self-hosting the licensed fonts to avoid Google font requests, subject to licensing and performance review. Current external fonts disclose IP/request information on page visits. Neither integration is necessary to Umami. No network behavior was silently changed as part of the policy work.
+- [AP information requirements](https://autoriteitpersoonsgegevens.nl/nl/zelf-doen/privacyrechten/recht-op-informatie), [AP cookies guidance](https://autoriteitpersoonsgegevens.nl/en/themes/internet-and-smart-devices/cookies), [ACM cookies guidance](https://www.acm.nl/nl/verkoop-aan-consumenten/reclame-en-verleiden/online-beinvloeden/cookies-plaatsen): transparency and assessment of cookies/similar technologies and limited-impact analytics.
+- [GDPR official text](https://eur-lex.europa.eu/eli/reg/2016/679/oj): lawful bases, transparency/rights, processors, transfers and complaints. Public drafts retain rights and the Dutch supervisory-authority complaint route.
+- [Umami privacy policy](https://umami.is/privacy), [metric definitions](https://docs.umami.is/docs/metric-definitions), FAQ/DPA/subprocessors above: distinguish minimized application payloads from provider network and operational processing.
+- [Cloudflare privacy policy](https://www.cloudflare.com/privacypolicy/): end-user IP, routing/system information and operational processing, not an account-specific retention guarantee.
+- [YouTube embedding help](https://support.google.com/youtube/answer/171780), [Google privacy policy](https://policies.google.com/privacy): embedding modes and independent provider processing.
+- [Font provenance and licensing](../src/assets/fonts/README.md): official source URLs, SIL OFL notices and asset hashes. Public services copy no longer links to Google Fonts privacy information because fonts are local.
 
-## 10. Newsletter issue
+These sources inform review, not a finding of MUUVA compliance. Recheck terms before approval. Source/browser checks are not a complete provider cookie/log inventory across regions, sign-in states and browsers.
 
-The current success confirmation is misleading because no subscription is created. Correct the message in all four languages or disable/remove the form in a separately approved change before publishing a final notice. No newsletter service, consent capture, mailing list or data retention system was built. The draft accurately discloses present behavior rather than implying that a backend exists.
+## Publication and activation blockers
 
-## 11. Approval gates
+1. Verify full controller identity and required postal address, with explicit approval before publishing a residential address. Keep draft status until complete.
+2. Complete lawful-basis and Dutch consent assessments. Record the result rather than treating the owner's intended exception as established. Complete any required controls in separately approved work.
+3. Complete DPA, subprocessors, transfers and operational-log/backup retention reviews. Establish privacy-request handling, erasure/objection procedures and processor assistance without unnecessary identifying data.
+4. Complete the postponed YouTube assessment. Obtain legal/native-language review of all four texts; approve final copy and the effective date before removing draft messaging.
+5. Review the release and separately authorize production deployment/analytics activation. Confirm Preview separation and verify live output afterwards. Other footer policy/navigation placeholders remain outside scope.
 
-Before **policy publication**: resolve controller/contact details; confirm deployed facts; approve purposes, legal bases, retention and transfers; complete provider/DPA and consent assessments; resolve the immediate-loading YouTube/Fonts decisions and misleading newsletter confirmation; obtain legal and native-language review of all four texts. Replace provisional statements with verified details, approve the effective/update date and remove draft labels only with approval. Check other policy placeholders separately. Technical tests are not legal approval.
-
-Before **analytics activation**: satisfy those gates plus confirm the actual Umami account/region/plan/website ID and accepted DPA; record the Dutch limited-analytics decision or implement approved consent; reverify exact-host restriction, disabled staging/localhost, DNT, minimized fields, all 32 paths/titles and history deduplication. Explicit deployment approval is still required. No Cloudflare/DNS changes, production deployment, analytics activation, commit or push are part of this pass.
-
-`PROJECT_BRIEF.md` and `CONTENT.md` remain unchanged. Their eventual approved synchronization should cover the privacy routes, finalized policy ownership and hosting facts; do not describe this draft as an approved milestone.
-
-## Technical verification record
-
-- Final required sequence passed: `npm test` (60 tests), `npm run build` (32 localized pages), `npm run test:production` (32 pages, shared assets, metadata/sitemap/headers), then `git diff --check`. Analytics remained disabled. Git reported only configured LF-to-CRLF normalization notices, not whitespace errors.
-- Automated tests cover all 32 real server-rendered pages and localized footer links, all four complete draft bodies, route/language preservation, metadata, sitemap, analytics allowlist and existing privacy regressions. Existing locale entries were compared with `HEAD` and are unchanged; only Privacy copy and its SEO entries were added.
-- Root-hosted output (`/`, `https://muuva.nl`) passed production verification with analytics disabled. The default base-path build is also checked separately. Neither changes deployment configuration.
-- Chromium checks against intercepted local build files covered Privacy links from home, routines and workout pages in each language, keyboard activation and heading focus, language switching, Back/Forward, direct opening/reload and Ctrl-click opening a new tab. All four languages were checked at widths of 390, 768 and 1440 pixels without horizontal overflow.
-- A visual pass loaded the actual Manrope/Newsreader fonts, checked hydration console errors and confirmed all four pages still contain meaningful text with JavaScript disabled. Typography accommodates the longer German title.
-- A separate browser-only analytics fixture exercised all 32 approved routes/titles, history navigation, repeated/rapid visits and query/anchor changes, plus staging/localhost/DNT/disabled exclusions. Requests were intercepted: no real analytics data was submitted and the generated artifact stayed disabled.
-- These local checks do not verify live Cloudflare responses, account settings, provider log retention, all third-party cookies or real YouTube playback. They do not constitute legal review, native-speaker approval or a compliance finding.
+`PROJECT_BRIEF.md` and `CONTENT.md` are synchronized for this approved implementation milestone, distinguishing local implementation, owner-confirmed facts, pending legal conclusions and deployment status. No production deployment is claimed.

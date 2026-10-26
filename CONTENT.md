@@ -9,7 +9,8 @@ The approved website interface is available in English, German, Dutch, and Spani
 | `product` | Purchase title and CTA, gallery controls, five hotspots and image descriptions |
 | `promo` | Homepage Guided Routines promotion |
 | `lifestyle` | Styled by You heading, image descriptions and carousel controls |
-| `footer` | Newsletter, navigation, policies, about text, legal credit and form messaging |
+| `privacy` | Four localized staging drafts; sections, contact links and draft date labels |
+| `footer` | Newsletter teaser, navigation, policies, about text and legal credit |
 | `routines` | Listing and category heroes, filter labels, workouts, metadata, player title, back links, placeholders and unavailable states |
 | `seo` | Localized page titles and meta descriptions for static output and browser navigation |
 
@@ -142,20 +143,12 @@ Styled by You.
 Stay in the move.
 
 ## Newsletter description
-Sign up for exclusive Muuva content and pilates inspiration
+Pilates inspiration, movement tips and more are on the way.
 
-## Newsletter confirmation
-You have been subscribed to our newsletter.
+## Newsletter status
+Coming soon
 
-## Newsletter field and validation
-
-- Field label: Email address
-- Placeholder: E-mail
-- Submit accessibility label: Subscribe to newsletter
-- Missing value: Please enter your email address.
-- Invalid email: Please enter a valid email address.
-
-All form messages use `footer` locale entries and update when the language changes. The browser's native email validation remains in use.
+The teaser is a noninteractive text label. There is no email field, submit control, validation or successful-subscription message, and no newsletter service or email collection. All four locales use `footer.description` and `footer.comingSoon`; the existing localized brand heading remains.
 
 ## About heading
 About Muuva
@@ -172,4 +165,10 @@ FAQs · Privacy Policy · Refund Policy · Shipping Policy · Terms of Service �
 ## Legal line
 © 2026, Muuva. Website designed by Calv200.
 
-The newsletter form currently shows its confirmation through local page state; it is not connected to a subscription service. Footer navigation and policy labels currently use `#` placeholder links.
+Privacy Policy links to the matching `/{language}/privacy/` route. Other footer navigation and policy links remain `#` placeholders.
+
+# Privacy notice editorial status
+
+The four `privacy` catalogs are the copy source; do not duplicate the full policy here. The drafts disclose MUUVA as a Netherlands eenmanszaak, KvK 99637588, `contact@muuva.nl` (actionable email link), and `https://muuva.nl`. They cover Cloudflare delivery/security, language storage, Umami Hobby with EU analytics storage and six-month standard analytics retention (separate from unconfirmed logs/backups), local fonts, standard YouTube embeds, external links, the unavailable newsletter and visitor rights. SEO descriptions explicitly identify a draft.
+
+The proprietor's full legal identity and required address are still missing. The proposed legitimate-interests basis and Dutch limited-analytics exception are not finalized. Keep the draft label and draft-update date until publication information and legal review are complete. YouTube privacy review and consent-management work are postponed. Production analytics activation is separate; copy must not claim that local/Preview builds track or that a deployment has occurred. See `docs/privacy-compliance-review.md` for sources and approval gates.
