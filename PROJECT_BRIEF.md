@@ -568,7 +568,7 @@ The homepage, Guided Routines listing and workout details, and shared interfaces
 
 - `src/i18n/index.js` initializes the browser instance through `src/main.jsx`. `src/i18n/resources.js` supplies the shared resources and translation options for browser rendering and static generation. All four catalogs are bundled; no translation server or runtime locale-file request is required.
 - `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json` are authoritative for implemented interface and SEO copy. English preserves the approved source wording; `CONTENT.md` provides editorial excerpts and a key map rather than a second catalog.
-- Active groups are `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, `privacy`, and `seo`. The older `site.title` entry remains in the catalogs; generated and browser document titles now use `seo.*`.
+- Active groups are `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, `privacy`, `about`, and `seo`. The older `site.title` entry remains in the catalogs; generated and browser document titles now use `seo.*`.
 - Coverage includes all page copy, filter and metadata labels, header/footer, gallery and hotspot controls, carousel descriptions, newsletter Coming soon copy, Privacy drafts, accessible labels, and SEO titles/descriptions.
 - Product Purchase retains the English heading `Get Your Pilates Kit`, no subtitle, and the square uniform `#F2EFE9` container. Localization does not change the kit image, five hotspot coordinates, or Amazon destination.
 
@@ -609,6 +609,7 @@ Cloudflare production uses Vite base `/` and public origin `https://muuva.nl`. T
 | Guided Routines | `/{language}/guided-routines/` | `/nl/guided-routines/` |
 | Workout detail | `/{language}/guided-routines/{slug}/` | `/es/guided-routines/ring/` |
 | Privacy | `/{language}/privacy/` | `/de/privacy/` |
+| About Us | `/{language}/about-us/` | `/nl/about-us/` |
 
 `/en/` is the production English homepage (`/muuva/en/` with the compatibility base). `src/routing/routeManifest.js` defines supported languages, stable `routineSlugs`, and public `pagePaths`; workout data imports its slug definitions. Slugs and filter IDs stay independent of translated labels.
 
@@ -624,7 +625,7 @@ New navigation must not reintroduce hash-based page routes. Static files support
 
 ### 8.3 Static pre-rendering and hydration
 
-The route manifest currently produces **32 localized public HTML pages**: four homepages, four Guided Routines listings, twenty detail pages (five workout slugs in four languages), and four Privacy pages. The separate `dist/index.html` remains a compatibility/language-detection entry, with its canonical pointing to the English homepage; it is not an additional localized page or sitemap entry.
+The route manifest currently produces **36 localized public HTML pages**: four homepages, four Guided Routines listings, twenty detail pages (five workout slugs in four languages), four Privacy pages, and four About Us pages. The separate `dist/index.html` remains a compatibility/language-detection entry, with its canonical pointing to the English homepage; it is not an additional localized page or sitemap entry.
 
 `npm run build` runs `build/prerender.js`:
 
@@ -683,7 +684,7 @@ The owner intends to pursue the Dutch limited-impact analytics exception and GDP
 
 ### 8.7 Known limitations and pending launch work
 
-Cloudflare Pages is the current host. Pass A.3 is implemented locally on staging only; deployment and analytics activation are separate owner actions. The Privacy drafts are available at `/en/privacy/`, `/de/privacy/`, `/nl/privacy/`, `/es/privacy/` through one shared component, with localized footer links, static HTML and SEO. The newsletter form has been removed in favor of a noninteractive Coming soon teaser; no subscription backend or email collection exists. Other footer navigation/policy placeholders remain unchanged.
+Cloudflare Pages is the current host. Pass A.3 is implemented locally on staging only; deployment and analytics activation are separate owner actions. The Privacy drafts are available at `/en/privacy/`, `/de/privacy/`, `/nl/privacy/`, `/es/privacy/` through one shared component, with localized footer links, static HTML and SEO. The newsletter form has been removed in favor of a noninteractive Coming soon teaser; no subscription backend or email collection exists. Behind Muuva now links to the localized About Us page. Other footer navigation/policy placeholders remain unchanged.
 
 Static verification is separate from browser checks for hydration, language/storage behavior, Back/Forward, anchors, filters, active videos, focus, galleries, forms, carousel, and responsive layout. Third-party playback/audio and actual hosted responses/caching require separate validation. The production verifier targets the known generated markup format, not general-purpose HTML validation.
 
@@ -696,3 +697,11 @@ Product packaging, printed guides, phone screens, photographs, and video imagery
 Final QA on 2026-10-17 found the Sliders embed (`hcx_IU7NLf8`) reporting a private video. Other live YouTube titles also differ from approved card metadata: Ring and Ball refer to 20-minute videos while the cards show 15 minutes; Band refers to a no-equipment workout; All Equipment refers to a 30-minute dumbbell workout while its card shows 20 minutes and the kit equipment. IDs and card metadata were preserved. The owner should verify availability and intended destinations before publishing. The live embeds loaded, but playback did not advance in the automated Chromium check; uninterrupted playback and audio still require a manual browser/device check.
 
 Native-language brand review is recommended for the localized Product Purchase heading, Styled by You adaptations, newsletter heading, and promotional descriptions. In particular, the DE/NL/ES carousel headings adapt the English phrase to “Your style. Your Muuva.” These are implemented editorial choices, not literal translations; final QA does not replace a native editor's brand-voice review.
+
+### About Us / Behind Muuva (Pass B.1)
+
+`src/pages/AboutUsPage.jsx` renders two editorial sections inside `SiteContainer`, with no introductory hero or extra CTA. At 1024px and wider, the first row places the image left/text right and the second text left/image right; each image matches its text card height. Below that breakpoint, each section reads text then photograph. Text controls row height, with Newsreader headings, Manrope paragraphs, existing sand and translucent-brand backgrounds, and no new color tokens.
+
+Images are imported unchanged from `src/assets/images/about us/inspired.png` and `src/assets/images/about us/aboutus.jpg`. Object-cover positioning preserves faces; dimensions reserve space, decoding is asynchronous, the first image loads eagerly and the second lazily. The second original is approximately 10 MB; no optimization or asset replacement was authorized.
+
+All four `about` catalogs retain the supplied complete English story and natural translations, plus descriptive alt text. The first story heading is the single H1; the second is H2. Entry focuses the H1 and scrolls to the top, matching Privacy behavior. Footer Behind Muuva uses `localizedUrl()`; language switching, history, direct entry and refresh share the existing routing architecture. Metadata and analytics paths/titles derive from the 36-route manifest; tracking settings and safeguards are unchanged. Implementation is local on staging, with no deployment implied.

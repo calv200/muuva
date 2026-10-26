@@ -9,6 +9,7 @@ The approved website interface is available in English, German, Dutch, and Spani
 | `product` | Purchase title and CTA, gallery controls, five hotspots and image descriptions |
 | `promo` | Homepage Guided Routines promotion |
 | `lifestyle` | Styled by You heading, image descriptions and carousel controls |
+| `about` | Complete two-section founder story, headings and image alt text |
 | `privacy` | Four localized staging drafts; sections, contact links and draft date labels |
 | `footer` | Newsletter teaser, navigation, policies, about text and legal credit |
 | `routines` | Listing and category heroes, filter labels, workouts, metadata, player title, back links, placeholders and unavailable states |
@@ -165,10 +166,16 @@ FAQs · Privacy Policy · Refund Policy · Shipping Policy · Terms of Service �
 ## Legal line
 © 2026, Muuva. Website designed by Calv200.
 
-Privacy Policy links to the matching `/{language}/privacy/` route. Other footer navigation and policy links remain `#` placeholders.
+Privacy Policy links to the matching `/{language}/privacy/` route. Behind Muuva links to `/{language}/about-us/`; other footer navigation and policy links remain `#` placeholders.
 
 # Privacy notice editorial status
 
 The four `privacy` catalogs are the copy source; do not duplicate the full policy here. The drafts disclose MUUVA as a Netherlands eenmanszaak, KvK 99637588, `contact@muuva.nl` (actionable email link), and `https://muuva.nl`. They cover Cloudflare delivery/security, language storage, Umami Hobby with EU analytics storage and six-month standard analytics retention (separate from unconfirmed logs/backups), local fonts, standard YouTube embeds, external links, the unavailable newsletter and visitor rights. SEO descriptions explicitly identify a draft.
 
 The proprietor's full legal identity and required address are still missing. The proposed legitimate-interests basis and Dutch limited-analytics exception are not finalized. Keep the draft label and draft-update date until publication information and legal review are complete. YouTube privacy review and consent-management work are postponed. Production analytics activation is separate; copy must not claim that local/Preview builds track or that a deployment has occurred. See `docs/privacy-compliance-review.md` for sources and approval gates.
+
+# About Us story
+
+The `about.inspired` and `about.us` keys hold the approved Pass B.1.1 story in all four languages. English preserves the revised wording verbatim: What Inspired Muuva? has one opening statement and five body paragraphs about Michelle's personal journey and connection to Pilates; About Us has five body paragraphs about Michelle and Carlos, their engineering backgrounds, shared dream and vision for MUUVA. Preserve Michelle, Carlos, Venezuela, the Netherlands, Amsterdam and Michelle's experience of more than eight years; do not shorten the narrative or add unsupported claims. Headings, alt text and `seo.about` remain localized; route and image filenames stay untranslated.
+
+Use only the two supplied photographs in `src/assets/images/about us/`, with the layout described in `PROJECT_BRIEF.md`. The existing translated Behind Muuva footer label is unchanged and now links to this page. Native-language editorial review remains recommended.

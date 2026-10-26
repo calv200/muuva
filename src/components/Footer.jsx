@@ -46,7 +46,7 @@ function FooterLinkList({ links, ariaLabel }) {
           <li key={link}>
             <a
               className="muuva-footer-link transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-              href={link === "footer.links.privacy" ? localizedUrl(i18n.resolvedLanguage, { page: "privacy" }) : "#"}
+              href={link === "footer.links.behind" ? localizedUrl(i18n.resolvedLanguage, { page: "about-us" }) : link === "footer.links.privacy" ? localizedUrl(i18n.resolvedLanguage, { page: "privacy" }) : "#"}
             >
               {t(link)}
             </a>

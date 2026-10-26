@@ -197,6 +197,10 @@
     "privacy": {
       "title": "Datenschutzerklärung | MUUVA",
       "description": "Der Entwurf der MUUVA-Datenschutzerklärung erläutert Website-Besuche, lokal gehostete Schriften, externe Dienste und Website-Analysen."
+    },
+    "about": {
+      "title": "Über uns | Die Geschichte hinter MUUVA",
+      "description": "Erfahre, wie Michelle und Carlos ihre Liebe zu Pilates und einen gemeinsamen Traum in MUUVA verwandelten, eine Pilates-Marke aus Amsterdam."
     }
   },
   "privacy": {
@@ -256,6 +260,27 @@
       "google": "Datenschutzerklärung von Google",
       "authority": "Niederländische Datenschutzaufsicht",
       "contact": "E-Mail an contact@muuva.nl"
+    }
+  },
+  "about": {
+    "inspired": {
+      "title": "Was hat Muuva inspiriert?",
+      "intro": "Eine Marke, inspiriert von der Liebe zu Pilates, dem Traum, etwas Sinnvolles aufzubauen, und dem Mut, noch einmal neu anzufangen.",
+      "p1": "Muuva entstand in einer Zeit des Wandels in Michelles Leben. Ursprünglich aus Venezuela, zog sie für eine berufliche Chance in der Technologiebranche in die Niederlande und baute dort mehr als acht Jahre lang ihre Karriere als Ingenieurin auf.",
+      "p2": "Als dieses Kapitel zu Ende ging, fragte sie sich, was sie wirklich als Nächstes tun wollte. Sie hatte schon immer davon geträumt, etwas Eigenes zu schaffen, und zum ersten Mal fühlte sich dieser Traum erreichbar an.",
+      "p3": "Pilates war für sie schon immer eine Möglichkeit, zur Ruhe zu kommen, Stress loszulassen und wieder zu sich selbst zu finden. An vollen Tagen und in unsicheren Momenten schenkte es ihr Ausgeglichenheit und Freude.",
+      "p4": "Sie hätte nie gedacht, dass etwas so Persönliches einmal Teil ihres beruflichen Weges werden könnte. Doch allmählich nahm eine Idee Gestalt an: Warum nicht etwas schaffen, das anderen Frauen hilft, dieses Gefühl ebenfalls zu entdecken und Bewegung ganz selbstverständlich in ihren Alltag einzubinden?",
+      "p5": "Mit ihrer Denkweise als Ingenieurin, ihrer Begeisterung für Pilates und der Vorfreude auf einen Neuanfang entstand die erste Idee für Muuva.",
+      "alt": "Michelle sitzt neben einem Laptop; vor ihr liegen ein Pilates-Ball und ein Ring von MUUVA."
+    },
+    "us": {
+      "title": "Über uns",
+      "p1": "Muuva begann mit einem gemeinsamen Traum von Michelle und ihrem Mann Carlos: zusammen etwas Sinnvolles zu schaffen, das auf etwas beruht, was sie beide von Herzen lieben.",
+      "p2": "Die beiden stammen ursprünglich aus Venezuela, sind Ingenieure und zogen in die Niederlande, um sich dort gemeinsam ein Leben aufzubauen. Mit unterschiedlichen Stärken, aber einer ähnlichen Denkweise gingen sie ihr neues Abenteuer mit Neugier, Kreativität und dem Vertrauen an, dass selbst große Träume mit kleinen Schritten beginnen.",
+      "p3": "Muuva aufzubauen bedeutete für sie mehr, als ein Unternehmen zu gründen. Es war eine Gelegenheit, ihre Erfahrungen zu verbinden, etwas völlig Neues zu lernen und aus einer Idee etwas Eigenes zu machen. Dabei entdeckten sie, wie viel sie gemeinsam erreichen konnten, indem sie einander unterstützten und ihre unterschiedlichen Perspektiven einbrachten.",
+      "p4": "Heute ist Muuva eine Pilates-Marke aus Amsterdam, entstanden mit Herz, durchdachtem Design und echter Freude an Bewegung. Mit ihren Pilates-Essentials möchten sie Frauen nicht nur schöne Produkte anbieten, sondern sie auch dazu inspirieren, Freude an Bewegung zu finden, sich Zeit für sich selbst zu nehmen und Pilates zu einem Teil ihres Alltags zu machen.",
+      "p5": "Im Kern spiegelt Muuva ihre Liebe, ihre gemeinsame Vision und den Mut wider, zusammen einem Traum zu folgen.",
+      "alt": "Michelle und Carlos stehen zusammen; Carlos lächelt Michelle an."
     }
   }
 }

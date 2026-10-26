@@ -10,7 +10,7 @@ npm run test:production
 git diff --check
 ```
 
-`test:production` reads the generated output directory, Vite base, and public-origin configuration. It compares the actual HTML files with the shared route manifest: currently 32 localized pages, plus the existing unlocalized compatibility entry. It checks rendered main content and localized headings, language, translated SEO metadata, canonical and reciprocal alternate links, translation-key leakage, shared JS/CSS/font files and absence of Google Fonts requests, sitemap contents, robots directives, and development addresses. It does not execute the application or contact the public site.
+`test:production` reads the generated output directory, Vite base, and public-origin configuration. It compares the actual HTML files with the shared route manifest: currently 36 localized pages, plus the existing unlocalized compatibility entry. It checks rendered main content and localized headings, language, translated SEO metadata, canonical and reciprocal alternate links, translation-key leakage, shared JS/CSS/font files and absence of Google Fonts requests, sitemap contents, robots directives, and development addresses. It does not execute the application or contact the public site.
 
 The verifier uses the known generated markup format rather than a general-purpose HTML validator. Its regression tests use temporary fixtures and deliberately corrupt output; they do not modify `dist`.
 
@@ -56,7 +56,7 @@ Manual activation steps remaining:
 1. Resolve the draft-policy/controller and legal-review blockers; confirm the accepted DPA, transfer safeguards and retention limitations. Review the final four texts. Technical tests do not satisfy these steps.
 2. Review and separately approve the code release to the Cloudflare production branch. No commit, push, merge or deployment has been performed here.
 3. In the existing Pages project settings, select the Production environment and enter the exact variables above; independently confirm the Preview overrides. Do not change DNS.
-4. Trigger an approved production rebuild/deployment; changing a variable alone does not update a built artifact. Verify all 32 direct routes/refreshes, local font responses, one tracker and one privacy hook, the website ID, canonical/hreflang/sitemap and non-production exclusion. Check dashboard ingestion only during an authorized live check.
+4. Trigger an approved production rebuild/deployment; changing a variable alone does not update a built artifact. Verify all 36 direct routes/refreshes, local font responses, one tracker and one privacy hook, the website ID, canonical/hreflang/sitemap and non-production exclusion. Check dashboard ingestion only during an authorized live check.
 5. To disable tracking, set `VITE_UMAMI_ENABLED=false` in Production and rebuild/redeploy. Verify that the published HTML contains neither analytics script.
 
 ## Pass A.3 local verification record (25 October 2026)
@@ -68,3 +68,11 @@ Manual activation steps remaining:
 - Local font requests resolve to the simulated website origin with no Google Fonts requests during normal loading. A separate reference-only comparison loaded the former Google stylesheet: heading, navigation and footer dimensions matched exactly at 390, 768 and 1440 pixels on all four Privacy pages, German/Dutch homepages and an English workout page. No horizontal overflow or hydration errors were observed. Screenshots were reviewed for Privacy typography and the noninteractive footer teaser.
 - Initial layout-shift totals on tested Preview Privacy loads were 0 to 0.000804. `font-display: swap` permits a small initial fallback-to-font shift; this is not a guarantee of zero shift on every device/network. Loaded text geometry showed no introduced wrapping differences.
 - Required final sequence: `npm test`, `npm run build`, `npm run test:production`, `git diff --check`. Live Cloudflare responses, account settings, actual Umami dashboard ingestion, real YouTube playback and legal/native-language approval remain unverified. Technical checks do not establish compliance.
+
+## Pass B.1 About Us verification
+
+The manifest now contains 36 localized public pages (9 per language), including `/en/about-us/`, `/de/about-us/`, `/nl/about-us/`, `/es/about-us/`. Historical Pass A.3 counts above describe that earlier build. Current tests cover full translated About server content, one H1/two sections/eight paragraphs/two images, localized footer links, unchanged placeholders, base-aware language routing, SEO/sitemap and analytics path/title coverage. Existing analytics restrictions remain intact.
+
+For browser review, check direct entry/reload, Behind Muuva from home/list/workout/Privacy, keyboard entry/focus, language switching, Back/Forward, both original image responses and all four languages at 390/768/1440. Desktop rows alternate image/text with equal neighboring heights; stacked layouts put each text before its photograph. Check faces after cropping and long translations for clipping/overflow. No image optimization is implied: the supplied second photo is approximately 10 MB.
+
+Local verification on 26 October 2026: 66 Node tests pass; root-hosted output verifies all 36 pages. Chromium passed the checks above for all four languages, including image decoding, row geometry and no horizontal overflow/hydration errors. Screenshots were reviewed for desktop composition and mobile reading order. An injected browser-only analytics fixture produced one approved pageview per About navigation/language/history transition; all requests were intercepted and no real events were submitted. Generated builds remain disabled. Existing locale values were compared with HEAD and are unchanged outside the new About/SEO keys. Live Cloudflare responses and native-language editorial approval remain separate from these local checks.
