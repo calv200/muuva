@@ -19,7 +19,7 @@ Full legal proprietor identity and the required postal address are unavailable i
 
 ## Verified local implementation
 
-- Four Privacy routes use one component and four locale catalogs. All 32 public pages have pre-rendered content, localized SEO, canonical/hreflang and sitemap entries. Draft labels and draft SEO descriptions remain.
+- Four Privacy routes use one component and four locale catalogs. The current manifest has 36 localized public pages, including the later About Us routes; generated pages have pre-rendered content, localized SEO, canonical/hreflang and sitemap entries. Draft labels and draft SEO descriptions remain. This route-count update does not constitute a renewed legal review.
 - Manrope and Newsreader are self-hosted variable WOFF2 Latin/Latin Extended assets. Google Fonts stylesheet/preconnects are removed. Fonts load from the website origin. Licenses, sources and hashes are in `src/assets/fonts/`.
 - The newsletter form, email input, submit button, success message/state and validation handlers are removed. The footer preserves its grid and branding with translated description and a noninteractive Coming soon label. There is no newsletter email collection or backend.
 - Standard YouTube embeds still load on workout pages before Play. Player behavior is unchanged. Amazon and Instagram remain voluntary outbound links with unchanged destinations.

@@ -12,6 +12,8 @@ git diff --check
 
 `test:production` reads the generated output directory, Vite base, and public-origin configuration. It compares the actual HTML files with the shared route manifest: currently 36 localized pages, plus the existing unlocalized compatibility entry. It checks rendered main content and localized headings, language, translated SEO metadata, canonical and reciprocal alternate links, translation-key leakage, shared JS/CSS/font files and absence of Google Fonts requests, sitemap contents, robots directives, and development addresses. It does not execute the application or contact the public site.
 
+New public routes must be added through the shared manifest and covered by localized SEO, pre-rendering, sitemap and production verification; the same manifest supplies the analytics path and approved-title allowlist. Verify the enabled analytics build separately when a route is added. A branch head or local build is not evidence of a Cloudflare deployment or live analytics ingestion.
+
 The verifier uses the known generated markup format rather than a general-purpose HTML validator. Its regression tests use temporary fixtures and deliberately corrupt output; they do not modify `dist`.
 
 GitHub Actions runs dependency installation, unit tests, build, and production verification in order. A failed step prevents artifact upload and the dependent deployment job. Local checks do not establish that the hosted GitHub Actions run or deployment has succeeded.
@@ -31,7 +33,7 @@ Before publishing, use `npm run preview` to check representative home, listing, 
 
 ## Cloudflare Production and Preview configuration
 
-Cloudflare Pages at `https://muuva.nl` is the owner-confirmed hosting architecture. This pass changes local files only. Existing GitHub Pages defaults/workflow remain for compatibility; no deployment settings are edited.
+Cloudflare Pages at `https://muuva.nl` is the owner-confirmed Production host; `https://staging.muuva.pages.dev` is the reported Preview host. The current deployed commit and environment settings require inspection in the Cloudflare Pages deployment dashboard or an equivalent deployment record. Existing GitHub Pages defaults/workflow remain for compatibility; these instructions do not change deployment settings.
 
 After the publication/compliance blockers in [the review](privacy-compliance-review.md) have been resolved and the owner has separately approved deployment, set these variables **only in Cloudflare Pages Production**:
 
@@ -59,7 +61,7 @@ Manual activation steps remaining:
 4. Trigger an approved production rebuild/deployment; changing a variable alone does not update a built artifact. Verify all 36 direct routes/refreshes, local font responses, one tracker and one privacy hook, the website ID, canonical/hreflang/sitemap and non-production exclusion. Check dashboard ingestion only during an authorized live check.
 5. To disable tracking, set `VITE_UMAMI_ENABLED=false` in Production and rebuild/redeploy. Verify that the published HTML contains neither analytics script.
 
-## Pass A.3 local verification record (25 October 2026)
+## Historical Pass A.3 local verification record (25 October 2026)
 
 - 64 Node tests pass, including all 32 real server-rendered pages, localized draft/contact/teaser content, no footer form, routing/SEO and the existing analytics privacy/navigation regressions. New production-verifier defects cover external font references and missing/invalid WOFF2 files.
 - Enabled root production simulation passes: 32 pages plus the compatibility root, exactly one tracker/hook per document, the specified website ID and six shared JS/CSS/font assets. Build variables were process-local; no shared activation file was created.
@@ -69,10 +71,12 @@ Manual activation steps remaining:
 - Initial layout-shift totals on tested Preview Privacy loads were 0 to 0.000804. `font-display: swap` permits a small initial fallback-to-font shift; this is not a guarantee of zero shift on every device/network. Loaded text geometry showed no introduced wrapping differences.
 - Required final sequence: `npm test`, `npm run build`, `npm run test:production`, `git diff --check`. Live Cloudflare responses, account settings, actual Umami dashboard ingestion, real YouTube playback and legal/native-language approval remain unverified. Technical checks do not establish compliance.
 
-## Pass B.1 About Us verification
+## Historical Pass B.1 About Us verification (26 October 2026)
 
-The manifest now contains 36 localized public pages (9 per language), including `/en/about-us/`, `/de/about-us/`, `/nl/about-us/`, `/es/about-us/`. Historical Pass A.3 counts above describe that earlier build. Current tests cover full translated About server content, one H1/two sections/eight paragraphs/two images, localized footer links, unchanged placeholders, base-aware language routing, SEO/sitemap and analytics path/title coverage. Existing analytics restrictions remain intact.
+The manifest grew to 36 localized public pages (9 per language), including `/en/about-us/`, `/de/about-us/`, `/nl/about-us/`, `/es/about-us/`. Historical Pass A.3 counts above describe that earlier build. At this B.1 checkpoint, tests covered the then-current translated About server content, one H1/two sections/eight paragraphs/two images, localized footer links, unchanged placeholders, base-aware language routing, SEO/sitemap and analytics path/title coverage. Pass B.1.1 subsequently revised the story to one opening statement and five body paragraphs in the first section and five body paragraphs in the second; the eight-paragraph assertion describes the earlier version. Existing analytics restrictions remain intact.
 
 For browser review, check direct entry/reload, Behind Muuva from home/list/workout/Privacy, keyboard entry/focus, language switching, Back/Forward, both original image responses and all four languages at 390/768/1440. Desktop rows alternate image/text with equal neighboring heights; stacked layouts put each text before its photograph. Check faces after cropping and long translations for clipping/overflow. No image optimization is implied: the supplied second photo is approximately 10 MB.
 
 Local verification on 26 October 2026: 66 Node tests pass; root-hosted output verifies all 36 pages. Chromium passed the checks above for all four languages, including image decoding, row geometry and no horizontal overflow/hydration errors. Screenshots were reviewed for desktop composition and mobile reading order. An injected browser-only analytics fixture produced one approved pageview per About navigation/language/history transition; all requests were intercepted and no real events were submitted. Generated builds remain disabled. Existing locale values were compared with HEAD and are unchanged outside the new About/SEO keys. Live Cloudflare responses and native-language editorial approval remain separate from these local checks.
+
+The B.1.1 source revision is present on `staging` at `c516f73` (branch inspected 30 October 2026). No application tests, browser checks or hosted deployment checks were run during this documentation synchronization. The records above remain historical, not fresh verification of the checked branch.
