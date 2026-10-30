@@ -90,6 +90,27 @@
     },
     "comingSoon": "Coming soon"
   },
+  "newsletter": {
+    "formLabel": "MUUVA newsletter signup",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "you@example.com",
+    "consent": "I agree to receive marketing emails from MUUVA. I can unsubscribe at any time.",
+    "privacyIntro": "Read the draft",
+    "verificationLabel": "Spam protection verification",
+    "subscribe": "Subscribe",
+    "submitting": "Sending...",
+    "success": "Almost there! Check your inbox and confirm your email address to join the MUUVA newsletter.",
+    "invalidEmail": "Enter a valid email address.",
+    "consentRequired": "Please agree to receive the newsletter.",
+    "challengeRequired": "Complete the verification before subscribing.",
+    "challengeError": "Verification failed or expired. Please try again.",
+    "unavailable": "Signup is unavailable right now. Please try again later."
+  },
+  "newsletterConfirmed": {
+    "title": "Welcome to MUUVA",
+    "description": "If you followed the confirmation link in your email, your newsletter signup is complete. Look out for Pilates inspiration, movement tips and little moments of motivation in your inbox.",
+    "cta": "Explore MUUVA"
+  },
   "routines": {
     "title": "Guided routines",
     "description": "Move with your essentials. Follow simple Pilates sessions designed to make movement part of your everyday routine.",
@@ -201,6 +222,10 @@
     "about": {
       "title": "About Us | The Story Behind MUUVA",
       "description": "Discover how Michelle and Carlos turned their love for Pilates and a shared dream into MUUVA, an Amsterdam-based Pilates brand."
+    },
+    "newsletterConfirmed": {
+      "title": "Newsletter confirmation | MUUVA",
+      "description": "Information for visitors who followed MUUVA's newsletter confirmation link."
     }
   },
   "privacy": {

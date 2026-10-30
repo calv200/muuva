@@ -1,6 +1,6 @@
 # MUUVA privacy notice - publication review
 
-Updated 25 October 2026 for Pass A.3, implemented locally on `staging`. **Privacy remains draft; publication and analytics activation are not approved by this technical review.** The visible date is a draft-update date, not an effective date. No account, DNS or deployment settings were changed. Keep confidential business evidence outside a public repository.
+Updated 25 October 2026 for Pass A.3, implemented locally on `staging`. **Privacy remains draft; publication and analytics activation are not approved by this technical review.** The visible date is a draft-update date, not an effective date. No account, DNS or deployment settings were changed. Keep confidential business evidence outside a public repository. Pass C.1 subsequently added a gated newsletter foundation; its separate activation blockers are in [Forms foundation](forms-pass-c1.md). This is not a renewed legal review.
 
 ## Confirmed facts and evidence boundaries
 
@@ -19,9 +19,9 @@ Full legal proprietor identity and the required postal address are unavailable i
 
 ## Verified local implementation
 
-- Four Privacy routes use one component and four locale catalogs. The current manifest has 36 localized public pages, including the later About Us routes; generated pages have pre-rendered content, localized SEO, canonical/hreflang and sitemap entries. Draft labels and draft SEO descriptions remain. This route-count update does not constitute a renewed legal review.
+- Four Privacy routes use one component and four locale catalogs. The current manifest has 40 localized public pages, including the later About Us and newsletter confirmation routes; generated pages have pre-rendered content, localized SEO, canonical/hreflang and sitemap entries. Draft labels and draft SEO descriptions remain. This route-count update does not constitute a renewed legal review.
 - Manrope and Newsreader are self-hosted variable WOFF2 Latin/Latin Extended assets. Google Fonts stylesheet/preconnects are removed. Fonts load from the website origin. Licenses, sources and hashes are in `src/assets/fonts/`.
-- The newsletter form, email input, submit button, success message/state and validation handlers are removed. The footer preserves its grid and branding with translated description and a noninteractive Coming soon label. There is no newsletter email collection or backend.
+- Pass A.3 removed the former newsletter form and misleading success state. Pass C.1 adds a new double opt-in form and Pages Function behind separate disabled-by-default flags; the footer still shows the noninteractive Coming soon label when the build flag is off. No live collection or backend activation has been verified.
 - Standard YouTube embeds still load on workout pages before Play. Player behavior is unchanged. Amazon and Instagram remain voluntary outbound links with unchanged destinations.
 - Manual language choice uses localStorage `muuva.language` until changed/cleared. URL language wins; automatic detection does not save. No first-party cookie setter was found. This does not make the entire website cookie-free.
 - Cloudflare hosting involves normal network metadata and may involve operational/security logs. Account-specific products, settings, access controls and retention were not inspected.

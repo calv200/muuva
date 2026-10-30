@@ -56,11 +56,19 @@ test("preview, localhost, GitHub Pages, www and DNT never pass the send hook", (
   for (const dnt of ["1", 1, "yes"]) assert.equal(browser(undefined, dnt).send(), false);
 });
 
-test("all 36 public paths pass without arbitrary payload properties or identifiers", () => {
+test("all 36 analytics-approved paths pass without arbitrary payload properties or identifiers", () => {
   assert.equal(config.paths.length, 36);
   for (const path of config.paths) {
     const result = browser(`https://muuva.nl${path}`).send({ title: "Private name", id: "user", data: { email: "name@example.com" }, screen: "123x456", language: "en" });
     assert.deepEqual(JSON.parse(JSON.stringify(result)), { website: config.website, hostname: "muuva.nl", url: path, referrer: "", title: config.titles[path] });
+  }
+});
+
+test("confirmation pages never produce analytics pageviews, even when visited directly", () => {
+  for (const language of ["en", "de", "nl", "es"]) {
+    const path = `/${language}/newsletter-confirmed/`;
+    assert(!config.paths.includes(path));
+    assert.equal(browser(`https://muuva.nl${path}`).send(), false);
   }
 });
 

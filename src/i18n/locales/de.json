@@ -90,6 +90,27 @@
     },
     "comingSoon": "Demnächst"
   },
+  "newsletter": {
+    "formLabel": "Anmeldung zum MUUVA-Newsletter",
+    "emailLabel": "E-Mail-Adresse",
+    "emailPlaceholder": "du@beispiel.de",
+    "consent": "Ich möchte Marketing-E-Mails von MUUVA erhalten. Ich kann mich jederzeit abmelden.",
+    "privacyIntro": "Lies den Entwurf der",
+    "verificationLabel": "Überprüfung zum Schutz vor Spam",
+    "subscribe": "Abonnieren",
+    "submitting": "Wird gesendet...",
+    "success": "Fast geschafft! Schau in dein Postfach und bestätige deine E-Mail-Adresse, um den MUUVA-Newsletter zu erhalten.",
+    "invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein.",
+    "consentRequired": "Bitte stimme dem Erhalt des Newsletters zu.",
+    "challengeRequired": "Bitte schließe die Überprüfung ab.",
+    "challengeError": "Die Überprüfung ist fehlgeschlagen oder abgelaufen. Bitte versuche es erneut.",
+    "unavailable": "Die Anmeldung ist derzeit nicht verfügbar. Bitte versuche es später erneut."
+  },
+  "newsletterConfirmed": {
+    "title": "Willkommen bei MUUVA",
+    "description": "Wenn du dem Bestätigungslink in deiner E-Mail gefolgt bist, ist deine Newsletter-Anmeldung abgeschlossen. Freu dich auf Pilates-Inspiration, Bewegungstipps und kleine Motivationsmomente in deinem Postfach.",
+    "cta": "MUUVA entdecken"
+  },
   "routines": {
     "title": "Angeleitete Einheiten",
     "description": "Bewege dich mit deinen Essentials. Entdecke einfache Pilates-Einheiten, die Bewegung zu einem festen Teil deines Alltags machen.",
@@ -201,6 +222,10 @@
     "about": {
       "title": "Über uns | Die Geschichte hinter MUUVA",
       "description": "Erfahre, wie Michelle und Carlos ihre Liebe zu Pilates und einen gemeinsamen Traum in MUUVA verwandelten, eine Pilates-Marke aus Amsterdam."
+    },
+    "newsletterConfirmed": {
+      "title": "Newsletter-Bestätigung | MUUVA",
+      "description": "Informationen für Besucher, die dem Bestätigungslink für den MUUVA-Newsletter gefolgt sind."
     }
   },
   "privacy": {

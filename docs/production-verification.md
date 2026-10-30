@@ -10,9 +10,9 @@ npm run test:production
 git diff --check
 ```
 
-`test:production` reads the generated output directory, Vite base, and public-origin configuration. It compares the actual HTML files with the shared route manifest: currently 36 localized pages, plus the existing unlocalized compatibility entry. It checks rendered main content and localized headings, language, translated SEO metadata, canonical and reciprocal alternate links, translation-key leakage, shared JS/CSS/font files and absence of Google Fonts requests, sitemap contents, robots directives, and development addresses. It does not execute the application or contact the public site.
+`test:production` reads the generated output directory, Vite base, and public-origin configuration. It compares the actual HTML files with the shared route manifest: currently 40 localized pages, plus the existing unlocalized compatibility entry. It checks rendered main content and localized headings, language, translated SEO metadata, canonical and reciprocal alternate links, translation-key leakage, shared JS/CSS/font files and absence of Google Fonts requests, sitemap contents, robots directives, and development addresses. It does not execute the application or contact the public site.
 
-New public routes must be added through the shared manifest and covered by localized SEO, pre-rendering, sitemap and production verification; the same manifest supplies the analytics path and approved-title allowlist. Verify the enabled analytics build separately when a route is added. A branch head or local build is not evidence of a Cloudflare deployment or live analytics ingestion.
+New public routes must be added through the shared manifest and covered by localized SEO, pre-rendering, sitemap and production verification. The analytics allowlist is derived from the manifest, with a deliberate exclusion for the four static newsletter confirmation routes: viewing them does not prove a completed subscription. Verify the enabled analytics build separately when a route is added. A branch head or local build is not evidence of a Cloudflare deployment or live analytics ingestion.
 
 The verifier uses the known generated markup format rather than a general-purpose HTML validator. Its regression tests use temporary fixtures and deliberately corrupt output; they do not modify `dist`.
 
@@ -25,7 +25,7 @@ The Node output checks cannot validate:
 - Hydration warnings, browser console errors, or runtime failures after scripts load.
 - Language detection, blocked localStorage, preference persistence, and language switching without a reload.
 - Filter state, browser Back/Forward, section scrolling, legacy-URL migration, or retaining an active video when switching language.
-- Keyboard/focus behavior, gallery and hotspot interactions, carousel scrolling, and the noninteractive newsletter teaser.
+- Keyboard/focus behavior, gallery and hotspot interactions, carousel scrolling, and the newsletter teaser or gated form (according to build settings).
 - Responsive layout, visual clipping, media playback/audio, or third-party video availability.
 - Actual Cloudflare Pages responses and caching, crawler indexing, or the hostname's root `/robots.txt` (the generated project file is under the Vite base).
 
@@ -58,8 +58,10 @@ Manual activation steps remaining:
 1. Resolve the draft-policy/controller and legal-review blockers; confirm the accepted DPA, transfer safeguards and retention limitations. Review the final four texts. Technical tests do not satisfy these steps.
 2. Review and separately approve the code release to the Cloudflare production branch. No commit, push, merge or deployment has been performed here.
 3. In the existing Pages project settings, select the Production environment and enter the exact variables above; independently confirm the Preview overrides. Do not change DNS.
-4. Trigger an approved production rebuild/deployment; changing a variable alone does not update a built artifact. Verify all 36 direct routes/refreshes, local font responses, one tracker and one privacy hook, the website ID, canonical/hreflang/sitemap and non-production exclusion. Check dashboard ingestion only during an authorized live check.
+4. Trigger an approved production rebuild/deployment; changing a variable alone does not update a built artifact. Verify all 40 direct routes/refreshes, local font responses, one tracker and one privacy hook, the website ID, canonical/hreflang/sitemap and non-production exclusion. Check dashboard ingestion only during an authorized live check.
 5. To disable tracking, set `VITE_UMAMI_ENABLED=false` in Production and rebuild/redeploy. Verify that the published HTML contains neither analytics script.
+
+Pass C.1 newsletter Forms configuration and local Pages Functions checks are documented in [Forms foundation](forms-pass-c1.md). Production newsletter submissions must remain disabled pending the Privacy and workflow reviews listed there; current deployed settings have not been inspected.
 
 ## Historical Pass A.3 local verification record (25 October 2026)
 

@@ -90,6 +90,27 @@
     },
     "comingSoon": "Próximamente"
   },
+  "newsletter": {
+    "formLabel": "Suscripción al boletín de MUUVA",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tu@ejemplo.es",
+    "consent": "Acepto recibir correos de marketing de MUUVA. Puedo darme de baja en cualquier momento.",
+    "privacyIntro": "Lee el borrador de la",
+    "verificationLabel": "Verificación contra el spam",
+    "subscribe": "Suscribirse",
+    "submitting": "Enviando...",
+    "success": "¡Casi listo! Revisa tu bandeja de entrada y confirma tu correo para recibir el boletín de MUUVA.",
+    "invalidEmail": "Introduce un correo electrónico válido.",
+    "consentRequired": "Acepta recibir el boletín para continuar.",
+    "challengeRequired": "Completa la verificación antes de suscribirte.",
+    "challengeError": "La verificación ha fallado o ha caducado. Inténtalo de nuevo.",
+    "unavailable": "La suscripción no está disponible ahora. Inténtalo más tarde."
+  },
+  "newsletterConfirmed": {
+    "title": "Te damos la bienvenida a MUUVA",
+    "description": "Si has seguido el enlace de confirmación de tu correo, tu suscripción al boletín está completa. Pronto recibirás inspiración para Pilates, consejos de movimiento y pequeños momentos de motivación.",
+    "cta": "Explorar MUUVA"
+  },
   "routines": {
     "title": "Rutinas guiadas",
     "description": "Muévete con tus esenciales. Sigue sesiones sencillas de Pilates para que el movimiento forme parte de tu día a día.",
@@ -201,6 +222,10 @@
     "about": {
       "title": "Sobre nosotros | La historia detrás de MUUVA",
       "description": "Descubre cómo Michelle y Carlos convirtieron su amor por el Pilates y un sueño compartido en MUUVA, una marca de Pilates de Ámsterdam."
+    },
+    "newsletterConfirmed": {
+      "title": "Confirmación del boletín | MUUVA",
+      "description": "Información para quienes han seguido el enlace de confirmación del boletín de MUUVA."
     }
   },
   "privacy": {

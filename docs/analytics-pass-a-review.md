@@ -34,7 +34,7 @@ Disabled output has neither script. An enabled artifact served on another host
 may download the official script, but both `data-domains="muuva.nl"` and the hook
 prevent analytics submission. Supported DNT signals also prevent submission.
 
-The hook accepts pageviews only for the current 36 localized manifest paths (9 per language), on the exact hostname
+The hook accepts pageviews only for 36 approved localized paths from the current 40-route manifest (9 per language); the four static newsletter confirmation routes are deliberately excluded because viewing them does not prove a subscription. It requires the exact hostname
 `muuva.nl`. It sends only the configured website, hostname, sanitized relative URL,
 external referrer origin and approved localized title. Titles are resolved at build
 time from the route manifest, existing locale catalogs and shared SEO metadata

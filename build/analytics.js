@@ -23,6 +23,8 @@ export function analyticsConfig(env = {}, { staging = false, base = "/muuva/" } 
     const i18n = createInstance();
     i18n.init({ lng: language, resources: { [language]: { translation } }, initImmediate: false, interpolation: { escapeValue: false } });
     for (const page of pagePaths) {
+      // A static landing page is not proof of a confirmed subscription.
+      if (page === "newsletter-confirmed/") continue;
       const pathname = `/${language}/${page}`;
       const route = parseLocation(new URL(pathname, env.VITE_PUBLIC_SITE_ORIGIN), "/");
       titles[pathname] = getMetadata(language, route, i18n.t.bind(i18n), { origin: env.VITE_PUBLIC_SITE_ORIGIN, base: "/" }).title;

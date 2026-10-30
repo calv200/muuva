@@ -43,7 +43,7 @@ export function parseLocation(location, base) {
   }
   const page = parts[0] === "guided-routines"
     ? (parts[1] ? "routine-detail" : "guided-routines")
-    : ["privacy", "about-us"].includes(parts[0]) && parts.length === 1 ? parts[0] : "home";
+    : ["privacy", "about-us", "newsletter-confirmed"].includes(parts[0]) && parts.length === 1 ? parts[0] : "home";
 
   return {
     language,
@@ -61,7 +61,7 @@ export function localizedUrl(language, { page = "home", slug = "", search = "", 
   if (!supportedLanguages.includes(language)) throw new Error("Unsupported route language");
   const path = page === "routine-detail"
     ? `guided-routines/${encodeURIComponent(slug)}/`
-    : page === "guided-routines" ? "guided-routines/" : ["privacy", "about-us"].includes(page) ? `${page}/` : "";
+    : page === "guided-routines" ? "guided-routines/" : ["privacy", "about-us", "newsletter-confirmed"].includes(page) ? `${page}/` : "";
   return `${basePath(base)}${language}/${path}${search}${hash}`;
 }
 

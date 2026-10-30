@@ -19,12 +19,12 @@ test("privacy URLs preserve page identity when switching languages, including ro
   }
 });
 
-test("all 36 real server-rendered pages have localized footer links and privacy pages contain complete translated drafts", async () => {
+test("all 40 real server-rendered pages have localized footer links and privacy pages contain complete translated drafts", async () => {
   const server = await createServer({ server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
   try {
     const { renderPage, getPublicPages } = await server.ssrLoadModule("/src/entry-server.jsx");
     const pages = getPublicPages();
-    assert.equal(pages.length, 36);
+    assert.equal(pages.length, 40);
     const titles = new Set();
     for (const { language, path } of pages) {
       const locale = JSON.parse(readFileSync(new URL(`../src/i18n/locales/${language}.json`, import.meta.url), "utf8"));

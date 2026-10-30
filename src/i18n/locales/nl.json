@@ -90,6 +90,27 @@
     },
     "comingSoon": "Binnenkort"
   },
+  "newsletter": {
+    "formLabel": "Aanmelden voor de MUUVA-nieuwsbrief",
+    "emailLabel": "E-mailadres",
+    "emailPlaceholder": "jij@voorbeeld.nl",
+    "consent": "Ik wil marketingmails van MUUVA ontvangen. Ik kan me op elk moment afmelden.",
+    "privacyIntro": "Lees het concept van het",
+    "verificationLabel": "Verificatie tegen spam",
+    "subscribe": "Aanmelden",
+    "submitting": "Verzenden...",
+    "success": "Bijna klaar! Controleer je inbox en bevestig je e-mailadres om de MUUVA-nieuwsbrief te ontvangen.",
+    "invalidEmail": "Vul een geldig e-mailadres in.",
+    "consentRequired": "Geef toestemming om de nieuwsbrief te ontvangen.",
+    "challengeRequired": "Voltooi de verificatie voordat je je aanmeldt.",
+    "challengeError": "De verificatie is mislukt of verlopen. Probeer het opnieuw.",
+    "unavailable": "Aanmelden is nu niet mogelijk. Probeer het later opnieuw."
+  },
+  "newsletterConfirmed": {
+    "title": "Welkom bij MUUVA",
+    "description": "Als je de bevestigingslink in je e-mail hebt gevolgd, is je aanmelding voor de nieuwsbrief voltooid. Kijk uit naar Pilates-inspiratie, bewegingstips en kleine momenten van motivatie in je inbox.",
+    "cta": "Ontdek MUUVA"
+  },
   "routines": {
     "title": "Begeleide routines",
     "description": "Beweeg met je essentials. Volg eenvoudige Pilates-sessies die beweging een vast onderdeel van je dag maken.",
@@ -201,6 +222,10 @@
     "about": {
       "title": "Over ons | Het verhaal achter MUUVA",
       "description": "Ontdek hoe Michelle en Carlos hun liefde voor Pilates en een gedeelde droom omzetten in MUUVA, een Pilates-merk uit Amsterdam."
+    },
+    "newsletterConfirmed": {
+      "title": "Nieuwsbriefbevestiging | MUUVA",
+      "description": "Informatie voor bezoekers die de bevestigingslink voor de MUUVA-nieuwsbrief hebben gevolgd."
     }
   },
   "privacy": {

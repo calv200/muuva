@@ -1,6 +1,9 @@
 import { useTranslation } from "react-i18next";
 import SiteContainer from "./SiteContainer.jsx";
 import { localizedUrl } from "../routing/urls.js";
+import NewsletterSignup from "./NewsletterSignup.jsx";
+
+const newsletterEnabled = import.meta.env.VITE_NEWSLETTER_ENABLED === "true" && import.meta.env.BASE_URL === "/";
 
 const navigationLinks = [
   "footer.links.behind",
@@ -71,7 +74,7 @@ export default function Footer() {
               {t("footer.description")}
             </p>
 
-            <p className="muuva-label mt-8 text-brand">{t("footer.comingSoon")}</p>
+            {newsletterEnabled ? <NewsletterSignup /> : <p className="muuva-label mt-8 text-brand">{t("footer.comingSoon")}</p>}
           </div>
 
           <FooterLinkList links={navigationLinks} ariaLabel={t("footer.navigation")} />
