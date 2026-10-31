@@ -29,13 +29,13 @@ function request(body = {}, { requestOrigin = origin, url = `${origin}/api/newsl
   });
 }
 
-function services({ challenge = { success: true, action: "newsletter_signup", hostname: "staging.muuva.pages.dev" }, brevoStatus = 201, failAt = "" } = {}) {
+function services({ challenge = { success: true, action: "newsletter_signup", hostname: "staging.muuva.pages.dev" }, brevoStatus = 201, brevoBody = "private upstream body with person@example.com", failAt = "" } = {}) {
   const calls = [];
   const fetchImpl = async (url, options) => {
     calls.push({ url, options });
     if (failAt && url.includes(failAt)) throw new Error("private upstream error with person@example.com");
     if (url.includes("siteverify")) return new Response(JSON.stringify(challenge), { status: 200 });
-    return new Response("private upstream body with person@example.com", { status: brevoStatus });
+    return new Response(brevoBody, { status: brevoStatus });
   };
   return { calls, fetchImpl };
 }
@@ -45,7 +45,7 @@ test("the four languages select fixed DOI templates, list and same-origin confir
     const mock = services();
     const response = await handleNewsletter({ request: request({ language }), env }, mock.fetchImpl);
     assert.equal(response.status, 202);
-    assert.deepEqual(await response.json(), { code: "confirmation_pending" });
+    assert.deepEqual(await response.json(), { code: "request_received" });
     assert.equal(mock.calls.length, 2);
     assert.equal(new URLSearchParams(mock.calls[0].options.body).get("secret"), env.TURNSTILE_SECRET);
     const brevo = JSON.parse(mock.calls[1].options.body);
@@ -118,15 +118,52 @@ test("missing credentials, upstream failures and timeouts return safe errors wit
     const body = await response.text();
     assert(!body.includes("person@example.com") && !body.includes(env.BREVO_API_KEY) && !body.includes(env.TURNSTILE_SECRET));
   }
-  assert(!readFileSync(new URL("../functions/api/newsletter.js", import.meta.url), "utf8").includes("console."));
 });
 
-test("possible duplicate-contact errors do not reveal subscriber state", async () => {
+test("Brevo DOI outcomes are classified privately without exposing contact state or upstream data", async () => {
+  const cases = [
+    { brevoStatus: 201, expected: { status: 201, category: "doi_created" }, publicStatus: 202 },
+    { brevoStatus: 400, brevoBody: JSON.stringify({ code: "duplicate_request", message: "person@example.com already exists" }), expected: { status: 400, category: "duplicate_request" }, publicStatus: 202 },
+    { brevoStatus: 409, expected: { status: 409, category: "unclassified" }, publicStatus: 202 },
+    { brevoStatus: 400, brevoBody: JSON.stringify({ code: "invalid_parameter", message: "Template 2 is invalid for person@example.com" }), expected: { status: 400, category: "invalid_parameter" }, publicStatus: 202 },
+    { brevoStatus: 400, brevoBody: JSON.stringify({ code: "person@example.com", message: "private" }), expected: { status: 400, category: "unclassified" }, publicStatus: 202 },
+    { brevoStatus: 400, brevoBody: JSON.stringify({ code: "invalid_parameter", message: "private".repeat(300) }), expected: { status: 400, category: "unclassified" }, publicStatus: 202 },
+    { brevoStatus: 403, brevoBody: JSON.stringify({ code: "permission_denied", message: "private-brevo-key lacks permission" }), expected: { status: 403, category: "permission_denied" }, publicStatus: 503 },
+    { brevoStatus: 401, brevoBody: JSON.stringify({ code: "unauthorized" }), expected: { status: 401, category: "unauthorized" }, publicStatus: 503 },
+    { brevoStatus: 429, expected: { status: 429, category: "unclassified" }, publicStatus: 503 },
+    { brevoStatus: 500, expected: { status: 500, category: "unclassified" }, publicStatus: 503 },
+    { brevoStatus: 200, expected: { status: 200, category: "unclassified" }, publicStatus: 503 },
+  ];
+  for (const settings of cases) {
+    const mock = services(settings);
+    const records = [];
+    const response = await handleNewsletter({ request: request(), env: { ...env, CF_PAGES_BRANCH: "staging" } }, mock.fetchImpl, (...args) => records.push(args));
+    assert.equal(response.status, settings.publicStatus);
+    assert.deepEqual(await response.json(), { code: settings.publicStatus === 202 ? "request_received" : "unavailable" });
+    assert.deepEqual(records, [["newsletter.brevo", settings.expected]]);
+    const serialized = JSON.stringify(records);
+    for (const privateValue of ["person@example.com", env.BREVO_API_KEY, env.TURNSTILE_SECRET, "valid-token", "Template 2", "https://"]) assert(!serialized.includes(privateValue));
+  }
+});
+
+test("Preview diagnostics are disabled outside the staging branch and transport failures never log private errors", async () => {
+  const records = [];
+  const logger = (...args) => records.push(args);
+  const production = services({ brevoStatus: 400, brevoBody: JSON.stringify({ code: "invalid_parameter" }) });
+  await handleNewsletter({ request: request(), env: { ...env, CF_PAGES_BRANCH: "main" } }, production.fetchImpl, logger);
+  assert.deepEqual(records, []);
+  const failed = services({ failAt: "doubleOptinConfirmation" });
+  const response = await handleNewsletter({ request: request(), env: { ...env, CF_PAGES_BRANCH: "staging" } }, failed.fetchImpl, logger);
+  assert.equal(response.status, 503);
+  assert.deepEqual(records, [["newsletter.brevo", { status: null, category: "transport_failure" }]]);
+});
+
+test("possible duplicate-contact errors have the same public response as DOI creation", async () => {
   for (const brevoStatus of [201, 400, 409]) {
     const mock = services({ brevoStatus });
-    const response = await handleNewsletter({ request: request(), env }, mock.fetchImpl);
+    const response = await handleNewsletter({ request: request(), env }, mock.fetchImpl, () => {});
     assert.equal(response.status, 202);
-    assert.deepEqual(await response.json(), { code: "confirmation_pending" });
+    assert.deepEqual(await response.json(), { code: "request_received" });
   }
 });
 

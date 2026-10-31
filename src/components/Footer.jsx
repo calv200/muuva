@@ -49,7 +49,7 @@ function FooterLinkList({ links, ariaLabel }) {
           <li key={link}>
             <a
               className="muuva-footer-link transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-              href={link === "footer.links.behind" ? localizedUrl(i18n.resolvedLanguage, { page: "about-us" }) : link === "footer.links.privacy" ? localizedUrl(i18n.resolvedLanguage, { page: "privacy" }) : "#"}
+              href={link === "footer.links.behind" ? localizedUrl(i18n.resolvedLanguage, { page: "about-us" }) : link === "footer.links.privacy" ? localizedUrl(i18n.resolvedLanguage, { page: "privacy" }) : ["footer.links.wholesale", "footer.links.apply"].includes(link) ? localizedUrl(i18n.resolvedLanguage, { page: "wholesale" }) : "#"}
             >
               {t(link)}
             </a>
@@ -66,7 +66,7 @@ export default function Footer() {
     <footer className="bg-warm py-16 text-ink sm:py-20 lg:py-24">
       <SiteContainer>
         <div className="grid gap-12 md:grid-cols-2 md:gap-x-16 md:gap-y-14 lg:grid-cols-[1.45fr_0.8fr_0.8fr_1fr] lg:gap-16">
-          <div>
+          <div className="min-w-0">
             <h2 className="font-serif text-4xl font-medium leading-tight sm:text-5xl">
               {t("footer.title")}
             </h2>

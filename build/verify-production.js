@@ -97,7 +97,7 @@ export async function verifyProductionOutput({ directory, base, origin = publicS
     for (const pagePath of pagePaths) {
       const route = parseLocation(new URL(`${base}${language}/${pagePath}`, origin), base);
       const metadata = getMetadata(language, route, i18n.t.bind(i18n), { origin, base });
-      const heading = route.page === "about-us" ? i18n.t("about.inspired.title") : route.page === "newsletter-confirmed" ? i18n.t("newsletterConfirmed.title") : route.page === "home" ? i18n.t("product.title") : route.page === "privacy" ? i18n.t("privacy.title") : route.page === "guided-routines" ? i18n.t("routines.title") : i18n.t(`routines.categories.${route.slug}.title`);
+      const heading = route.page === "about-us" ? i18n.t("about.inspired.title") : route.page === "wholesale" ? i18n.t("wholesale.title") : route.page === "newsletter-confirmed" ? i18n.t("newsletterConfirmed.title") : route.page === "home" ? i18n.t("product.title") : route.page === "privacy" ? i18n.t("privacy.title") : route.page === "guided-routines" ? i18n.t("routines.title") : i18n.t(`routines.categories.${route.slug}.title`);
       expected.set(`${language}/${pagePath}index.html`, { metadata, heading });
     }
   }

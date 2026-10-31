@@ -48,7 +48,7 @@ test("About server HTML contains the entire localized story, two original images
       const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)[0];
       assert(footer.includes(`href="${localizedUrl(language, { page: "about-us" }, server.config.base)}"`));
       assert(footer.includes(escapeMarkup(locale.footer.links.behind)));
-      assert.equal((footer.match(/href="#"/g) || []).length, 11, "Other placeholder links stay unchanged");
+      assert.equal((footer.match(/href="#"/g) || []).length, 9, "Only About, Privacy and the two Wholesale links have routes");
     }
   } finally {
     await server.close();

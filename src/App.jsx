@@ -14,6 +14,7 @@ import GuidedRoutinesPage from "./pages/GuidedRoutinesPage.jsx";
 import PrivacyPage from "./pages/PrivacyPage.jsx";
 import AboutUsPage from "./pages/AboutUsPage.jsx";
 import NewsletterConfirmedPage from "./pages/NewsletterConfirmedPage.jsx";
+import WholesalePage from "./pages/WholesalePage.jsx";
 
 function HomePage() {
   return (
@@ -45,11 +46,12 @@ export default function App({ initialRoute }) {
       });
       return () => window.cancelAnimationFrame(frame);
     }
-    if (["home", "privacy", "about-us", "newsletter-confirmed"].includes(route.page)) window.scrollTo({ top: 0, behavior: "auto" });
+    if (["home", "privacy", "about-us", "wholesale", "newsletter-confirmed"].includes(route.page)) window.scrollTo({ top: 0, behavior: "auto" });
   }, [route.page, route.slug, route.hash]);
 
   const renderPage = () => {
     if (route.page === "about-us") return <AboutUsPage />;
+    if (route.page === "wholesale") return <WholesalePage />;
     if (route.page === "privacy") return <PrivacyPage />;
     if (route.page === "newsletter-confirmed") return <NewsletterConfirmedPage />;
     if (route.page === "guided-routines") {

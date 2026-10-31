@@ -10,7 +10,7 @@ npm run test:production
 git diff --check
 ```
 
-`test:production` reads the generated output directory, Vite base, and public-origin configuration. It compares the actual HTML files with the shared route manifest: currently 40 localized pages, plus the existing unlocalized compatibility entry. It checks rendered main content and localized headings, language, translated SEO metadata, canonical and reciprocal alternate links, translation-key leakage, shared JS/CSS/font files and absence of Google Fonts requests, sitemap contents, robots directives, and development addresses. It does not execute the application or contact the public site.
+`test:production` reads the generated output directory, Vite base, and public-origin configuration. It compares the actual HTML files with the shared route manifest: currently 44 localized pages, plus the existing unlocalized compatibility entry. It checks rendered main content and localized headings, language, translated SEO metadata, canonical and reciprocal alternate links, translation-key leakage, shared JS/CSS/font files and absence of Google Fonts requests, sitemap contents, robots directives, and development addresses. It does not execute the application or contact the public site.
 
 New public routes must be added through the shared manifest and covered by localized SEO, pre-rendering, sitemap and production verification. The analytics allowlist is derived from the manifest, with a deliberate exclusion for the four static newsletter confirmation routes: viewing them does not prove a completed subscription. Verify the enabled analytics build separately when a route is added. A branch head or local build is not evidence of a Cloudflare deployment or live analytics ingestion.
 
@@ -26,6 +26,7 @@ The Node output checks cannot validate:
 - Language detection, blocked localStorage, preference persistence, and language switching without a reload.
 - Filter state, browser Back/Forward, section scrolling, legacy-URL migration, or retaining an active video when switching language.
 - Keyboard/focus behavior, gallery and hotspot interactions, carousel scrolling, and the newsletter teaser or gated form (according to build settings).
+- Wholesale image/form layout, validation focus, errors retaining data, challenge reset, inline success, responsive widget sizing and coexistence with the newsletter. See [Pass C.2 Wholesale review](forms-pass-c2-wholesale.md) for configuration and local results.
 - Responsive layout, visual clipping, media playback/audio, or third-party video availability.
 - Actual Cloudflare Pages responses and caching, crawler indexing, or the hostname's root `/robots.txt` (the generated project file is under the Vite base).
 

@@ -1,26 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { localizedUrl } from "../routing/urls.js";
+import { loadTurnstile, useTurnstileSize } from "../forms/turnstile.js";
 
 const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
-const turnstileScript = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-let scriptPromise;
-
-function loadTurnstile() {
-  if (window.turnstile) return Promise.resolve(window.turnstile);
-  if (!scriptPromise) {
-    scriptPromise = new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = turnstileScript;
-      script.async = true;
-      script.referrerPolicy = "no-referrer";
-      script.onload = () => window.turnstile ? resolve(window.turnstile) : reject(new Error("Turnstile unavailable"));
-      script.onerror = () => reject(new Error("Turnstile unavailable"));
-      document.head.append(script);
-    }).catch((error) => { scriptPromise = undefined; throw error; });
-  }
-  return scriptPromise;
-}
 
 export default function NewsletterSignup() {
   const { t, i18n } = useTranslation();
@@ -31,9 +14,13 @@ export default function NewsletterSignup() {
   const [token, setToken] = useState("");
   const [state, setState] = useState("idle");
   const [message, setMessage] = useState("");
+  const received = state === "success";
+  const widgetSize = useTurnstileSize(widgetContainer, Boolean(siteKey) && !received);
 
   useEffect(() => {
+    if (received) return;
     let mounted = true;
+    setToken("");
     if (!siteKey) { setMessage("unavailable"); return; }
     loadTurnstile().then((turnstile) => {
       if (!mounted || !widgetContainer.current) return;
@@ -41,6 +28,7 @@ export default function NewsletterSignup() {
         sitekey: siteKey,
         action: "newsletter_signup",
         theme: "light",
+        size: widgetSize,
         callback: (value) => { setToken(value); setMessage(""); },
         "expired-callback": () => setToken(""),
         "error-callback": () => { setToken(""); setMessage("challengeError"); },
@@ -51,7 +39,7 @@ export default function NewsletterSignup() {
       if (widgetId.current !== null && window.turnstile) window.turnstile.remove(widgetId.current);
       widgetId.current = null;
     };
-  }, []);
+  }, [widgetSize, received]);
 
   async function submit(event) {
     event.preventDefault();
@@ -71,7 +59,7 @@ export default function NewsletterSignup() {
         body: JSON.stringify({ email: address, language: i18n.resolvedLanguage, consent: true, turnstileToken: token }),
       });
       const result = await response.json();
-      if (!response.ok || result.code !== "confirmation_pending") {
+      if (!response.ok || result.code !== "request_received") {
         setMessage(({ invalid_email: "invalidEmail", consent_required: "consentRequired", challenge_required: "challengeRequired", challenge_failed: "challengeError" })[result.code] || "unavailable");
       } else {
         setState("success");

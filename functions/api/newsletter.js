@@ -9,6 +9,12 @@ const approvedTemplates = { en: 2, de: 3, nl: 4, es: 5 };
 const siteverifyUrl = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 const brevoUrl = "https://api.brevo.com/v3/contacts/doubleOptinConfirmation";
 const maxBodyBytes = 2048;
+const maxBrevoErrorBytes = 1024;
+const brevoErrorCodes = new Set([
+  "invalid_parameter", "missing_parameter", "out_of_range", "unauthorized",
+  "document_not_found", "method_not_allowed", "not_enough_credits",
+  "duplicate_parameter", "duplicate_request", "account_under_validation", "permission_denied",
+]);
 
 function json(status, code) {
   return new Response(JSON.stringify({ code }), {
@@ -48,11 +54,33 @@ async function boundedJson(request) {
   } catch { return null; }
 }
 
+async function brevoErrorCode(response) {
+  const reader = response.body?.getReader();
+  if (!reader) return null;
+  let size = 0;
+  const chunks = [];
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > maxBrevoErrorBytes) { await reader.cancel(); return null; }
+      chunks.push(value);
+    }
+    const bytes = new Uint8Array(size);
+    let offset = 0;
+    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
+    const body = JSON.parse(new TextDecoder().decode(bytes));
+    return body && typeof body.code === "string" && brevoErrorCodes.has(body.code) ? body.code : null;
+  } catch { return null; }
+}
+
 export async function requestWithTimeout(fetchImpl, url, options, timeoutMs, readJson = false) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetchImpl(url, { ...options, signal: controller.signal });
+    if (readJson === "brevo") return { status: response.status, code: response.status === 201 ? null : await brevoErrorCode(response) };
     return readJson ? { ok: response.ok, body: response.ok ? await response.json() : null } : response;
   }
   finally { clearTimeout(timer); }
@@ -78,8 +106,14 @@ function configFor(env, language) {
   return { listId, templateId };
 }
 
+function logBrevoDiagnostic(env, log, status, category) {
+  if (env.CF_PAGES_BRANCH !== "staging" || env.NEWSLETTER_ALLOWED_HOSTNAME !== "staging.muuva.pages.dev") return;
+  const safeStatus = Number.isInteger(status) && status >= 100 && status <= 599 ? status : null;
+  try { log("newsletter.brevo", { status: safeStatus, category }); } catch { /* Diagnostics must not affect signup handling. */ }
+}
+
 // Kept separate from the Pages entry point so network calls can be mocked in tests.
-export async function handleNewsletter({ request, env }, fetchImpl = fetch) {
+export async function handleNewsletter({ request, env }, fetchImpl = fetch, log = console.info) {
   if (request.method !== "POST") return json(405, "method_not_allowed");
   if (env?.NEWSLETTER_SUBMISSIONS_ENABLED !== "true") return json(503, "unavailable");
   const origin = trustedOrigin(request, env);
@@ -115,11 +149,18 @@ export async function handleNewsletter({ request, env }, fetchImpl = fetch) {
         templateId: config.templateId,
         contactPixelTrackingConsent: false,
       }),
-    }, 8000);
-    // A contact-state error must not reveal whether an address already exists.
-    if (response.ok || response.status === 400 || response.status === 409) return json(202, "confirmation_pending");
+    }, 8000, "brevo");
+    // Preview diagnostics contain only a numeric status and an allowlisted error code.
+    logBrevoDiagnostic(env, log, response.status, response.code || (response.status === 201 ? "doi_created" : "unclassified"));
+    if (response.status === 201 || response.status === 400 || response.status === 409) {
+      // A neutral receipt also covers contact-state rejections; it never claims Brevo sent mail.
+      return json(202, "request_received");
+    }
     return json(503, "unavailable");
-  } catch { return json(503, "unavailable"); }
+  } catch {
+    logBrevoDiagnostic(env, log, null, "transport_failure");
+    return json(503, "unavailable");
+  }
 }
 
 export function onRequest(context) {

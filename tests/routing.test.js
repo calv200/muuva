@@ -7,7 +7,7 @@ const base = "/muuva/";
 const parse = (url) => parseLocation(new URL(url, "https://example.com"), base);
 
 test("all generated language/page paths parse and round-trip", () => {
-  assert.equal(pagePaths.length, 5 + Object.keys(routineSlugs).length);
+  assert.equal(pagePaths.length, 6 + Object.keys(routineSlugs).length);
   for (const language of supportedLanguages) {
     for (const path of pagePaths) {
       const url = `${base}${language}/${path}`;

@@ -90,6 +90,48 @@
     },
     "comingSoon": "Próximamente"
   },
+  "wholesale": {
+    "eyebrow": "MUUVA PARA NEGOCIOS",
+    "title": "Movámonos juntos con Muuva.",
+    "intro": "Tanto si tienes un estudio de Pilates como si eres instructor o tienes una tienda, nos encantaría descubrir cómo podemos colaborar.",
+    "imageAlt": "Aro y pelota de Pilates de MUUVA sobre un reformer en un estudio luminoso",
+    "formTitle": "Hablemos",
+    "formIntro": "Cuéntanos un poco sobre tu negocio y lo que tienes en mente.",
+    "fields": {
+      "name": "Tu nombre",
+      "businessName": "Nombre del negocio",
+      "email": "Correo electrónico",
+      "businessType": "Tipo de negocio (opcional)",
+      "enquiry": "Tu consulta"
+    },
+    "businessTypes": {
+      "placeholder": "Selecciona un tipo de negocio",
+      "studio": "Estudio de Pilates",
+      "instructor": "Instructor",
+      "retailer": "Tienda",
+      "other": "Otro"
+    },
+    "consent": "Acepto que MUUVA utilice los datos que envío para responder a mi consulta y confirmo que he leído la Política de privacidad.",
+    "privacyText": "Tus datos nos ayudan a responder a tu consulta comercial. Lee nuestra",
+    "verificationLabel": "Verificación contra el spam",
+    "submit": "ENVIAR CONSULTA →",
+    "submitting": "Enviando...",
+    "successTitle": "Gracias por escribirnos.",
+    "successText": "Hemos recibido tu consulta y te responderemos lo antes posible.",
+    "errors": {
+      "required": "Completa este campo.",
+      "tooLong": "Utiliza un máximo de {{max}} caracteres.",
+      "invalidText": "Elimina los caracteres de control no admitidos.",
+      "invalidEmail": "Introduce un correo electrónico válido.",
+      "invalidBusinessType": "Selecciona uno de los tipos de negocio disponibles.",
+      "consentRequired": "Confirma que MUUVA puede utilizar tus datos para responder.",
+      "validationError": "Revisa el formulario y completa los campos obligatorios.",
+      "challengeRequired": "Completa la verificación antes de enviar tu consulta.",
+      "challengeError": "La verificación ha fallado o ha caducado. Inténtalo de nuevo.",
+      "unavailable": "No hemos podido enviar tu consulta ahora. Tus datos siguen aquí; inténtalo más tarde.",
+      "notReady": "Las consultas a través de este formulario no están disponibles ahora. Inténtalo más tarde."
+    }
+  },
   "newsletter": {
     "formLabel": "Suscripción al boletín de MUUVA",
     "emailLabel": "Correo electrónico",
@@ -99,7 +141,7 @@
     "verificationLabel": "Verificación contra el spam",
     "subscribe": "Suscribirse",
     "submitting": "Enviando...",
-    "success": "¡Casi listo! Revisa tu bandeja de entrada y confirma tu correo para recibir el boletín de MUUVA.",
+    "success": "Solicitud recibida. Si llega un correo de confirmación, sigue el enlace para suscribirte al boletín de MUUVA. Aún no estás suscrito.",
     "invalidEmail": "Introduce un correo electrónico válido.",
     "consentRequired": "Acepta recibir el boletín para continuar.",
     "challengeRequired": "Completa la verificación antes de suscribirte.",
@@ -222,6 +264,10 @@
     "about": {
       "title": "Sobre nosotros | La historia detrás de MUUVA",
       "description": "Descubre cómo Michelle y Carlos convirtieron su amor por el Pilates y un sueño compartido en MUUVA, una marca de Pilates de Ámsterdam."
+    },
+    "wholesale": {
+      "title": "Venta al por mayor y colaboraciones | MUUVA",
+      "description": "Colabora con MUUVA como estudio de Pilates, instructor o tienda. Cuéntanos sobre tu negocio y descubre cómo podemos movernos juntos."
     },
     "newsletterConfirmed": {
       "title": "Confirmación del boletín | MUUVA",
