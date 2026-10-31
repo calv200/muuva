@@ -1,6 +1,10 @@
 # Pass C.3.1 — Forms security and rate limiting
 
-Review implementation on `staging`, 31 October 2026. The owner reports Newsletter and Wholesale are deployed to Preview; no account configuration or deployed commit was inspected here. This pass creates no external resource, changes no Cloudflare setting and performs no deployment. **Live enforcement remains inactive until the owner creates and binds the Durable Object resource and explicitly selects `enforce`.**
+Implementation review and staging-validation documentation closure on `staging`, 31 October 2026.
+
+**Pass C.3.1 — Core security implementation and hosted rate-limiting enforcement validated on staging. Production readiness remains subject to operational, regression and privacy review.**
+
+The Cloudflare configuration/deployment observations below are owner-reported and supported by Cloudflare dashboard screenshots described in the closure handoff; the live request results are owner-reported browser-console observations. Codex performed no fresh authenticated Cloudflare inspection or new live requests during this documentation closure. Local Git inspection found a clean `staging` working tree at `1baaa5b837bdeb8b5d20aa6a17a72c56e6cb9cfd`, matching the reported deployed source commit; this confirms local Git state, not an independent inspection of the Cloudflare deployment. This closure changes only this document, creates no resource, changes no account setting and performs no deployment.
 
 ## Audit findings
 
@@ -27,7 +31,7 @@ The master brief, CONTENT and handoff contain older no-form descriptions and cou
 
 Compatibility references: [Pages bindings and local DO development](https://developers.cloudflare.com/pages/functions/bindings/#durable-objects), [Workers rate-limit locality/accuracy](https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/), [Pages custom-domain differences](https://developers.cloudflare.com/pages/configuration/debugging-pages/#differences-between-pagesdev-and-custom-domains), [WAF availability](https://developers.cloudflare.com/waf/rate-limiting-rules/#availability). No claim is made that this account has a particular WAF plan or any rules enabled.
 
-The Worker configuration at `workers/forms-rate-limiter/wrangler.jsonc` exports `FormRateLimiter` with a SQLite migration, compatibility date `2026-10-30`, and public Worker/preview URLs disabled. Its default HTTP handler returns `404`; it is not a public proxy for spending another visitor's allowance. Pages calls the namespace directly. Cloudflare requires a separately deployed Worker to export a DO class; a Pages project cannot deploy that class itself. Creating that Worker/namespace is an **owner dependency**, not an action performed by this pass.
+The Worker configuration at `workers/forms-rate-limiter/wrangler.jsonc` exports `FormRateLimiter` with a SQLite migration, compatibility date `2026-10-30`, and public Worker/preview URLs disabled. Its default HTTP handler returns `404`; it is not a public proxy for spending another visitor's allowance. Pages calls the namespace directly. Cloudflare requires a separately deployed Worker to export a DO class; a Pages project cannot deploy that class itself. The owner has now reported the separate Preview Worker/namespace ready and bound, as recorded below. Separate Production infrastructure remains pending. Codex did not create or deploy either resource.
 
 ## Enforcement contract
 
@@ -45,7 +49,7 @@ A cleanup alarm deletes all object storage once the last admitted timestamp is a
 
 Only a syntactically valid `CF-Connecting-IP` on a Cloudflare-context request is used, after the existing origin/host checks. IPv6 spelling is canonicalized. `X-Forwarded-For`, `X-Real-IP`, arbitrary caller IDs and email addresses are never fallback identities. Missing platform identity fails closed in `enforce`; local Node tests explicitly supply synthetic Cloudflare metadata. A local emulator is not an authenticated Internet proxy.
 
-Cloudflare's [header reference](https://developers.cloudflare.com/fundamentals/reference/http-headers/#cf-connecting-ip) documents special Worker-subrequest behavior and Pseudo IPv4. Keep same-zone Workers trusted, avoid a different untrusted ingress/CDN, and review any visitor-IP-removal/Pseudo IPv4 setting before activation. Cross-zone Workers can share Cloudflare's special address and consequently share an allowance. The code does not infer identity from user-controlled forwarding headers to work around these cases.
+Cloudflare's [header reference](https://developers.cloudflare.com/fundamentals/reference/http-headers/#cf-connecting-ip) documents special Worker-subrequest behavior and Pseudo IPv4. Keep same-zone Workers trusted, avoid a different untrusted ingress/CDN, and include any visitor-IP-removal/Pseudo IPv4 setting in the remaining operational review and before Production activation. Cross-zone Workers can share Cloudflare's special address and consequently share an allowance. The code does not infer identity from user-controlled forwarding headers to work around these cases.
 
 The Function HMACs the canonical address using a dedicated server secret and a domain-separated string containing scope and endpoint. Only the HMAC digest plus nonpersonal version/scope/endpoint names determine the object name. The private DO request contains only the two numeric thresholds; its stored `attempts` value contains only admission timestamps, at most 1,000. No submitted body, token, address or credential is forwarded to the DO or written to application logs.
 
@@ -53,26 +57,26 @@ The identifier is **pseudonymous, not anonymous**: it is deterministic until the
 
 New diagnostics log only `forms.rate_limit` with fixed `endpoint`, safe `category` and numeric `status` for throttling/configuration/dependency failures. Allowed/off requests are not logged by this helper. Categories are `throttled`, `configuration`, `client_identity_unavailable`, `limiter_unavailable`, `invalid_limiter_response`. No exception text, digest, raw IP, form values or upstream bodies are logged. Existing allowlisted Preview Brevo diagnostics are retained. Platform request logs are outside this application-log claim and still require owner review.
 
-## Configuration and owner rollout
+## Configuration reference and owner rollout
 
-No Pages Wrangler configuration is added or substituted for the existing dashboard convention. Configure the following **Preview runtime** bindings only after approving the resource:
+No Pages Wrangler configuration is added or substituted for the existing dashboard convention. The owner has completed the Preview resource/binding setup recorded in the hosted-validation section below. The following table preserves the configuration contract and missing-value behavior:
 
 | Name | Type | Value / missing behavior |
 | --- | --- | --- |
 | `FORMS_RATE_LIMITER` | Durable Object namespace binding | Namespace exporting `FormRateLimiter` from `muuva-forms-rate-limiter-preview`. Missing causes `503` in enforce mode. |
 | `FORMS_RATE_LIMIT_HASH_SECRET` | Secret | Dedicated high-entropy secret, at least 32 characters, maximum 256; generate independently of Brevo/Turnstile secrets and keep out of Git. Missing/invalid causes `503`. |
 | `FORMS_RATE_LIMIT_SCOPE` | Plain runtime string | `preview`; required lowercase letters/digits/hyphens, 1–32 characters. Missing/invalid causes `503`. |
-| `FORMS_RATE_LIMIT_MODE` | Plain runtime string | Initially unset or `off`; explicitly `enforce` after binding verification. Any other value is invalid and returns `503`. |
+| `FORMS_RATE_LIMIT_MODE` | Plain runtime string | Current owner-reported Preview value: `enforce`. Unset or `off` disables enforcement explicitly; any other value is invalid and returns `503`. |
 | `FORMS_RATE_LIMIT_10M` | Optional plain runtime string | Default `5`; integer `1`–`1000`. |
 | `FORMS_RATE_LIMIT_1H` | Optional plain runtime string | Default `20`; integer `1`–`1000`. |
 
 Both thresholds apply independently to each endpoint; adjust them together with real shared-network experience. A studio, office, mobile carrier or privacy proxy can share one IP among legitimate visitors. Five attempts per ten minutes is an initial conservative policy for controlled testing, not a proven production allowance. Different addresses, including changing IPv6 privacy addresses, can obtain separate allowances. No persistent cookie/fingerprint is added to try to defeat that limitation.
 
-Owner sequence:
+Owner rollout procedure retained for reference and future configuration changes; it is not a list of outstanding Preview resource dependencies. The final Preview setup/deployment is reported complete below, while normal valid-submission regression testing remains pending:
 
 1. Confirm Workers/DO availability, quotas and costs for the account. Approve creation of the separate Preview Worker and its SQLite namespace using the supplied Worker configuration. Do not change the Production Worker/Pages environment.
 2. In the Pages project's **Preview** bindings, add Durable Object variable `FORMS_RATE_LIMITER`, selecting that exported namespace. Add the Preview-only hash secret, scope and optional thresholds; leave mode `off` initially. Do not attach a production namespace here.
-3. The owner deploys the reviewed source to Preview with the bindings and verifies the existing forms still work. Binding changes require a new Pages deployment. This pass has not performed either deployment.
+3. The owner deploys the reviewed source to Preview with the bindings and verifies the existing forms still work. Binding changes require a new Pages deployment. The owner-reported enforcement deployment is recorded below; valid-submission regressions under enforced limits are not established by its invalid-payload tests.
 4. The owner changes Preview mode to `enforce`, redeploys and runs the controlled checklist below. A missing binding or quota failure must produce `503`, never a silent bypass.
 5. Keep all Production activation flags/settings unchanged. Production needs separate approval, a separately named Worker/namespace, a different hash secret and scope `production`, reviewed thresholds, Privacy/operational review and an independently verified binding. The provided Worker config names only Preview.
 
@@ -90,27 +94,77 @@ A separate local Miniflare/workerd SQLite check exercises the real storage trans
 
 The reusable check is `scripts/verify-forms-rate-limiter-runtime.mjs`. Run `node scripts/verify-forms-rate-limiter-runtime.mjs <path-to-miniflare/dist/src/index.js>` using the Miniflare supplied by the existing local Wrangler installation. It supports the installed Miniflare 5 adapter and the version 4 options format. No runtime/test dependency or account access is added to the application. This review used Wrangler `4.156.0` / Miniflare `5.20261023.3-beta` locally.
 
-Required final checks: `npm test`, `npm run build`, `npm run test:production`, `git diff --check`; compile Pages Functions using the existing local Wrangler workflow, and package the DO Worker with a local dry run. Browser checks use mocked Turnstile/API responses; they must verify rate feedback in all languages, retained data, both independent cooldowns, no automatic retries, fresh tokens on manual retry, success/failure and newsletter concurrency. No real Brevo call or email is part of these automated checks.
+Original application-verification sequence: `npm test`, `npm run build`, `npm run test:production`, `git diff --check`; compile Pages Functions using the existing local Wrangler workflow, and package the DO Worker with a local dry run. Browser checks use mocked Turnstile/API responses; they must verify rate feedback in all languages, retained data, both independent cooldowns, no automatic retries, fresh tokens on manual retry, success/failure and newsletter concurrency. No real Brevo call or email is part of these automated checks. This documentation-only closure requires diff/Markdown review, not a rerun of application tests or builds.
 
-Results on 31 October 2026: all **103 Node tests passed**, including under the enabled root-hosted staging build environment. Default and enabled staging builds passed production verification for **44 localized pages**. Pages Functions compiled successfully; the DO Worker packaged successfully with Wrangler's `--dry-run`. The real local runtime check passed as described above. Chromium passed both forms' rate feedback in EN/DE/NL/ES at desktop/mobile widths, including non-JSON `429` responses, delta-second and HTTP-date headers, retained fields/consent, independent disabled states, no automatic requests, fresh tokens after accelerated cooldowns, duplicate-submit prevention and both existing accepted states. No page/hydration errors occurred; Spanish mobile feedback was visually reviewed with no overflow. All four locale catalogs have no duplicate keys, and comparison with HEAD confirmed only the two new message values were added. `git diff --check` passed. Existing parallel-Vite HMR port warnings did not fail the Node suite. These results do not prove live enforcement or email delivery.
+Previously recorded local results on 31 October 2026: all **103 Node tests passed**, including under the enabled root-hosted staging build environment. Default and enabled staging builds passed production verification for **44 localized pages**. Pages Functions compiled successfully; the DO Worker packaged successfully with Wrangler's `--dry-run`. The real local runtime check passed as described above. Chromium passed both forms' rate feedback in EN/DE/NL/ES at desktop/mobile widths, including non-JSON `429` responses, delta-second and HTTP-date headers, retained fields/consent, independent disabled states, no automatic requests, fresh tokens after accelerated cooldowns, duplicate-submit prevention and both existing accepted states. No page/hydration errors occurred; Spanish mobile feedback was visually reviewed with no overflow. All four locale catalogs have no duplicate keys, and comparison with the then-current HEAD confirmed only the two new message values were added. `git diff --check` passed. Existing parallel-Vite HMR port warnings did not fail the Node suite. These local results alone do not prove hosted enforcement or email delivery; the separate owner-reported hosted evidence follows. Application tests and builds were not rerun for this documentation-only closure.
 
 For repeatable local namespace checks, Cloudflare documents running `wrangler dev` for the separate Worker and `wrangler pages dev dist --do FORMS_RATE_LIMITER=FormRateLimiter@muuva-forms-rate-limiter-preview` for Pages. Supply nonproduction local bindings in ignored `.dev.vars` files and keep test traffic on localhost. The installed Wrangler binary can also compile `pages functions build --outdir <temporary-directory>` and package the Worker with `deploy --dry-run --config workers/forms-rate-limiter/wrangler.jsonc --outdir <temporary-directory>`; the latter is packaging only, not a deployment command executed against an account. Existing `npm run dev` / `preview` serve only frontend files.
 
-## Controlled Preview checklist and Production gate
+## Hosted Preview deployment and live validation — owner-reported
 
-- Inspect the actual Preview deployment/binding and mode. Do not infer enforcement from mocked tests or a successful build.
-- Use one controlled browser/network and one endpoint. Five valid-origin dummy JSON submissions that fail payload validation should return `400`; the sixth should return `429` with decreasing `Retry-After`. These invalid payloads must not reach either upstream. Do not run load tests.
-- Confirm the other endpoint has its own allowance. Check retry after the window, not repeated polling; confirm no permanent block and no history extension from denied requests.
-- Check malformed/missing mandatory config and a controlled dependency failure return safe `503` with no upstream call. Inspect only safe status/category logs, never print environment bindings or captured bodies.
-- Check shared-network usability, changing language, expired challenges, stored field/consent state, failed submissions and manual retry with a new token. After the quota window, perform only a separately approved real newsletter/enquiry delivery test.
-- Confirm Production is unchanged; finalize privacy/controller/provider/retention review, limits, operational monitoring, resource costs, separate namespace/secrets and rollback ownership before any Production activation.
+The owner reports the following final Preview configuration and successful deployment on **31 October 2026**, supported by Cloudflare dashboard screenshots. This is a record of that evidence, not a fresh authenticated inspection by Codex. Production configuration is reported unchanged.
 
-Staging is ready for a controlled **local** test of this code. A controlled **hosted enforcement** test is blocked on owner creation/deployment of the external Worker/namespace, the Preview binding/secret and Preview deployment with `enforce`. No account-level enforcement is claimed.
+| Item | Owner-reported observation |
+| --- | --- |
+| Separate Worker | `muuva-forms-rate-limiter-preview` — Ready |
+| Durable Object class / storage | `FormRateLimiter` / SQLite-backed Durable Objects |
+| Public Worker URLs | Disabled |
+| Pages project / environment | `muuva` / Preview |
+| Pages Durable Object binding | `FORMS_RATE_LIMITER` |
+| Bound namespace | `muuva-forms-rate-limiter-preview_FormRateLimiter` |
+| Hash secret | `FORMS_RATE_LIMIT_HASH_SECRET` configured as a Secret; its value is never recorded |
+| Scope / mode | `FORMS_RATE_LIMIT_SCOPE=preview`, `FORMS_RATE_LIMIT_MODE=enforce` |
+| Thresholds | No optional overrides; defaults of 5 attempts per rolling 10 minutes and 20 per rolling 60 minutes |
+| Source branch / commit | `staging` / `1baaa5b837bdeb8b5d20aa6a17a72c56e6cb9cfd` (`local hardening on staging`) |
+| Final enforcement deployment | `3b97ab77-5f05-4d21-b595-8a27e7fa30aa` |
+| Alias | `https://staging.muuva.pages.dev` |
+| Deployment status / date | Success / 31 October 2026 |
+
+### Newsletter threshold test
+
+The owner made six controlled browser-console requests from the staging website to `POST https://staging.muuva.pages.dev/api/newsletter`. Every request used `{"test":true}`: syntactically valid JSON with an unsupported form field, rather than malformed JSON. This exercises rate admission before normal form-input validation.
+
+| Attempt | HTTP response | Observed `Retry-After` |
+| --- | --- | --- |
+| 1 | `400 Bad Request` | `null` |
+| 2 | `400 Bad Request` | `null` |
+| 3 | `400 Bad Request` | `null` |
+| 4 | `400 Bad Request` | `null` |
+| 5 | `400 Bad Request` | `null` |
+| 6 | `429 Too Many Requests` | `600` |
+
+`null` records the browser's observation that the header was absent. The results show that the Pages Function reached the limiter, five attempts were admitted before input validation rejected them, and the sixth was rate-limited with a 600-second retry interval. Hosted Newsletter rate-limit enforcement was operational on staging during this owner-performed test.
+
+Given this invalid form payload and the documented validation order, these requests were rejected before Turnstile and Brevo processing. The test did not intentionally create subscriptions or send emails. **It does not verify Brevo double opt-in delivery.**
+
+### Independent Wholesale allowance test
+
+Immediately after exhausting the Newsletter allowance, the owner made one controlled request from the same testing network to `POST https://staging.muuva.pages.dev/api/wholesale`, also using `{"test":true}`. The response was `400 Bad Request`, with `Retry-After: null` (header absent).
+
+Wholesale retained an available allowance while Newsletter was rate-limited, confirming independent endpoint allowances for that testing network. The invalid request stopped before transactional email delivery. This is an isolation check, not a complete Wholesale threshold, valid-submission or delivery test.
+
+## Milestone closure and outstanding validation
+
+Completed: application security hardening; the previously recorded 103 passing tests and local SQLite concurrency/expiry checks; owner-reported Preview Worker deployment, namespace binding and runtime configuration with `enforce`; successful staging Pages deployment; and the controlled live Newsletter enforcement and independent Wholesale allowance tests above. The earlier resource-creation blocker is resolved for Preview according to the owner evidence.
+
+Still pending or outside the verified hosted-test scope:
+
+- Normal valid-submission regression testing for both forms under enforced limits: validation, language switching, expired challenges, retained fields/consent, recoverable failures, fresh-token manual retries and actual accepted/delivery workflows. Earlier mocked browser tests do not replace this hosted regression check.
+- Hosted recovery after the rolling window expires, including retry timing, no permanent block and no extension from denied requests. The short live test does not verify the hourly threshold or hosted alarm delivery.
+- Hosted failure-path testing for missing/unavailable Durable Object infrastructure and mandatory configuration: confirm safe fail-closed `503` responses without upstream calls. Inspect only safe status/category logs, never secrets, raw IPs or form bodies.
+- Longer-term quota/cost monitoring and shared-IP/network usability review, including relevant ingress/header settings. Avoid load tests or repeated polling.
+- Separate Production infrastructure, namespace, secrets and configuration; Production remains unchanged according to the owner report.
+- Privacy and data-retention review under **Pass C.3.2**, including controller/provider processing, pseudonymous identifiers, logical expiry versus physical/provider/backup retention. That pass is not begun by this closure.
+- Final independent Production release authorization, with reviewed limits, monitoring and rollback ownership.
+
+The documented C.3.1 core staging-validation milestone is closed within the evidence scope above. It is **not fully Production-approved**. All existing shared-network, Free-plan/quota, fail-closed, privacy, retention and distributed-abuse caveats remain applicable.
+
+Documentation-closure verification: `git diff --check` passed, and `git diff -- docs/forms-pass-c3-1-security.md` was reviewed for Markdown consistency, evidence attribution and scope. Only this document changed; application tests and builds were not rerun. The change remains uncommitted for owner review.
 
 ## Rollback and C.3.3 handoff
 
 Owner rollback is explicit: set Preview mode to `off` and redeploy to restore the prior no-limiter behavior, or redeploy the preceding reviewed bundle. During active abuse, disabling the individual form submission flag is safer than removing its quota. No automatic error path turns enforcement off. Do not delete namespaces, undo migrations or rotate the hash secret as an incident shortcut: rotation changes every identifier and resets allowances; old counters still follow their expiry. Leave Production untouched.
 
-Files added: `functions/_lib/rate-limit.js`, `workers/forms-rate-limiter/index.js`, `workers/forms-rate-limiter/wrangler.jsonc`, `src/forms/retry.js`, `tests/forms-security.test.js`, `scripts/verify-forms-rate-limiter-runtime.mjs` and this document. Files changed: both API endpoints, `functions/_lib/forms.js`, both form components, all four locale catalogs, and the Newsletter MIME regression test. No page/image/layout, route, deployment workflow or master project document is changed.
+Implementation files committed in `1baaa5b`: added `functions/_lib/rate-limit.js`, `workers/forms-rate-limiter/index.js`, `workers/forms-rate-limiter/wrangler.jsonc`, `src/forms/retry.js`, `tests/forms-security.test.js`, `scripts/verify-forms-rate-limiter-runtime.mjs` and this document; changed both API endpoints, `functions/_lib/forms.js`, both form components, all four locale catalogs, and the Newsletter MIME regression test. No page/image/layout, route, deployment workflow or master project document was changed by that implementation. This documentation closure changes **only `docs/forms-pass-c3-1-security.md`**, with no application, test, Worker configuration or account changes and no commit/push/deployment by Codex.
 
-C.3.3 must synchronize the master brief/content/handoff and Privacy review with the verified deployment, chosen resource/region, IP-derived pseudonymous identifiers, logical expiry versus provider retention, operational failure policy and actual activation state. This review is technical implementation evidence, not legal or native-language approval.
+C.3.3 must synchronize the master brief/content/handoff and Privacy review with the owner-reported staging deployment and live results, remaining operational evidence, chosen resource/region, IP-derived pseudonymous identifiers, logical expiry versus provider retention, operational failure policy and actual activation state. This review is technical implementation evidence, not legal or native-language approval. Those master documents remain reserved for C.3.3 and unchanged by this closure.
