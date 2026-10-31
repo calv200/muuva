@@ -80,6 +80,7 @@ test("oversized and non-JSON bodies fail before Turnstile", async () => {
   const invalid = [
     new Request(`${origin}/api/newsletter`, { method: "POST", headers: { Origin: origin, "Content-Type": "application/json" }, body: "x".repeat(2049) }),
     new Request(`${origin}/api/newsletter`, { method: "POST", headers: { Origin: origin, "Content-Type": "text/plain" }, body: "hello" }),
+    new Request(`${origin}/api/newsletter`, { method: "POST", headers: { Origin: origin, "Content-Type": "application/jsonp" }, body: "{}" }),
     new Request(`${origin}/api/newsletter`, { method: "POST", headers: { Origin: origin, "Content-Type": "application/json" }, body: "{" }),
   ];
   for (const incoming of invalid) {

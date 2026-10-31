@@ -119,6 +119,7 @@
     "successTitle": "Bedankt voor je bericht.",
     "successText": "We hebben je vraag ontvangen en nemen zo snel mogelijk contact met je op.",
     "errors": {
+      "rateLimited": "Te veel pogingen. Wacht even voordat je het opnieuw probeert.",
       "required": "Vul dit veld in.",
       "tooLong": "Gebruik maximaal {{max}} tekens.",
       "invalidText": "Verwijder niet-ondersteunde controletekens.",
@@ -133,6 +134,7 @@
     }
   },
   "newsletter": {
+    "rateLimited": "Te veel pogingen. Wacht even voordat je het opnieuw probeert.",
     "formLabel": "Aanmelden voor de MUUVA-nieuwsbrief",
     "emailLabel": "E-mailadres",
     "emailPlaceholder": "jij@voorbeeld.nl",

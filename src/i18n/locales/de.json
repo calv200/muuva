@@ -119,6 +119,7 @@
     "successTitle": "Danke für deine Nachricht.",
     "successText": "Wir haben deine Anfrage erhalten und melden uns so bald wie möglich bei dir.",
     "errors": {
+      "rateLimited": "Zu viele Versuche. Bitte warte etwas, bevor du es erneut versuchst.",
       "required": "Bitte fülle dieses Feld aus.",
       "tooLong": "Bitte verwende höchstens {{max}} Zeichen.",
       "invalidText": "Bitte entferne nicht unterstützte Steuerzeichen.",
@@ -133,6 +134,7 @@
     }
   },
   "newsletter": {
+    "rateLimited": "Zu viele Versuche. Bitte warte etwas, bevor du es erneut versuchst.",
     "formLabel": "Anmeldung zum MUUVA-Newsletter",
     "emailLabel": "E-Mail-Adresse",
     "emailPlaceholder": "du@beispiel.de",

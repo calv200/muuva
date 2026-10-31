@@ -1,3 +1,5 @@
+import { checkFormRateLimit } from "../_lib/rate-limit.js";
+
 const languages = ["en", "de", "nl", "es"];
 const templateBindings = {
   en: "BREVO_DOI_TEMPLATE_EN",
@@ -32,7 +34,7 @@ function emailIsValid(value) {
 }
 
 async function boundedJson(request) {
-  if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) return null;
+  if (request.headers.get("content-type")?.split(";")[0].trim().toLowerCase() !== "application/json") return null;
   const declared = Number(request.headers.get("content-length"));
   if (declared > maxBodyBytes) return null;
   const reader = request.body?.getReader();
@@ -118,6 +120,8 @@ export async function handleNewsletter({ request, env }, fetchImpl = fetch, log 
   if (env?.NEWSLETTER_SUBMISSIONS_ENABLED !== "true") return json(503, "unavailable");
   const origin = trustedOrigin(request, env);
   if (!origin) return json(403, "forbidden");
+  const rateLimit = await checkFormRateLimit({ request, env, endpoint: "newsletter" }, { log });
+  if (rateLimit) return rateLimit;
   const input = await boundedJson(request);
   if (!input || Object.keys(input).some((key) => !["email", "language", "consent", "turnstileToken"].includes(key))) return json(400, "invalid_request");
   if (!languages.includes(input.language)) return json(400, "invalid_language");

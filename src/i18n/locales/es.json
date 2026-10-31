@@ -119,6 +119,7 @@
     "successTitle": "Gracias por escribirnos.",
     "successText": "Hemos recibido tu consulta y te responderemos lo antes posible.",
     "errors": {
+      "rateLimited": "Demasiados intentos. Espera un poco antes de volver a intentarlo.",
       "required": "Completa este campo.",
       "tooLong": "Utiliza un máximo de {{max}} caracteres.",
       "invalidText": "Elimina los caracteres de control no admitidos.",
@@ -133,6 +134,7 @@
     }
   },
   "newsletter": {
+    "rateLimited": "Demasiados intentos. Espera un poco antes de volver a intentarlo.",
     "formLabel": "Suscripción al boletín de MUUVA",
     "emailLabel": "Correo electrónico",
     "emailPlaceholder": "tu@ejemplo.es",

@@ -1,7 +1,7 @@
-export function json(status, code) {
+export function json(status, code, headers = {}) {
   return new Response(JSON.stringify({ code }), {
     status,
-    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" },
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", ...headers },
   });
 }
 

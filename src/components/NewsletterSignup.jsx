@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { localizedUrl } from "../routing/urls.js";
 import { loadTurnstile, useTurnstileSize } from "../forms/turnstile.js";
+import { useRetryAfter } from "../forms/retry.js";
 
 const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
@@ -14,6 +15,13 @@ export default function NewsletterSignup() {
   const [token, setToken] = useState("");
   const [state, setState] = useState("idle");
   const [message, setMessage] = useState("");
+  const pending = useRef(null);
+  const accepted = useRef(false);
+  const retry = useRetryAfter(() => {
+    setToken("");
+    setMessage((previous) => previous === "rateLimited" ? "" : previous);
+    if (widgetId.current !== null) window.turnstile?.reset(widgetId.current);
+  });
   const received = state === "success";
   const widgetSize = useTurnstileSize(widgetContainer, Boolean(siteKey) && !received);
 
@@ -29,9 +37,9 @@ export default function NewsletterSignup() {
         action: "newsletter_signup",
         theme: "light",
         size: widgetSize,
-        callback: (value) => { setToken(value); setMessage(""); },
+        callback: (value) => { setToken(value); setMessage((previous) => ["challengeRequired", "challengeError"].includes(previous) ? "" : previous); },
         "expired-callback": () => setToken(""),
-        "error-callback": () => { setToken(""); setMessage("challengeError"); },
+        "error-callback": () => { setToken(""); setMessage((previous) => previous === "rateLimited" ? previous : "challengeError"); },
       });
     }).catch(() => { if (mounted) setMessage("challengeError"); });
     return () => {
@@ -40,14 +48,19 @@ export default function NewsletterSignup() {
       widgetId.current = null;
     };
   }, [widgetSize, received]);
+  useEffect(() => () => pending.current?.abort(), []);
 
   async function submit(event) {
     event.preventDefault();
-    if (state === "loading" || state === "success") return;
+    if (pending.current || accepted.current) return;
+    if (retry.isBlocked()) { setMessage("rateLimited"); return; }
     const address = email.trim();
     if (!address || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)) { setMessage("invalidEmail"); return; }
     if (!consent) { setMessage("consentRequired"); return; }
     if (!token) { setMessage("challengeRequired"); return; }
+    const controller = new AbortController();
+    pending.current = controller;
+    const timeout = setTimeout(() => controller.abort(), 20000);
     setState("loading");
     setMessage("");
     try {
@@ -55,19 +68,27 @@ export default function NewsletterSignup() {
         method: "POST",
         credentials: "same-origin",
         referrerPolicy: "no-referrer",
+        signal: controller.signal,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: address, language: i18n.resolvedLanguage, consent: true, turnstileToken: token }),
       });
-      const result = await response.json();
-      if (!response.ok || result.code !== "request_received") {
-        setMessage(({ invalid_email: "invalidEmail", consent_required: "consentRequired", challenge_required: "challengeRequired", challenge_failed: "challengeError" })[result.code] || "unavailable");
+      if (response.status === 429) {
+        retry.respectRetryAfter(response.headers.get("Retry-After"));
+        setMessage("rateLimited");
       } else {
-        setState("success");
-        setEmail("");
-        setConsent(false);
-        return;
+        const result = await response.json();
+        if (!response.ok || result.code !== "request_received") {
+          setMessage(({ invalid_email: "invalidEmail", consent_required: "consentRequired", challenge_required: "challengeRequired", challenge_failed: "challengeError" })[result.code] || "unavailable");
+        } else {
+          accepted.current = true;
+          setState("success");
+          setEmail("");
+          setConsent(false);
+          return;
+        }
       }
     } catch { setMessage("unavailable"); }
+    finally { clearTimeout(timeout); pending.current = null; }
     setState("idle");
     setToken("");
     if (widgetId.current !== null) window.turnstile?.reset(widgetId.current);
@@ -92,7 +113,7 @@ export default function NewsletterSignup() {
         <p className="muuva-footer-link mb-2 text-muted">{t("newsletter.verificationLabel")}</p>
         <div ref={widgetContainer} />
       </div>
-      <button type="submit" disabled={state === "loading"} className="muuva-ui min-h-11 rounded-full bg-brand px-7 py-2.5 font-medium text-white transition hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand disabled:cursor-wait disabled:opacity-60">
+      <button type="submit" disabled={state === "loading" || retry.blocked} className="muuva-ui min-h-11 rounded-full bg-brand px-7 py-2.5 font-medium text-white transition hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand disabled:cursor-wait disabled:opacity-60">
         {state === "loading" ? t("newsletter.submitting") : t("newsletter.subscribe")}
       </button>
       {message && <p role="alert" className="muuva-ui text-brand">{t(`newsletter.${message}`)}</p>}

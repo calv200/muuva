@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { localizedUrl } from "../routing/urls.js";
 import { loadTurnstile, useTurnstileSize } from "../forms/turnstile.js";
 import { businessTypes, validateWholesale, wholesaleLimits } from "../forms/wholesale.js";
+import { useRetryAfter } from "../forms/retry.js";
 
 const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 const available = import.meta.env.VITE_WHOLESALE_ENABLED === "true" && Boolean(siteKey) && import.meta.env.BASE_URL === "/";
@@ -20,6 +21,12 @@ export default function WholesaleForm() {
   const form = useRef(null);
   const successHeading = useRef(null);
   const pending = useRef(null);
+  const accepted = useRef(false);
+  const retry = useRetryAfter(() => {
+    setToken("");
+    setMessage((previous) => previous === "rateLimited" ? "" : previous);
+    if (widget.current !== null) window.turnstile?.reset(widget.current);
+  });
   const received = state === "success";
   const widgetSize = useTurnstileSize(container, available && !received, "flexible");
 
@@ -37,7 +44,7 @@ export default function WholesaleForm() {
         size: widgetSize,
         callback: (value) => { setToken(value); setMessage((previous) => ["challengeRequired", "challengeError"].includes(previous) ? "" : previous); },
         "expired-callback": () => setToken(""),
-        "error-callback": () => { setToken(""); setMessage("challengeError"); },
+        "error-callback": () => { setToken(""); setMessage((previous) => previous === "rateLimited" ? previous : "challengeError"); },
       });
     }).catch(() => { if (mounted) setMessage("challengeError"); });
     return () => {
@@ -58,7 +65,8 @@ export default function WholesaleForm() {
 
   async function submit(event) {
     event.preventDefault();
-    if (pending.current || received || !available) return;
+    if (pending.current || accepted.current || !available) return;
+    if (retry.isBlocked()) { setMessage("rateLimited"); return; }
     const { value, errors: invalid } = validateWholesale(fields);
     setErrors(invalid);
     if (Object.keys(invalid).length) {
@@ -78,13 +86,19 @@ export default function WholesaleForm() {
         headers: { "Content-Type": "application/json" }, signal: controller.signal,
         body: JSON.stringify({ ...value, language: i18n.resolvedLanguage, turnstileToken: token }),
       });
-      const result = await response.json();
-      if (response.status === 202 && result.code === "enquiry_received") {
-        setState("success");
-        setFields({ name: "", businessName: "", email: "", businessType: "", enquiry: "", consent: false });
-        return;
+      if (response.status === 429) {
+        retry.respectRetryAfter(response.headers.get("Retry-After"));
+        setMessage("rateLimited");
+      } else {
+        const result = await response.json();
+        if (response.status === 202 && result.code === "enquiry_received") {
+          accepted.current = true;
+          setState("success");
+          setFields({ name: "", businessName: "", email: "", businessType: "", enquiry: "", consent: false });
+          return;
+        }
+        setMessage(({ challenge_required: "challengeRequired", challenge_failed: "challengeError", invalid_fields: "validationError" })[result.code] || "unavailable");
       }
-      setMessage(({ challenge_required: "challengeRequired", challenge_failed: "challengeError", invalid_fields: "validationError" })[result.code] || "unavailable");
     } catch { setMessage("unavailable"); }
     finally { clearTimeout(timeout); pending.current = null; }
     setState("idle");
@@ -134,7 +148,7 @@ export default function WholesaleForm() {
         <p className="muuva-footer-link mt-3 text-muted">{t("wholesale.privacyText")} <a href={localizedUrl(i18n.resolvedLanguage, { page: "privacy" })} className="text-brand underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">{t("footer.links.privacy")}</a>.</p>
       </div>
       {available && <div><p className="muuva-footer-link mb-2 text-muted">{t("wholesale.verificationLabel")}</p><div ref={container} className="min-w-0" /></div>}
-      <button type="submit" disabled={!available || state === "loading"} className="muuva-label min-h-12 w-full rounded-sm bg-brand px-7 py-4 text-white transition hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">{t(state === "loading" ? "wholesale.submitting" : "wholesale.submit")}</button>
+      <button type="submit" disabled={!available || state === "loading" || retry.blocked} className="muuva-label min-h-12 w-full rounded-sm bg-brand px-7 py-4 text-white transition hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">{t(state === "loading" ? "wholesale.submitting" : "wholesale.submit")}</button>
       {message && <p role="alert" className="muuva-ui text-ink">{t(`wholesale.errors.${message}`)}</p>}
     </form>
   );

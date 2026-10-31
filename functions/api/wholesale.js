@@ -1,5 +1,6 @@
 import { boundedJson, fetchWithTimeout, json, trustedOrigin } from "../_lib/forms.js";
 import { emailIsValid, validateWholesale } from "../../src/forms/wholesale.js";
+import { checkFormRateLimit } from "../_lib/rate-limit.js";
 
 const languages = ["en", "de", "nl", "es"];
 const allowedFields = ["name", "businessName", "email", "businessType", "enquiry", "consent", "language", "turnstileToken"];
@@ -36,6 +37,8 @@ export async function handleWholesale({ request, env }, fetchImpl = fetch) {
   if (request.method !== "POST") return json(405, "method_not_allowed");
   if (env?.WHOLESALE_SUBMISSIONS_ENABLED !== "true") return json(503, "unavailable");
   if (!trustedOrigin(request, env.WHOLESALE_PUBLIC_ORIGIN, env.WHOLESALE_ALLOWED_HOSTNAME)) return json(403, "forbidden");
+  const rateLimit = await checkFormRateLimit({ request, env, endpoint: "wholesale" });
+  if (rateLimit) return rateLimit;
   const input = await boundedJson(request, 16384);
   if (!input || Object.keys(input).some((key) => !allowedFields.includes(key))) return json(400, "invalid_request");
   if (!languages.includes(input.language)) return json(400, "invalid_language");
