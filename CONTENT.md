@@ -149,7 +149,7 @@ Pilates inspiration, movement tips and more are on the way.
 ## Newsletter status
 Coming soon
 
-The teaser is a noninteractive text label. There is no email field, submit control, validation or successful-subscription message, and no newsletter service or email collection. All four locales use `footer.description` and `footer.comingSoon`; the existing localized brand heading remains.
+The disabled build retains this noninteractive teaser. An enabled root-hosted build renders the localized Newsletter form with email, separate unchecked newsletter consent, Privacy link and Turnstile. Copy in `newsletter` distinguishes request receipt from actual DOI delivery or subscription. List/template IDs and confirmation routes remain independent of labels; see forms C.1. Website consent choices never subscribe a visitor.
 
 ## About heading
 About Muuva
@@ -166,13 +166,21 @@ FAQs · Privacy Policy · Refund Policy · Shipping Policy · Terms of Service �
 ## Legal line
 © 2026, Muuva. Website designed by Calv200.
 
-Privacy Policy links to the matching `/{language}/privacy/` route. Behind Muuva links to `/{language}/about-us/`; other footer navigation and policy links remain `#` placeholders.
+Privacy Policy links to `/{language}/privacy/`, Behind Muuva to `/{language}/about-us/`, and Wholesale Muuva / Apply for Wholesale to `/{language}/wholesale/`. Persistent Privacy settings is a button, not a page. Other footer navigation/policy links remain `#` placeholders.
 
 # Privacy notice editorial status
 
-The four `privacy` catalogs are the copy source; do not duplicate the full policy here. The drafts disclose MUUVA as a Netherlands eenmanszaak, KvK 99637588, `contact@muuva.nl` (actionable email link), and `https://muuva.nl`. They cover Cloudflare delivery/security, language storage, Umami Hobby with EU analytics storage and six-month standard analytics retention (separate from unconfirmed logs/backups), local fonts, standard YouTube embeds, external links, the unavailable newsletter and visitor rights. SEO descriptions explicitly identify a draft.
+The four `privacy` catalogs are authoritative; do not duplicate the policy here. Drafts dated 1 November 2026 disclose MUUVA, Netherlands eenmanszaak, KvK 99637588, `contact@muuva.nl` and `https://muuva.nl`, with a translated neutral business-address placeholder. Fourteen sections cover controller, purposes/bases, Cloudflare/Turnstile/HMAC counters, functional storage/fonts, choices/withdrawal, consent-controlled Umami and YouTube, Newsletter, Wholesale, email/providers, retention, transfers, rights and updates. SEO and visible labels retain draft status. Provider settings are attributed to owner confirmation, intended/manual cleanup is qualified, and no absolute provider deletion or EU-only processing is promised.
 
-The proprietor's full legal identity and required address are still missing. The proposed legitimate-interests basis and Dutch limited-analytics exception are not finalized. Keep the draft label and draft-update date until publication information and legal review are complete. YouTube privacy review and consent-management work are postponed. Production analytics activation is separate; copy must not claim that local/Preview builds track or that a deployment has occurred. See `docs/privacy-compliance-review.md` for sources and approval gates.
+Approved controller identity/address details and final legal/native-language review remain publication blockers. Never recover or publish a residential address. Keep draft status until approved; no final effective date is fabricated. C.3.2B uses affirmative consent for optional analytics/videos, superseding the earlier proposed analytics exception and postponement. Production activation and actual provider ingestion/delivery/playback remain separately authorized checks. See `docs/privacy-compliance-review.md`.
+
+# Privacy preferences and video copy
+
+The four `consent` catalogs define first-layer choices, category explanations, storage-failure feedback and footer settings. Reject optional, Customize and Accept optional have equal visual weight. Essential functionality is explained without a consent toggle; Analytics and External videos start unchecked. No active marketing category is shown. The four `videoConsent` catalogs define the informed Enable YouTube & Play action, Google-processing explanation, Watch on YouTube link and visible leaving-MUUVA notice. A video grant must preserve Analytics. Existing thumbnails, workout titles and metadata remain unchanged.
+
+# Wholesale copy
+
+The four `wholesale` catalogs define the approved page/form labels, accessibility, validation, rate feedback and inline success. The required privacy acknowledgement authorizes replying to the enquiry, not marketing. Keep the existing editorial layout, supplied reformer photograph and no visitor acknowledgement email; see `docs/forms-pass-c2-wholesale.md`.
 
 # About Us story
 

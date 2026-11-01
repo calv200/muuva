@@ -1,68 +1,26 @@
 # Production verification
 
-Run the local verification sequence (the retained GitHub Pages compatibility workflow also runs the build checks):
+Updated 1 November 2026 for C.3.2B. Use [ordered release/smoke-test checklist](production-release-c332.md) for configuration, approvals, blockers, current results and rollback. Tests do not establish legal approval, live delivery/ingestion or hosted deployment.
 
-```sh
-npm ci
-npm test
-npm run build
-npm run test:production
-git diff --check
-```
+## Required local gate
 
-`test:production` reads the generated output directory, Vite base, and public-origin configuration. It compares the actual HTML files with the shared route manifest: currently 44 localized pages, plus the existing unlocalized compatibility entry. It checks rendered main content and localized headings, language, translated SEO metadata, canonical and reciprocal alternate links, translation-key leakage, shared JS/CSS/font files and absence of Google Fonts requests, sitemap contents, robots directives, and development addresses. It does not execute the application or contact the public site.
+Run in order: npm test, npm run build, npm run test:production, git diff --check. Default build is disabled. Separate root-hosted enabled simulations use process-local dummy public Turnstile configuration; runtime submission flags remain false and all third-party browser requests must be intercepted. Also test MUUVA_STAGING=true with analytics accidentally enabled. No shared environment/dashboard activation change is needed.
 
-New public routes must be added through the shared manifest and covered by localized SEO, pre-rendering, sitemap and production verification. The analytics allowlist is derived from the manifest, with a deliberate exclusion for the four static newsletter confirmation routes: viewing them does not prove a completed subscription. Verify the enabled analytics build separately when a route is added. A branch head or local build is not evidence of a Cloudflare deployment or live analytics ingestion.
+Static verification covers all 44 localized pages plus compatibility root, SSR text, language, localized metadata, canonical/reciprocal hreflang, sitemap/robots, assets/fonts and hosting headers. It rejects external fonts, development addresses, empty shells, unresolved translations, broken sitemap and incorrect noindex rules. Enabled output must have exactly the expected inline loader and zero external tracker tags, including root; disabled output has neither. Analytics resource hints and pre-consent YouTube iframes are rejected. Fixture-corruption checks preserve these gates. Compatibility root is not another public route; 40 paths are analytics-eligible.
 
-The verifier uses the known generated markup format rather than a general-purpose HTML validator. Its regression tests use temporary fixtures and deliberately corrupt output; they do not modify `dist`.
+## Browser gate
 
-GitHub Actions runs dependency installation, unit tests, build, and production verification in order. A failed step prevents artifact upload and the dependent deployment job. Local checks do not establish that the hosted GitHub Actions run or deployment has succeeded.
+Use Chromium against generated files: no hydration/page errors; all locales/direct routes/reloads; 320/390/tablet/desktop layouts without overflow; equally accessible first-layer choices, unchecked categories, footer settings/keyboard/focus; independent permissions, persistence, language changes, tabs, blocked/invalid/expired storage and withdrawal.
 
-## Browser and hosted-site checks
+Use the official tracker with every script/gateway request intercepted: zero before consent, current page once after load, exact sanitized fields/titles/referrer/UTMs, rapid navigation, consecutive Back/Forward, language/internal navigation after Back, separated repeat visits, no filter/anchor-only views, no new events after withdrawal, no script refetch in the document and DNT/hostname gates. Simulated muuva.nl interception is local fixture evidence only.
 
-The Node output checks cannot validate:
+Intercept YouTube: original five thumbnails, 16:9 geometry, informed Option A and safe external links, independent Analytics choice, correct nocookie embeds/autoplay request and immediate removal on withdrawal. Check listing/filters/detail/Back, vertical centering, original hero/product gallery/hotspots/Amazon and both forms. Intercepted players do not prove playback/audio or browser autoplay permission.
 
-- Hydration warnings, browser console errors, or runtime failures after scripts load.
-- Language detection, blocked localStorage, preference persistence, and language switching without a reload.
-- Filter state, browser Back/Forward, section scrolling, legacy-URL migration, or retaining an active video when switching language.
-- Keyboard/focus behavior, gallery and hotspot interactions, carousel scrolling, and the newsletter teaser or gated form (according to build settings).
-- Wholesale image/form layout, validation focus, errors retaining data, challenge reset, inline success, responsive widget sizing and coexistence with the newsletter. See [Pass C.2 Wholesale review](forms-pass-c2-wholesale.md) for configuration and local results.
-- Responsive layout, visual clipping, media playback/audio, or third-party video availability.
-- Actual Cloudflare Pages responses and caching, crawler indexing, or the hostname's root `/robots.txt` (the generated project file is under the Vite base).
+The reusable scripts/verify-consent-browser.mjs takes an existing Playwright module path and downloaded official tracker path; no application dependency is added. Serve an enabled root-hosted build on 127.0.0.1:4175. It intercepts all external traffic. Form/security unit tests mock Siteverify and Brevo with no real email calls.
 
-Before publishing, use `npm run preview` to check representative home, listing, filtered, and workout pages in all four languages on desktop and mobile. Inspect the console, language menu, page metadata after navigation, gallery, footer teaser, and active video. After deployment, check direct localized URLs and refreshes, the sitemap, and asset responses on the live host. These remain separate from the required static production gate.
+## Current local results — 1 November 2026
 
-## Cloudflare Production and Preview configuration
-
-Cloudflare Pages at `https://muuva.nl` is the owner-confirmed Production host; `https://staging.muuva.pages.dev` is the reported Preview host. The current deployed commit and environment settings require inspection in the Cloudflare Pages deployment dashboard or an equivalent deployment record. Existing GitHub Pages defaults/workflow remain for compatibility; these instructions do not change deployment settings.
-
-After the publication/compliance blockers in [the review](privacy-compliance-review.md) have been resolved and the owner has separately approved deployment, set these variables **only in Cloudflare Pages Production**:
-
-```dotenv
-VITE_UMAMI_ENABLED=true
-VITE_UMAMI_WEBSITE_ID=8963af84-1a22-4cad-a8ef-413afe485468
-VITE_PUBLIC_SITE_ORIGIN=https://muuva.nl
-VITE_BASE_PATH=/
-```
-
-Ensure `MUUVA_STAGING` is absent or false in Production. Under **Preview**, keep:
-
-```dotenv
-MUUVA_STAGING=true
-VITE_UMAMI_ENABLED=false
-```
-
-Never place activation values in a shared environment file or inherit Production analytics into Preview. Build and verification must receive the same environment. For local enabled simulations, set the four Production values only for that process and run build plus production verification; intercept every tracker request and event in browser tests. Repeat with the Preview values (and test that `MUUVA_STAGING=true` still suppresses an accidentally true enabled flag). Finish with the ordinary disabled build.
-
-Manual activation steps remaining:
-
-1. Resolve the draft-policy/controller and legal-review blockers; confirm the accepted DPA, transfer safeguards and retention limitations. Review the final four texts. Technical tests do not satisfy these steps.
-2. Review and separately approve the code release to the Cloudflare production branch. No commit, push, merge or deployment has been performed here.
-3. In the existing Pages project settings, select the Production environment and enter the exact variables above; independently confirm the Preview overrides. Do not change DNS.
-4. Trigger an approved production rebuild/deployment; changing a variable alone does not update a built artifact. Verify all 40 direct routes/refreshes, local font responses, one tracker and one privacy hook, the website ID, canonical/hreflang/sitemap and non-production exclusion. Check dashboard ingestion only during an authorized live check.
-5. To disable tracking, set `VITE_UMAMI_ENABLED=false` in Production and rebuild/redeploy. Verify that the published HTML contains neither analytics script.
-
-Pass C.1 newsletter Forms configuration and local Pages Functions checks are documented in [Forms foundation](forms-pass-c1.md). Production newsletter submissions must remain disabled pending the Privacy and workflow reviews listed there; current deployed settings have not been inspected.
+See [release handoff](production-release-c332.md). Historical records below retain earlier route counts/architecture and are not fresh verification. C.3.1 hosted enforcement evidence is owner-reported in its security doc. C.3.2B changes remain local until separately deployed and validated on staging/Production.
 
 ## Historical Pass A.3 local verification record (25 October 2026)
 

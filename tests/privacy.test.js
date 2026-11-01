@@ -48,6 +48,11 @@ test("all 44 server-rendered pages preserve localized footer and Privacy content
           assert(footer?.includes(`href="${privacyUrl}"`));
           assert(footer.includes(escapeMarkup(locale.footer.links.privacy)));
           assert(footer.includes(escapeMarkup(locale.footer.description)));
+          assert(footer.includes(escapeMarkup(locale.consent.settings)));
+          const settingsButtons = [...footer.matchAll(/<button\b[^>]*>[\s\S]*?<\/button>/g)]
+            .map((match) => match[0]).filter((button) => button.endsWith(`>${escapeMarkup(locale.consent.settings)}</button>`));
+          assert.equal(settingsButtons.length, 1, "Exactly one persistent Privacy settings button");
+          const collectionFooter = footer.replace(settingsButtons[0], "");
           if (newsletterEnabled) {
             assert(footer.includes(`<form`) && footer.includes(`aria-label="${escapeMarkup(locale.newsletter.formLabel)}"`));
             assert(footer.includes('type="email"') && footer.includes('type="checkbox"'));
@@ -60,7 +65,7 @@ test("all 44 server-rendered pages preserve localized footer and Privacy content
             assert(!/role="status"|aria-live=/i.test(footer), "Footer must not imply a completed signup");
           } else {
             assert(footer.includes(escapeMarkup(locale.footer.comingSoon)));
-            assert(!/<(?:form|input|button)\b|role="(?:button|status)"|aria-live=/i.test(footer), "Footer teaser must not collect email or imply a subscription");
+            assert(!/<(?:form|input|button)\b|role="(?:button|status)"|aria-live=/i.test(collectionFooter), "Footer teaser must not collect email or imply a subscription");
           }
           assert.equal(locale.footer.success, undefined);
           if (route.page !== "privacy") continue;

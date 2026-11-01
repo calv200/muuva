@@ -261,7 +261,7 @@
     },
     "privacy": {
       "title": "Privacybeleid | MUUVA",
-      "description": "Lees het conceptprivacybeleid van MUUVA over websitebezoeken, lokaal gehoste lettertypen, externe diensten en websitestatistieken."
+      "description": "Lees MUUVA’s conceptprivacybeleid over toestemming, Umami, YouTube, nieuwsbrief, groothandelsaanvragen en je rechten."
     },
     "about": {
       "title": "Over ons | Het verhaal achter MUUVA",
@@ -279,60 +279,94 @@
   "privacy": {
     "title": "Privacybeleid",
     "draft": "Concept ter beoordeling",
-    "intro": "Dit concept legt uit hoe informatie wordt verwerkt wanneer je MUUVA bezoekt, producten bekijkt of Guided Routines gebruikt. Het beschrijft de website en de beoogde analyticsconfiguratie voor productie. De volledige gegevens van de verwerkingsverantwoordelijke en de juridische beoordeling zijn vóór publicatie nog nodig.",
+    "intro": "Dit concept beschrijft MUUVA’s website, privacykeuzes, Guided Routines, nieuwsbrief en groothandelsaanvragen. Het is niet goedgekeurd voor onbeperkte publicatie: gegevens van de verantwoordelijke en definitieve juridische toetsing zijn onvolledig.",
     "updated": "Concept laatst bijgewerkt:",
     "sections": {
       "operator": {
-        "title": "Over MUUVA",
-        "p1": "MUUVA is de handelsnaam van een eenmanszaak gevestigd in Nederland, ingeschreven bij de Kamer van Koophandel onder KvK 99637588. Dit beleid gaat over https://muuva.nl. Voor privacyvragen of verzoeken kun je mailen naar contact@muuva.nl."
+        "title": "Verantwoordelijke en contact",
+        "p1": "MUUVA is een Nederlandse eenmanszaak, KvK 99637588, Nederland. Deze verklaring betreft https://muuva.nl. Voor privacyvragen en verzoeken kun je contact opnemen via contact@muuva.nl.",
+        "p2": "[Zakelijk contactadres volgt]. Goedgekeurde adres-/contactgegevens en definitieve juridische toetsing zijn publicatievoorwaarden. Dit concept is geen definitieve privacyverklaring."
+      },
+      "purposes": {
+        "title": "Gegevens, doelen en grondslagen",
+        "p1": "Websiteverzoeken omvatten IP, browser, bronnen en tijdstippen. Formulieren verzamelen contact-, taal-, toestemmings- of aanvraaggegevens; vermijd gevoelige informatie. Voorgestelde AVG-grondslagen: gerechtvaardigde belangen bij betrouwbare levering, evenredige beveiliging en zakelijke beantwoording (artikel 6 lid 1 onder f); gevraagde precontractuele stappen waar toepasselijk (b); toestemming voor optionele analyses, video’s en nieuwsbrief (a); en toepasselijke wettelijke verplichtingen (c). Definitieve toetsing per doel blijft nodig."
       },
       "hosting": {
-        "title": "Een bezoek aan de website",
-        "p1": "De website wordt aangeboden via Cloudflare Pages. Bij het laden van een pagina worden netwerkverzoeken verstuurd die onder meer je IP-adres, browserinformatie, de opgevraagde bron en het tijdstip kunnen bevatten. Hosting- en beveiligingsdiensten kunnen technische loggegevens verwerken om de website te leveren en misbruik tegen te gaan.",
-        "p2": "Deze operationele verwerking staat los van optionele bezoekersstatistieken. Ook als analytics uitstaat, blijven technische verzoeken nodig om de website te tonen en kunnen verzoeken naar ingesloten externe diensten plaatsvinden."
+        "title": "Websitelevering en beveiliging",
+        "p1": "Cloudflare Pages host MUUVA; Pages Functions verwerkt actieve formulieren en Managed Turnstile controleert misbruik. Noodzakelijke beveiliging staat los van optionele toestemming en kan IP-, apparaat-/browser- en controlegegevens omvatten. Voor staging bevestigt de eigenaar: pre-clearance uit, Workers Logs uit, geen Logpush-taken. Providerlogs en effectieve Production-instellingen zijn daarmee niet geverifieerd.",
+        "p2": "Formulierlimieten gebruiken geheime HMAC-gebaseerde pseudonieme identificatoren uit het client-IP, apart per formulier en omgeving. Actieve tellers verlopen logisch na ongeveer één uur. Identificatoren zijn niet anoniem. Cloudflare SQLite Durable Object-herstelgeschiedenis en andere gegevens kunnen langer blijven; geen volledige verwijdering na één uur of uitsluitend Europese verwerking wordt beloofd."
       },
       "storage": {
-        "title": "Cookies en je taalkeuze",
-        "p1": "Wanneer je zelf een taal kiest, bewaart MUUVA die keuze in de localStorage van je browser onder muuva.language. De keuze blijft staan totdat je deze wijzigt of de opgeslagen websitegegevens in je browser wist. De taal in het pagina-adres heeft voorrang. Automatische taaldetectie slaat geen voorkeur op.",
-        "p2": "De Umami-implementatie van MUUVA plaatst geen analyticscookies. Dat betekent niet dat de hele website cookievrij is: ingesloten diensten van derden kunnen cookies of vergelijkbare technieken gebruiken, afhankelijk van hun instellingen en je browser."
+        "title": "Functionele opslag en lettertypen",
+        "p1": "Handmatige taalkeuze bewaart muuva.language in localStorage tot wijziging/verwijdering; URL-taal gaat voor. Automatische detectie bewaart niets. Manrope en Newsreader worden zelf gehost zonder Google Fonts-verzoeken.",
+        "p2": "muuva.consent bewaart categorieën, melding/versie, opslagtijd en afloop lokaal, zonder bezoekers-ID of serverdatabase voor toestemming. Vernieuwing aanvankelijk na zes kalendermaanden is een instelbare productkeuze, geen universele wettelijke termijn. Ongeldige, verlopen of onbeschikbare opslag blokkeert optionele diensten."
+      },
+      "consent": {
+        "title": "Keuzes en intrekken",
+        "p1": "Bij eerste bezoek kun je Optioneel weigeren, Aanpassen of Optioneel accepteren. Analyses en Externe video’s zijn onafhankelijk en aanvankelijk uit. Scrollen of verder browsen is geen toestemming. Noodzakelijke functies zijn niet optioneel. Marketingtracking is niet actief.",
+        "p2": "Via Privacyinstellingen in de footer kun je altijd wijzigen of intrekken. Intrekken stopt toekomstige analyses en verwijdert spelers; eerdere overdrachten worden niet automatisch teruggehaald. Keuzes gelden voor deze browser/oorsprong en relevante tabbladen, niet alle apparaten. Gewiste opslag of een nieuwe melding vraagt een nieuwe keuze. Lokale gegevens zijn beperkt bewijs, geen volledig toestemmingsregister."
       },
       "analytics": {
-        "title": "Websitestatistieken",
-        "p1": "De productieconfiguratie voor muuva.nl gebruikt Umami Cloud met het Hobby-abonnement en opslag van analyticsgegevens in de EU, voor websitestatistieken, toewijzing van verkeersbronnen en analyse van de navigatie. Tracking is beperkt tot de exacte hostnaam muuva.nl. In lokale en Preview-builds blijft analytics uitgeschakeld. Activering in productie is een afzonderlijke stap na beoordeling; dit concept bevestigt niet dat tracking al actief is.",
-        "p2": "De goedgekeurde configuratie verstuurt uitsluitend de websitecode, hostnaam, goedgekeurde openbare paginapaden en vertaalde paginatitels, toegestane campagnewaarden en de oorsprong van een externe verwijzende website. Andere querywaarden en ankers worden verwijderd. Browsertaal, schermgrootte, eigen bezoekerscodes, aangepaste gebeurtenissen, advertentiepixels en sessieopnamen worden uitgesloten. Het Do Not Track-signaal van de browser wordt gerespecteerd.",
-        "p3": "Umami kan IP-adressen en User-Agent-informatie verwerken om gehashte sessiecodes te berekenen en statistieken zoals browser en apparaattype af te leiden. Deze codes garanderen geen anonimiteit. IP-adressen kunnen ook in operationele of beveiligingslogs voorkomen. Opslag van analyticsgegevens in de EU betekent niet dat alle verwerking uitsluitend binnen de EU plaatsvindt. Activering blijft afhankelijk van de privacybeoordeling."
+        "title": "Optionele Umami-analyses",
+        "p1": "Wanneer beschikbaar op muuva.nl laadt Umami Cloud alleen na toestemming voor Analyses en met respect voor Do Not Track. Preview en localhost sturen nooit productieanalyses. De eigenaar bevestigt Hobby, EU (Frankfurt) voor analyseopslag en zes maanden standaardbewaring. Dit bevestigt geen actieve Production-analyses.",
+        "p2": "MUUVA stuurt alleen website-ID, hostnaam, goedgekeurd openbaar pad, goedgekeurde vertaalde titel, gevalideerde campagnewaarden en oorsprong van externe verwijzingen. Andere queries, fragmenten, formulierinhoud, eigen ID’s/gebeurtenissen, schermgrootte en browsertaal zijn uitgesloten. Geen advertentiepixels of sessieopnames. Campagnes mogen geen persoonsgegevens bevatten; syntax herkent niet iedere persoonsnaam.",
+        "p3": "Umami ontvangt netwerkmetagegevens zoals IP en User-Agent en kan apparaat-/browserkenmerken en gehashte sessies afleiden. Hashing garandeert geen anonimiteit. Europese analyseopslag betekent niet dat ondersteuning, beveiliging, subverwerkers en andere verwerking volledig in de EU blijven. Operationele logs en back-ups hebben afzonderlijke bewaring."
       },
       "videos": {
-        "title": "YouTube Guided Routines",
-        "p1": "Trainingspagina’s bevatten standaard ingesloten YouTube-spelers. Je browser maakt al contact met YouTube wanneer de speler laadt, voordat je op Play drukt. Google kan je IP-adres, browser- en verzoekinformatie ontvangen en, afhankelijk van instellingen en je aanmeldstatus, cookies gebruiken of activiteit aan een account koppelen.",
-        "p2": "Voor de zelfstandige verwerking door YouTube geldt de privacyinformatie van Google. De beoordeling van de privacymodus voor ingesloten video’s en het pas laden na een bewuste handeling is uitgesteld. Deze wijzigingen zijn nog niet toegepast op de huidige website."
-      },
-      "services": {
-        "title": "Lettertypen en externe links",
-        "p1": "Manrope en Newsreader worden samen met de MUUVA-website gehost. Je browser downloadt deze lettertypebestanden vanaf dezelfde oorsprong als de website, zonder contact met Google Fonts. Voor deze verzoeken geldt de bovenstaande informatie over het leveren van de website.",
-        "p2": "Amazon-kooplinks en Instagram-links brengen je naar externe websites wanneer je ervoor kiest ze te volgen. Het zijn links, geen ingesloten advertentie- of socialetracking-scripts. Aankopen vinden plaats bij Amazon. Deze diensten hanteren hun eigen privacyvoorwaarden."
+        "title": "Optionele YouTube Guided Routines",
+        "p1": "Vóór toestemming voor Externe video’s tonen trainingen lokale afbeeldingen zonder YouTube-verzoeken. YouTube inschakelen en afspelen staat alleen die categorie toe en laadt een privacyvriendelijkere youtube-nocookie.com-speler. Google ontvangt dan netwerk-/browsergegevens en kan afhankelijk van afspelen, aanmelding en instellingen opslag/accountkoppeling gebruiken. De modus voorkomt niet alle Google-verwerking.",
+        "p2": "Intrekken via Privacyinstellingen verwijdert actieve spelers direct. Bekijken op YouTube opent de bestaande video in een nieuw tabblad zonder MUUVA-keuzes te wijzigen. Je verlaat MUUVA; Googles eigen privacypraktijken gelden."
       },
       "newsletter": {
-        "title": "Nieuwsbrief",
-        "p1": "De nieuwsbrief is nog niet beschikbaar. De footer toont een aankondiging met Binnenkort, zonder inschrijfformulier. MUUVA verzamelt op deze website geen e-mailadressen via een nieuwsbriefformulier en registreert geen nieuwsbriefinschrijvingen."
+        "title": "Nieuwsbriefaanmeldingen",
+        "p1": "Het actieve formulier vraagt e-mail, interfacetaal en afzonderlijke, aanvankelijk niet aangevinkte nieuwsbriefinstemming. Brevo verzorgt dubbele opt-in en inschrijvingen. Een ontvangstmelding bevestigt geen bezorging of abonnement; bevestig per e-mail als die aankomt. Afmelden via de nieuwsbrieflink of contact. Websitevoorkeuren schrijven je niet in.",
+        "p2": "Toestemmingstekst/versie staat in de bron; Brevo-bevestigings-/inschrijfbewijs, met koppeling aan de getoonde tekst, moet operationeel worden bewaard en geverifieerd. Actieve abonnees blijven zolang ingeschreven, met beoordeling na 24 maanden inactiviteit. Opruimen onbevestigde registraties na 30 dagen is beoogd, niet volledig geverifieerd. Blokkeringen blijven alleen zover nodig om afmeldingen te respecteren met gedocumenteerde criteria."
+      },
+      "wholesale": {
+        "title": "Groothandelsaanvragen",
+        "p1": "Het actieve formulier verzamelt naam, bedrijf, e-mail, optioneel bedrijfstype, aanvraag, taal en privacybevestiging voor beantwoording. Cloudflare Functions, Turnstile en gescheiden omgevingslimieten beschermen het; Brevo bezorgt aan de Microsoft 365-bedrijfsmailbox. De bevestiging geeft geen marketing- of nieuwsbriefinstemming.",
+        "p2": "De bedoeling is inhoud handmatig binnen twaalf maanden na het laatste wezenlijke zakelijke contact te beoordelen/verwijderen, behalve lopende relaties, wettelijke plichten of geschillen. Dit is geen geverifieerde automatische mailboxregel en staat los van Brevo-transactielogs."
+      },
+      "providers": {
+        "title": "E-mail- en infrastructuurproviders",
+        "p1": "Brevo verzorgt dubbele opt-in en transactionele bezorging. De eigenaar bevestigt 24 maanden transactielogbewaring voor alle afzenders. Volledige e-mailvoorbeelden zijn uitgeschakeld; historische voorbeelden, metagegevens en back-ups worden daarmee niet gewist.",
+        "p2": "contact@muuva.nl gebruikt Microsoft 365 Email Essentials via GoDaddy. De eigenaar meldt Default MRM Policy met oudere bewaartags, Online Archive uit en Mailbox Litigation Hold uit. Automatische twaalfmaandse groothandelsverwijdering is niet geverifieerd. Aanvullende Purview-bewaring/holds, werkelijk herstel van verwijderde items en andere back-ups blijven ongeverifieerd.",
+        "p3": "Amazon-kooplinks en Instagram-links zijn vrijwillige externe links, geen ingebedde reclame-/socialetrackers. Aankopen gebeuren bij Amazon. Na volgen gelden de eigen privacypraktijken van de dienst."
       },
       "retention": {
-        "title": "Bewaartermijnen, grondslagen en doorgifte",
-        "p1": "Voor Umami Hobby geldt een standaardbewaartermijn van zes maanden voor analyticsgegevens. Dit staat los van operationele en beveiligingslogs en back-ups, waarvan de toepasselijke termijnen nog moeten worden bevestigd. Je taalkeuze blijft in je browser totdat je die wijzigt of wist. Hosting- en externe diensten hanteren afzonderlijke bewaartermijnen.",
-        "p2": "MUUVA stelt gerechtvaardigd belang onder artikel 6 lid 1 onder f AVG voor als grondslag om websitegebruik te begrijpen en de navigatie te verbeteren, onder voorbehoud van de vereiste beoordeling. Ook de Nederlandse uitzondering voor analytics met beperkte privacygevolgen wordt nog beoordeeld; er is niet vastgesteld dat toestemming overbodig is. De grondslagen, bewaartermijnen van aanbieders en waarborgen voor verwerking buiten de Europese Economische Ruimte moeten vóór publicatie en activering worden afgerond."
+        "title": "Bewaarcriteria",
+        "p1": "Taalopslag blijft tot wijziging/verwijdering; toestemming verloopt eerst na zes kalendermaanden. Actieve formuliertellers verlopen logisch na ongeveer één uur, apart van providerherstelgeschiedenis. Umami-analyses hebben zes maanden standaardbewaring, operationele/beveiligingslogs en back-ups aparte termijnen.",
+        "p2": "Nieuwsbrief-, aanvraag- en transactietermijnen staan hierboven. Privacycorrespondentie blijft slechts zover nodig voor afhandeling, bewijs en plichten. Back-ups, herstel, blokkeringen en juridische holds kunnen actieve gegevens overleven. Geverifieerde termijnen en gedocumenteerde controles blijven nodig; geen absolute permanente verwijderingstermijn voor alle systemen wordt beloofd."
+      },
+      "transfers": {
+        "title": "Internationale verwerking en waarborgen",
+        "p1": "Cloudflare, Brevo, Microsoft/GoDaddy, Umami en Google kunnen toegang/verwerking buiten de EER omvatten. Europese analyseopslag is geen uitsluitend Europese verwerking. Mogelijke waarborgen zijn adequaatheidsbesluiten of standaardcontractbepalingen en aanvullende maatregelen. Toets werkelijk gebruikte diensten, regio’s, subverwerkers en afspraken. Links bewijzen geen aanvaarding door MUUVA, exacte bestemmingen of voltooide toetsing. Vraag ons naar toepasselijke waarborgen."
       },
       "rights": {
-        "title": "Je privacyrechten",
-        "p1": "Afhankelijk van de verwerking en de wettelijke voorwaarden kun je vragen om inzage, correctie, verwijdering, beperking of overdraagbaarheid van je persoonsgegevens, en bezwaar maken tegen verwerking. Als toestemming de grondslag is, kun je die intrekken zonder dat dit de rechtmatigheid van eerdere verwerking aantast. Mail voor privacyvragen of het uitoefenen van je rechten naar contact@muuva.nl en beschrijf je verzoek.",
-        "p2": "Je kunt een klacht indienen bij de Autoriteit Persoonsgegevens of bij de toezichthouder in het land waar je woont of werkt, of waar een vermoedelijke overtreding plaatsvond. Vragen over de zelfstandige verwerking door een aanbieder kun je ook rechtstreeks aan die aanbieder stellen."
+        "title": "Rechten en klachten",
+        "p1": "Onder wettelijke voorwaarden kun je inzage, correctie, verwijdering, beperking of overdraagbaarheid vragen, bezwaar maken tegen gerechtvaardigd-belangverwerking en toestemming intrekken zonder eerdere rechtmatige verwerking aan te tasten. Beschrijf je verzoek aan contact@muuva.nl; we vragen alleen evenredige noodzakelijke informatie.",
+        "p2": "We antwoorden normaal binnen één maand, met uitgelegde wettelijke verlengingen. Klagen kan bij de Nederlandse Autoriteit Persoonsgegevens of de toezichthouder waar je woont, werkt of een vermeende inbreuk plaatsvond. Benader waar passend providers voor hun zelfstandige verwerking."
+      },
+      "updates": {
+        "title": "Wijzigingen van dit concept",
+        "p1": "De datum betreft conceptvoorbereiding, geen definitieve ingangsdatum. Wezenlijke wijzigingen van optionele verwerking vragen zo nodig nieuwe keuzes. Goedgekeurde verantwoordelijkegegevens en definitieve juridische/moedertaaltoetsing ontbreken nog vóór onbeperkte publicatie."
       }
     },
     "links": {
-      "cloudflare": "Privacyinformatie van Cloudflare",
-      "umami": "Privacyinformatie van Umami",
-      "google": "Privacybeleid van Google",
-      "authority": "Autoriteit Persoonsgegevens",
-      "contact": "Mail naar contact@muuva.nl"
+      "cloudflare": "Cloudflare-privacy",
+      "turnstile": "Turnstile-privacy",
+      "cloudflareDpa": "Cloudflare-verwerkersovereenkomst",
+      "cloudflareTransfers": "Cloudflare-doorgiftevoorwaarden",
+      "cloudflareSubprocessors": "Cloudflare-subverwerkers",
+      "umami": "Umami-privacy",
+      "umamiDpa": "Umami-verwerkersovereenkomst",
+      "umamiSubprocessors": "Umami-subverwerkers",
+      "google": "Google-privacy",
+      "brevo": "Brevo-privacy",
+      "microsoft": "Microsoft-privacy",
+      "godaddy": "GoDaddy-privacy",
+      "contact": "E-mail contact@muuva.nl",
+      "authority": "Autoriteit Persoonsgegevens"
     }
   },
   "about": {
@@ -355,5 +389,28 @@
       "p5": "In de kern weerspiegelt Muuva hun liefde, hun gedeelde visie en de moed om samen een droom te volgen.",
       "alt": "Michelle en Carlos staan samen, terwijl Carlos naar Michelle glimlacht."
     }
+  },
+  "consent": {
+    "title": "Privacy- en cookievoorkeuren",
+    "intro": "Noodzakelijke functies houden MUUVA veilig werkend. Met jouw toestemming meet Umami bezoeken en laadt YouTube trainingen. Beide blijven uit totdat je kiest. Je kunt je keuzes altijd wijzigen via Privacyinstellingen.",
+    "essential": "Noodzakelijk — altijd actief",
+    "essentialDescription": "Websitelevering, taal- en privacykeuzes en formulierbeveiliging. Dit zijn geen optionele toestemmingscategorieën.",
+    "analytics": "Analyses",
+    "analyticsDescription": "Sta Umami Cloud toe openbare paginabezoeken met minimale gegevens te meten. Geen advertenties of sessieopnames.",
+    "externalVideos": "Externe video’s",
+    "externalVideosDescription": "Sta YouTube-spelers toe. Google ontvangt informatie zodra een speler laadt, ook vóór afspelen.",
+    "reject": "Optioneel weigeren",
+    "customize": "Aanpassen",
+    "accept": "Optioneel accepteren",
+    "save": "Keuzes opslaan",
+    "close": "Instellingen sluiten",
+    "settings": "Privacyinstellingen",
+    "storageError": "Je browser kon deze keuzes niet opslaan. Optionele analyses en video’s blijven geblokkeerd. Je kunt blijven browsen of rechtstreeks op YouTube kijken."
+  },
+  "videoConsent": {
+    "enable": "YouTube inschakelen en afspelen",
+    "explanation": "Door YouTube in te schakelen mag Google bij het laden informatie zoals je IP-adres en browsergegevens verwerken. Alleen Externe video’s worden toegestaan; je keuze voor Analyses blijft gelijk.",
+    "external": "Bekijken op YouTube",
+    "leaving": "Opent YouTube in een nieuw tabblad. Je verlaat MUUVA; je opgeslagen keuzes veranderen niet."
   }
 }

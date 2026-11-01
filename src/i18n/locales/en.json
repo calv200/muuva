@@ -261,7 +261,7 @@
     },
     "privacy": {
       "title": "Privacy Policy | MUUVA",
-      "description": "Read MUUVA’s draft privacy notice about website visits, locally hosted fonts, external services and production analytics."
+      "description": "Read MUUVA’s draft privacy policy on consent, Umami, YouTube, newsletter subscriptions, Wholesale enquiries and your rights."
     },
     "about": {
       "title": "About Us | The Story Behind MUUVA",
@@ -279,60 +279,94 @@
   "privacy": {
     "title": "Privacy Policy",
     "draft": "Draft for review",
-    "intro": "This draft explains how information is handled when you visit MUUVA, explore products or use Guided Routines. It covers the website and the intended production analytics configuration. Final controller information and the legal assessment are still pending before publication.",
+    "intro": "This draft covers MUUVA’s website, privacy choices, Guided Routines, newsletter and Wholesale enquiries. It is not approved for unrestricted publication: controller contact details and final legal review remain incomplete.",
     "updated": "Draft last updated:",
     "sections": {
       "operator": {
-        "title": "Who we are",
-        "p1": "MUUVA is the trading name of a sole proprietorship (eenmanszaak) established in the Netherlands, registered with the Dutch Chamber of Commerce under KvK 99637588. This notice concerns https://muuva.nl. For privacy questions or requests, contact contact@muuva.nl."
+        "title": "Controller and contact",
+        "p1": "MUUVA is a Dutch sole proprietorship (eenmanszaak), KvK 99637588, Netherlands. This notice concerns https://muuva.nl. For privacy questions and requests, contact contact@muuva.nl.",
+        "p2": "[Business contact address pending]. Approved controller address/contact details and final legal review are publication blockers. This draft is not a final legal notice."
+      },
+      "purposes": {
+        "title": "Data, purposes and legal bases",
+        "p1": "Website requests involve IP, browser, resource and timing data. Forms collect contact details, language, consent or enquiry information. Please avoid sensitive information. Proposed GDPR bases are legitimate interests in reliable delivery, proportionate security and answering business enquiries (Article 6(1)(f)); requested pre-contractual steps where applicable (6(1)(b)); consent for optional analytics, videos and newsletters (6(1)(a)); and applicable legal obligations (6(1)(c)). These purpose-specific assessments remain subject to final review."
       },
       "hosting": {
-        "title": "Visiting the website",
-        "p1": "The website is delivered through Cloudflare Pages. Loading a page involves network requests that can include your IP address, browser information, the requested resource and the time of the request. Hosting and security services may process technical logs to deliver the website and protect it against abuse.",
-        "p2": "This operational processing is separate from optional audience analytics. Turning analytics off does not prevent the technical requests needed to display the website or requests to embedded external services."
+        "title": "Website delivery and security",
+        "p1": "Cloudflare Pages hosts MUUVA; Pages Functions process enabled forms and Managed Turnstile checks abuse. Necessary security is separate from optional consent and may involve IP, device/browser and challenge information. The owner confirms for staging: pre-clearance disabled, Workers Logs disabled and no Logpush jobs. Provider operational records and effective Production settings are separate and not thereby verified.",
+        "p2": "Rate limiting uses pseudonymous secret-key HMAC identifiers derived from client IP, separately per form and environment. Active counters expire logically after approximately one hour. These identifiers are not anonymous. Cloudflare SQLite Durable Object recovery history and other records may persist longer; no complete deletion after one hour or EU-only processing is promised."
       },
       "storage": {
-        "title": "Cookies and your language choice",
-        "p1": "When you manually select a language, MUUVA saves that choice in your browser’s localStorage under muuva.language. It remains until you change it or clear the website’s stored data in your browser. The language in the page URL takes priority. Automatic language detection does not save a preference.",
-        "p2": "MUUVA’s Umami implementation does not set analytics cookies. This does not mean the whole website is cookie-free: embedded third-party services may use cookies or similar technologies, depending on their settings and your browser."
+        "title": "Functional storage and fonts",
+        "p1": "Manual language selection saves muuva.language in localStorage until changed or cleared; URL language takes priority. Automatic detection saves nothing. Manrope and Newsreader are self-hosted, without Google Fonts requests.",
+        "p2": "muuva.consent stores category choices, notice/version, save time and expiry locally, without a visitor ID or server consent database. Initial renewal is six calendar months, a configurable product choice, not a universal legal rule. Invalid, expired or unavailable storage blocks optional services."
+      },
+      "consent": {
+        "title": "Choices and withdrawal",
+        "p1": "Reject optional, Customize and Accept optional are available on first visit. Analytics and External videos are independent and initially off. Scrolling or browsing does not give consent. Essential functions are not optional consent. No marketing tracking category is active.",
+        "p2": "Use Privacy settings in the footer to update or withdraw choices at any time. Withdrawal stops future analytics and removes players; earlier transmissions cannot be recalled automatically. Choices apply to this browser and origin, including relevant tabs, not every device. Clearing storage or an updated notice requires a new choice. Browser-local records are limited evidence, not a complete consent audit trail."
       },
       "analytics": {
-        "title": "Website analytics",
-        "p1": "The production configuration for muuva.nl uses Umami Cloud on the Hobby plan, with analytics storage in the EU, for website analytics, traffic attribution and navigation analysis. Tracking is restricted to the exact hostname muuva.nl. Local and Preview builds remain disabled. Production activation is a separate step after review; this draft does not confirm that tracking is live.",
-        "p2": "The approved configuration sends only the website identifier, hostname, approved public page path, approved localized page title, permitted campaign values and the origin of an external referring website. Other query values and anchors are removed. It excludes browser language and screen size, custom visitor identifiers, custom events, advertising pixels and session recordings. It respects the browser’s Do Not Track signal.",
-        "p3": "Umami can process IP addresses and User-Agent information to calculate hashed session identifiers and derive metrics such as browser and device type. These identifiers are not a guarantee of anonymity. IP addresses may also occur in operational or security logs. EU analytics storage does not mean that every processing activity takes place within the EU. Activation remains subject to the privacy review."
+        "title": "Optional Umami analytics",
+        "p1": "When available on muuva.nl, Umami Cloud loads only after Analytics consent and subject to Do Not Track. Preview and localhost never send production analytics. The owner confirms Hobby, EU (Frankfurt) analytics storage and six-month standard analytics retention. This draft does not establish live Production activation.",
+        "p2": "MUUVA sends only website ID, hostname, approved public path, approved localized title, validated campaign values and external referrer origin. Other queries, fragments, form content, custom IDs/events, screen size and browser language are excluded. No advertising pixels or session recordings. Campaign labels must contain no personal data; syntax checks cannot recognize every personal name.",
+        "p3": "Umami receives network metadata such as IP and User-Agent and may derive device/browser metrics and hashed sessions. Hashing does not guarantee anonymity. EU analytics storage does not mean all support, security, subprocessors or other operations remain in the EU. Operational logs and backups have separate retention."
       },
       "videos": {
-        "title": "YouTube Guided Routines",
-        "p1": "Workout pages contain standard YouTube embedded players. Your browser contacts YouTube when the player loads, before you press Play. Google may receive your IP address, browser and request information, and may use cookies or associate activity with an account depending on its settings and your sign-in status.",
-        "p2": "YouTube’s independent processing is governed by Google’s privacy information. The review of privacy-enhanced embedding and loading only after a visitor’s action has been postponed. Neither change is implemented on the current website."
-      },
-      "services": {
-        "title": "Fonts and external links",
-        "p1": "Manrope and Newsreader are hosted with the MUUVA website. Your browser downloads these font files from the website’s own origin, without contacting Google Fonts. Hosting-related requests are covered by the website delivery information above.",
-        "p2": "Amazon purchase links and Instagram links take you to external websites when you choose to follow them. They are links, rather than embedded advertising or social tracking scripts. Purchases take place on Amazon. Those services apply their own privacy terms."
+        "title": "Optional YouTube Guided Routines",
+        "p1": "Before External videos permission, workouts show local thumbnails without YouTube requests. Enable YouTube & Play grants only that category and loads a youtube-nocookie.com privacy-enhanced player. Google then receives network/browser information and may use storage or account associations depending on playback, sign-in and settings. Privacy-enhanced mode does not eliminate Google processing.",
+        "p2": "Withdraw permission in Privacy settings to remove active players immediately. Watch on YouTube opens the existing video in a new tab without changing MUUVA choices. You leave MUUVA and Google’s own privacy practices apply."
       },
       "newsletter": {
-        "title": "Newsletter",
-        "p1": "The newsletter is not yet available. The footer displays a Coming soon message, with no subscription form. MUUVA does not collect email addresses through a newsletter form or register newsletter subscriptions on this website."
+        "title": "Newsletter subscriptions",
+        "p1": "The enabled form asks for email, interface language and separate unchecked newsletter consent. Brevo handles double opt-in and subscriptions. A request receipt does not confirm email delivery or subscription; confirm through the email if received. Unsubscribe using newsletter links or contact us. Website preferences do not subscribe you.",
+        "p2": "Consent wording/version is maintained in source; Brevo confirmation/subscriber evidence, including linkage to the wording shown, must be retained and verified operationally. Active subscribers remain while subscribed, with review after 24 months of inactivity. Cleanup of unconfirmed registrations after 30 days is intended, not fully verified. Suppression records remain only as needed to honor opt-outs under documented retention criteria."
+      },
+      "wholesale": {
+        "title": "Wholesale enquiries",
+        "p1": "The enabled form collects name, business name, email, optional business type, enquiry, language and privacy acknowledgement to answer your request. Cloudflare Functions, Turnstile and separate environment rate limiting protect it; Brevo delivers to the Microsoft 365 business mailbox. Acknowledgement is not permission for marketing or a newsletter subscription.",
+        "p2": "Enquiry contents are intended for manual review/deletion within 12 months after the last meaningful business interaction, except for ongoing relationships, legal obligations or disputes. This is not a verified automatic mailbox deletion rule and is separate from Brevo transactional logs."
+      },
+      "providers": {
+        "title": "Email and infrastructure providers",
+        "p1": "Brevo handles double opt-in and transactional delivery. The owner confirms 24-month transactional-log retention for all senders. Full transactional email previews were disabled; this does not erase historical previews, metadata or backups.",
+        "p2": "contact@muuva.nl uses Microsoft 365 Email Essentials via GoDaddy. The owner reports Default MRM Policy with legacy retention tags, Online Archive disabled and Mailbox Litigation Hold off. Automatic 12-month Wholesale deletion is not verified. Additional Purview retention/holds, actual deleted-item recovery and other backups remain unverified.",
+        "p3": "Amazon purchase links and Instagram links are voluntary outbound links, not embedded advertising/social trackers. Purchases happen on Amazon. Following links brings you under those services’ own privacy practices."
       },
       "retention": {
-        "title": "Retention, legal grounds and transfers",
-        "p1": "Umami Hobby has a standard analytics retention period of six months. This is separate from operational or security logs and backup retention, whose applicable periods still require confirmation. Your language preference remains in your browser until changed or cleared. Hosting and external services have separate retention arrangements.",
-        "p2": "MUUVA proposes legitimate interests under GDPR Article 6(1)(f) for understanding website use and improving navigation, subject to the required assessment. The Dutch exception for analytics with limited privacy impact is also under assessment; no conclusion that consent is unnecessary has been approved. Relevant legal bases, provider retention details and safeguards for processing outside the European Economic Area must be finalized before publication and activation."
+        "title": "Retention criteria",
+        "p1": "Language storage lasts until changed/cleared; consent expires initially after six calendar months. Active form counters expire logically after approximately one hour, separately from provider recovery history. Umami analytics has six-month standard retention, with separate operational/security logs and backups.",
+        "p2": "Newsletter, enquiry and transactional-log periods appear above. Privacy correspondence is kept only as needed to handle/demonstrate requests and meet legal obligations. Provider backups, recovery, suppression and legal holds may outlast active records. Verified periods and documented reviews remain necessary; no absolute permanent-deletion deadline across all systems is claimed."
+      },
+      "transfers": {
+        "title": "International processing and safeguards",
+        "p1": "Cloudflare, Brevo, Microsoft/GoDaddy, Umami and Google can involve access or processing outside the EEA. EU analytics storage is not EU-only processing. Applicable safeguards may include adequacy decisions or standard contractual clauses and supplementary measures. Review actual services, regions, subprocessors and agreements. Linked provider documents do not prove MUUVA’s acceptance evidence, exact destinations or completed assessments. Contact us for applicable safeguard information."
       },
       "rights": {
-        "title": "Your privacy rights",
-        "p1": "Depending on the processing and applicable conditions, you may request access to your personal data, correction, erasure, restriction or portability, and you may object to processing. Where consent is the basis, you may withdraw it without affecting the lawfulness of earlier processing. For privacy questions or to exercise your rights, email contact@muuva.nl and describe your request.",
-        "p2": "You may complain to the Dutch Autoriteit Persoonsgegevens or the supervisory authority in the country where you live or work, or where an alleged infringement occurred. Requests about a provider’s independent processing can also be directed to that provider."
+        "title": "Rights and complaints",
+        "p1": "Subject to legal conditions, you may request access, correction, erasure, restriction or portability, object to legitimate-interest processing and withdraw consent without affecting earlier lawful processing. Describe your request to contact@muuva.nl; we ask only for proportionate information needed to verify and handle it.",
+        "p2": "We normally respond within one month, with explained extensions where legally permitted. You may complain to the Dutch Autoriteit Persoonsgegevens or the authority where you live, work or an alleged infringement occurred. Contact providers for their independent processing where appropriate."
+      },
+      "updates": {
+        "title": "Updates to this draft",
+        "p1": "The date above is a draft preparation date, not a final effective date. Material changes to optional processing require renewed choices where appropriate. Approved controller details and final legal/native-language review remain necessary before unrestricted publication."
       }
     },
     "links": {
-      "cloudflare": "Cloudflare privacy information",
-      "umami": "Umami privacy information",
-      "google": "Google privacy policy",
-      "authority": "Dutch data protection authority",
-      "contact": "Email contact@muuva.nl"
+      "cloudflare": "Cloudflare privacy",
+      "turnstile": "Turnstile privacy",
+      "cloudflareDpa": "Cloudflare DPA",
+      "cloudflareTransfers": "Cloudflare transfer terms",
+      "cloudflareSubprocessors": "Cloudflare subprocessors",
+      "umami": "Umami privacy",
+      "umamiDpa": "Umami DPA",
+      "umamiSubprocessors": "Umami subprocessors",
+      "google": "Google privacy",
+      "brevo": "Brevo privacy",
+      "microsoft": "Microsoft privacy",
+      "godaddy": "GoDaddy privacy",
+      "contact": "Email contact@muuva.nl",
+      "authority": "Dutch data protection authority"
     }
   },
   "about": {
@@ -355,5 +389,28 @@
       "p5": "At its heart, Muuva is a reflection of their love, their shared vision, and the courage to follow a dream together.",
       "alt": "Michelle and Carlos standing together, with Carlos smiling at Michelle."
     }
+  },
+  "consent": {
+    "title": "Privacy & Cookie Preferences",
+    "intro": "Essential functions keep MUUVA working securely. With your permission, Umami measures visits and YouTube loads workouts. Both stay off until you choose. Change your choices in Privacy settings at any time.",
+    "essential": "Essential — always active",
+    "essentialDescription": "Website delivery, language and privacy choices, and form security. These are not optional consent categories.",
+    "analytics": "Analytics",
+    "analyticsDescription": "Allow Umami Cloud to measure public page visits with minimized data. No advertising or session recordings.",
+    "externalVideos": "External videos",
+    "externalVideosDescription": "Allow YouTube players. Google receives information when a player loads, even before playback.",
+    "reject": "Reject optional",
+    "customize": "Customize",
+    "accept": "Accept optional",
+    "save": "Save choices",
+    "close": "Close settings",
+    "settings": "Privacy settings",
+    "storageError": "Your browser could not save these choices. Optional analytics and videos remain blocked. You can still browse MUUVA or watch directly on YouTube."
+  },
+  "videoConsent": {
+    "enable": "Enable YouTube & Play",
+    "explanation": "Enabling YouTube allows Google to process information such as your IP address and browser details when the player loads. Only External videos permission is saved; your Analytics choice stays unchanged.",
+    "external": "Watch on YouTube",
+    "leaving": "Opens YouTube in a new tab. You are leaving MUUVA; your saved choices do not change."
   }
 }

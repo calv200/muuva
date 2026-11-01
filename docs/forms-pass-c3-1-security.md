@@ -145,6 +145,8 @@ Wholesale retained an available allowance while Newsletter was rate-limited, con
 
 ## Milestone closure and outstanding validation
 
+C.3.2B follow-up (1 November 2026): independent website consent and updated four-language Privacy drafts are now implemented locally, with master documentation synchronized. No form endpoint, limiter logic, Preview configuration or owner-created Production Wrangler file changed. The owner reports a separate Production Worker/binding/keys/variables prepared, with limiter off and both forms off; effective settings and hosted workflows remain unverified. References below to Production setup and C.3.2 not begun describe the historical C.3.1 closure, superseded by this follow-up. See [release checklist](production-release-c332.md) for current blockers and activation order. Original test/deployment records remain intact.
+
 Completed: application security hardening; the previously recorded 103 passing tests and local SQLite concurrency/expiry checks; owner-reported Preview Worker deployment, namespace binding and runtime configuration with `enforce`; successful staging Pages deployment; and the controlled live Newsletter enforcement and independent Wholesale allowance tests above. The earlier resource-creation blocker is resolved for Preview according to the owner evidence.
 
 Still pending or outside the verified hosted-test scope:

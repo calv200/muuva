@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import SiteContainer from "./SiteContainer.jsx";
 import { localizedUrl } from "../routing/urls.js";
 import NewsletterSignup from "./NewsletterSignup.jsx";
+import { useConsent } from "../consent/ConsentProvider.jsx";
 
 const newsletterEnabled = import.meta.env.VITE_NEWSLETTER_ENABLED === "true" && import.meta.env.BASE_URL === "/";
 
@@ -62,6 +63,7 @@ function FooterLinkList({ links, ariaLabel }) {
 
 export default function Footer() {
   const { t } = useTranslation();
+  const { openSettings } = useConsent();
   return (
     <footer className="bg-warm py-16 text-ink sm:py-20 lg:py-24">
       <SiteContainer>
@@ -89,6 +91,7 @@ export default function Footer() {
         </div>
 
         <div className="muuva-legal mt-16 flex flex-col gap-9 text-muted sm:mt-20 lg:mt-24">
+          <button type="button" onClick={openSettings} className="min-h-11 self-start text-left underline underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand">{t("consent.settings")}</button>
           <a
             className="inline-flex h-10 w-10 items-center justify-center text-muted transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
             href="https://www.instagram.com/muuva.studio/"

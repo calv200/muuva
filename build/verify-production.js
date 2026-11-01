@@ -110,7 +110,9 @@ export async function verifyProductionOutput({ directory, base, origin = publicS
     assert(!/fonts\.(?:googleapis|gstatic)\.com/i.test(html), `${filename}: External Google Fonts request`);
     const head = only(elements(html, "head"), "head");
     const trackers = tags(html, "script").filter((tag) => tag.src === umamiScript);
-    assert.equal(trackers.length, analytics ? 1 : 0, `${filename}: Incorrect Umami script count`);
+    assert.equal(trackers.length, 0, `${filename}: Incorrect Umami script count: external tracker before consent`);
+    assert(!tags(html, "link").some((tag) => /umami\./i.test(tag.href || "")), `${filename}: Pre-consent analytics resource hint`);
+    assert(!tags(html, "iframe").some((tag) => /(?:youtube|youtu\.be)/i.test(tag.src || "")), `${filename}: YouTube iframe before consent`);
     assert.equal(tags(html, "script").filter((tag) => tag.id === "muuva-analytics-privacy").length, analytics ? 1 : 0,
       `${filename}: Incorrect Umami privacy hook count`);
     if (analytics) assert(head.includes(analyticsHead(analytics)), `${filename}: Incorrect Umami configuration or privacy hook`);

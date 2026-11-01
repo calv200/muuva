@@ -24,12 +24,15 @@ test("privacy routes retain approved titles and sanitized URLs while duplicate a
   }
 });
 
-function browser(href = "https://muuva.nl/en/", dnt) {
+function browser(href = "https://muuva.nl/en/", dnt, consent = true) {
   const listeners = {};
+  const scripts = [];
   const window = { location: new URL(href), addEventListener: (name, handler) => { listeners[name] = handler; } };
-  runInNewContext(`(${installAnalyticsPrivacy.toString()})(${JSON.stringify(config)})`, { window, navigator: { doNotTrack: dnt }, URL, URLSearchParams });
+  window.muuvaConsent = { analytics: consent };
+  const document = { referrer: "", createElement: () => ({ setAttribute(name, value) { this[name] = value; } }), head: { append: (script) => scripts.push(script) } };
+  runInNewContext(`(${installAnalyticsPrivacy.toString()})(${JSON.stringify(config)})`, { window, document, navigator: { doNotTrack: dnt }, URL, URLSearchParams });
   const send = (payload = {}, type = "event") => window.muuvaBeforeSend(type, { url: window.location.href, ...payload });
-  return { window, send, listeners };
+  return { window, send, listeners, scripts, loaded: () => scripts[0]?.onload() };
 }
 
 test("analytics is opt-in, fail-closed on invalid configuration, and excluded from staging", () => {
@@ -44,9 +47,9 @@ test("head installation is single, ordered, domain-restricted, DNT-aware and abs
   const template = "<html><head></head><body></body></html>";
   assert.equal(documentWithAnalytics(template, null), template);
   const html = documentWithAnalytics(template, config);
-  assert.equal((html.match(/src="https:\/\/cloud.umami.is\/script.js"/g) || []).length, 1);
-  assert(html.indexOf('id="muuva-analytics-privacy"') < html.indexOf('src="https://cloud.umami.is/script.js"'));
-  for (const attribute of ['data-domains="muuva.nl"', 'data-do-not-track="true"', 'data-before-send="muuvaBeforeSend"', 'referrerpolicy="no-referrer"']) assert(html.includes(attribute));
+  assert.equal((html.match(/<script[^>]+src="https:\/\/cloud.umami.is\/script.js"/g) || []).length, 0);
+  assert(html.includes('id="muuva-analytics-privacy"'));
+  assert(html.includes('"auto-track": "false"'));
   assert.throws(() => documentWithAnalytics(html, config), /Duplicate/);
   assert.equal(analyticsHead(null), "");
 });
@@ -121,7 +124,8 @@ test("custom events, identify, performance, unknown paths and compatibility URLs
 });
 
 test("initial/hydration duplicates and stale navigation callbacks are dropped; Back/Forward has one pageview", () => {
-  const { window, send, listeners } = browser();
+  const session = browser();
+  const { window, send, listeners } = session;
   assert(send());
   assert.equal(send(), false);
   window.location = new URL("https://muuva.nl/de/");
@@ -129,6 +133,7 @@ test("initial/hydration duplicates and stale navigation callbacks are dropped; B
   assert.equal(send({ url: "/en/" }), false);
   let count = 0;
   window.umami = { track: (callback) => { if (send(callback({ url: "/de/" }))) count++; } };
+  session.loaded();
   window.location = new URL("https://muuva.nl/en/");
   listeners.popstate();
   listeners.popstate();
@@ -167,7 +172,7 @@ function navigationBrowser() {
       if (result) pageviews.push(result.url);
     },
   };
-  session.window.umami.track();
+  session.loaded();
   return {
     pageviews,
     navigate(path) {
@@ -222,4 +227,37 @@ test("filter, anchor and campaign-only changes do not constitute another page", 
   session.traverse("/en/guided-routines/?filter=Ring");
   session.traverse("/en/guided-routines/#video");
   assert.deepEqual(session.pageviews, ["/en/", "/en/guided-routines/"]);
+});
+
+test("consent gates loading and sending, tracks current once after load, and never backfills or reloads", () => {
+  const session = browser(undefined, undefined, false);
+  const { window, scripts, listeners, send } = session;
+  assert.equal(scripts.length, 0);
+  assert.equal(send(), false);
+  window.location = new URL("https://muuva.nl/de/"); listeners["muuva:navigate"]();
+  window.muuvaConsent = { analytics: true }; listeners["muuva:consent"]();
+  assert.equal(scripts.length, 1);
+  assert.equal(scripts[0]["data-auto-track"], "false");
+  const views = [];
+  window.umami = { track: (callback) => { const result = send(callback({})); if (result) views.push(result.url); } };
+  window.location = new URL("https://muuva.nl/nl/"); listeners["muuva:navigate"]();
+  session.loaded(); listeners["muuva:navigate"]();
+  assert.deepEqual(views, ["/nl/"]);
+  window.muuvaConsent = { analytics: false }; listeners["muuva:consent"]();
+  window.location = new URL("https://muuva.nl/es/"); listeners.popstate();
+  assert.equal(send(), false);
+  assert.deepEqual(views, ["/nl/"]);
+  window.muuvaConsent = { analytics: true }; listeners["muuva:consent"]();
+  assert.equal(scripts.length, 1);
+  assert.deepEqual(views, ["/nl/", "/es/"]);
+});
+
+test("withdrawal during tracker loading, DNT and nonproduction hosts never start submissions", () => {
+  const session = browser();
+  const views = [];
+  session.window.umami = { track: () => views.push("unexpected") };
+  session.window.muuvaConsent = { analytics: false }; session.listeners["muuva:consent"](); session.loaded();
+  assert.equal(views.length, 0);
+  for (const host of ["localhost", "staging.muuva.pages.dev", "www.muuva.nl"]) assert.equal(browser(`https://${host}/en/`).scripts.length, 0);
+  for (const dnt of ["1", 1, "yes"]) assert.equal(browser(undefined, dnt).scripts.length, 0);
 });

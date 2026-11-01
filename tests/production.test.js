@@ -66,8 +66,8 @@ test("enabled analytics verifies every localized page and compatibility root, re
   const original = await readFile(file, "utf8");
   await writeFile(file, original.replace("</head>", '<script src="https://cloud.umami.is/script.js"></script></head>'));
   await assert.rejects(verifyProductionOutput(options), /Incorrect Umami script count/);
-  await writeFile(file, original.replace(/<script defer[^>]*><\/script>/, ""));
-  await assert.rejects(verifyProductionOutput(options), /Incorrect Umami script count/);
+  await writeFile(file, original.replace(/<script id="muuva-analytics-privacy">[\s\S]*?<\/script>/, ""));
+  await assert.rejects(verifyProductionOutput(options), /Incorrect Umami privacy hook count/);
 });
 
 test("disabled output rejects an accidentally installed tracker on the compatibility root", async (t) => {
@@ -120,6 +120,8 @@ test("commercial headers protect project and preview hosts without a custom-doma
 });
 
 const corruptions = {
+  "a pre-consent analytics resource hint": async (o) => edit(pageFile(o), (s) => s.replace("</head>", '<link rel="preconnect" href="https://cloud.umami.is"></head>')),
+  "a pre-consent YouTube iframe": async (o) => edit(pageFile(o), (s) => s.replace("</main>", '<iframe src="https://www.youtube-nocookie.com/embed/Ns9PKZRh2j4"></iframe></main>')),
   "an external Google font stylesheet": async (o) => edit(pageFile(o), (s) => s.replace("</head>", '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope"></head>')),
   "an external font URL in CSS": async (o) => edit(path.join(o.directory, "assets/app.css"), (s) => s.replaceAll("./font.woff2", "https://fonts.gstatic.com/font.woff2")),
   "a missing font file": async (o) => unlink(path.join(o.directory, "assets/font.woff2")),

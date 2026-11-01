@@ -33,14 +33,18 @@ export function analyticsConfig(env = {}, { staging = false, base = "/muuva/" } 
   return { website, paths: Object.keys(titles), titles };
 }
 
-// Self-contained: serialized into the head before the deferred official tracker.
-// No React lifecycle, router modifications, persistent IDs, or custom events.
+// Self-contained consent loader. The external tracker is never emitted as HTML.
+// Automatic tracking is disabled: only the gated navigation adapter sends views.
 export function installAnalyticsPrivacy({ website, paths, titles }) {
   const allowedPaths = new Set(paths);
   const approvedTitles = new Map(Object.entries(titles));
   const campaignKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
   let lastPage;
+  let consented = false;
+  let requested = false;
+  let ready = false;
   const permitted = () => window.location.hostname === "muuva.nl"
+    && window.muuvaConsent?.analytics === true
     && ![window.doNotTrack, navigator.doNotTrack, navigator.msDoNotTrack].some((value) => [1, "1", "yes"].includes(value));
 
   function cleanUrl(value) {
@@ -79,23 +83,41 @@ export function installAnalyticsPrivacy({ website, paths, titles }) {
     return { website, hostname: "muuva.nl", url, referrer, title: approvedTitles.get(pathname) };
   };
 
-  // Cloud script inspected 2026-10-25: History API interception does not include
-  // popstate, and its 300ms callbacks read the latest URL rather than capturing
-  // each navigation. Cover Back/Forward and each completed router navigation
-  // immediately, preserving rapid visits. Automatic callbacks are deduplicated
-  // by pathname above. No history writes, timers or React effects are added.
+  // Keep Back/Forward recovery and immediate completed-router navigation.
+  // No events from before consent/load are retained or replayed.
   const trackCurrentPage = () => {
-    if (permitted()) window.umami?.track((payload) => ({ ...payload, url: window.location.href, referrer: "" }));
+    if (!permitted() || !ready) return;
+    if (!allowedPaths.has(window.location.pathname)) { lastPage = undefined; return; }
+    window.umami?.track((payload) => ({ ...payload, url: window.location.href, referrer: lastPage ? "" : document.referrer }));
   };
+  const updateConsent = () => {
+    const next = permitted();
+    if (next === consented) return;
+    consented = next;
+    lastPage = undefined;
+    if (!next) return; // Hook also blocks already-loaded or delayed callbacks.
+    if (ready) { trackCurrentPage(); return; }
+    if (requested) return; // Never reload a failed, pending or withdrawn tracker.
+    requested = true;
+    const script = document.createElement("script");
+    script.id = "muuva-umami";
+    script.src = "https://cloud.umami.is/script.js";
+    script.defer = true;
+    for (const [name, value] of Object.entries({ "website-id": website, domains: "muuva.nl", "do-not-track": "true", "exclude-hash": "true", "before-send": "muuvaBeforeSend", "auto-track": "false" })) script.setAttribute(`data-${name}`, value);
+    script.referrerPolicy = "no-referrer";
+    script.onload = () => { ready = true; trackCurrentPage(); };
+    document.head.append(script);
+  };
+  window.addEventListener("muuva:consent", updateConsent);
   window.addEventListener("popstate", trackCurrentPage);
   window.addEventListener("muuva:navigate", trackCurrentPage);
+  updateConsent();
 }
 
 export function analyticsHead(config) {
   if (!config) return "";
   const settings = JSON.stringify(config).replaceAll("<", "\\u003c");
-  return `<script id="muuva-analytics-privacy">(${installAnalyticsPrivacy.toString()})(${settings});</script>\n`
-    + `<script defer src="${umamiScript}" data-website-id="${config.website}" data-domains="muuva.nl" data-do-not-track="true" data-exclude-hash="true" data-before-send="muuvaBeforeSend" referrerpolicy="no-referrer"></script>\n`;
+  return `<script id="muuva-analytics-privacy">(${installAnalyticsPrivacy.toString()})(${settings});</script>\n`;
 }
 
 export function documentWithAnalytics(template, config) {

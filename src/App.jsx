@@ -15,6 +15,7 @@ import PrivacyPage from "./pages/PrivacyPage.jsx";
 import AboutUsPage from "./pages/AboutUsPage.jsx";
 import NewsletterConfirmedPage from "./pages/NewsletterConfirmedPage.jsx";
 import WholesalePage from "./pages/WholesalePage.jsx";
+import ConsentProvider from "./consent/ConsentProvider.jsx";
 
 function HomePage() {
   return (
@@ -72,12 +73,14 @@ export default function App({ initialRoute }) {
 
   return (
     <RouteContext.Provider value={route}>
-      <SeoMetadata route={route} />
-      <div className="min-h-screen bg-linen text-ink" onClick={handleInternalLink}>
-        <Header />
-        {renderPage()}
-        <Footer />
-      </div>
+      <ConsentProvider>
+        <SeoMetadata route={route} />
+        <div className="min-h-screen bg-linen text-ink" onClick={handleInternalLink}>
+          <Header />
+          {renderPage()}
+          <Footer />
+        </div>
+      </ConsentProvider>
     </RouteContext.Provider>
   );
 }

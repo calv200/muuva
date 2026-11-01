@@ -1,76 +1,24 @@
-# Umami foundation: pending review
+# Umami consent-controlled analytics review
 
-Analytics remains disabled by default. This draft records implementation and review
-requirements; it is not a published Privacy Notice or authorization to activate tracking.
+Updated 1 November 2026, local staging C.3.2B. Default disabled; no deployment/account activation. Unrestricted publication remains blocked by [privacy review](privacy-compliance-review.md).
 
-## Configuration
+## Configuration and loader
 
-No environment file or dashboard setting has been changed. Missing
-`VITE_UMAMI_ENABLED` means disabled, including existing production builds.
-Local development does not install the tracker. Preview must keep the flag absent
-or `false`; `MUUVA_STAGING=true` also suppresses it at build time.
+VITE_UMAMI_ENABLED=true means consent-controlled availability, never consent. It requires root hosting, VITE_PUBLIC_SITE_ORIGIN=https://muuva.nl and valid public website ID 8963af84-1a22-4cad-a8ef-413afe485468. Missing/false disables; MUUVA_STAGING=true suppresses even an enabled flag. Build and verifier use identical inputs. Full matrix and owner activation/rollback: [release checklist](production-release-c332.md).
 
-Only after explicit configuration and Privacy Notice approval, a production build
-may use:
+build/analytics.js emits one first-party inline privacy loader and **no external tracker tag or analytics resource hint**. Before affirmative Analytics permission it fetches no tracker and sends/queues nothing. The central consent store publishes state synchronously. Exact muuva.nl and all supported DNT signals gate loading and before-send; enabled artifacts on localhost/Preview cannot load the tracker. Disabled output has no integration.
 
-```dotenv
-VITE_UMAMI_ENABLED=true
-VITE_UMAMI_WEBSITE_ID=8963af84-1a22-4cad-a8ef-413afe485468
-VITE_PUBLIC_SITE_ORIGIN=https://muuva.nl
-VITE_BASE_PATH=/
-```
+After permission it requests the official Cloud tracker once with data-auto-track=false, data-domains=muuva.nl, data-do-not-track=true, data-exclude-hash=true, data-before-send=muuvaBeforeSend and no-referrer script policy. Official configuration/downloaded source inspected 1 November 2026 confirms automatic initialization is disabled: no automatic history/click/performance/error tracking listeners. Current Cloud ingestion uses gateway.umami.is; browser tests intercept gateway and script traffic.
 
-The website ID is public, not an API credential. An enabled non-staging build
-fails for a missing/invalid UUID, a different public origin, or subpath hosting.
-Build and production verification must use the same environment variables.
-Disabling requires rebuilding with the flag absent or `false`.
+## Navigation and withdrawal
 
-## Implementation and data boundaries
+The existing centralized popstate and muuva:navigate adapter sends immediate current-location pageviews. Current eligible page counts once after consent/load; subsequent genuine navigations count. No preload queue/backfill. During loading, only the route current at load is sent. Approved paths/titles, pathname deduplication and stale-callback rejection remain. Queries/filters/anchors alone do not count; repeat visits separated by another page, rapid navigation, consecutive Back/Forward and language/internal navigation after Back count once. No analytics history writes or URL changes. Manifest: 44 routes, 40 analytics-eligible; Newsletter confirmation excluded.
 
-`build/analytics.js` inserts one synchronous privacy-hook script followed by one
-deferred official `https://cloud.umami.is/script.js` in every generated document
-head, including the compatibility root. No React effects install scripts.
-Disabled output has neither script. An enabled artifact served on another host
-may download the official script, but both `data-domains="muuva.nl"` and the hook
-prevent analytics submission. Supported DNT signals also prevent submission.
+Withdrawal synchronously closes before-send and future adapter sends, resetting deduplication. The loaded script remains inert in memory without automatic listeners, so no forced reload is needed. A pending download may finish but cannot send without current permission. The script is never refetched in that document, including failure/regrant. Fresh permission can reuse the loaded tracker and count current page once. Already initiated requests/transmitted events cannot be recalled. Refresh/new documents check saved consent normally.
 
-The hook accepts pageviews only for 36 approved localized paths from the current 40-route manifest (9 per language); the four static newsletter confirmation routes are deliberately excluded because viewing them does not prove a subscription. It requires the exact hostname
-`muuva.nl`. It sends only the configured website, hostname, sanitized relative URL,
-external referrer origin and approved localized title. Titles are resolved at build
-time from the route manifest, existing locale catalogs and shared SEO metadata
-resolver. Neither `document.title` nor a tracking caller's title is accepted.
-It omits screen size, browser-language payload fields, names, IDs, custom properties, event names, form values and
-performance/identify requests. It drops arbitrary query parameters and fragments.
-Unknown paths are omitted rather than sending a possibly personal route segment.
+## Payload boundaries
 
-The five supported UTM parameters are retained as campaign labels, limited to
-80 characters with a restricted character set. Duplicate keys and obvious
-addresses, phone-like numbers, UUIDs and long opaque tokens are discarded.
-Do not put personal names or other personal data in campaign labels: syntax
-filtering cannot determine the meaning of every otherwise valid label. Marketing
-must review its campaign naming convention before activation.
-
-Automatic Umami History API tracking remains enabled for initial pageviews and
-History API changes. Initial root
-and legacy URLs are rejected until existing routing normalizes them; stale and
-consecutive duplicate pathnames are rejected. Filter, anchor and campaign-only
-changes on the same pathname do not create another pageview. UTM attribution is
-retained on the first pageview of a genuine page navigation. No visitor URL is rewritten
-by analytics. Existing routing preserves UTM parameters during automatic language
-selection and language switching. Ordinary links keep their existing query
-behavior; analytics does not append campaign parameters to every internal link.
-
-Inspection of the Cloud script on 2026-10-25 found interception of `pushState`
-and `replaceState`, without a `popstate` listener. Its delayed 300ms callbacks
-read the latest URL, so rapid navigation can lose intermediate visits. Its
-internal URL also remains stale after Back/Forward. A centralized adapter calls
-`umami.track` immediately for Back/Forward and each existing `muuva:navigate`
-event, using the actual current URL. The hook deduplicates delayed automatic
-callbacks by pathname. A return to a route after visiting another route counts
-again; same-page query/anchor changes do not. No router or history behavior is
-modified. Browser checks cover these cases. Recheck before activation because
-the hosted script can change independently of this repo. Views before a blocked
-or not-yet-loaded tracker cannot be guaranteed; no pre-load visitor queue is kept.
+Only website, hostname, url, referrer and title remain. Titles come from approved localized metadata at build time, never document.title or caller text. Unknown/personal routes, fragments, arbitrary queries, form content, custom IDs/properties/events and identify/performance/error payloads are rejected. Referrers retain at most an external HTTP(S) origin. Five UTM values remain syntax/length validated, excluding duplicates and obvious email/phone/token/UUID values. Syntax cannot recognize every personal name: require nonpersonal campaign naming. No recordings or advertising. Provider network metadata/session processing remains relevant.
 
 ## Device, language and title decisions (Pass A.1)
 
@@ -123,31 +71,12 @@ Sources reviewed:
 - [Current public device classification](https://github.com/umami-software/umami/blob/master/src/lib/detect.ts)
 - [Current public ingestion schema and title storage](https://github.com/umami-software/umami/blob/master/src/app/api/send/route.ts)
 
-## Privacy Notice draft checklist: launch blocker
 
-Pass A.2 replaces the footer placeholder with four localized Privacy Notice staging drafts.
-They are not approved for publication; see [the compliance review](privacy-compliance-review.md).
-At the time of Pass A, no functioning Privacy Notice
-was found. Publish an approved, accessible localized notice before activation.
-The notice needs reviewed statements covering:
+## Current review status
 
-- MUUVA's use of Umami Cloud for aggregate traffic and campaign attribution.
-- Data processed: approved page paths and UTM labels, referrer origins, normal
-  HTTP metadata, and verified provider-derived metrics/session processing.
-- The account's reported EU region, verified hosting/subprocessors and any
-  possible international processing or transfers and applicable safeguards.
-- Actual configured retention periods, provider retention and deletion process.
-- The responsible business/controller's verified identity, contact details,
-  relevant rights, how to exercise them and applicable complaint information.
-- The applicable lawful basis and cookie/ePrivacy assessment, including whether
-  consent or an additional control is required before loading the provider script.
-- DNT handling and the limitations of that browser signal.
+This release chooses consent, superseding the historical proposed limited-analytics exception and postponed consent/video work. Owner confirms Hobby/Frankfurt/six-month analytics storage; logs/backups/transfers and final legal/controller review remain open. Four drafts cover current forms and gated services. No activation was performed.
 
-Pass A.3 owner-confirmed facts: Netherlands eenmanszaak, KvK 99637588, contact@muuva.nl; Umami Cloud Hobby, EU analytics storage and six-month standard analytics retention. This is owner confirmation, not account inspection. Full proprietor identity/address, DPA/transfer review, operational-log/backup retention and the legal basis/consent decision remain unresolved. The owner intends to pursue the Dutch limited-analytics exception and Article 6(1)(f), and has postponed consent-management work and YouTube review. Cookie-free operation alone does not settle consent requirements.
-
-## Pass A.3 synchronization
-
-`PROJECT_BRIEF.md`, `CONTENT.md` and the compliance review now describe the approved local implementation, owner-confirmed business/account facts, local fonts and the newsletter teaser. Privacy remains draft. No analytics code changes, account settings or deployments were needed. See [production verification](production-verification.md) for exact Production/Preview variables, local simulations and remaining manual steps. The older verification records below describe earlier passes, not current route counts or deployment status.
+## Historical verification — earlier automatic-tracker architecture
 
 ## Implementation-pass verification
 
