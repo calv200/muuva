@@ -145,7 +145,7 @@ export const routines = [
     id: "sliders-routine",
     slug: routineSlugs.sliders,
     titleKey: "routines.workouts.sliders.title",
-    durationMinutes: 15,
+    durationMinutes: 10,
     intensity: "medium",
     muscleGroups: ["fullBody"],
     equipment: ["sliders"],

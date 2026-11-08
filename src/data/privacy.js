@@ -11,6 +11,7 @@ export const privacySections = [
   { id: "analytics", paragraphs: 3, links: ["umami", "umamiDpa", "umamiSubprocessors"] },
   { id: "videos", paragraphs: 2, links: ["google"] },
   { id: "newsletter", paragraphs: 2, links: ["brevo"] },
+  { id: "contact", paragraphs: 2, links: [] },
   { id: "wholesale", paragraphs: 2, links: [] },
   { id: "providers", paragraphs: 3, links: ["microsoft", "godaddy"] },
   { id: "retention", paragraphs: 2, links: [] },

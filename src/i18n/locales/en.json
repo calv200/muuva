@@ -39,7 +39,8 @@
       "band": "Resistance band from the Pilates Essential Kit",
       "sliders": "Pilates sliders from the Pilates Essential Kit",
       "full-kit": "Pilates Essential Kit"
-    }
+    },
+    "marketplace": { "label": "Amazon store", "automatic": "Choose automatically", "nl": "Netherlands", "de": "Germany" }
   },
   "promo": {
     "section": "Guided Pilates routines",
@@ -73,18 +74,15 @@
     "aboutTitle": "About Muuva",
     "about": "Based in Amsterdam, Muuva creates beautifully designed and sustainably made Pilates gear for movement practices at home and in the studio.",
     "instagram": "Muuva on Instagram",
+    "tiktok": "Muuva on TikTok",
+    "youtube": "Muuva on YouTube",
+    "socials": "Muuva social media",
     "copyrightPrefix": "© {{year}}, Muuva. Website designed by",
     "links": {
       "behind": "Behind Muuva",
       "contact": "Contact Us",
-      "wholesale": "Wholesale Muuva",
       "apply": "Apply for Wholesale",
-      "care": "Caring For Your Muuva",
-      "sustainability": "Sustainability Commitment",
-      "faq": "FAQs",
       "privacy": "Privacy Policy",
-      "refund": "Refund Policy",
-      "shipping": "Shipping Policy",
       "service": "Terms of Service",
       "use": "Terms of Use"
     },
@@ -149,6 +147,23 @@
     "challengeRequired": "Complete the verification before subscribing.",
     "challengeError": "Verification failed or expired. Please try again.",
     "unavailable": "Signup is unavailable right now. Please try again later."
+  },
+  "contact": {
+    "eyebrow": "WE’D LOVE TO HEAR FROM YOU",
+    "title": "Get in touch",
+    "intro": "Have a question, an idea, or something you'd like to share? We'd love to hear from you.",
+    "formTitle": "Send us a message",
+    "formIntro": "Share a few details and we’ll get back to you.",
+    "fields": { "name": "Your name", "email": "Email address", "subject": "Enquiry type", "message": "Your message" },
+    "subjects": { "placeholder": "Choose an enquiry type", "general": "General question", "product": "Product support", "order": "Order enquiry", "other": "Other" },
+    "consent": "I agree that MUUVA may use these details to process and reply to my enquiry. This is not marketing consent.",
+    "privacyText": "Read our",
+    "verificationLabel": "Spam protection verification",
+    "submit": "SEND MESSAGE →",
+    "submitting": "Sending...",
+    "successTitle": "Thank you for your message.",
+    "successText": "Your request has been received. This confirmation does not guarantee delivery to a person; please email contact@muuva.nl if you need another way to reach us.",
+    "errors": { "rateLimited": "Too many attempts. Please wait before trying again.", "required": "Please complete this field.", "tooLong": "Use no more than {{max}} characters.", "invalidText": "Please remove unsupported control characters.", "invalidEmail": "Enter a valid email address.", "invalidSubject": "Choose one of the available enquiry types.", "consentRequired": "Please acknowledge how your information will be used.", "validationError": "Please check the form and complete the required fields.", "challengeRequired": "Complete the verification before sending your message.", "challengeError": "Verification failed or expired. Please try again.", "unavailable": "We couldn’t send your message right now. Your details are still here; please try later.", "notReady": "This form is currently unavailable. Please email contact@muuva.nl." }
   },
   "newsletterConfirmed": {
     "title": "Welcome to MUUVA",
@@ -271,6 +286,7 @@
       "title": "Wholesale & Studio Partnerships | MUUVA",
       "description": "Connect with MUUVA for Pilates studio, instructor and retail partnerships. Tell us about your business and explore how we can move together."
     },
+    "contact": { "title": "Contact MUUVA | Get in touch", "description": "Contact MUUVA with a general question, product support request or order enquiry. We’d love to hear from you." },
     "newsletterConfirmed": {
       "title": "Newsletter confirmation | MUUVA",
       "description": "Information for visitors who followed MUUVA's newsletter confirmation link."
@@ -279,7 +295,7 @@
   "privacy": {
     "title": "Privacy Policy",
     "draft": "Draft for review",
-    "intro": "This draft covers MUUVA’s website, privacy choices, Guided Routines, newsletter and Wholesale enquiries. It is not approved for unrestricted publication: controller contact details and final legal review remain incomplete.",
+    "intro": "This draft covers MUUVA’s website, privacy choices, Guided Routines, newsletter, Contact and Wholesale enquiries. It is not approved for unrestricted publication: controller contact details and final legal review remain incomplete.",
     "updated": "Draft last updated:",
     "sections": {
       "operator": {
@@ -298,7 +314,7 @@
       },
       "storage": {
         "title": "Functional storage and fonts",
-        "p1": "Manual language selection saves muuva.language in localStorage until changed or cleared; URL language takes priority. Automatic detection saves nothing. Manrope and Newsreader are self-hosted, without Google Fonts requests.",
+        "p1": "Manual language selection saves muuva.language in localStorage until changed or cleared; URL language takes priority. A manually selected Amazon NL/DE marketplace is saved as muuva.marketplace until changed or cleared. Cloudflare country is used only when you follow a purchase link and is not saved. Automatic language detection saves nothing. Manrope and Newsreader are self-hosted, without Google Fonts requests.",
         "p2": "muuva.consent stores category choices, notice/version, save time and expiry locally, without a visitor ID or server consent database. Initial renewal is six calendar months, a configurable product choice, not a universal legal rule. Invalid, expired or unavailable storage blocks optional services."
       },
       "consent": {
@@ -327,11 +343,16 @@
         "p1": "The enabled form collects name, business name, email, optional business type, enquiry, language and privacy acknowledgement to answer your request. Cloudflare Functions, Turnstile and separate environment rate limiting protect it; Brevo delivers to the Microsoft 365 business mailbox. Acknowledgement is not permission for marketing or a newsletter subscription.",
         "p2": "Enquiry contents are intended for manual review/deletion within 12 months after the last meaningful business interaction, except for ongoing relationships, legal obligations or disputes. This is not a verified automatic mailbox deletion rule and is separate from Brevo transactional logs."
       },
+      "contact": {
+        "title": "Contact enquiries",
+        "p1": "The optional Contact form collects your name, email address, enquiry type, message, interface language and a required acknowledgement to process and reply to your request. Cloudflare Pages Functions, Turnstile and a separate environment rate-limit category protect submissions; Brevo sends a fixed transactional message to the configured business recipient. The acknowledgement is not marketing consent and does not add you to a newsletter list.",
+        "p2": "The form is disabled until separately configured. MUUVA has not yet confirmed the retention period or deletion procedure for Contact enquiries; these details must be reviewed before activation. Enquiry content is used only as needed to handle and reply to the request, subject to legal obligations and ongoing matters. Brevo transactional logs and provider backups have separate retention."
+      },
       "providers": {
         "title": "Email and infrastructure providers",
         "p1": "Brevo handles double opt-in and transactional delivery. The owner confirms 24-month transactional-log retention for all senders. Full transactional email previews were disabled; this does not erase historical previews, metadata or backups.",
         "p2": "contact@muuva.nl uses Microsoft 365 Email Essentials via GoDaddy. The owner reports Default MRM Policy with legacy retention tags, Online Archive disabled and Mailbox Litigation Hold off. Automatic 12-month Wholesale deletion is not verified. Additional Purview retention/holds, actual deleted-item recovery and other backups remain unverified.",
-        "p3": "Amazon purchase links and Instagram links are voluntary outbound links, not embedded advertising/social trackers. Purchases happen on Amazon. Following links brings you under those services’ own privacy practices."
+        "p3": "Amazon purchase links and Instagram, TikTok and YouTube links are voluntary outbound links, not embedded advertising/social trackers. Purchases happen on Amazon. Following links brings you under those services’ own privacy practices."
       },
       "retention": {
         "title": "Retention criteria",

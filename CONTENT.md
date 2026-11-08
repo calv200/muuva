@@ -40,11 +40,12 @@ Buy on Amazon →
 ## Gallery Buy CTA
 Buy on Amazon →
 
-## Amazon link
-https://www.amazon.de/dp/B0GZ4RBMX9
+## Amazon marketplaces
+NL: https://www.amazon.nl/dp/B0GZ4RBMX9
+DE: https://www.amazon.de/dp/B0GZ4RBMX9
 
 ## Presentation and gallery behavior
-Left-aligned title and one Buy on Amazon CTA in the square, unified `#F2EFE9` featured container. The title wraps naturally and has no subtitle. On wide desktop the full-kit image sits across the center and right; smaller layouts stack the title and CTA above the image. The title and rounded CTA use deep green `#304C40`. No dynamic selection copy or routine links. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
+Left-aligned title and one Buy on Amazon CTA in the square, unified `#F2EFE9` featured container. The title wraps naturally and has no subtitle. On wide desktop the full-kit image sits across the center and right; smaller layouts stack the title and CTA above the image. The title and rounded CTA use deep green `#304C40`. A discreet NL/DE selector allows explicit marketplace choice. Manual choice overrides language and is saved in functional localStorage; otherwise NL language selects Amazon NL, DE selects Amazon DE, Cloudflare country detection selects NL/DE for EN/ES at click time, and the fallback is NL. Static/subpath builds use approved direct links; root Cloudflare builds use an allowlisted first-party redirect. On 8 November 2026 both supplied URLs resolved to the matching ASIN pages but showed the product as currently unavailable; a live offer is not confirmed. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
 
 Hotspot labels and destinations, under `src/assets/images/Products/`:
 
@@ -115,7 +116,7 @@ Part of the Pilates Essential Kit · Explore the kit →
 | --- | --- | --- | --- | --- |
 | Pilates Ring Workout | 15 min | Medium | Full body | Ring |
 | Pilates Ball Workout | 15 min | Medium | Full body | Ball |
-| Pilates Sliders Workout | 15 min | Medium | Full body | Slider |
+| Pilates Sliders Workout | 10 min | Medium | Full body | Slider |
 | Resistance Band Workout | 15 min | Medium | Full body | Band |
 | All Equipment Workout | 20 min | Medium | Full body | Band, Ball, Ring, Slider |
 
@@ -158,21 +159,32 @@ About Muuva
 Based in Amsterdam, Muuva creates beautifully designed and sustainably made Pilates gear for movement practices at home and in the studio.
 
 ## Navigation links
-Behind Muuva · Contact Us · Wholesale Muuva · Apply for Wholesale · Caring For Your Muuva · Sustainability Commitment
+Behind Muuva · Contact Us · Apply for Wholesale
 
 ## Policy links
-FAQs · Privacy Policy · Refund Policy · Shipping Policy · Terms of Service · Terms of Use
+Privacy Policy · Terms of Service · Terms of Use
 
 ## Legal line
 © 2026, Muuva. Website designed by Calv200.
 
-Privacy Policy links to `/{language}/privacy/`, Behind Muuva to `/{language}/about-us/`, and Wholesale Muuva / Apply for Wholesale to `/{language}/wholesale/`. Persistent Privacy settings is a button, not a page. Other footer navigation/policy links remain `#` placeholders.
+Privacy Policy links to `/{language}/privacy/`, Behind Muuva to `/{language}/about-us/`, Contact Us to `/{language}/contact/`, and Apply for Wholesale to `/{language}/wholesale/`. Instagram (`https://www.instagram.com/muuva.studio/`), TikTok (`https://www.tiktok.com/@muuva.studio`) and YouTube (`https://www.youtube.com/@Muuva.studio`) use matching accessible external icons. Persistent Privacy settings is a button, not a page. Terms of Service, Terms of Use and the website-credit destination remain `#` placeholders; do not invent destinations.
 
 # Privacy notice editorial status
 
-The four `privacy` catalogs are authoritative; do not duplicate the policy here. Drafts dated 1 November 2026 disclose MUUVA, Netherlands eenmanszaak, KvK 99637588, `contact@muuva.nl` and `https://muuva.nl`, with a translated neutral business-address placeholder. Fourteen sections cover controller, purposes/bases, Cloudflare/Turnstile/HMAC counters, functional storage/fonts, choices/withdrawal, consent-controlled Umami and YouTube, Newsletter, Wholesale, email/providers, retention, transfers, rights and updates. SEO and visible labels retain draft status. Provider settings are attributed to owner confirmation, intended/manual cleanup is qualified, and no absolute provider deletion or EU-only processing is promised.
+The four `privacy` catalogs are authoritative; do not duplicate the policy here. Drafts dated 1 November 2026 disclose MUUVA, Netherlands eenmanszaak, KvK 99637588, `contact@muuva.nl` and `https://muuva.nl`, with a translated neutral business-address placeholder. Fifteen sections cover controller, purposes/bases, Cloudflare/Turnstile/HMAC counters, functional storage/fonts, choices/withdrawal, consent-controlled Umami and YouTube, Newsletter, Contact, Wholesale, email/providers, retention, transfers, rights and updates. Contact copy explains enquiry handling, reply processing, Turnstile/rate limiting, fixed transactional recipient and no marketing use; retention needs owner confirmation. Amazon marketplace preference storage and click-only Cloudflare country use are described. SEO and visible labels retain draft status; no absolute provider deletion or EU-only processing is promised.
 
-Approved controller identity/address details and final legal/native-language review remain publication blockers. Never recover or publish a residential address. Keep draft status until approved; no final effective date is fabricated. C.3.2B uses affirmative consent for optional analytics/videos, superseding the earlier proposed analytics exception and postponement. Production activation and actual provider ingestion/delivery/playback remain separately authorized checks. See `docs/privacy-compliance-review.md`.
+Approved controller identity/address details, final retention decisions and legal/native-language review remain publication blockers. Never recover or publish a residential address. Keep draft status until approved; no final effective date is fabricated. C.3.2B uses affirmative consent for optional analytics/videos, superseding the earlier proposed analytics exception and postponement. Production activation and actual provider ingestion/delivery/playback remain separately authorized checks. See `docs/privacy-compliance-review.md`.
+
+# Contact Us copy
+
+The four `contact` catalogs define all page, form, validation, verification and neutral receipt text. The business email is `contact@muuva.nl`. The required privacy acknowledgement permits processing and replying only; it is not marketing consent. The form has no newsletter enrollment and stays disabled by default until separately approved and configured.
+
+| Language | Title | Supporting message |
+| --- | --- | --- |
+| EN | Get in touch | Have a question, an idea, or something you'd like to share? We'd love to hear from you. |
+| DE | Nimm Kontakt auf | Hast du eine Frage, eine Idee oder etwas, das du mit uns teilen möchtest? Wir freuen uns, von dir zu hören. |
+| NL | Neem contact op | Heb je een vraag, een idee of iets dat je met ons wilt delen? We horen graag van je. |
+| ES | Ponte en contacto | ¿Tienes una pregunta, una idea o algo que quieras compartir? Nos encantará leerte. |
 
 # Privacy preferences and video copy
 

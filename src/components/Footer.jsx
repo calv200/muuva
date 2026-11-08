@@ -9,36 +9,20 @@ const newsletterEnabled = import.meta.env.VITE_NEWSLETTER_ENABLED === "true" && 
 const navigationLinks = [
   "footer.links.behind",
   "footer.links.contact",
-  "footer.links.wholesale",
   "footer.links.apply",
-  "footer.links.care",
-  "footer.links.sustainability",
 ];
 
 const policyLinks = [
-  "footer.links.faq",
   "footer.links.privacy",
-  "footer.links.refund",
-  "footer.links.shipping",
   "footer.links.service",
   "footer.links.use",
 ];
 
-function InstagramIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-5 w-5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="1.5"
-    >
-      <rect x="4" y="4" width="16" height="16" rx="4" />
-      <circle cx="12" cy="12" r="3.5" />
-      <path strokeLinecap="round" d="M17.3 6.7h.01" />
-    </svg>
-  );
+function SocialIcon({ platform }) {
+  const common = { "aria-hidden": true, className: "h-6 w-6", viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round", strokeLinejoin: "round" };
+  if (platform === "instagram") return <svg {...common}><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.6" cy="6.6" r=".8" fill="currentColor" stroke="none" /></svg>;
+  if (platform === "tiktok") return <svg {...common}><path d="M14 4v10.2a4.1 4.1 0 1 1-3.2-4" /><path d="M14 4c.6 2.5 2.2 4 5 4.3" /></svg>;
+  return <svg {...common}><path d="M21 8.2a2.8 2.8 0 0 0-2-2C17.3 5.7 12 5.7 12 5.7s-5.3 0-7 .5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2.5 12a29 29 0 0 0 .5 3.8 2.8 2.8 0 0 0 2 2c1.7.5 7 .5 7 .5s5.3 0 7-.5a2.8 2.8 0 0 0 2-2 29 29 0 0 0 .5-3.8 29 29 0 0 0-.5-3.8Z" /><path d="m10 9 5 3-5 3z" fill="currentColor" stroke="none" /></svg>;
 }
 
 function FooterLinkList({ links, ariaLabel }) {
@@ -50,7 +34,7 @@ function FooterLinkList({ links, ariaLabel }) {
           <li key={link}>
             <a
               className="muuva-footer-link transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-              href={link === "footer.links.behind" ? localizedUrl(i18n.resolvedLanguage, { page: "about-us" }) : link === "footer.links.privacy" ? localizedUrl(i18n.resolvedLanguage, { page: "privacy" }) : ["footer.links.wholesale", "footer.links.apply"].includes(link) ? localizedUrl(i18n.resolvedLanguage, { page: "wholesale" }) : "#"}
+              href={link === "footer.links.behind" ? localizedUrl(i18n.resolvedLanguage, { page: "about-us" }) : link === "footer.links.contact" ? localizedUrl(i18n.resolvedLanguage, { page: "contact" }) : link === "footer.links.privacy" ? localizedUrl(i18n.resolvedLanguage, { page: "privacy" }) : link === "footer.links.apply" ? localizedUrl(i18n.resolvedLanguage, { page: "wholesale" }) : "#"}
             >
               {t(link)}
             </a>
@@ -92,15 +76,13 @@ export default function Footer() {
 
         <div className="muuva-legal mt-16 flex flex-col gap-9 text-muted sm:mt-20 lg:mt-24">
           <button type="button" onClick={openSettings} className="min-h-11 self-start text-left underline underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand">{t("consent.settings")}</button>
-          <a
-            className="inline-flex h-10 w-10 items-center justify-center text-muted transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-            href="https://www.instagram.com/muuva.studio/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t("footer.instagram")}
-          >
-            <InstagramIcon />
-          </a>
+          <nav aria-label={t("footer.socials")} className="flex gap-2">
+            {[["instagram", "https://www.instagram.com/muuva.studio/"], ["tiktok", "https://www.tiktok.com/@muuva.studio"], ["youtube", "https://www.youtube.com/@Muuva.studio"]].map(([platform, href]) => (
+              <a key={platform} className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" href={href} target="_blank" rel="noopener noreferrer" aria-label={t(`footer.${platform}`)}>
+                <SocialIcon platform={platform} />
+              </a>
+            ))}
+          </nav>
 
           <p>
             {t("footer.copyrightPrefix", { year: 2026 })}{" "}

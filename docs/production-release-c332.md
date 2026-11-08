@@ -1,6 +1,6 @@
 # C.3.2B / C.3.3 preparation — owner release handoff
 
-Prepared 1 November 2026. **Implemented locally on staging; not authorized for unrestricted launch. No commit, push, merge, deployment or account changes by Codex.** Policy stays DRAFT FOR REVIEW. The owner-controlled procedure below is not deployment permission.
+Prepared 1 November 2026; consolidated Contact and marketplace implementation addendum 8 November 2026. **Implemented locally on staging; not authorized for unrestricted launch. No commit, push, merge, deployment or account changes by Codex.** Policy stays DRAFT FOR REVIEW. The owner-controlled procedure below is not deployment permission.
 
 ## Status and evidence
 
@@ -11,7 +11,13 @@ Prepared 1 November 2026. **Implemented locally on staging; not authorized for u
 | Verified on staging | Historical C.3.1 **owner-reported** enforcement, five Newsletter 400s then 429/Retry-After 600 and independent Wholesale 400. See its security doc for commit/deployment. New C.3.2B consent code has not been deployed/verified there by this task. |
 | Not yet verified on Production | Owner reports infrastructure/variables prepared; no fresh effective deployment, real Turnstile/DOI/Wholesale/analytics or video playback proof. |
 
-Current source has 44 localized routes, 40 analytics-eligible routes. No new route, image replacement or dependency. Owner-created `workers/forms-rate-limiter/wrangler.production.jsonc` is preserved, separate from Preview, and remains owner-managed/untracked unless the owner chooses to include it.
+Current source has 48 localized routes, 44 analytics-eligible routes. The 8 November pass adds a separate disabled Contact route/endpoint, marketplace resolver and fixed NL/DE purchase routing without product asset replacement or dependency additions. Owner-created `workers/forms-rate-limiter/wrangler.production.jsonc` is preserved, separate from Preview, and remains owner-managed/untracked unless the owner chooses to include it.
+
+## Consolidated Contact and marketplace addendum — 8 November 2026
+
+Contact uses `/api/contact` and the existing `BREVO_WHOLESALE_API_KEY` transactional credential only if the owner verifies that its permission and intended sender use are appropriate. No new Brevo API key is intrinsically required. Keep both flags disabled until the owner resolves Contact retention/legal review and configures the environment. The required acknowledgement only covers processing/reply; it is not newsletter or marketing permission. Automated verification uses mocks; no real email, Turnstile or deployed endpoint was invoked.
+
+Marketplace resolution uses fixed owner-provided NL/DE destinations, an Origin-free GET redirect on root-hosted MUUVA Cloudflare origins and direct approved link fallback for local, GitHub Pages and subpath builds. Manual NL/DE preference is the only marketplace setting stored. The supplied ASIN URLs and live offers have not been externally verified.
 
 ## Implementation and files
 
@@ -62,6 +68,17 @@ All current values below are **owner-reported preparation**, not independent eff
 | `BREVO_WHOLESALE_TO_EMAIL` | Prepared; value not independently inspected | Owner-approved business recipient, expected `contact@muuva.nl` | Owner-approved test recipient |
 | `BREVO_WHOLESALE_SENDER_EMAIL` | Prepared; not independently inspected | Existing authorized sender mailbox; owner must verify exact value | Authorized test sender |
 | `BREVO_WHOLESALE_SENDER_NAME` | Prepared; not independently inspected | Existing approved nonempty sender name; verify exact value | Approved test name |
+| `VITE_CONTACT_ENABLED` | **New, false/default off** | `true` only after review, with root hosting and Turnstile site key | Separate Preview build flag; default false |
+| `CONTACT_SUBMISSIONS_ENABLED` | **New, false/default off** | `true` only after exact config, enforced rate limiting and owner approval | Separate Preview runtime flag; default false |
+| `CONTACT_PUBLIC_ORIGIN` | **New** | `https://muuva.nl` | `https://staging.muuva.pages.dev` |
+| `CONTACT_ALLOWED_HOSTNAME` | **New** | `muuva.nl` | `staging.muuva.pages.dev` |
+| `BREVO_CONTACT_TO_EMAIL` | **New** | Owner-approved fixed business recipient; expected `contact@muuva.nl`, verify before activation | Owner-approved test recipient |
+| `BREVO_CONTACT_SENDER_EMAIL` | **New** | Owner-approved existing authorized sender mailbox | Separately authorized sender |
+| `BREVO_CONTACT_SENDER_NAME` | **New** | Owner-approved fixed sender name | Separately approved sender name |
+| `BREVO_WHOLESALE_API_KEY` | Existing; reused, not a new Contact key | Verify transactional permission and sender authorization for Contact | Separate authorized Preview secret |
+| `TURNSTILE_SECRET` / `VITE_TURNSTILE_SITE_KEY` | Existing shared integration | Existing matching Production keys; Contact action `contact_enquiry`, hostname `muuva.nl` | Existing matching Preview keys; Contact action `contact_enquiry`, Preview hostname |
+| `FORMS_RATE_LIMITER`, scope/mode/hash/thresholds | Existing shared limiter | Existing Production binding; mode must be `enforce`; Contact is an isolated category | Existing Preview namespace and credentials; Contact is an isolated category |
+| Marketplace resolver | No new secret/binding | Existing root base/origin; Pages Function obtains country from `request.cf.country` | Root `*.muuva.pages.dev` supported; static `/muuva/` avoids API links |
 | `FORMS_RATE_LIMITER` | Reported binding | `muuva-forms-rate-limiter-production_FormRateLimiter` | `muuva-forms-rate-limiter-preview_FormRateLimiter` |
 | Worker/class | Owner reports deployed | `muuva-forms-rate-limiter-production` / `FormRateLimiter`, SQLite, public URLs disabled | Separate Preview Worker/class namespace |
 | `FORMS_RATE_LIMIT_SCOPE` | `production` | `production` | `preview` |
@@ -75,7 +92,7 @@ No current source requires a marketing category, analytics API secret, new DOI t
 
 Final results on 1 November 2026 (local, not hosted deployment/legal sign-off):
 
-- Required final sequence passed: `npm test` **113/113**, `npm run build`, `npm run test:production` (44 localized pages plus root, six shared JS/CSS/font assets), `git diff --check`.
+- Historical C.3.2B final sequence on 1 November passed: `npm test` **113/113**, `npm run build`, `npm run test:production` (44 localized pages plus root), `git diff --check`. The 8 November consolidated pass results are recorded in its addendum after fresh verification.
 - Root-hosted enabled Production-like build and verifier passed. Generated documents contain the expected first-party loader but no external Umami script tags, analytics hints or YouTube iframes. Browser interception used the actual current official downloaded tracker including its `gateway.umami.is` ingestion path.
 - Staging-like environment with both frontend forms available and accidentally true Umami flag: **113/113 tests**, build and 44-page verification passed; actual Preview output has no analytics integration or YouTube iframe. Runtime submission flags remained false in build simulations.
 - Chromium suite passed: equal first-layer controls/initial unchecked categories; accept/reject/independent choices; persistence/reload, language selection, same-origin tabs, invalid/expired/blocked storage, withdrawal/regrant without refetch; DNT/localhost/Preview exclusions; zero optional network before consent; exact sanitized payload, rapid navigation and consecutive Back/Forward, navigation after Back and no filter/anchor duplicates. All traffic was intercepted.
@@ -107,8 +124,9 @@ Reproduction using an **already installed** Playwright (no application dependenc
 1. Keep both form runtime flags and frontend flags false while confirming Production binding/secret/scope/thresholds. Set Production `FORMS_RATE_LIMIT_MODE=enforce` first; never turn enforcement off as a workaround for a failing public form.
 2. Confirm correct Production origins, authorized Brevo keys/list/templates/sender/recipient and Turnstile hostname/actions. Secrets already reported configured still require presence/environment verification, not printing.
 3. Set Production Newsletter build/runtime flags true, then Wholesale build/runtime flags true only with enforced protection. Set `VITE_UMAMI_ENABLED=true` only for the new reviewed consent-aware build, base/origin/ID as above. Visitor Analytics permission remains off by default. Keep Preview analytics disabled.
-4. Only after separate approval, release the reviewed commit to main/trigger the agreed Production rebuild. This checklist grants no such permission. Build variables require rebuild and runtime bindings may require deployment; changed dashboard fields alone do not prove effective configuration.
-5. Wait for successful tests/build/verification in the deployment. Record deployment UUID, exact deployed commit and Europe/Amsterdam date/time. Check custom-domain alias `https://muuva.nl`, bindings/effective mode and expected static output. Do not declare readiness from branch head alone.
+4. Contact remains off unless separately approved after retention/privacy/native-language review: configure the new Contact flags, exact origin/hostname, fixed sender/recipient and authorized existing transactional key; verify action `contact_enquiry`, then enable Contact build/runtime only with `FORMS_RATE_LIMIT_MODE=enforce`. Mock tests are not live delivery evidence.
+5. Only after separate approval, release the reviewed commit to main/trigger the agreed Production rebuild. This checklist grants no such permission. Build variables require rebuild and runtime bindings may require deployment; changed dashboard fields alone do not prove effective configuration.
+6. Wait for successful tests/build/verification in the deployment. Record deployment UUID, exact deployed commit and Europe/Amsterdam date/time. Check custom-domain alias `https://muuva.nl`, bindings/effective mode and expected static output. Do not declare readiness from branch head alone.
 
 ### C. Controlled live smoke test — designated owner only
 
@@ -120,7 +138,16 @@ Reproduction using an **already installed** Playwright (no application dependenc
 6. Designated Newsletter email: empty/invalid fields/unchecked consent blocked; valid challenge/action/hostname; neutral receipt; real DOI email, link, correct localized confirmation and list state verified separately. Test unsubscribe/suppression and safe duplicate behavior without exposing subscriber status. Receipt alone is not successful delivery. Preserve approved templates/DOI code.
 7. Designated Wholesale enquiry: separate acknowledgement, valid challenge, real intended recipient delivery/Reply-To, escaped content and localized success. Verify no newsletter/marketing enrollment. No visitor acknowledgement is claimed.
 8. Confirm effective Production limiter with a small separately approved invalid-field JSON test such as `{"test":true}` from one network: five admitted invalid requests should reach 400, sixth 429 with Retry-After. Both flags/origin must be correct; do not use valid form payloads for quota testing. Verify independent other-form allowance and recovery after window, never poll aggressively. Confirm legitimate submissions below threshold do not return 503. Missing dependency/configuration fails closed; use safe categories only, not raw data. Hosted hourly expiry/alarm/outage tests remain distinct from this short smoke check.
-9. Check all 44 direct localized pages/refreshes, canonical/hreflang/sitemap, policy/contact/footer links, hero, gallery/hotspots/Amazon, routine filters/Back and responsive widths. Check console/network for hydration, overflow or unexpected third-party requests. Verify Preview still uses its own namespace/keys/origin and never sends production analytics.
+9. Check all 48 direct localized pages/refreshes, canonical/hreflang/sitemap, policy/contact/footer links, hero, gallery/hotspots/Amazon, routine filters/Back and responsive widths. Check console/network for hydration, overflow or unexpected third-party requests. Verify Preview still uses its own namespace/keys/origin and never sends production analytics.
+
+### Local verification, 8 November 2026
+
+- `npm test`: passed, **125/125**. Includes mocked Contact verification/email/rate-limit paths, Unicode/field validation, locale rendering, marketplace selection/redirect allowlist and static-host fallback, all existing consent/newsletter/wholesale regressions.
+- `npm run build`: passed; prerendered **48 localized pages** plus compatibility root.
+- `npm run test:production`: passed; 48 localized pages, six shared JS/CSS/font assets, reciprocal hreflang, sitemap, robots and hosting headers.
+- `git diff --check`: passed. Git emitted expected LF/CRLF working-copy conversion warnings.
+- Browserslist emitted its stale-database notice; Vite tests emitted non-failing HMR WebSocket port `24678` conflicts. Browser automation packages are unavailable, so responsive/visual and live interaction acceptance remains **UNVERIFIED**.
+- No live Cloudflare deployment, Turnstile call, Brevo email, Amazon purchase, or settings change was made. Amazon NL and DE URLs both resolved to the owner-supplied ASIN product pages on 8 November, but each page reported the item currently unavailable; listing/offer availability is not confirmed.
 
 ### D. Post-test and rollback
 

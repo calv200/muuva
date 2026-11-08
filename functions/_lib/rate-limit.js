@@ -29,7 +29,7 @@ export async function checkFormRateLimit({ request, env, endpoint }, { log = con
     diagnostic(log, endpoint, category, 503);
     return json(503, "unavailable");
   };
-  if (!["newsletter", "wholesale"].includes(endpoint)) return json(503, "unavailable");
+  if (!["newsletter", "wholesale", "contact"].includes(endpoint)) return json(503, "unavailable");
   const namespace = env.FORMS_RATE_LIMITER;
   const secret = env.FORMS_RATE_LIMIT_HASH_SECRET;
   const scope = env.FORMS_RATE_LIMIT_SCOPE;

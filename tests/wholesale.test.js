@@ -73,7 +73,7 @@ test("Wholesale has localized editorial content, accessible fields, image, SEO a
       assert(metadata.canonical.endsWith(`/${language}/wholesale/`));
       assert(metadata.alternates.every((alternate) => alternate.href.endsWith("/wholesale/")));
       const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)[0];
-      assert.equal((footer.match(new RegExp(`href="/${language}/wholesale/"`, "g")) || []).length, 2);
+      assert.equal((footer.match(new RegExp(`href="/${language}/wholesale/"`, "g")) || []).length, 1);
     }
   } finally {
     if (server) await server.close();

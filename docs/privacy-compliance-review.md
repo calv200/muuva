@@ -1,10 +1,10 @@
 # MUUVA privacy and consent review
 
-Updated 1 November 2026 for C.3.2B / C.3.3 preparation, implemented locally on staging. **Draft for review. No unrestricted public launch or Production activation approved.** See [release checklist](production-release-c332.md) for matrix, owner actions and local results.
+Updated 8 November 2026 for the consolidated Contact/marketplace pass after C.3.2B / C.3.3 preparation, implemented locally on staging. **Draft for review. No unrestricted public launch or Production activation approved.** See [release checklist](production-release-c332.md) for matrix, owner actions and local results.
 
 ## Implementation and evidence boundaries
 
-There are 44 localized routes including Newsletter confirmation and Wholesale. Four policy drafts retain localized SEO, canonical/hreflang, sitemap, visible draft status and preparation date rather than an invented effective date. Local source/tests do not establish a Cloudflare deployment or effective account settings.
+There are now 48 localized routes including Contact, Newsletter confirmation and Wholesale. Four policy drafts retain localized SEO, canonical/hreflang, sitemap, visible draft status and preparation date rather than an invented effective date. Local source/tests do not establish a Cloudflare deployment or effective account settings.
 
 A central consent store/provider/panel handles independent Analytics and External videos, initially off. Reject, customize and accept are equally styled/accessible; no preselection or browsing/scrolling inference. Essential delivery/security and functional preferences are not optional consent. No active marketing category exists. Footer Privacy settings supports update/withdrawal. First-party localStorage muuva.consent contains version 1, notice 2026-11-01, boolean categories, savedAt and expiresAt, with initial six-calendar-month renewal. Invalid/corrupt/blocked/expired storage fails closed. Storage events synchronize tabs; bounded timers/focus/pageshow/visibility revalidate. A video-only grant preserves the other choice and its renewal deadline.
 
@@ -12,9 +12,13 @@ Browser-local evidence cannot establish who chose, is not tamperproof or a serve
 
 Umami availability is build gated; generated HTML has no external tracker tag/resource hint. Exact muuva.nl, DNT and Analytics permission gate loading and every before-send call. Official automatic initialization is disabled; the existing router/popstate adapter sends the current eligible page once after load/grant and subsequent genuine navigations without a preload queue/backfill. Withdrawal closes the gate immediately. A loaded script can remain inert in memory without automatic tracking listeners; fresh permission reuses it without refetch. Already initiated requests cannot be recalled. Only website, hostname, url, referrer and title survive; no form data, IDs, custom events, recordings or arbitrary titles/paths. See [analytics review](analytics-pass-a-review.md).
 
-YouTube loads only after independent External videos consent. Option A preserves original local thumbnails and 16:9 frames. Informed Enable YouTube & Play grants that category alone and requests autoplay on a youtube-nocookie.com player; normal controls remain if denied. Watch on YouTube opens the original URL safely and changes no choice. Withdrawal removes active iframes. Enhanced mode still sends data to Google. Fonts stay self-hosted; Amazon/Instagram remain voluntary links.
+YouTube loads only after independent External videos consent. Option A preserves original local thumbnails and 16:9 frames. Informed Enable YouTube & Play grants that category alone and requests autoplay on a youtube-nocookie.com player; normal controls remain if denied. Watch on YouTube opens the original URL safely and changes no choice. Withdrawal removes active iframes. Enhanced mode still sends data to Google. Fonts stay self-hosted; Amazon, Instagram, TikTok and YouTube social links remain voluntary outbound links.
 
 Newsletter DOI and Wholesale validation, Turnstile, origins, rate limiting, timeouts, safe responses and diagnostics are unchanged. Website consent never subscribes a visitor or infers marketing consent from Wholesale acknowledgement.
+
+The Contact form collects name, email, controlled enquiry type, message (maximum 4,000 Unicode code points), interface language and a required acknowledgement to process and reply. There is no newsletter enrollment. Contact submissions use a separate endpoint category, action `contact_enquiry`, exact configured origin/hostname, the existing transactional Brevo credential subject to owner permission review, fixed configured sender/recipient and validated Reply-To. Frontend and backend flags default off. The legal retention period/procedure is explicitly unconfirmed and must be decided before activation; provider logs/backups have their own retention. No production email or live Turnstile verification was performed in the local tests.
+
+The visitor may save only NL/DE marketplace choice in functional localStorage. For EN/ES purchases, root-hosted Cloudflare resolves only `request.cf.country` at a clicked GET link and does not store it or change the website language. All redirect destinations are fixed Amazon NL/DE URLs; static/subpath hosting uses direct links and language/manual-choice fallback. No third-party geolocation, IP storage or automatic page-load redirect is added. Current live marketplace offers have not been verified.
 
 ## Owner-confirmed facts — not authenticated inspection
 

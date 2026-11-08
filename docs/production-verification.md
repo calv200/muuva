@@ -1,16 +1,16 @@
 # Production verification
 
-Updated 1 November 2026 for C.3.2B. Use [ordered release/smoke-test checklist](production-release-c332.md) for configuration, approvals, blockers, current results and rollback. Tests do not establish legal approval, live delivery/ingestion or hosted deployment.
+Updated 8 November 2026 for the consolidated Contact/marketplace pass. Use [ordered release/smoke-test checklist](production-release-c332.md) for configuration, approvals, blockers, current results and rollback. Tests do not establish legal approval, live delivery/ingestion, Amazon listing availability or hosted deployment.
 
 ## Required local gate
 
 Run in order: npm test, npm run build, npm run test:production, git diff --check. Default build is disabled. Separate root-hosted enabled simulations use process-local dummy public Turnstile configuration; runtime submission flags remain false and all third-party browser requests must be intercepted. Also test MUUVA_STAGING=true with analytics accidentally enabled. No shared environment/dashboard activation change is needed.
 
-Static verification covers all 44 localized pages plus compatibility root, SSR text, language, localized metadata, canonical/reciprocal hreflang, sitemap/robots, assets/fonts and hosting headers. It rejects external fonts, development addresses, empty shells, unresolved translations, broken sitemap and incorrect noindex rules. Enabled output must have exactly the expected inline loader and zero external tracker tags, including root; disabled output has neither. Analytics resource hints and pre-consent YouTube iframes are rejected. Fixture-corruption checks preserve these gates. Compatibility root is not another public route; 40 paths are analytics-eligible.
+Static verification covers all 48 localized pages plus compatibility root, SSR text, language, localized metadata, canonical/reciprocal hreflang, sitemap/robots, assets/fonts and hosting headers. It rejects external fonts, development addresses, empty shells, unresolved translations, broken sitemap and incorrect noindex rules. Enabled output must have exactly the expected inline loader and zero external tracker tags, including root; disabled output has neither. Analytics resource hints and pre-consent YouTube iframes are rejected. Fixture-corruption checks preserve these gates. Compatibility root is not another public route; 44 paths are analytics-eligible.
 
 ## Browser gate
 
-Use Chromium against generated files: no hydration/page errors; all locales/direct routes/reloads; 320/390/tablet/desktop layouts without overflow; equally accessible first-layer choices, unchecked categories, footer settings/keyboard/focus; independent permissions, persistence, language changes, tabs, blocked/invalid/expired storage and withdrawal.
+Use Chromium against generated files: no hydration/page errors; all locales/direct routes/reloads; homepage, Footer, Contact form states and purchase destinations at 320/390/768/1440px without overflow; Contact field errors, challenge, loading/success/429/unavailable behavior; equally accessible first-layer choices, unchecked categories, footer settings/keyboard/focus; independent permissions, persistence, language changes, tabs, blocked/invalid/expired storage and withdrawal.
 
 Use the official tracker with every script/gateway request intercepted: zero before consent, current page once after load, exact sanitized fields/titles/referrer/UTMs, rapid navigation, consecutive Back/Forward, language/internal navigation after Back, separated repeat visits, no filter/anchor-only views, no new events after withdrawal, no script refetch in the document and DNT/hostname gates. Simulated muuva.nl interception is local fixture evidence only.
 

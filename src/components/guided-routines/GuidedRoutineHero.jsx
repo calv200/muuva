@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import AssetPlaceholder from "./AssetPlaceholder.jsx";
 import mainHeader from "../../assets/images/guided-routines/headers/main-page.png";
-import { AMAZON_PRODUCT_URL } from "../../data/product.js";
+import { MarketplaceLink } from "../../commerce/MarketplaceContext.jsx";
 
 export default function GuidedRoutineHero({ hero }) {
   const { t } = useTranslation();
@@ -46,14 +46,11 @@ export default function GuidedRoutineHero({ hero }) {
           {hero.kitCta && (
             <p className="muuva-ui mt-7 text-muted">
               {t("routines.kitPart")}{" "}
-              <a
+              <MarketplaceLink
                 className="text-ink underline decoration-ink/40 underline-offset-4 transition hover:decoration-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-                href={AMAZON_PRODUCT_URL}
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 {t("routines.kitCta")}
-              </a>
+              </MarketplaceLink>
             </p>
           )}
         </div>

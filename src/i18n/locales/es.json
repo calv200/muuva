@@ -39,7 +39,8 @@
       "band": "Banda de resistencia del kit de Pilates",
       "sliders": "Discos deslizantes del kit de Pilates",
       "full-kit": "Kit de Pilates"
-    }
+    },
+    "marketplace": { "label": "Tienda de Amazon", "automatic": "Elegir automáticamente", "nl": "Países Bajos", "de": "Alemania" }
   },
   "promo": {
     "section": "Rutinas guiadas de Pilates",
@@ -73,18 +74,15 @@
     "aboutTitle": "Sobre Muuva",
     "about": "Desde Ámsterdam, Muuva crea accesorios de Pilates con un diseño cuidado y una fabricación sostenible para tu práctica en casa y en el estudio.",
     "instagram": "Muuva en Instagram",
+    "tiktok": "Muuva en TikTok",
+    "youtube": "Muuva en YouTube",
+    "socials": "Muuva en redes sociales",
     "copyrightPrefix": "© {{year}}, Muuva. Sitio web diseñado por",
     "links": {
       "behind": "Detrás de Muuva",
       "contact": "Contacto",
-      "wholesale": "Muuva para distribuidores",
       "apply": "Hazte distribuidor",
-      "care": "Cuida tus productos Muuva",
-      "sustainability": "Compromiso con la sostenibilidad",
-      "faq": "Preguntas frecuentes",
       "privacy": "Política de privacidad",
-      "refund": "Política de reembolso",
-      "shipping": "Política de envíos",
       "service": "Condiciones del servicio",
       "use": "Condiciones de uso"
     },
@@ -149,6 +147,23 @@
     "challengeRequired": "Completa la verificación antes de suscribirte.",
     "challengeError": "La verificación ha fallado o ha caducado. Inténtalo de nuevo.",
     "unavailable": "La suscripción no está disponible ahora. Inténtalo más tarde."
+  },
+  "contact": {
+    "eyebrow": "NOS ENCANTARÍA SABER DE TI",
+    "title": "Ponte en contacto",
+    "intro": "¿Tienes una pregunta, una idea o algo que quieras compartir? Nos encantará leerte.",
+    "formTitle": "Envíanos un mensaje",
+    "formIntro": "Cuéntanos algunos detalles y te responderemos.",
+    "fields": { "name": "Tu nombre", "email": "Correo electrónico", "subject": "Tipo de consulta", "message": "Tu mensaje" },
+    "subjects": { "placeholder": "Elige un tipo de consulta", "general": "Pregunta general", "product": "Ayuda con un producto", "order": "Consulta sobre un pedido", "other": "Otro" },
+    "consent": "Acepto que MUUVA utilice estos datos para gestionar y responder a mi consulta. Esto no es consentimiento para recibir marketing.",
+    "privacyText": "Lee nuestra",
+    "verificationLabel": "Verificación contra spam",
+    "submit": "ENVIAR MENSAJE →",
+    "submitting": "Enviando...",
+    "successTitle": "Gracias por escribirnos.",
+    "successText": "Hemos recibido tu consulta. Esta confirmación no garantiza que una persona haya recibido el mensaje; también puedes escribir a contact@muuva.nl.",
+    "errors": { "rateLimited": "Demasiados intentos. Espera un poco antes de volver a intentarlo.", "required": "Completa este campo.", "tooLong": "Usa un máximo de {{max}} caracteres.", "invalidText": "Elimina los caracteres de control no admitidos.", "invalidEmail": "Introduce un correo electrónico válido.", "invalidSubject": "Elige uno de los tipos de consulta disponibles.", "consentRequired": "Confirma cómo se utilizarán tus datos.", "validationError": "Revisa el formulario y completa los campos obligatorios.", "challengeRequired": "Completa la verificación antes de enviar el mensaje.", "challengeError": "La verificación ha fallado o ha caducado. Inténtalo de nuevo.", "unavailable": "No hemos podido enviar tu mensaje ahora. Tus datos siguen aquí; inténtalo más tarde.", "notReady": "Este formulario no está disponible ahora. Escribe a contact@muuva.nl." }
   },
   "newsletterConfirmed": {
     "title": "Te damos la bienvenida a MUUVA",
@@ -271,6 +286,7 @@
       "title": "Venta al por mayor y colaboraciones | MUUVA",
       "description": "Colabora con MUUVA como estudio de Pilates, instructor o tienda. Cuéntanos sobre tu negocio y descubre cómo podemos movernos juntos."
     },
+    "contact": { "title": "Contacto | MUUVA", "description": "Contacta con MUUVA para una pregunta general, ayuda con un producto o una consulta sobre un pedido. Nos encantará leerte." },
     "newsletterConfirmed": {
       "title": "Confirmación del boletín | MUUVA",
       "description": "Información para quienes han seguido el enlace de confirmación del boletín de MUUVA."
@@ -279,7 +295,7 @@
   "privacy": {
     "title": "Política de privacidad",
     "draft": "Borrador para revisión",
-    "intro": "Este borrador trata el sitio de MUUVA, preferencias de privacidad, Guided Routines, boletín y consultas mayoristas. No está aprobado para publicación sin restricciones: faltan datos del responsable y la revisión jurídica definitiva.",
+    "intro": "Este borrador trata el sitio de MUUVA, preferencias de privacidad, Guided Routines, boletín y consultas de contacto y mayoristas. No está aprobado para publicación sin restricciones: faltan datos del responsable y la revisión jurídica definitiva.",
     "updated": "Última actualización del borrador:",
     "sections": {
       "operator": {
@@ -298,7 +314,7 @@
       },
       "storage": {
         "title": "Almacenamiento funcional y fuentes",
-        "p1": "Elegir idioma manualmente guarda muuva.language en localStorage hasta cambiarlo/borrarlo; prevalece la URL. La detección automática no guarda nada. Manrope y Newsreader se alojan localmente sin solicitudes a Google Fonts.",
+        "p1": "La selección manual de idioma guarda muuva.language en localStorage hasta cambiarlo o borrarlo; prevalece el idioma de la URL. La tienda de Amazon NL/DE elegida manualmente se guarda como muuva.marketplace hasta cambiarla o borrarla. El país detectado por Cloudflare solo se usa al seguir un enlace de compra y no se guarda. La detección automática de idioma no guarda nada. Manrope y Newsreader se alojan localmente sin solicitudes a Google Fonts.",
         "p2": "muuva.consent guarda categorías, aviso/versión, fecha y caducidad localmente, sin ID de visitante ni base de consentimiento en servidor. Renovar inicialmente a los seis meses naturales es una decisión configurable, no una regla legal universal. Un estado inválido, caducado o inaccesible bloquea servicios opcionales."
       },
       "consent": {
@@ -327,11 +343,16 @@
         "p1": "El formulario activo recoge nombre, empresa, correo, tipo de negocio opcional, consulta, idioma y reconocimiento de privacidad para responder. Cloudflare Functions, Turnstile y límites separados por entorno lo protegen; Brevo entrega al buzón empresarial Microsoft 365. El reconocimiento no permite marketing ni suscripción al boletín.",
         "p2": "Se pretende revisar/eliminar contenidos manualmente dentro de doce meses de la última interacción empresarial significativa, salvo relaciones vigentes, obligaciones o disputas. No es una regla automática verificada del buzón y es independiente de registros transaccionales de Brevo."
       },
+      "contact": {
+        "title": "Consultas de contacto",
+        "p1": "El formulario opcional de contacto recoge tu nombre, correo electrónico, tipo de consulta, mensaje, idioma de la interfaz y una confirmación obligatoria para tramitar y responder a tu solicitud. Cloudflare Pages Functions, Turnstile y una categoría de limitación independiente por entorno protegen los envíos; Brevo envía un mensaje transaccional fijo al destinatario empresarial configurado. La confirmación no es consentimiento de marketing ni te añade a una lista del boletín.",
+        "p2": "El formulario permanecerá desactivado hasta que se configure por separado. El periodo de conservación y el procedimiento de eliminación de las consultas de contacto aún no están confirmados y deben revisarse antes de la activación. El contenido se utilizará solo mientras sea necesario para tramitar y responder a la solicitud, sujeto a obligaciones legales y asuntos pendientes. Los registros transaccionales de Brevo y las copias de los proveedores tienen plazos distintos."
+      },
       "providers": {
         "title": "Proveedores de correo e infraestructura",
         "p1": "Brevo gestiona doble confirmación y entrega transaccional. El propietario confirma 24 meses de registros transaccionales para todos los remitentes. Vistas previas completas desactivadas; esto no borra vistas históricas, metadatos ni copias.",
         "p2": "contact@muuva.nl usa Microsoft 365 Email Essentials mediante GoDaddy. El propietario informa Default MRM Policy con etiquetas heredadas, Online Archive desactivado y Mailbox Litigation Hold desactivado. No hay eliminación mayorista automática a doce meses verificada. Retención/holds adicionales de Purview, recuperación real de elementos borrados y otras copias siguen sin verificar.",
-        "p3": "Los enlaces de compra Amazon e Instagram son externos y voluntarios, no rastreadores publicitarios/sociales integrados. Compras se hacen en Amazon. Al seguirlos se aplican las prácticas propias de esos servicios."
+        "p3": "Los enlaces de compra de Amazon y de Instagram, TikTok y YouTube son externos y voluntarios, no rastreadores publicitarios/sociales integrados. Las compras se realizan en Amazon. Al seguirlos se aplican las prácticas propias de esos servicios."
       },
       "retention": {
         "title": "Criterios de conservación",

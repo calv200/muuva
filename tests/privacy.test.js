@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { createServer } from "vite";
 import { privacyLinks, privacySections, privacyUpdatedOn } from "../src/data/privacy.js";
 import { localizedUrl, parseLocation } from "../src/routing/urls.js";
-import { supportedLanguages } from "../src/routing/routeManifest.js";
+import { pagePaths, supportedLanguages } from "../src/routing/routeManifest.js";
 import { escapeMarkup } from "../build/html.js";
 
 test("privacy URLs preserve page identity when switching languages, including root hosting and trailing slashes", () => {
@@ -19,8 +19,8 @@ test("privacy URLs preserve page identity when switching languages, including ro
   }
 });
 
-test("all 44 server-rendered pages preserve localized footer and Privacy content with newsletter off and on", async () => {
-  const keys = ["VITE_BASE_PATH", "VITE_NEWSLETTER_ENABLED", "VITE_TURNSTILE_SITE_KEY", "VITE_PUBLIC_SITE_ORIGIN"];
+test("all manifest pages preserve localized footer and Privacy content with newsletter off and on", async () => {
+  const keys = ["VITE_BASE_PATH", "VITE_NEWSLETTER_ENABLED", "VITE_TURNSTILE_SITE_KEY", "VITE_PUBLIC_SITE_ORIGIN", "VITE_CONTACT_ENABLED"];
   const saved = Object.fromEntries(keys.map((key) => [key, process.env[key]]));
   try {
     for (const newsletterEnabled of [false, true]) {
@@ -38,7 +38,7 @@ test("all 44 server-rendered pages preserve localized footer and Privacy content
       try {
         const { renderPage, getPublicPages } = await server.ssrLoadModule("/src/entry-server.jsx");
         const pages = getPublicPages();
-        assert.equal(pages.length, 44);
+        assert.equal(pages.length, supportedLanguages.length * pagePaths.length);
         const titles = new Set();
         for (const { language, path } of pages) {
           const locale = JSON.parse(readFileSync(new URL(`../src/i18n/locales/${language}.json`, import.meta.url), "utf8"));

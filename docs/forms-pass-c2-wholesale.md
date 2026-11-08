@@ -8,7 +8,7 @@ Files added: `src/pages/WholesalePage.jsx`, `src/components/WholesaleForm.jsx`, 
 
 The four public `/{language}/wholesale/` routes use the existing React, Tailwind, Newsreader/Manrope and localized routing patterns. The page has an editorial introduction, studio photograph on the left and a warm neutral form panel on the right. Below the desktop breakpoint the photograph stacks above the form. The supplied photograph exists at `src/assets/images/studios and B2B/reformer_bench.jpg`, rather than the requested `studios/` path; it is used without modification or relocation.
 
-Both Wholesale Muuva and Apply for Wholesale in the footer link to this page. Language switching preserves the route, queries and anchor. The manifest, static HTML, localized SEO, canonical/hreflang links and sitemap include the four new pages: 44 localized pages in total. The existing analytics configuration derives its approved public paths and titles from that manifest (40 paths after excluding newsletter confirmation pages); form values and submission events are never added to analytics.
+At the C.2 milestone, both Wholesale Muuva and Apply for Wholesale in the footer linked to this page. The manifest then contained 44 localized pages and analytics allowed 40 routes. In the consolidated 8 November pass the obsolete Wholesale Muuva footer link was removed, Apply for Wholesale remains, Contact was added, and the current manifest contains 48 localized pages / 44 analytics-eligible routes. Form values and submission events are never added to analytics.
 
 ## Form and delivery
 

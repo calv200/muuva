@@ -18,7 +18,7 @@ The Cloudflare configuration/deployment observations below are owner-reported an
 
 Existing protections are retained: POST and runtime activation checks, exact configured origin/host, bounded JSON and allowed fields/languages, required consent and validation, upstream timeouts and safe responses. Turnstile must succeed with the correct hostname and action; its single-use/replay checks remain provider-enforced. Newsletter still calls only the DOI endpoint with list `3` and templates EN `2`, DE `3`, NL `4`, ES `5`; its neutral public receipt for Brevo `201`/`400`/`409` remains unchanged. No direct contact creation or subscriber-state disclosure is added. Wholesale still uses a fixed configured recipient/sender, validated Reply-To, escaped HTML/plain text and a fixed subject; only a Brevo `201` produces its existing accepted state. No enquiry or subscriber values enter analytics, rate records or new logs.
 
-The master brief, CONTENT and handoff contain older no-form descriptions and counts. Current source is authoritative: 44 localized pages and two form endpoints. Those master documents and public Privacy drafts remain unchanged, pending C.3.3 synchronization and review.
+At the 31 October C.3.1 closure, the master brief, CONTENT and handoff still contained older no-form descriptions and counts; that statement is historical. The 8 November consolidated pass synchronizes those documents and adds Contact as a separate third form endpoint. Current source now generates 48 localized pages; see the current [release handoff](production-release-c332.md). The C.3.1 closure itself did not change those documents or public Privacy drafts.
 
 ## Architecture decision and evidence
 

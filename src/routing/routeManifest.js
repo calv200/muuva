@@ -16,5 +16,6 @@ export const pagePaths = [
   "privacy/",
   "about-us/",
   "wholesale/",
+  "contact/",
   "newsletter-confirmed/",
 ];
