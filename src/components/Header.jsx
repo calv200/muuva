@@ -11,7 +11,7 @@ export default function Header() {
       <SiteContainer className="flex h-16 items-center justify-between">
         <a href={localizedUrl(i18n.resolvedLanguage)} className="inline-flex items-center" aria-label={t("header.home")}>
           <img
-            className="h-[18px] w-auto object-contain"
+            className="h-[12.6px] w-auto object-contain sm:h-[18px]"
             src={muuvaLogo}
             alt="muuva"
           />

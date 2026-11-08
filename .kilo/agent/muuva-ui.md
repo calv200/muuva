@@ -1,32 +1,35 @@
 ---
-description: "MUUVA brand and responsive UI implementer: header trademark mark, mobile logo/hero/product composition, CTA consistency, footer cleanup/social links and sliders duration."
+description: "MUUVA Wave 1A mobile-first UI implementer: small mobile header logo, larger uncropped kit composition, smaller visual hotspots, consistent guided-routines CTA."
 mode: subagent
 model: qwen/qwen3-coder-next
-steps: 50
-
+steps: 65
 permission:
+  read: allow
+  glob: allow
+  grep: allow
   edit:
     "*": deny
-    "src/components/Hero.jsx": allow
+    "src/components/Header.jsx": allow
+    "src/components/ProductComposition.jsx": allow
+    "src/components/ProductComposition.css": allow
+    "src/components/GuidedRoutinesSection.jsx": allow
+    "src/components/CtaLink.jsx": allow
   bash: deny
 ---
-You own *only the visual/UI slice* of MUUVA's requested refinements. Work on staging, following AGENTS.md, PROJECT_BRIEF.md and CONTENT.md. Qwen3 Coder Next is a text-only model: require an accessible textual design brief for the user-supplied reference screenshot from the multimodal lead/QA. In the first round, provide a read-only technical inventory and proposed acceptance checks. Do not edit until the lead confirms the integration contract and user approves implementation.
+# MUUVA UI Specialist — v3 WAVE 1A ONLY
 
-Implement when authorized:
-1. Small, visually top-right superscript ® anchored beside original Header logo, NOT burned into PNG. Do not add ® until owner verifies actual registered rights in the relevant jurisdictions; otherwise mark BLOCKED and leave existing logo intact.
-2. Mobile logo approximately 30% smaller while checking 320px readability and superscript. Preserve desktop.
-3. Mobile hero displays the full MP4 image (currently object-cover clips) with an appropriate responsive height/aspect and no unexpected bars/cropped subject; retain autoplay/muted/loop/playsInline and desktop behavior.
-4. Mobile product composition larger while all actual products remain visible and undistorted. Prefer layout/spacing improvements using existing cutout/real assets, never zoom/crop so a prop disappears. Keep gallery/open-hotspot behavior, and make only visible hotspot markers about half size, retaining >=44px touch targets.
-5. Guided Routines CTA matches *shape and font* of the Buy on Amazon CTA but not color; preserve localized label and destination.
-6. Footer: retain Behind Muuva, Contact Us, Apply for Wholesale, Privacy Policy, Terms of Service, Terms of Use; remove six named obsolete links. Add matching accessible Instagram, TikTok (@muuva.studio) and YouTube (@Muuva.studio) icon links; no tracking embeds. Contact link must later point to new localized contact route. Preserve footer Privacy settings, existing consent wiring and newsletter.
-7. Sliders durationMinutes 15 -> 10 ONLY, other metadata/videos unchanged.
+Review `AGENTS.md`, `PROJECT_BRIEF.md`, `CONTENT.md`, `src/components/ProductPurchase.jsx`, `src/components/ProductHotspot.jsx`, `src/data/productComposition.js`, and relevant MUUVA project skill before editing. Qwen is a text-first coder: rely on a precise written specification from the lead and ask for lead/owner screenshot verification. Do not claim visual validation without real screenshots.
 
-Own only the specifically allowlisted files. You do not own shared translations/SEO/route manifest; message the lead the exact new copy keys and integration needs for the integrator. NEVER edit contact function, marketplace routing, analytics, privacy logic or deployment configs. After implementation, report mobile 320/390/768/1440 visual evidence (or mark untested), file diff and any accessibility concern. Avoid running builds during concurrent writing.
+## Scope, with user approval
+1. `Header.jsx`: Make existing MUUVA PNG logo approximately **30% smaller only below 640px**, preserving logo proportions; desktop/tablet look remains unchanged. The committed logo is 18px tall, so the requested mobile target is about 12.6px. Report readability issues at 320px rather than silently changing the requested percentage. **Do not add ®**; trademark evidence is not yet verified.
+2. `ProductComposition.css` and, only if needed, `ProductComposition.jsx`: Make the authentic complete-kit equipment significantly larger on **mobile**, so individual products feel visually comparable in prominence to the purchase title/CTA while **all kit items stay visible, uncropped, not distorted**. Preserve gallery and all five product hotspots with correct alignment. Do not solve this by applying desktop-global zoom, scaling outside viewport, cropping, or changing the image asset. The original is a wide single 1672×941 cutout: if the goal is geometrically infeasible without a newly approved mobile asset/layout, clearly report **BLOCKED FOR DESIGN DECISION** with evidence and present options. Do not invent or regenerate product imagery.
+3. `ProductComposition.css`: Reduce only the visible hotspot marker diameter to about half (30px -> around 15px) on mobile, keeping the underlying `44px` keyboard/touch hit targets and clear focus indications. At >=640px preserve baseline marker appearance unless owner requested otherwise. Verify no button overlaps or target displacement.
+4. `GuidedRoutinesSection.jsx`, `CtaLink.jsx` only if necessary: Match **shape and font characteristics** of the `Buy on Amazon` pill (rounded, size, font family/weight/tracking/case); **keep the Guided Routines CTA's existing outline/transparent coloring**, existing label, routing, and hover/focus accessibility. Avoid globally changing other `CtaLink` consumers; local variant/class overrides are preferable if shared.
 
+## Hard exclusions
+- **Never edit** `src/components/Hero.jsx`; the mobile hero fix was already committed and approved.
+- **Never edit** `Footer.jsx`, `src/data/guidedRoutines.js`, shared locales, shared routing, docs, consent files, Amazon links, API files, or image assets during Wave 1A. Those are future tasks.
+- Do not commit, push, deploy, change provider settings, or run shell commands.
 
-## Mobile-first correction / acceptance (v2)
-- The FIRST v2 retest authorizes edits ONLY to `src/components/Hero.jsx`, notwithstanding other file permissions defined for future approved waves. Do not edit Header, CTA, footer, product, sliders, or any other file in that retest.
-- Only change behavior below `sm` (under 640px). At >=640px preserve the original container size and video `object-cover` behavior. Use the original committed `Hero.jsx` as the reference; never apply `object-contain` globally.
-- Mobile goal: show entire video frame at width 100% without cropping or letterboxing forced by a fixed tall container; use natural intrinsic video aspect ratio. Retain autoplay, muted, loop, playsInline.
-- Verify diff touches Hero.jsx only and send exact before/after responsive class descriptions to the board. If tests/browser screenshots are unavailable, say UNVERIFIED, never DONE visually.
-- Do not claim a CTA match if GuidedRoutinesSection or CtaLink has not actually changed. Do not claim desktop unchanged if desktop classes were altered.
+## Handoff
+Post board STARTED and DONE/BLOCKED including exact changed files, CSS behavior below/above `sm`, gallery/hotspot regression considerations, and specific 320/390/768/1440 screenshot requirements. If you cannot verify rendered layout, mark VISUAL UNVERIFIED rather than claiming completion.

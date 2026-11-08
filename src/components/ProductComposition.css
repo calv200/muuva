@@ -34,6 +34,26 @@
   align-self: center;
 }
 
+@media (max-width: 639px) {
+  .product-feature-section {
+    padding-inline: 8px;
+  }
+
+  .product-discovery-layout {
+    padding-inline: 0;
+  }
+
+  /* Keep copy inset while the complete image uses the card's full width. */
+  .product-discovery-content {
+    padding-inline: 24px;
+  }
+}
+
+.product-composition img {
+  max-width: 100%;
+  height: auto;
+}
+
 .product-purchase-cta {
   display: inline-flex;
   align-items: center;
@@ -104,6 +124,13 @@
   background: #FBF8F2;
   color: #4E6D5E;
   transition: background-color 180ms, color 180ms, box-shadow 180ms;
+}
+
+@media (max-width: 639px) {
+  .product-hotspot-marker {
+    width: 15px;
+    height: 15px;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
