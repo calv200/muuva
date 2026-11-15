@@ -100,6 +100,14 @@ a { color: inherit; }
   /* The sprite camera is the kit camera cropped to a 640px square at x 300, y 200, so frame 0 sits on the photo band. */
   left: -33.333%; top: -217.838%; width: 270.042%; background-image: url(./band-sprite.webp);
 }
+.sliders-layer {
+  /* The sliders' box inside the 1672x941 kit image: x 151, y 581, 245 wide, 115 high. */
+  left: 9.0311%; top: 61.7428%; width: 14.6531%; aspect-ratio: 245 / 115;
+}
+.sliders-layer .sprite {
+  /* Kit camera cropped to a 640px square at x 40, y 180. */
+  left: -45.306%; top: -348.696%; width: 261.224%; background-image: url(./sliders-sprite.webp);
+}
 .ring-layer {
   /* The ring's box inside the 1672x941 kit image: x 643, y 476, 517 wide, 261 high. */
   left: 38.4569%; top: 50.5845%; width: 30.9211%; aspect-ratio: 517 / 261;
@@ -120,6 +128,11 @@ a { color: inherit; }
 #band-specs .c2 { left: 16%; top: 76%; width: 9em; transform: translate(-50%, 6px); text-align: center; }
 #band-specs .tag { top: 99%; }
 @media (max-width: 639px) { #band-specs .c1 { left: 40%; width: 10.5em; } }
+#sliders-specs .c1 { left: 58%; bottom: 87%; width: 13em; text-align: center; }
+#sliders-specs .c2 { left: 12%; top: 46%; width: 8em; transform: translate(-50%, 6px); text-align: center; }
+#sliders-specs .tag { top: 96%; }
+.specs-in #sliders-specs .c1 { transform: translateY(0); }
+@media (max-width: 639px) { #sliders-specs .c1 { left: 46%; width: 10.5em; } #sliders-specs .c2 { left: 10%; } }
 .spec .tag strong { color: var(--ink); }
 .spec svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .spec polyline { fill: none; stroke: var(--ink); stroke-width: var(--hair, .2); stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 600ms ease; }
@@ -187,6 +200,10 @@ a { color: inherit; }
             <img class="photo" src="./ring-photo.webp" alt="" draggable="false">
             <div class="sprite"></div>
           </div>
+          <div class="reveal-layer sliders-layer" id="sliders-layer" aria-hidden="true">
+            <img class="photo" src="./sliders-photo.webp" alt="" draggable="false">
+            <div class="sprite"></div>
+          </div>
           <div class="reveal-layer band-layer" id="band-layer" aria-hidden="true">
             <img class="photo" src="./band-photo.webp" alt="" draggable="false">
             <div class="sprite"></div>
@@ -194,7 +211,7 @@ a { color: inherit; }
           <button type="button" class="hotspot" id="ring-hotspot" style="--dx:65%;--dy:67%;--mx:65%;--my:67%" aria-label="Show Pilates ring details" aria-expanded="false" aria-controls="ring-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
           <button type="button" class="hotspot" data-gallery="ball" style="--dx:79%;--dy:33%;--mx:79%;--my:33%" aria-label="View the Pilates ball" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
           <button type="button" class="hotspot" id="band-hotspot" style="--dx:29%;--dy:78%;--mx:29%;--my:78%" aria-label="Show resistance band details" aria-expanded="false" aria-controls="band-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
-          <button type="button" class="hotspot" data-gallery="sliders" style="--dx:21%;--dy:65%;--mx:13%;--my:63%" aria-label="View the sliders" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
+          <button type="button" class="hotspot" id="sliders-hotspot" style="--dx:21%;--dy:65%;--mx:13%;--my:63%" aria-label="Show slider details" aria-expanded="false" aria-controls="sliders-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
           <button type="button" class="hotspot" data-gallery="kit" style="--dx:73%;--dy:83%;--mx:73%;--my:83%" aria-label="View the workout guide" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
         </div>
 
@@ -220,7 +237,19 @@ a { color: inherit; }
           <p class="c2">Compact &amp; portable</p>
           <p class="tag">Designed to help you <strong>grow stronger</strong>!</p>
         </div>
+        <div class="spec" id="sliders-specs" role="region" aria-label="Slider details" hidden>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <polyline class="l1" pathLength="1" points="78,14 78,27 56,27"/>
+            <circle cx="56" cy="27" r=".9"/>
+            <polyline class="l2" pathLength="1" points="12,57 12,68 47,68"/>
+            <circle cx="47" cy="68" r=".9"/>
+          </svg>
+          <p class="c1">To intensify <strong>core training</strong> on any surface</p>
+          <p class="c2">Compact &amp; portable</p>
+          <p class="tag"><strong>Strength</strong> in every slide!</p>
+        </div>
         <button type="button" class="close" id="ring-close" aria-label="Back to the full kit">&times;</button>
+        <button type="button" class="close" id="sliders-close" aria-label="Back to the full kit">&times;</button>
         <button type="button" class="close" id="band-close" aria-label="Back to the full kit">&times;</button>
       </div>
     </div>
@@ -234,7 +263,7 @@ a { color: inherit; }
       <ul><li><a href="/en/about-us/">Behind Muuva</a></li><li><a href="/en/contact/">Contact Us</a></li><li><a href="/en/wholesale/">Apply for Wholesale</a></li><li><a href="/en/privacy/">Privacy Policy</a></li></ul>
       <div><strong style="color:var(--ink);font-weight:500">About Muuva</strong><p>Muuva creates beautifully designed Pilates gear for movement practices at home and in the studio.</p></div>
     </div>
-    <p class="legal">Prototype page for the ring and band reveal interactions. Not part of the public site. &copy; 2026, Muuva.</p>
+    <p class="legal">Prototype page for the ring, band and slider reveal interactions. Not part of the public site. &copy; 2026, Muuva.</p>
   </div>
 </footer>
 
@@ -381,6 +410,7 @@ a { color: inherit; }
   const reveals = [
     makeReveal({ name: "ring", sprite: "./ring-sprite.webp", room: { narrow: [0.30, 0.34], wide: [0.20, 0.20] }, shift: { narrow: -0.06, wide: 0.10 } }),
     makeReveal({ name: "band", sprite: "./band-sprite.webp", room: { narrow: [0.13, 0.16], wide: [0.02, 0.14] }, shift: { narrow: 0, wide: 0.04 } }),
+    makeReveal({ name: "sliders", sprite: "./sliders-sprite.webp", room: { narrow: [0.13, 0.14], wide: [0.02, 0.12] }, shift: { narrow: 0, wide: 0.04 } }),
   ];
   const preload = () => reveals.forEach((reveal) => reveal.load());
   if ("requestIdleCallback" in window) requestIdleCallback(preload, { timeout: 4000 }); else setTimeout(preload, 2500);
