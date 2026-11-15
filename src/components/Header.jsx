@@ -10,11 +10,14 @@ export default function Header() {
     <header className="sticky top-0 z-30 bg-warm backdrop-blur-sm">
       <SiteContainer className="flex h-16 items-center justify-between">
         <a href={localizedUrl(i18n.resolvedLanguage)} className="inline-flex items-center" aria-label={t("header.home")}>
-          <img
-            className="h-[12.6px] w-auto object-contain sm:h-[18px]"
-            src={muuvaLogo}
-            alt="muuva"
-          />
+          <span className="relative inline-flex">
+            <img
+              className="h-[12.6px] w-auto object-contain sm:h-[18px]"
+              src={muuvaLogo}
+              alt="muuva"
+            />
+            <span aria-hidden="true" className="absolute -right-[0.6em] -top-[0.45em] text-[8px] font-semibold leading-none text-brand sm:text-[9px]">®</span>
+          </span>
         </a>
 
         <div className="flex items-center gap-4 sm:gap-6 lg:gap-10">

@@ -7,6 +7,9 @@ const lifestyleImageModules = import.meta.glob(
   { eager: true, import: "default" }
 );
 
+// Images listed here are shown after all others, in this order (lifeStyle1 closes the carousel).
+const lastImageNumbers = [1];
+
 const lifestyleImages = Object.entries(lifestyleImageModules)
   .map(([path, src]) => {
     const imageNumber = Number(path.match(/lifeStyle(\d+)/i)?.[1]);
@@ -14,11 +17,14 @@ const lifestyleImages = Object.entries(lifestyleImageModules)
     return {
       src,
       order: imageNumber,
+      lastIndex: lastImageNumbers.indexOf(imageNumber),
       altKey: imageNumber >= 1 && imageNumber <= 8 ? `lifestyle.alt.${imageNumber}` : "lifestyle.alt.default",
     };
   })
   .filter((image) => Number.isFinite(image.order))
-  .sort((firstImage, secondImage) => firstImage.order - secondImage.order);
+  .sort((firstImage, secondImage) =>
+    (firstImage.lastIndex - secondImage.lastIndex) || (firstImage.order - secondImage.order)
+  );
 
 export default function LifestyleCarouselSection() {
   const { t } = useTranslation();

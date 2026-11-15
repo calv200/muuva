@@ -167,7 +167,7 @@ Privacy Policy
 ## Legal line
 © 2026, Muuva. Website designed by Calv200.
 
-Privacy Policy links to `/{language}/privacy/`, Behind Muuva to `/{language}/about-us/`, Contact Us to `/{language}/contact/`, and Apply for Wholesale to `/{language}/wholesale/`. Instagram (`https://www.instagram.com/muuva.studio/`), TikTok (`https://www.tiktok.com/@muuva.studio`) and YouTube (`https://www.youtube.com/@Muuva.studio`) use matching accessible external icons. Persistent Privacy settings is a button, not a page. The website credit links to `https://www.instagram.com/calv200/`. Terms of Service and Terms of Use were removed; there are no placeholder links.
+Privacy Policy links to `/{language}/privacy/`, Behind Muuva to `/{language}/about-us/`, Contact Us to `/{language}/contact/`, and Apply for Wholesale to `/{language}/wholesale/`. Instagram (`https://www.instagram.com/muuva.studio/`), TikTok (`https://www.tiktok.com/@muuva.studio`) and YouTube (`https://www.youtube.com/@Muuva.studio`) use matching accessible external icons. Persistent Privacy settings is a button, not a page. The website credit links to `https://www.instagram.com/calv200/`. The full stop after the credit is an unstyled easter-egg link (`footer.prototype` accessible label) to the ring-reveal prototype preview. Terms of Service and Terms of Use were removed; there are no placeholder links.
 
 # Privacy notice editorial status
 
@@ -196,6 +196,6 @@ The four `wholesale` catalogs define the approved page/form labels, accessibilit
 
 # About Us story
 
-The `about.inspired` and `about.us` keys in the four locale catalogs are the authoritative approved Pass B.1.1 story. What Inspired Muuva? has one opening statement and five body paragraphs about Michelle's journey, engineering/technology career and connection to Pilates. About Us has five body paragraphs about Michelle and Carlos, their Venezuelan origins and engineering backgrounds, shared dream, complementary strengths and vision for MUUVA. Preserve Michelle, Carlos, Venezuela, the Netherlands, Amsterdam and Michelle's experience of more than eight years; do not shorten the narrative or add unsupported claims. Headings, alt text and `seo.about` remain localized; route and image filenames stay untranslated.
+The `about.inspired` and `about.us` keys in the four locale catalogs hold the owner-approved story (November 2026 rewrite). What Inspired Muuva? has one opening statement (`intro`) and one body paragraph (`p1`) about Pilates as personal time and Michelle's wish to share it. About Us is written in the first person by Michelle and Carlos: two body paragraphs (`p1`, `p2`) followed by a sign-off (`closing` + `signature`, rendered on two lines). Do not shorten or embellish the approved wording. Headings, alt text and `seo.about` remain localized; route and image filenames stay untranslated.
 
 Use only the two supplied photographs in `src/assets/images/about us/`, with the layout described in `PROJECT_BRIEF.md`. The existing translated Behind Muuva footer label is unchanged and now links to this page. Native-language editorial review remains recommended.

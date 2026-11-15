@@ -22,3 +22,6 @@ Thumbs.db
 
 # Editor-specific settings
 .vscode/
+
+# Git bundles used to transfer commits
+*.bundle

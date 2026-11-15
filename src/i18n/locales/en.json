@@ -84,7 +84,8 @@
       "apply": "Apply for Wholesale",
       "privacy": "Privacy Policy"
     },
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "prototype": "Muuva prototype"
   },
   "wholesale": {
     "eyebrow": "MUUVA FOR BUSINESS",
@@ -391,21 +392,16 @@
   "about": {
     "inspired": {
       "title": "What Inspired Muuva?",
-      "intro": "A brand inspired by a love for Pilates, the dream of building something meaningful, and the courage to begin again.",
-      "p1": "Muuva was born during a moment of change in Michelle's life. Originally from Venezuela, she moved to the Netherlands for an opportunity in technology and spent more than eight years building her career as an engineer.",
-      "p2": "When that chapter came to an end, she found herself wondering what she truly wanted to do next. She had always dreamed of creating something of her own, and for the first time, that dream started to feel possible.",
-      "p3": "Pilates had always been her way to slow down, let go of stress, and reconnect with herself. Through busy days and uncertain moments, it was something that brought her a sense of balance and joy.",
-      "p4": "She never imagined that something so personal could become part of her professional journey. But slowly, an idea began to take shape: why not create something that could help other women discover that same feeling and make movement a natural part of their everyday lives?",
-      "p5": "With her engineering mindset, a passion for Pilates, and the excitement of starting something new, the first idea for Muuva came to life.",
+      "intro": "Muuva was born from a love for Pilates and a simple idea: every woman deserves a little time just for herself. A moment to slow down, feel good, and reconnect with her body and mind, no matter how busy life gets.",
+      "p1": "For Michelle, Pilates has always been more than just a workout. It’s her way to unwind, let go of stress, and feel like herself again. She wanted to share that feeling with other women and make it easier to enjoy Pilates at home, in their own space and at their own pace. That’s what Muuva is all about: helping women find joy in movement and turn a little me time into an everyday act of self love.",
       "alt": "Michelle seated beside a laptop with a MUUVA Pilates ball and ring in front of her."
     },
     "us": {
       "title": "About Us",
-      "p1": "Muuva began with a shared dream between Michelle and her husband, Carlos: to create something meaningful together, built around something they genuinely love.",
-      "p2": "Originally from Venezuela, they are both engineers who moved to the Netherlands to build a life together. With different strengths but a shared way of thinking, they approached their new adventure with curiosity, creativity, and the belief that even the biggest dreams begin with small steps.",
-      "p3": "Building Muuva became more than starting a business. It was a chance to combine their experiences, learn something entirely new, and turn an idea into something they could call their own. Along the way, they discovered how much they could accomplish by supporting each other and bringing their different perspectives together.",
-      "p4": "Today, Muuva is an Amsterdam-based Pilates brand created with heart, thoughtful design, and a genuine love for movement. More than beautiful Pilates essentials, they hope to inspire women to find joy in moving, take a moment for themselves, and make Pilates part of their everyday lives.",
-      "p5": "At its heart, Muuva is a reflection of their love, their shared vision, and the courage to follow a dream together.",
+      "p1": "Hi, we’re Michelle and Carlos! Originally from Venezuela, two engineers who moved to the Netherlands with big dreams and the hope of building a beautiful life together. After more than eight years working in technology, Michelle found herself at a turning point, wondering what would truly make her happy. With her love for Pilates, Carlos by her side, and a dream they both believed in, they decided to take a chance on something completely new.",
+      "p2": "Muuva is so much more than a business to us. It’s a little piece of our story, built with love, countless ideas, late night conversations, and the excitement (and sometimes fear!) of starting from scratch. We’ve poured our hearts into every detail, hoping to create something that brings a little happiness into other women’s everyday lives.",
+      "closing": "With love,",
+      "signature": "Michelle + Carlos",
       "alt": "Michelle and Carlos standing together, with Carlos smiling at Michelle."
     }
   },
