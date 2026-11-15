@@ -163,7 +163,8 @@ test("production verification command exits unsuccessfully for a development ori
   const root = fileURLToPath(new URL("../", import.meta.url));
   const result = spawnSync(process.execPath, ["build/verify-production.js"], {
     cwd: root,
-    env: { ...process.env, VITE_PUBLIC_SITE_ORIGIN: "http://localhost:5173" },
+    // Analytics is checked separately; keep this test independent of the build environment's Umami setting.
+    env: { ...process.env, VITE_PUBLIC_SITE_ORIGIN: "http://localhost:5173", VITE_UMAMI_ENABLED: "false" },
     encoding: "utf8",
   });
   assert.equal(result.status, 1);
