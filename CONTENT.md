@@ -162,12 +162,12 @@ Based in Amsterdam, Muuva creates beautifully designed and sustainably made Pila
 Behind Muuva · Contact Us · Apply for Wholesale
 
 ## Policy links
-Privacy Policy · Terms of Service · Terms of Use
+Privacy Policy
 
 ## Legal line
 © 2026, Muuva. Website designed by Calv200.
 
-Privacy Policy links to `/{language}/privacy/`, Behind Muuva to `/{language}/about-us/`, Contact Us to `/{language}/contact/`, and Apply for Wholesale to `/{language}/wholesale/`. Instagram (`https://www.instagram.com/muuva.studio/`), TikTok (`https://www.tiktok.com/@muuva.studio`) and YouTube (`https://www.youtube.com/@Muuva.studio`) use matching accessible external icons. Persistent Privacy settings is a button, not a page. Terms of Service, Terms of Use and the website-credit destination remain `#` placeholders; do not invent destinations.
+Privacy Policy links to `/{language}/privacy/`, Behind Muuva to `/{language}/about-us/`, Contact Us to `/{language}/contact/`, and Apply for Wholesale to `/{language}/wholesale/`. Instagram (`https://www.instagram.com/muuva.studio/`), TikTok (`https://www.tiktok.com/@muuva.studio`) and YouTube (`https://www.youtube.com/@Muuva.studio`) use matching accessible external icons. Persistent Privacy settings is a button, not a page. The website credit links to `https://www.instagram.com/calv200/`. Terms of Service and Terms of Use were removed; there are no placeholder links.
 
 # Privacy notice editorial status
 

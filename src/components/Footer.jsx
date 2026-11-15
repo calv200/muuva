@@ -14,8 +14,6 @@ const navigationLinks = [
 
 const policyLinks = [
   "footer.links.privacy",
-  "footer.links.service",
-  "footer.links.use",
 ];
 
 function SocialIcon({ platform }) {
@@ -88,7 +86,9 @@ export default function Footer() {
             {t("footer.copyrightPrefix", { year: 2026 })}{" "}
             <a
               className="transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
-              href="#"
+              href="https://www.instagram.com/calv200/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Calv200
             </a>

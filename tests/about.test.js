@@ -48,7 +48,8 @@ test("About server HTML contains the entire localized story, two original images
       const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)[0];
       assert(footer.includes(`href="${localizedUrl(language, { page: "about-us" }, server.config.base)}"`));
       assert(footer.includes(escapeMarkup(locale.footer.links.behind)));
-       assert.equal((footer.match(/href="#"/g) || []).length, 3, "Only the two Terms links and the designer placeholder remain unrouted");
+       assert.equal((footer.match(/href="#"/g) || []).length, 0, "No unrouted placeholder links remain in the footer");
+      assert(footer.includes('href="https://www.instagram.com/calv200/" target="_blank" rel="noopener noreferrer"'), "Website credit links to the designer's Instagram");
     }
   } finally {
     await server.close();
