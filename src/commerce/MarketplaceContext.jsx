@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MARKETPLACE_STORAGE_KEY, marketplaceHref } from "./marketplace.js";
+import { MARKETPLACE_CHOICES, defaultMarketplaceChoice } from "./marketplaceRules.js";
 
 const MarketplaceContext = createContext(null);
 
@@ -9,11 +10,11 @@ export function MarketplaceProvider({ children }) {
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(MARKETPLACE_STORAGE_KEY);
-      if (stored === "NL" || stored === "DE") setOverride(stored);
+      if (MARKETPLACE_CHOICES.includes(stored)) setOverride(stored);
     } catch { /* Functional preference storage is optional. */ }
   }, []);
   function choose(value) {
-    const next = value === "NL" || value === "DE" ? value : null;
+    const next = MARKETPLACE_CHOICES.includes(value) ? value : null;
     setOverride(next);
     try {
       if (next) window.localStorage.setItem(MARKETPLACE_STORAGE_KEY, next);
@@ -36,16 +37,19 @@ export function MarketplaceLink({ children, ...props }) {
 }
 
 export function MarketplaceSelector() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { override, choose } = useMarketplace();
   return (
-    <label className="muuva-footer-link mt-4 flex flex-wrap items-center gap-2 text-muted">
-      <span>{t("product.marketplace.label")}</span>
-      <select value={override || ""} onChange={(event) => choose(event.target.value)} className="min-h-11 rounded-sm border border-softborder bg-cream px-3 text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
-        <option value="">{t("product.marketplace.automatic")}</option>
-        <option value="NL">{t("product.marketplace.nl")}</option>
-        <option value="DE">{t("product.marketplace.de")}</option>
+    <span className="product-purchase-region">
+      <select
+        aria-label={t("product.marketplace.label")}
+        value={override || defaultMarketplaceChoice(i18n.resolvedLanguage)}
+        onChange={(event) => choose(event.target.value)}
+      >
+        <option value="NL" title={t("product.marketplace.nl")}>NL</option>
+        <option value="DE" title={t("product.marketplace.de")}>DE</option>
+        <option value="EU" title={t("product.marketplace.automatic")}>EU</option>
       </select>
-    </label>
+    </span>
   );
 }

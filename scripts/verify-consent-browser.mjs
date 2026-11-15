@@ -14,7 +14,7 @@ const errors = [];
 const folder = path.join(tmpdir(), "muuva-c332-browser"); mkdirSync(folder, { recursive: true });
 const wait = (ms = 80) => new Promise((resolve) => setTimeout(resolve, ms));
 const locales = Object.fromEntries(["en", "de", "nl", "es"].map((l) => [l, JSON.parse(readFileSync(`src/i18n/locales/${l}.json`, "utf8"))]));
-const ids = { ring: "Ns9PKZRh2j4", ball: "eZBYO-GSlVk", sliders: "hcx_IU7NLf8", band: "i9Ev0n22PYc", "full-body": "7X87YbXHo9c" };
+const ids = { ring: "bKmylm6T57w", ball: "XhJxOA3MqFU", sliders: "HXgckKOg-ZM", band: "H6qv9lBoJUE", "full-body": "234bG1XJLRI" };
 async function setup({ host = "muuva.nl", dnt = false, storageBlocked = false } = {}) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   const requests = { trackers: 0, videos: [], views: [], forms: [], formCounts: {}, unexpected: [] };

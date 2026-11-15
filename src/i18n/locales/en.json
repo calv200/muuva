@@ -17,7 +17,7 @@
   },
   "product": {
     "title": "Get Your Pilates Kit",
-    "buy": "Buy on Amazon →",
+    "buy": "Buy on Amazon",
     "discover": "Discover the complete MUUVA Pilates Essential Kit",
     "viewKit": "View complete Pilates Essential Kit photos",
     "imageAlt": "MUUVA Pilates kit with ring, ball, band, sliders, packaging, carry bag, pump, and guide with phone",
@@ -314,7 +314,7 @@
       },
       "storage": {
         "title": "Functional storage and fonts",
-        "p1": "Manual language selection saves muuva.language in localStorage until changed or cleared; URL language takes priority. A manually selected Amazon NL/DE marketplace is saved as muuva.marketplace until changed or cleared. Cloudflare country is used only when you follow a purchase link and is not saved. Automatic language detection saves nothing. Manrope and Newsreader are self-hosted, without Google Fonts requests.",
+        "p1": "Manual language selection saves muuva.language in localStorage until changed or cleared; URL language takes priority. A manually selected Amazon NL/DE/EU marketplace is saved as muuva.marketplace until changed or cleared. Cloudflare country is used only when you follow a purchase link and is not saved. Automatic language detection saves nothing. Manrope and Newsreader are self-hosted, without Google Fonts requests.",
         "p2": "muuva.consent stores category choices, notice/version, save time and expiry locally, without a visitor ID or server consent database. Initial renewal is six calendar months, a configurable product choice, not a universal legal rule. Invalid, expired or unavailable storage blocks optional services."
       },
       "consent": {

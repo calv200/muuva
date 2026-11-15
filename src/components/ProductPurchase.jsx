@@ -58,7 +58,7 @@ export default function ProductPurchase() {
       <div className="product-discovery-layout">
         <div className="product-discovery-content">
           <h2 id="product-discovery-heading" className="font-serif text-[clamp(2rem,4vw,2.75rem)] font-normal leading-[1.1] text-ink">{t("product.title")}</h2>
-          <div className="product-purchase-action mt-6">
+          <div className="product-purchase-action mt-6" role="group" aria-label={t("product.buy")}>
             <MarketplaceLink className="product-purchase-cta">{t("product.buy")}</MarketplaceLink>
             <MarketplaceSelector />
           </div>

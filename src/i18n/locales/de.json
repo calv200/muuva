@@ -17,7 +17,7 @@
   },
   "product": {
     "title": "Hol dir dein Pilates-Set",
-    "buy": "Bei Amazon kaufen →",
+    "buy": "Bei Amazon kaufen",
     "discover": "Entdecke das komplette MUUVA Pilates-Set",
     "viewKit": "Fotos des kompletten Pilates-Sets ansehen",
     "imageAlt": "MUUVA Pilates-Set mit Ring, Ball, Band, Slidern, Verpackung, Tragetasche, Pumpe und Anleitung mit Smartphone",
@@ -314,7 +314,7 @@
       },
       "storage": {
         "title": "Funktionsspeicher und Schriften",
-        "p1": "Die manuelle Sprachwahl speichert muuva.language bis zur Änderung/Löschung im localStorage; die URL-Sprache hat Vorrang. Ein manuell gewählter Amazon-Marktplatz NL/DE wird als muuva.marketplace bis zur Änderung/Löschung gespeichert. Das Cloudflare-Land wird nur beim Folgen eines Kauflinks verwendet und nicht gespeichert. Automatische Spracherkennung speichert nichts. Manrope und Newsreader werden selbst gehostet, ohne Google-Fonts-Anfragen.",
+        "p1": "Die manuelle Sprachwahl speichert muuva.language bis zur Änderung/Löschung im localStorage; die URL-Sprache hat Vorrang. Ein manuell gewählter Amazon-Marktplatz NL/DE/EU wird als muuva.marketplace bis zur Änderung/Löschung gespeichert. Das Cloudflare-Land wird nur beim Folgen eines Kauflinks verwendet und nicht gespeichert. Automatische Spracherkennung speichert nichts. Manrope und Newsreader werden selbst gehostet, ohne Google-Fonts-Anfragen.",
         "p2": "muuva.consent speichert Kategorien, Hinweis/Version, Speicherzeit und Ablauf lokal, ohne Besucher-ID oder Server-Einwilligungsdatenbank. Erneuerung zunächst nach sechs Kalendermonaten ist eine konfigurierbare Produktentscheidung, keine allgemeine gesetzliche Frist. Ungültiger, abgelaufener oder gesperrter Speicher blockiert optionale Dienste."
       },
       "consent": {

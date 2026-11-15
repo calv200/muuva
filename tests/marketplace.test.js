@@ -2,7 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createServer } from "vite";
 import { marketplaceHref, MARKETPLACE_STORAGE_KEY } from "../src/commerce/marketplace.js";
-import { MARKETPLACES, selectMarketplace } from "../src/commerce/marketplaceRules.js";
+import { readFileSync } from "node:fs";
+import { MARKETPLACES, defaultMarketplaceChoice, selectMarketplace } from "../src/commerce/marketplaceRules.js";
+
+const locale = (language) => JSON.parse(readFileSync(new URL(`../src/i18n/locales/${language}.json`, import.meta.url), "utf8"));
 import { supportedLanguages } from "../src/routing/routeManifest.js";
 
 test("static and local fallback links use manual choice, language, then approved NL default", () => {
@@ -25,6 +28,9 @@ test("marketplace rule table covers language and country precedence without stor
     assert.equal(selectMarketplace({ language: locale, country: null }), expected);
     assert.equal(selectMarketplace({ language: locale, override: "NL", country: "DE" }), "NL");
     assert.equal(selectMarketplace({ language: locale, override: "DE", country: "NL" }), "DE");
+    assert.equal(selectMarketplace({ language: locale, override: "EU", country: "DE" }), "DE");
+    assert.equal(selectMarketplace({ language: locale, override: "EU", country: "FR" }), "NL");
+    assert.equal(selectMarketplace({ language: locale, override: "EU" }), expected);
   }
 });
 
@@ -42,7 +48,9 @@ test("all rendered Amazon CTA locations use centralized safe marketplace links i
       const home = renderPage(language, "").html;
       const expected = language === "de" ? MARKETPLACES.DE : MARKETPLACES.NL;
       assert(home.includes(`href="${expected}" target="_blank" rel="noopener noreferrer"`));
-      assert(home.includes("Choose automatically") || language !== "en");
+      for (const choice of ["NL", "DE", "EU"]) assert(new RegExp(`<option value="${choice}"[^>]*>${choice}</option>`).test(home), `${choice} store option`);
+      assert(new RegExp(`<option value="${defaultMarketplaceChoice(language)}"[^>]*selected`).test(home), "Language default is preselected");
+      assert(!locale(language).product.buy.includes("→"), "Purchase pill has no trailing arrow");
       const detail = renderPage(language, "guided-routines/ring/").html;
       assert(detail.includes(`href="${expected}" target="_blank" rel="noopener noreferrer"`));
       assert(!home.includes("/api/marketplace"), "GitHub Pages compatibility build must not expose the Pages Function endpoint");

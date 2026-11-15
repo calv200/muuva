@@ -35,17 +35,17 @@ English navigation: Shop · Training sessions. The language selector shows EN, D
 Get Your Pilates Kit
 
 ## Buy CTA
-Buy on Amazon →
+Buy on Amazon
 
 ## Gallery Buy CTA
-Buy on Amazon →
+Buy on Amazon
 
 ## Amazon marketplaces
 NL: https://www.amazon.nl/dp/B0GZ4RBMX9
 DE: https://www.amazon.de/dp/B0GZ4RBMX9
 
 ## Presentation and gallery behavior
-Left-aligned title and one Buy on Amazon CTA in the square, unified `#F2EFE9` featured container. The title wraps naturally and has no subtitle. On wide desktop the full-kit image sits across the center and right; smaller layouts stack the title and CTA above the image. The title and rounded CTA use deep green `#304C40`. A discreet NL/DE selector allows explicit marketplace choice. Manual choice overrides language and is saved in functional localStorage; otherwise NL language selects Amazon NL, DE selects Amazon DE, Cloudflare country detection selects NL/DE for EN/ES at click time, and the fallback is NL. Static/subpath builds use approved direct links; root Cloudflare builds use an allowlisted first-party redirect. On 8 November 2026 both supplied URLs resolved to the matching ASIN pages but showed the product as currently unavailable; a live offer is not confirmed. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
+Left-aligned title and one Buy on Amazon CTA in the square, unified `#F2EFE9` featured container. The title wraps naturally and has no subtitle. On wide desktop the full-kit image sits across the center and right; smaller layouts stack the title and CTA above the image. The title and rounded CTA use deep green `#304C40`. The right end of the CTA pill holds an NL/DE/EU store selector (no trailing arrow). NL and DE are explicit stores; EU means automatic: Cloudflare country detection sends visitors from Germany to Amazon DE and everyone else to Amazon NL at click time. The preselected value is NL for Dutch, DE for German and EU for English/Spanish. A manual choice is saved in functional localStorage. Static/subpath builds use approved direct links; root Cloudflare builds use an allowlisted first-party redirect. On 8 November 2026 both supplied URLs resolved to the matching ASIN pages but showed the product as currently unavailable; a live offer is not confirmed. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
 
 Hotspot labels and destinations, under `src/assets/images/Products/`:
 

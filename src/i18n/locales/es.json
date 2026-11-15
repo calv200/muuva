@@ -17,7 +17,7 @@
   },
   "product": {
     "title": "Consigue tu kit de Pilates",
-    "buy": "Comprar en Amazon →",
+    "buy": "Comprar en Amazon",
     "discover": "Descubre el kit completo de Pilates de MUUVA",
     "viewKit": "Ver fotos del kit completo de Pilates",
     "imageAlt": "Kit de Pilates de MUUVA con aro, pelota, banda, discos deslizantes, caja, bolsa, inflador y guía con teléfono",
@@ -314,7 +314,7 @@
       },
       "storage": {
         "title": "Almacenamiento funcional y fuentes",
-        "p1": "La selección manual de idioma guarda muuva.language en localStorage hasta cambiarlo o borrarlo; prevalece el idioma de la URL. La tienda de Amazon NL/DE elegida manualmente se guarda como muuva.marketplace hasta cambiarla o borrarla. El país detectado por Cloudflare solo se usa al seguir un enlace de compra y no se guarda. La detección automática de idioma no guarda nada. Manrope y Newsreader se alojan localmente sin solicitudes a Google Fonts.",
+        "p1": "La selección manual de idioma guarda muuva.language en localStorage hasta cambiarlo o borrarlo; prevalece el idioma de la URL. La tienda de Amazon NL/DE/EU elegida manualmente se guarda como muuva.marketplace hasta cambiarla o borrarla. El país detectado por Cloudflare solo se usa al seguir un enlace de compra y no se guarda. La detección automática de idioma no guarda nada. Manrope y Newsreader se alojan localmente sin solicitudes a Google Fonts.",
         "p2": "muuva.consent guarda categorías, aviso/versión, fecha y caducidad localmente, sin ID de visitante ni base de consentimiento en servidor. Renovar inicialmente a los seis meses naturales es una decisión configurable, no una regla legal universal. Un estado inválido, caducado o inaccesible bloquea servicios opcionales."
       },
       "consent": {

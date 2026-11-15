@@ -17,7 +17,7 @@
   },
   "product": {
     "title": "Haal jouw Pilates-set in huis",
-    "buy": "Koop op Amazon →",
+    "buy": "Koop op Amazon",
     "discover": "Ontdek de complete MUUVA Pilates-set",
     "viewKit": "Bekijk foto's van de complete Pilates-set",
     "imageAlt": "MUUVA Pilates-set met ring, bal, band, sliders, verpakking, draagtas, pomp en handleiding met telefoon",
@@ -314,7 +314,7 @@
       },
       "storage": {
         "title": "Functionele opslag en lettertypen",
-        "p1": "Handmatige taalselectie bewaart muuva.language in localStorage tot wijziging of verwijdering; de URL-taal heeft voorrang. Een handmatig gekozen Amazon NL/DE-winkel wordt als muuva.marketplace bewaard tot wijziging of verwijdering. Het Cloudflare-land wordt alleen gebruikt wanneer je een aankooplink volgt en wordt niet opgeslagen. Automatische taaldetectie bewaart niets. Manrope en Newsreader worden zelf gehost zonder Google Fonts-verzoeken.",
+        "p1": "Handmatige taalselectie bewaart muuva.language in localStorage tot wijziging of verwijdering; de URL-taal heeft voorrang. Een handmatig gekozen Amazon NL/DE/EU-winkel wordt als muuva.marketplace bewaard tot wijziging of verwijdering. Het Cloudflare-land wordt alleen gebruikt wanneer je een aankooplink volgt en wordt niet opgeslagen. Automatische taaldetectie bewaart niets. Manrope en Newsreader worden zelf gehost zonder Google Fonts-verzoeken.",
         "p2": "muuva.consent bewaart categorieën, melding/versie, opslagtijd en afloop lokaal, zonder bezoekers-ID of serverdatabase voor toestemming. Vernieuwing aanvankelijk na zes kalendermaanden is een instelbare productkeuze, geen universele wettelijke termijn. Ongeldige, verlopen of onbeschikbare opslag blokkeert optionele diensten."
       },
       "consent": {

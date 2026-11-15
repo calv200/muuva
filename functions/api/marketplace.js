@@ -1,4 +1,4 @@
-import { MARKETPLACES, selectMarketplace } from "../../src/commerce/marketplaceRules.js";
+import { MARKETPLACE_CHOICES, MARKETPLACES, selectMarketplace } from "../../src/commerce/marketplaceRules.js";
 
 const languages = new Set(["en", "de", "nl", "es"]);
 const responseHeaders = {
@@ -18,7 +18,7 @@ export function handleMarketplace({ request }) {
   }
   const language = url.searchParams.get("language") || "en";
   const override = url.searchParams.get("marketplace") || null;
-  if (!languages.has(language) || (override !== null && !["NL", "DE"].includes(override))) {
+  if (!languages.has(language) || (override !== null && !MARKETPLACE_CHOICES.includes(override))) {
     return new Response(null, { status: 400, headers: responseHeaders });
   }
   const country = request.cf?.country;

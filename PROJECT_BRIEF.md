@@ -217,7 +217,7 @@ The header should remain minimal and elegant, but it must not feel visually insi
 ### 5.7 Shared CTA / Button Foundation
 
 Create one reusable CTA/button style for actions such as:
-- `Buy on Amazon →`
+- `Buy on Amazon`
 - `Explore Guided Routines →`
 
 Default direction:
@@ -383,7 +383,7 @@ This sketch defines the desired layout direction for the hero section, including
 
 - Placement: after the hero video, before the Guided Routines promotional section. Preserve the remaining page order.
 - Layout: centered framed container up to 1462px wide with square 90-degree corners, a subtle shadow, and one unified `#F2EFE9` background. At 1280px and wider, the left-aligned editorial block shares the card with the image positioned across the center and right. Below 1280px, copy stacks above the image. The surrounding section remains `#FBF8F2`.
-- Static copy: left-aligned Newsreader title `Get Your Pilates Kit` in deep green `#304C40`, wrapping naturally without forced line breaks. No subtitle appears. The single main CTA remains the rounded, filled `Buy on Amazon →` button in `#304C40` with white text, darker hover, and visible focus, spaced directly below the title. The `More info` button remains removed.
+- Static copy: left-aligned Newsreader title `Get Your Pilates Kit` in deep green `#304C40`, wrapping naturally without forced line breaks. No subtitle appears. The single main CTA remains the rounded, filled `Buy on Amazon` pill in `#304C40` with white text, darker hover, and visible focus, whose right end holds the NL/DE/EU Amazon store selector, spaced directly below the title. The `More info` button remains removed.
 - Sizing and positioning: the image wrapper is 100% wide up to 1341.6px below 1280px. At 1280px and wider it is 106% wide up to 1422.1px, shifted right by 9% of its width and upward with a -24px top margin. The wider layout uses 40px top and 24px bottom card padding; the card remains content-sized. The original image proportions, transparent padding, product arrangement, and percentage hotspot alignment remain intact. No equipment is independently resized.
 - Composition: one transparent `src/assets/images/Products/full-kit-cutout.png` (1672×941), derived locally from `src/assets/images/Products/kit-billboard.png`. Preserve the original product arrangement, perspective, guide/phone angle and photographic shadows. Original source remains unchanged. No floating animation.
 - Gallery triggers: five semantic hotspot buttons overlay the single image, with percentage coordinates and centralized `galleryImageId` mapping in `src/data/productComposition.js`. Ring, Ball, Band and Sliders open their respective photos. The workout-guide hotspot at 73% x / 83% y, beneath the printed guide beside the phone, temporarily opens the full-kit photo. Change only its `galleryImageId` when a dedicated guide photo is added to the gallery. The independent image button opens the full-kit photo; empty section space outside the image and editorial text do not.
@@ -497,11 +497,11 @@ Keep routine data and video URLs centralized in:
 `src/data/guidedRoutines.js`
 
 YouTube embed URLs:
-    - Ring: `https://www.youtube.com/embed/Ns9PKZRh2j4`
-    - Ball: `https://www.youtube.com/embed/eZBYO-GSlVk`
-    - Band: `https://www.youtube.com/embed/i9Ev0n22PYc`
-    - Sliders: `https://www.youtube.com/embed/hcx_IU7NLf8`
-    - All Equipment: `https://www.youtube.com/embed/7X87YbXHo9c`
+    - Ring: `https://www.youtube.com/embed/bKmylm6T57w`
+    - Ball: `https://www.youtube.com/embed/XhJxOA3MqFU`
+    - Band: `https://www.youtube.com/embed/H6qv9lBoJUE`
+    - Sliders: `https://www.youtube.com/embed/HXgckKOg-ZM`
+    - All Equipment: `https://www.youtube.com/embed/234bG1XJLRI`
 
 The Sliders card is titled `Pilates Sliders Workout` and shows the clock with `10 min`, `Medium` intensity, `Full body` muscle group, and a `Slider` equipment pill, using the same metadata layout as the other workouts.
 
@@ -705,7 +705,7 @@ Pre-rendering provides translated initial content and discoverable canonical URL
 
 Product packaging, printed guides, phone screens, photographs, and video imagery can contain baked-in English. These assets remain unchanged. The website translates surrounding interface text and the iframe's accessible title; YouTube owns the embedded player's controls and their language. Website language selection does not localize spoken audio. Captions, subtitles, or localized video versions require separate media work.
 
-Final QA on 2026-10-17 found the Sliders embed (`hcx_IU7NLf8`) reporting a private video. Other live YouTube titles also differ from approved card metadata: Ring and Ball refer to 20-minute videos while the cards show 15 minutes; Band refers to a no-equipment workout; All Equipment refers to a 30-minute dumbbell workout while its card shows 20 minutes and the kit equipment. IDs and card metadata were preserved. The owner should verify availability and intended destinations before publishing. The live embeds loaded, but playback did not advance in the automated Chromium check; uninterrupted playback and audio still require a manual browser/device check.
+Final QA on 2026-10-17 found the Sliders embed (`HXgckKOg-ZM`) reporting a private video. Other live YouTube titles also differ from approved card metadata: Ring and Ball refer to 20-minute videos while the cards show 15 minutes; Band refers to a no-equipment workout; All Equipment refers to a 30-minute dumbbell workout while its card shows 20 minutes and the kit equipment. IDs and card metadata were preserved. The owner should verify availability and intended destinations before publishing. The live embeds loaded, but playback did not advance in the automated Chromium check; uninterrupted playback and audio still require a manual browser/device check.
 
 Native-language brand review is recommended for the localized Product Purchase heading, Styled by You adaptations, newsletter heading, and promotional descriptions. In particular, the DE/NL/ES carousel headings adapt the English phrase to “Your style. Your Muuva.” These are implemented editorial choices, not literal translations; final QA does not replace a native editor's brand-voice review.
 

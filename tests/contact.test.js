@@ -192,7 +192,7 @@ test("Cloudflare marketplace redirect is ordinary Origin-free GET with strict qu
     if (country) Object.defineProperty(request, "cf", { value: { country } });
     return handleMarketplace({ request });
   };
-  for (const [query, country, expected] of [["?language=en", "DE", MARKETPLACES.DE], ["?language=es", "NL", MARKETPLACES.NL], ["?language=nl", "DE", MARKETPLACES.NL], ["?language=de&marketplace=NL", "DE", MARKETPLACES.NL], ["?language=en", null, MARKETPLACES.NL]]) {
+  for (const [query, country, expected] of [["?language=en", "DE", MARKETPLACES.DE], ["?language=es", "NL", MARKETPLACES.NL], ["?language=nl", "DE", MARKETPLACES.NL], ["?language=de&marketplace=NL", "DE", MARKETPLACES.NL], ["?language=en", null, MARKETPLACES.NL], ["?language=nl&marketplace=EU", "DE", MARKETPLACES.DE], ["?language=de&marketplace=EU", "FR", MARKETPLACES.NL]]) {
     const response = resolve(query, country);
     assert.equal(response.status, 302);
     assert.equal(response.headers.get("location"), expected);

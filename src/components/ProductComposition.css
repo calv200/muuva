@@ -59,17 +59,45 @@
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding: 16px 32px;
-  border-radius: 9999px;
+  padding: 16px 20px 16px 32px;
+  border-radius: 9999px 0 0 9999px;
   background: #304C40;
   color: white;
   font-size: 16px;
   font-weight: 500;
+  white-space: nowrap;
   transition: background-color 180ms;
 }
 
 .product-purchase-cta:hover { background: #243B32; }
 .product-purchase-cta:focus-visible { outline: 2px solid #304C40; outline-offset: 4px; }
+
+/* One pill: purchase link on the left, Amazon store choice in the right end. */
+.product-purchase-action { display: inline-flex; align-items: stretch; max-width: 100%; }
+.product-purchase-region {
+  display: inline-flex;
+  border-left: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: 0 9999px 9999px 0;
+  background: #304C40;
+  transition: background-color 180ms;
+}
+.product-purchase-region:hover { background: #243B32; }
+.product-purchase-region select {
+  appearance: none;
+  min-height: 48px;
+  padding: 0 38px 0 14px;
+  border: 0;
+  border-radius: 0 9999px 9999px 0;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1.5 1.5 6 6l4.5-4.5'/%3E%3C/svg%3E") no-repeat right 18px center / 10px;
+  color: white;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+.product-purchase-region select:focus-visible { outline: 2px solid #304C40; outline-offset: 4px; }
+.product-purchase-region option { background: #F2EFE9; color: #1F2A24; }
 
 @media (min-width: 1280px) {
   .product-discovery-layout {
