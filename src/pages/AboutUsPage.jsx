@@ -21,7 +21,7 @@ export default function AboutUsPage() {
               </h1>
               <p className="muuva-support mt-7 font-medium text-ink">{t("about.inspired.intro")}</p>
               <div className="muuva-support mt-6 space-y-5 text-ink/85">
-                {[1, 2, 3, 4, 5].map((n) => <p key={n}>{t(`about.inspired.p${n}`)}</p>)}
+                <p>{t("about.inspired.p1")}</p>
               </div>
             </div>
             <div className="relative aspect-[3/2] min-w-0 overflow-hidden lg:col-start-1 lg:row-start-1 lg:aspect-auto">
@@ -32,7 +32,12 @@ export default function AboutUsPage() {
             <div className="min-w-0 bg-brand/10 px-6 py-10 sm:p-10 xl:p-12">
               <h2 id="about-us" className={headingClass}>{t("about.us.title")}</h2>
               <div className="muuva-support mt-7 space-y-5 text-ink/85">
-                {[1, 2, 3, 4, 5].map((n) => <p key={n}>{t(`about.us.p${n}`)}</p>)}
+                {[1, 2].map((n) => <p key={n}>{t(`about.us.p${n}`)}</p>)}
+                <p className="pt-2 font-serif text-xl italic text-ink">
+                  {t("about.us.closing")}
+                  <br />
+                  {t("about.us.signature")}
+                </p>
               </div>
             </div>
             <div className="relative aspect-[3/4] min-w-0 overflow-hidden lg:aspect-auto">

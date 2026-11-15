@@ -6,6 +6,9 @@ import { useConsent } from "../consent/ConsentProvider.jsx";
 
 const newsletterEnabled = import.meta.env.VITE_NEWSLETTER_ENABLED === "true" && import.meta.env.BASE_URL === "/";
 
+// Easter egg: the full stop after the website credit opens the ring-reveal prototype (separate branch preview).
+const PROTOTYPE_URL = "https://poc-ring-reveal.muuva.pages.dev/poc/ring-reveal/";
+
 const navigationLinks = [
   "footer.links.behind",
   "footer.links.contact",
@@ -92,7 +95,16 @@ export default function Footer() {
             >
               Calv200
             </a>
-            .
+            <a
+              className="cursor-text no-underline focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-brand"
+              href={PROTOTYPE_URL}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              aria-label={t("footer.prototype")}
+              data-easter-egg="prototype"
+            >
+              .
+            </a>
           </p>
         </div>
       </SiteContainer>
