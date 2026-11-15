@@ -108,6 +108,14 @@ a { color: inherit; }
   /* Kit camera cropped to a 640px square at x 40, y 180. */
   left: -45.306%; top: -348.696%; width: 261.224%; background-image: url(./sliders-sprite.webp);
 }
+.guide-layer {
+  /* The guide + phone box inside the 1672x941 kit image: x 1148, y 553, 336 wide, 264 high. */
+  left: 68.6603%; top: 58.7673%; width: 20.0957%; aspect-ratio: 336 / 264;
+}
+.guide-layer .sprite {
+  /* Kit camera cropped to a 640px square at x 1000, y 260. */
+  left: -44.048%; top: -110.985%; width: 190.476%; background-image: url(./guide-sprite.webp);
+}
 .ring-layer {
   /* The ring's box inside the 1672x941 kit image: x 643, y 476, 517 wide, 261 high. */
   left: 38.4569%; top: 50.5845%; width: 30.9211%; aspect-ratio: 517 / 261;
@@ -132,6 +140,10 @@ a { color: inherit; }
 #sliders-specs .c2 { left: 12%; top: 46%; width: 8em; transform: translate(-50%, 6px); text-align: center; }
 #sliders-specs .tag { top: 96%; }
 .specs-in #sliders-specs .c1 { transform: translateY(0); }
+#guide-specs .c1 { left: 70%; bottom: 101%; width: 13em; transform: translate(-50%, 6px); text-align: center; }
+#guide-specs .c2 { left: 16%; bottom: 57%; width: 8em; transform: translate(-50%, 6px); text-align: center; }
+#guide-specs .tag { top: 91%; }
+@media (max-width: 639px) { #guide-specs .c1 { left: 62%; width: 11em; } #guide-specs .c2 { left: 17%; width: 7em; } }
 @media (max-width: 639px) { #sliders-specs .c1 { left: 46%; width: 10.5em; } #sliders-specs .c2 { left: 10%; } }
 .spec .tag strong { color: var(--ink); }
 .spec svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -140,6 +152,9 @@ a { color: inherit; }
 .specs-in .spec p { opacity: 1; transform: translateY(0); }
 .specs-in .spec .c2, .specs-in .spec .tag { transform: translate(-50%, 0); }
 .specs-in #band-specs .c1 { transform: translateY(0); }
+/* per-product rules use ids, so the settled state needs ids too */
+.specs-in #ring-specs .c2, .specs-in #band-specs .c2, .specs-in #sliders-specs .c2,
+.specs-in #guide-specs .c1, .specs-in #guide-specs .c2 { transform: translate(-50%, 0); }
 .specs-in .spec polyline { stroke-dashoffset: 0; }
 .specs-in .spec circle { opacity: 1; }
 .specs-in .spec .c2 { transition-delay: 150ms; } .specs-in .spec .l2 { transition-delay: 150ms; } .specs-in .spec .tag { transition-delay: 350ms; }
@@ -200,6 +215,10 @@ a { color: inherit; }
             <img class="photo" src="./ring-photo.webp" alt="" draggable="false">
             <div class="sprite"></div>
           </div>
+          <div class="reveal-layer guide-layer" id="guide-layer" aria-hidden="true">
+            <img class="photo" src="./guide-photo.webp" alt="" draggable="false">
+            <div class="sprite"></div>
+          </div>
           <div class="reveal-layer sliders-layer" id="sliders-layer" aria-hidden="true">
             <img class="photo" src="./sliders-photo.webp" alt="" draggable="false">
             <div class="sprite"></div>
@@ -212,7 +231,7 @@ a { color: inherit; }
           <button type="button" class="hotspot" data-gallery="ball" style="--dx:79%;--dy:33%;--mx:79%;--my:33%" aria-label="View the Pilates ball" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
           <button type="button" class="hotspot" id="band-hotspot" style="--dx:29%;--dy:78%;--mx:29%;--my:78%" aria-label="Show resistance band details" aria-expanded="false" aria-controls="band-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
           <button type="button" class="hotspot" id="sliders-hotspot" style="--dx:21%;--dy:65%;--mx:13%;--my:63%" aria-label="Show slider details" aria-expanded="false" aria-controls="sliders-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
-          <button type="button" class="hotspot" data-gallery="kit" style="--dx:73%;--dy:83%;--mx:73%;--my:83%" aria-label="View the workout guide" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
+          <button type="button" class="hotspot" id="guide-hotspot" style="--dx:73%;--dy:83%;--mx:73%;--my:83%" aria-label="Show workout guide and guided routines details" aria-expanded="false" aria-controls="guide-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
         </div>
 
         <div class="spec" id="ring-specs" role="region" aria-label="Pilates ring details" hidden>
@@ -248,7 +267,19 @@ a { color: inherit; }
           <p class="c2">Compact &amp; portable</p>
           <p class="tag"><strong>Strength</strong> in every slide!</p>
         </div>
+        <div class="spec" id="guide-specs" role="region" aria-label="Workout guide and guided routines details" hidden>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <polyline class="l1" pathLength="1" points="70,-1 70,22"/>
+            <circle cx="70" cy="22" r=".9"/>
+            <polyline class="l2" pathLength="1" points="16,44 16,71 27,71"/>
+            <circle cx="27" cy="71" r=".9"/>
+          </svg>
+          <p class="c1">Printed guide with <strong>32 exercises</strong> for every piece of the kit</p>
+          <p class="c2"><strong>Guided video routines</strong>, one scan away</p>
+          <p class="tag"><strong>Your routine starts here.</strong> Follow along at home, at your own pace.</p>
+        </div>
         <button type="button" class="close" id="ring-close" aria-label="Back to the full kit">&times;</button>
+        <button type="button" class="close" id="guide-close" aria-label="Back to the full kit">&times;</button>
         <button type="button" class="close" id="sliders-close" aria-label="Back to the full kit">&times;</button>
         <button type="button" class="close" id="band-close" aria-label="Back to the full kit">&times;</button>
       </div>
@@ -263,7 +294,7 @@ a { color: inherit; }
       <ul><li><a href="/en/about-us/">Behind Muuva</a></li><li><a href="/en/contact/">Contact Us</a></li><li><a href="/en/wholesale/">Apply for Wholesale</a></li><li><a href="/en/privacy/">Privacy Policy</a></li></ul>
       <div><strong style="color:var(--ink);font-weight:500">About Muuva</strong><p>Muuva creates beautifully designed Pilates gear for movement practices at home and in the studio.</p></div>
     </div>
-    <p class="legal">Prototype page for the ring, band and slider reveal interactions. Not part of the public site. &copy; 2026, Muuva.</p>
+    <p class="legal">Prototype page for the kit reveal interactions. Not part of the public site. &copy; 2026, Muuva.</p>
   </div>
 </footer>
 
@@ -410,6 +441,7 @@ a { color: inherit; }
   const reveals = [
     makeReveal({ name: "ring", sprite: "./ring-sprite.webp", room: { narrow: [0.30, 0.34], wide: [0.20, 0.20] }, shift: { narrow: -0.06, wide: 0.10 } }),
     makeReveal({ name: "band", sprite: "./band-sprite.webp", room: { narrow: [0.13, 0.16], wide: [0.02, 0.14] }, shift: { narrow: 0, wide: 0.04 } }),
+    makeReveal({ name: "guide", sprite: "./guide-sprite.webp", room: { narrow: [0.26, 0.10], wide: [0.14, 0.08] }, shift: { narrow: 0.02, wide: 0.02 } }),
     makeReveal({ name: "sliders", sprite: "./sliders-sprite.webp", room: { narrow: [0.13, 0.14], wide: [0.02, 0.12] }, shift: { narrow: 0, wide: 0.04 } }),
   ];
   const preload = () => reveals.forEach((reveal) => reveal.load());
