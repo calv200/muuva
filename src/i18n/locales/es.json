@@ -137,7 +137,7 @@
     "emailLabel": "Correo electrónico",
     "emailPlaceholder": "tu@ejemplo.es",
     "consent": "Acepto recibir correos de marketing de MUUVA. Puedo darme de baja en cualquier momento.",
-    "privacyIntro": "Lee el borrador de la",
+    "privacyIntro": "Lee la",
     "verificationLabel": "Verificación contra el spam",
     "subscribe": "Suscribirse",
     "submitting": "Enviando...",
@@ -276,7 +276,7 @@
     },
     "privacy": {
       "title": "Política de privacidad | MUUVA",
-      "description": "Lee el borrador de privacidad de MUUVA sobre consentimiento, Umami, YouTube, boletín, consultas mayoristas y tus derechos."
+      "description": "Lee la política de privacidad de MUUVA sobre consentimiento, Umami, YouTube, boletín, consultas mayoristas y tus derechos."
     },
     "about": {
       "title": "Sobre nosotros | La historia detrás de MUUVA",
@@ -294,14 +294,14 @@
   },
   "privacy": {
     "title": "Política de privacidad",
-    "draft": "Borrador para revisión",
-    "intro": "Este borrador trata el sitio de MUUVA, preferencias de privacidad, Guided Routines, boletín y consultas de contacto y mayoristas. No está aprobado para publicación sin restricciones: faltan datos del responsable y la revisión jurídica definitiva.",
-    "updated": "Última actualización del borrador:",
+    "draft": "Aviso de privacidad",
+    "intro": "Este aviso trata el sitio de MUUVA, preferencias de privacidad, Guided Routines, boletín y consultas de contacto y mayoristas.",
+    "updated": "Última actualización:",
     "sections": {
       "operator": {
         "title": "Responsable y contacto",
         "p1": "MUUVA es una empresa individual neerlandesa (eenmanszaak), KvK 99637588, Países Bajos. Este aviso se refiere a https://muuva.nl. Para preguntas y solicitudes de privacidad, escribe a contact@muuva.nl.",
-        "p2": "[Dirección de contacto empresarial pendiente]. Los datos aprobados de dirección/contacto y la revisión jurídica definitiva son requisitos de publicación. Este borrador no es un aviso legal definitivo."
+        "p2": "Dirección comercial: Calveslo 5, 1433 NK Kudelstaart, Noord-Holland, Países Bajos."
       },
       "purposes": {
         "title": "Datos, fines y bases legales",
@@ -369,8 +369,8 @@
         "p2": "Normalmente respondemos en un mes, con prórrogas explicadas legalmente permitidas. Puedes reclamar ante la Autoriteit Persoonsgegevens neerlandesa o la autoridad de tu residencia, trabajo o lugar de presunta infracción. Contacta a proveedores sobre su tratamiento independiente cuando corresponda."
       },
       "updates": {
-        "title": "Actualizaciones del borrador",
-        "p1": "La fecha es de preparación del borrador, no una entrada en vigor definitiva. Cambios sustanciales de tratamiento opcional requieren renovar elecciones cuando proceda. Faltan datos aprobados del responsable y revisión jurídica/lingüística final antes de publicación sin restricciones."
+        "title": "Actualizaciones de este aviso",
+        "p1": "La fecha indica la última actualización de este aviso. Cambios sustanciales de tratamiento opcional requieren renovar elecciones cuando proceda."
       }
     },
     "links": {

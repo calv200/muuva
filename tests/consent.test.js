@@ -98,7 +98,8 @@ test("four consent/video/policy catalogs have complete matching keys and substan
     const text = JSON.stringify(locale.privacy);
     assert(text.includes("KvK 99637588") && text.includes("contact@muuva.nl"));
     for (const word of ["HMAC", "Turnstile", "Brevo", "Microsoft 365", "GoDaddy", "muuva.consent", "muuva.language", "Frankfurt", "Purview"]) assert(text.includes(word), word);
-    assert(!/\b[1-9]\d{3}\s?[A-Z]{2}\b/.test(text), "No Dutch postal address in draft copy");
+    assert(locale.privacy.sections.operator.p2.includes("Calveslo 5, 1433 NK Kudelstaart"), "Approved business address is published");
+    assert(!/\[[^\]]*\]/.test(locale.privacy.sections.operator.p2), "No bracketed placeholder remains");
     assert(locale.privacy.draft.length > 5);
   }
 });

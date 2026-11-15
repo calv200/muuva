@@ -137,7 +137,7 @@
     "emailLabel": "E-mailadres",
     "emailPlaceholder": "jij@voorbeeld.nl",
     "consent": "Ik wil marketingmails van MUUVA ontvangen. Ik kan me op elk moment afmelden.",
-    "privacyIntro": "Lees het concept van het",
+    "privacyIntro": "Lees het",
     "verificationLabel": "Verificatie tegen spam",
     "subscribe": "Aanmelden",
     "submitting": "Verzenden...",
@@ -276,7 +276,7 @@
     },
     "privacy": {
       "title": "Privacybeleid | MUUVA",
-      "description": "Lees MUUVA’s conceptprivacybeleid over toestemming, Umami, YouTube, nieuwsbrief, groothandelsaanvragen en je rechten."
+      "description": "Lees MUUVA’s privacybeleid over toestemming, Umami, YouTube, nieuwsbrief, groothandelsaanvragen en je rechten."
     },
     "about": {
       "title": "Over ons | Het verhaal achter MUUVA",
@@ -294,14 +294,14 @@
   },
   "privacy": {
     "title": "Privacybeleid",
-    "draft": "Concept ter beoordeling",
-    "intro": "Dit concept beschrijft MUUVA’s website, privacykeuzes, Guided Routines, nieuwsbrief, contact- en groothandelsvragen. Het is niet goedgekeurd voor onbeperkte publicatie: gegevens van de verantwoordelijke en definitieve juridische toetsing zijn onvolledig.",
-    "updated": "Concept laatst bijgewerkt:",
+    "draft": "Privacyverklaring",
+    "intro": "Deze verklaring beschrijft MUUVA’s website, privacykeuzes, Guided Routines, nieuwsbrief, contact- en groothandelsvragen.",
+    "updated": "Laatst bijgewerkt:",
     "sections": {
       "operator": {
         "title": "Verantwoordelijke en contact",
         "p1": "MUUVA is een Nederlandse eenmanszaak, KvK 99637588, Nederland. Deze verklaring betreft https://muuva.nl. Voor privacyvragen en verzoeken kun je contact opnemen via contact@muuva.nl.",
-        "p2": "[Zakelijk contactadres volgt]. Goedgekeurde adres-/contactgegevens en definitieve juridische toetsing zijn publicatievoorwaarden. Dit concept is geen definitieve privacyverklaring."
+        "p2": "Zakelijk adres: Calveslo 5, 1433 NK Kudelstaart, Noord-Holland, Nederland."
       },
       "purposes": {
         "title": "Gegevens, doelen en grondslagen",
@@ -369,8 +369,8 @@
         "p2": "We antwoorden normaal binnen één maand, met uitgelegde wettelijke verlengingen. Klagen kan bij de Nederlandse Autoriteit Persoonsgegevens of de toezichthouder waar je woont, werkt of een vermeende inbreuk plaatsvond. Benader waar passend providers voor hun zelfstandige verwerking."
       },
       "updates": {
-        "title": "Wijzigingen van dit concept",
-        "p1": "De datum betreft conceptvoorbereiding, geen definitieve ingangsdatum. Wezenlijke wijzigingen van optionele verwerking vragen zo nodig nieuwe keuzes. Goedgekeurde verantwoordelijkegegevens en definitieve juridische/moedertaaltoetsing ontbreken nog vóór onbeperkte publicatie."
+        "title": "Wijzigingen van deze verklaring",
+        "p1": "De datum geeft aan wanneer deze verklaring voor het laatst is bijgewerkt. Wezenlijke wijzigingen van optionele verwerking vragen zo nodig nieuwe keuzes."
       }
     },
     "links": {

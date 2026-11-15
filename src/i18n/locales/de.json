@@ -137,7 +137,7 @@
     "emailLabel": "E-Mail-Adresse",
     "emailPlaceholder": "du@beispiel.de",
     "consent": "Ich möchte Marketing-E-Mails von MUUVA erhalten. Ich kann mich jederzeit abmelden.",
-    "privacyIntro": "Lies den Entwurf der",
+    "privacyIntro": "Lies die",
     "verificationLabel": "Überprüfung zum Schutz vor Spam",
     "subscribe": "Abonnieren",
     "submitting": "Wird gesendet...",
@@ -276,7 +276,7 @@
     },
     "privacy": {
       "title": "Datenschutzerklärung | MUUVA",
-      "description": "MUUVAs Datenschutzentwurf zu Einwilligung, Umami, YouTube, Newsletter, Großhandelsanfragen und Ihren Rechten lesen."
+      "description": "MUUVAs Datenschutzerklärung zu Einwilligung, Umami, YouTube, Newsletter, Großhandelsanfragen und Ihren Rechten lesen."
     },
     "about": {
       "title": "Über uns | Die Geschichte hinter MUUVA",
@@ -294,14 +294,14 @@
   },
   "privacy": {
     "title": "Datenschutzerklärung",
-    "draft": "Entwurf zur Prüfung",
-    "intro": "Dieser Entwurf behandelt MUUVAs Website, Datenschutzauswahl, Guided Routines, Newsletter, Kontakt- und Großhandelsanfragen. Er ist nicht zur uneingeschränkten Veröffentlichung freigegeben: Verantwortlichenangaben und abschließende rechtliche Prüfung fehlen noch.",
-    "updated": "Entwurf zuletzt aktualisiert:",
+    "draft": "Datenschutzhinweis",
+    "intro": "Diese Erklärung behandelt MUUVAs Website, Datenschutzauswahl, Guided Routines, Newsletter, Kontakt- und Großhandelsanfragen.",
+    "updated": "Zuletzt aktualisiert:",
     "sections": {
       "operator": {
         "title": "Verantwortlicher und Kontakt",
         "p1": "MUUVA ist ein niederländisches Einzelunternehmen (eenmanszaak), KvK 99637588, Niederlande. Diese Erklärung betrifft https://muuva.nl. Datenschutzfragen und Anträge richten Sie an contact@muuva.nl.",
-        "p2": "[Geschäftliche Kontaktadresse ausstehend]. Freigegebene Adress-/Kontaktangaben und die endgültige rechtliche Prüfung sind Veröffentlichungsvoraussetzungen. Dies ist keine endgültige Datenschutzerklärung."
+        "p2": "Geschäftsadresse: Calveslo 5, 1433 NK Kudelstaart, Noord-Holland, Niederlande."
       },
       "purposes": {
         "title": "Daten, Zwecke und Rechtsgrundlagen",
@@ -369,8 +369,8 @@
         "p2": "Wir antworten grundsätzlich binnen eines Monats, mit erläuterten gesetzlich zulässigen Verlängerungen. Beschwerden sind bei der niederländischen Autoriteit Persoonsgegevens oder der Aufsicht an Wohn-/Arbeitsort oder Ort des mutmaßlichen Verstoßes möglich. Für eigenständige Verarbeitung kontaktieren Sie gegebenenfalls Anbieter."
       },
       "updates": {
-        "title": "Änderungen des Entwurfs",
-        "p1": "Das Datum bezeichnet Entwurfsvorbereitung, kein endgültiges Inkrafttreten. Wesentliche Änderungen optionaler Verarbeitung erfordern gegebenenfalls erneute Auswahl. Freigegebene Verantwortlichenangaben und abschließende rechtliche/muttersprachliche Prüfung fehlen vor uneingeschränkter Veröffentlichung."
+        "title": "Änderungen dieser Erklärung",
+        "p1": "Das Datum zeigt die letzte Aktualisierung dieser Erklärung. Wesentliche Änderungen optionaler Verarbeitung erfordern gegebenenfalls erneute Auswahl."
       }
     },
     "links": {

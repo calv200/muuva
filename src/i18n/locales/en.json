@@ -137,7 +137,7 @@
     "emailLabel": "Email address",
     "emailPlaceholder": "you@example.com",
     "consent": "I agree to receive marketing emails from MUUVA. I can unsubscribe at any time.",
-    "privacyIntro": "Read the draft",
+    "privacyIntro": "Read the",
     "verificationLabel": "Spam protection verification",
     "subscribe": "Subscribe",
     "submitting": "Sending...",
@@ -276,7 +276,7 @@
     },
     "privacy": {
       "title": "Privacy Policy | MUUVA",
-      "description": "Read MUUVA’s draft privacy policy on consent, Umami, YouTube, newsletter subscriptions, Wholesale enquiries and your rights."
+      "description": "Read MUUVA’s privacy policy on consent, Umami, YouTube, newsletter subscriptions, Wholesale enquiries and your rights."
     },
     "about": {
       "title": "About Us | The Story Behind MUUVA",
@@ -294,14 +294,14 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "draft": "Draft for review",
-    "intro": "This draft covers MUUVA’s website, privacy choices, Guided Routines, newsletter, Contact and Wholesale enquiries. It is not approved for unrestricted publication: controller contact details and final legal review remain incomplete.",
-    "updated": "Draft last updated:",
+    "draft": "Privacy notice",
+    "intro": "This notice covers MUUVA’s website, privacy choices, Guided Routines, newsletter, Contact and Wholesale enquiries.",
+    "updated": "Last updated:",
     "sections": {
       "operator": {
         "title": "Controller and contact",
         "p1": "MUUVA is a Dutch sole proprietorship (eenmanszaak), KvK 99637588, Netherlands. This notice concerns https://muuva.nl. For privacy questions and requests, contact contact@muuva.nl.",
-        "p2": "[Business contact address pending]. Approved controller address/contact details and final legal review are publication blockers. This draft is not a final legal notice."
+        "p2": "Business address: Calveslo 5, 1433 NK Kudelstaart, Noord-Holland, Netherlands."
       },
       "purposes": {
         "title": "Data, purposes and legal bases",
@@ -324,7 +324,7 @@
       },
       "analytics": {
         "title": "Optional Umami analytics",
-        "p1": "When available on muuva.nl, Umami Cloud loads only after Analytics consent and subject to Do Not Track. Preview and localhost never send production analytics. The owner confirms Hobby, EU (Frankfurt) analytics storage and six-month standard analytics retention. This draft does not establish live Production activation.",
+        "p1": "When available on muuva.nl, Umami Cloud loads only after Analytics consent and subject to Do Not Track. Preview and localhost never send production analytics. The owner confirms Hobby, EU (Frankfurt) analytics storage and six-month standard analytics retention. This notice does not establish live Production activation.",
         "p2": "MUUVA sends only website ID, hostname, approved public path, approved localized title, validated campaign values and external referrer origin. Other queries, fragments, form content, custom IDs/events, screen size and browser language are excluded. No advertising pixels or session recordings. Campaign labels must contain no personal data; syntax checks cannot recognize every personal name.",
         "p3": "Umami receives network metadata such as IP and User-Agent and may derive device/browser metrics and hashed sessions. Hashing does not guarantee anonymity. EU analytics storage does not mean all support, security, subprocessors or other operations remain in the EU. Operational logs and backups have separate retention."
       },
@@ -369,8 +369,8 @@
         "p2": "We normally respond within one month, with explained extensions where legally permitted. You may complain to the Dutch Autoriteit Persoonsgegevens or the authority where you live, work or an alleged infringement occurred. Contact providers for their independent processing where appropriate."
       },
       "updates": {
-        "title": "Updates to this draft",
-        "p1": "The date above is a draft preparation date, not a final effective date. Material changes to optional processing require renewed choices where appropriate. Approved controller details and final legal/native-language review remain necessary before unrestricted publication."
+        "title": "Updates to this notice",
+        "p1": "The date above shows when this notice was last updated. Material changes to optional processing require renewed choices where appropriate."
       }
     },
     "links": {

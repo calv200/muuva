@@ -1,5 +1,5 @@
-// Date of preparation of this staging draft, not a production effective date.
-export const privacyUpdatedOn = "2026-11-01";
+// Date this notice was last updated.
+export const privacyUpdatedOn = "2026-11-15";
 
 // Stable structure and destinations; all visitor-facing wording is in the catalogs.
 export const privacySections = [
