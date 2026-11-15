@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<title>MUUVA prototype | Ring reveal</title>
+<link rel="preload" href="./manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="./kit.webp" as="image">
+<style>
+@font-face { font-family: "Manrope"; font-weight: 400 600; font-display: swap; src: url(./manrope-latin.woff2) format("woff2"); }
+@font-face { font-family: "Newsreader"; font-weight: 400 500; font-display: swap; src: url(./newsreader-latin.woff2) format("woff2"); }
+
+:root {
+  --ink: #24211F; --muted: #6F6A63; --brand: #4E6D5E; --deep: #304C40; --deep-hover: #243B32;
+  --cream: #FBF8F2; --warm: #F2EFE9; --border: #D7D0C6;
+  --sans: "Manrope", ui-sans-serif, system-ui, sans-serif; --serif: "Newsreader", Georgia, serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); line-height: 1.5; }
+img { display: block; max-width: 100%; height: auto; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+.container { max-width: 1280px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 40px); }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 30; background: var(--warm); }
+.site-header .container { display: flex; height: 64px; align-items: center; justify-content: space-between; }
+.site-header .logo img { height: 12.6px; width: auto; }
+.site-header nav { display: none; gap: 32px; font-size: 15px; font-weight: 500; line-height: 1; }
+.site-header nav a { text-decoration: underline; text-decoration-color: rgb(36 33 31 / .7); text-underline-offset: 4px; }
+.header-right { display: flex; align-items: center; gap: 40px; }
+.lang { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; }
+.proto-tag { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--brand); border: 1px solid var(--brand); border-radius: 999px; padding: 3px 10px; }
+@media (min-width: 640px) { .site-header .logo img { height: 18px; } .site-header nav { display: flex; } }
+
+/* Product section (mirrors the main site) */
+.product-section { padding: clamp(48px, 7vw, 96px) clamp(16px, 3vw, 48px); background: var(--cream); }
+.product-layout {
+  display: grid; grid-template-areas: "content" "composition"; gap: 2rem;
+  max-width: 1462px; margin-inline: auto; padding: clamp(24px, 4vw, 60px);
+  background: var(--warm); box-shadow: 0 12px 40px rgb(36 33 31 / 4%); overflow: hidden;
+}
+.product-content { grid-area: content; min-width: 0; }
+.product-content h1 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; color: var(--deep); }
+.buy { display: inline-flex; align-items: stretch; margin-top: 24px; max-width: 100%; }
+.buy a { display: inline-flex; align-items: center; min-height: 48px; padding: 16px 20px 16px 32px; border-radius: 9999px 0 0 9999px; background: var(--deep); color: #fff; font-size: 16px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 180ms; }
+.buy a:hover, .buy .region:hover { background: var(--deep-hover); }
+.buy .region { display: inline-flex; border-left: 1px solid rgb(255 255 255 / .35); border-radius: 0 9999px 9999px 0; background: var(--deep); transition: background-color 180ms; }
+.buy select {
+  appearance: none; min-height: 48px; padding: 0 38px 0 14px; border: 0; border-radius: 0 9999px 9999px 0; color: #fff; cursor: pointer;
+  font: 600 14px/1 var(--sans); letter-spacing: .06em;
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1.5 1.5 6 6l4.5-4.5'/%3E%3C/svg%3E") no-repeat right 18px center / 10px;
+}
+.buy option { background: var(--warm); color: var(--ink); }
+
+.stage { grid-area: composition; position: relative; transition: min-height 600ms cubic-bezier(.6, 0, .2, 1); }
+.composition { position: relative; width: 100%; max-width: 1341.6px; margin-left: auto; isolation: isolate; }
+.kit-button { display: block; width: 100%; }
+.kit-button img { width: 100%; }
+.kit-button, .hotspot { transition: opacity 450ms ease; }
+
+.hotspot { position: absolute; left: var(--mx); top: var(--my); z-index: 3; width: 44px; height: 44px; transform: translate(-50%, -50%); display: grid; place-items: center; border-radius: 50%; touch-action: manipulation; }
+.hotspot span { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--brand); border-radius: 50%; background: var(--cream); color: var(--brand); transition: box-shadow 180ms; }
+.hotspot svg { width: 12px; height: 12px; }
+@media (hover: hover) and (pointer: fine) { .hotspot:hover span { box-shadow: 0 0 0 3px rgb(78 109 94 / 15%); } }
+@media (min-width: 640px) { .hotspot { left: var(--dx); top: var(--dy); } .hotspot span { width: 30px; height: 30px; } .hotspot svg { width: 14px; height: 14px; } }
+
+@media (max-width: 639px) {
+  .product-section { padding-inline: 8px; }
+  .product-layout { padding-inline: 0; gap: 1.5rem; }
+  .product-content { padding-inline: 24px; }
+  .composition { width: 118%; max-width: none; margin: -3.5% 0 -8% -8.4%; }
+  .buy a { min-height: 44px; padding: 10px 16px 10px 24px; font-size: 15px; }
+  .buy select { min-height: 44px; padding: 0 34px 0 12px; font-size: 13px; background-position: right 16px center; }
+}
+@media (min-width: 1280px) {
+  .product-layout { grid-template-areas: "feature"; gap: 0; padding-block: 40px 24px; }
+  .product-content { grid-area: feature; position: relative; z-index: 4; max-width: 390px; padding-top: 8px; align-self: start; }
+  .product-content h1 { font-size: 3.375rem; line-height: .96; }
+  .buy { margin-top: 28px; }
+  .stage { grid-area: feature; }
+  .composition { width: 106%; max-width: 1422.1px; margin-top: -24px; transform: translateX(9%); }
+}
+
+/* Ring reveal */
+.ring-layer {
+  /* The ring's box inside the 1672x941 kit image: x 643, y 476, 517 wide, 261 high. */
+  position: absolute; left: 38.4569%; top: 50.5845%; width: 30.9211%; aspect-ratio: 517 / 261; z-index: 2;
+  transform-origin: 0 0; pointer-events: none; visibility: hidden; will-change: transform;
+}
+.ring-layer .photo { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ring-layer .sprite {
+  /* Frame 0 of the render is scaled and offset so its ring sits on the photo ring. */
+  position: absolute; left: -14.502%; top: -93.37%; width: 129.87%; aspect-ratio: 1;
+  background: url(./ring-sprite.webp) 0 0 / 600% 600% no-repeat; opacity: 0;
+  filter: drop-shadow(0 .5em 1em rgb(36 33 31 / .12));
+}
+.ring-layer .photo, .ring-layer .sprite { transition: opacity 240ms linear; }
+.is-open .ring-layer { visibility: visible; pointer-events: auto; cursor: pointer; }
+.is-open .kit-button, .is-open .hotspot { opacity: 0; pointer-events: none; }
+
+.spec { position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none; font-size: clamp(12.5px, calc(var(--cell, 500px) * .034), 21px); color: var(--ink); }
+.spec p { position: absolute; margin: 0; line-height: 1.35; opacity: 0; transform: translateY(6px); transition: opacity 450ms ease, transform 450ms ease; }
+.spec strong { font-weight: 600; }
+.spec .c1 { left: -10%; bottom: 97.5%; width: 17em; }
+.spec .c2 { left: 92%; top: 68%; width: 11.5em; transform: translate(-50%, 6px); text-align: center; }
+.spec .tag { left: 52%; top: 101%; width: min(26em, 150%); transform: translate(-50%, 6px); text-align: center; color: var(--muted); }
+.spec .tag strong { color: var(--ink); }
+.spec svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.spec polyline { fill: none; stroke: var(--ink); stroke-width: var(--hair, .2); stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 600ms ease; }
+.spec circle { fill: var(--warm); stroke: var(--ink); stroke-width: var(--hair, .2); opacity: 0; transition: opacity 300ms ease; }
+.specs-in .spec p { opacity: 1; transform: translateY(0); }
+.specs-in .spec .c2, .specs-in .spec .tag { transform: translate(-50%, 0); }
+.specs-in .spec polyline { stroke-dashoffset: 0; }
+.specs-in .spec circle { opacity: 1; }
+.specs-in .spec .c2 { transition-delay: 150ms; } .specs-in .spec .l2 { transition-delay: 150ms; } .specs-in .spec .tag { transition-delay: 350ms; }
+
+.close { position: absolute; right: 12px; top: 0; z-index: 6; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--border); background: var(--cream); font-size: 22px; line-height: 1; opacity: 0; pointer-events: none; transition: opacity 300ms ease; }
+.is-open .close { opacity: 1; pointer-events: auto; }
+@media (min-width: 640px) { .close { right: 0; } }
+
+/* Gallery (unchanged behaviour for the other products) */
+.gallery { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; padding: 16px; background: rgb(36 33 31 / .85); backdrop-filter: blur(4px); }
+.gallery.open { display: flex; }
+.gallery img { max-height: 76vh; max-width: calc(100vw - 9rem); object-fit: contain; box-shadow: 0 24px 70px rgb(36 33 31 / .12); }
+.gallery button { position: absolute; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: rgb(251 248 242 / .9); font-size: 24px; line-height: 1; }
+.gallery .g-close { right: 20px; top: 20px; } .gallery .g-prev { left: 16px; top: 50%; transform: translateY(-50%); } .gallery .g-next { right: 16px; top: 50%; transform: translateY(-50%); }
+
+/* Footer */
+.site-footer { background: var(--warm); padding: 56px 0 40px; color: var(--muted); font-size: 14px; }
+.site-footer .cols { display: grid; gap: 32px; }
+.site-footer h2 { margin: 0 0 12px; font-family: var(--serif); font-weight: 500; font-size: 1.75rem; color: var(--ink); }
+.site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.site-footer a { text-decoration: none; } .site-footer a:hover { color: var(--ink); }
+.site-footer .legal { margin-top: 48px; font-size: 12px; }
+@media (min-width: 768px) { .site-footer .cols { grid-template-columns: 1.4fr 1fr 1fr; } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .stage, .ring-layer, .kit-button, .hotspot, .spec p, .spec polyline { transition-duration: 1ms !important; } }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="/en/" aria-label="MUUVA home"><img src="./logo.png" alt="muuva"></a>
+    <div class="header-right">
+      <nav aria-label="Main"><a href="#product">Shop</a><a href="/en/guided-routines/">Training sessions</a></nav>
+      <span class="proto-tag">Prototype</span>
+      <span class="lang" aria-label="Language: English">EN</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="product" class="product-section" aria-labelledby="product-title">
+    <div class="product-layout">
+      <div class="product-content">
+        <h1 id="product-title">Get Your Pilates Kit</h1>
+        <div class="buy" role="group" aria-label="Buy on Amazon">
+          <a id="buy-link" href="https://www.amazon.nl/dp/B0GZ4RBMX9" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+          <span class="region"><select id="buy-region" aria-label="Amazon store"><option>NL</option><option>DE</option><option selected>EU</option></select></span>
+        </div>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="composition" id="composition" role="group" aria-label="Discover the kit">
+          <button type="button" class="kit-button" data-gallery="kit" aria-label="View the full kit" aria-haspopup="dialog">
+            <img src="./kit.webp" width="1672" height="941" alt="MUUVA Pilates Essential Kit with ring, ball, resistance band, sliders, carry bag and guide" draggable="false">
+          </button>
+          <div class="ring-layer" id="ring-layer" aria-hidden="true">
+            <img class="photo" src="./ring-photo.webp" alt="" draggable="false">
+            <div class="sprite" id="sprite"></div>
+          </div>
+          <button type="button" class="hotspot" id="ring-hotspot" style="--dx:65%;--dy:67%;--mx:65%;--my:67%" aria-label="Show Pilates ring details" aria-expanded="false" aria-controls="ring-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
+          <button type="button" class="hotspot" data-gallery="ball" style="--dx:79%;--dy:33%;--mx:79%;--my:33%" aria-label="View the Pilates ball" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
+          <button type="button" class="hotspot" data-gallery="band" style="--dx:29%;--dy:78%;--mx:29%;--my:78%" aria-label="View the resistance band" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
+          <button type="button" class="hotspot" data-gallery="sliders" style="--dx:21%;--dy:65%;--mx:13%;--my:63%" aria-label="View the sliders" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
+          <button type="button" class="hotspot" data-gallery="kit" style="--dx:73%;--dy:83%;--mx:73%;--my:83%" aria-label="View the workout guide" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
+        </div>
+
+        <div class="spec" id="ring-specs" role="region" aria-label="Pilates ring details" hidden>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <polyline class="l1" pathLength="1" points="12,4 12,16 40,16"/>
+            <circle cx="40" cy="16" r=".9"/>
+            <polyline class="l2" pathLength="1" points="74,54 92,54 92,66"/>
+            <circle cx="74" cy="54" r=".9"/>
+          </svg>
+          <p class="c1">Made from <strong>fiberglass</strong>, to intensify muscle sculpting</p>
+          <p class="c2"><strong>Non-slip</strong> and comfortable foam pads</p>
+          <p class="tag"><strong>Small squeeze. Serious work.</strong> The difference between doing the move and feeling the move.</p>
+        </div>
+        <button type="button" class="close" id="ring-close" aria-label="Back to the full kit">&times;</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="cols">
+      <div><h2>Stay in the move.</h2><p>Pilates inspiration, movement tips and more are on the way.</p></div>
+      <ul><li><a href="/en/about-us/">Behind Muuva</a></li><li><a href="/en/contact/">Contact Us</a></li><li><a href="/en/wholesale/">Apply for Wholesale</a></li><li><a href="/en/privacy/">Privacy Policy</a></li></ul>
+      <div><strong style="color:var(--ink);font-weight:500">About Muuva</strong><p>Muuva creates beautifully designed Pilates gear for movement practices at home and in the studio.</p></div>
+    </div>
+    <p class="legal">Prototype page for the ring reveal interaction. Not part of the public site. &copy; 2026, Muuva.</p>
+  </div>
+</footer>
+
+<div class="gallery" id="gallery" role="dialog" aria-modal="true" aria-label="Product gallery">
+  <button type="button" class="g-close" aria-label="Close gallery">&times;</button>
+  <button type="button" class="g-prev" aria-label="Previous image">&lsaquo;</button>
+  <img id="gallery-img" alt="">
+  <button type="button" class="g-next" aria-label="Next image">&rsaquo;</button>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const stage = $("stage"), composition = $("composition"), layer = $("ring-layer"), sprite = $("sprite");
+  const photo = layer.querySelector(".photo"), spec = $("ring-specs"), hotspot = $("ring-hotspot"), closeButton = $("ring-close");
+  const FRAMES = 36, COLUMNS = 6, PLAY_MS = 1300, MOVE_MS = 1450;
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let open = false, busy = false, frame = 0, raf = 0, spriteReady = null;
+
+  // Amazon store choice: EU is automatic (this static prototype cannot see the country, so it uses NL).
+  const stores = { NL: "https://www.amazon.nl/dp/B0GZ4RBMX9", DE: "https://www.amazon.de/dp/B0GZ4RBMX9", EU: "https://www.amazon.nl/dp/B0GZ4RBMX9" };
+  $("buy-region").addEventListener("change", (event) => { $("buy-link").href = stores[event.target.value]; });
+
+  function loadSprite() {
+    spriteReady ??= new Promise((resolve) => { const image = new Image(); image.onload = image.onerror = resolve; image.src = "./ring-sprite.webp"; });
+    return spriteReady;
+  }
+  ["pointerenter", "focus", "touchstart"].forEach((type) => hotspot.addEventListener(type, loadSprite, { passive: true, once: true }));
+  if ("requestIdleCallback" in window) requestIdleCallback(loadSprite, { timeout: 4000 }); else setTimeout(loadSprite, 2500);
+
+  function showFrame(index) {
+    frame = Math.max(0, Math.min(FRAMES - 1, index));
+    sprite.style.backgroundPosition = `${(frame % COLUMNS) * 20}% ${Math.floor(frame / COLUMNS) * 20}%`;
+  }
+  function play(to, duration) {
+    cancelAnimationFrame(raf);
+    const from = frame, start = performance.now();
+    return new Promise((resolve) => {
+      if (duration <= 1) { showFrame(to); return resolve(); }
+      const tick = (now) => {
+        const progress = Math.min(1, (now - start) / duration);
+        showFrame(Math.round(from + (to - from) * progress));
+        if (progress < 1) raf = requestAnimationFrame(tick); else resolve();
+      };
+      raf = requestAnimationFrame(tick);
+    });
+  }
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  // Where the enlarged render cell goes. The callouts hang off this cell, so the stage
+  // needs room above (first callout) and below (tagline).
+  function layout() {
+    const stageBox = stage.getBoundingClientRect();
+    layer.style.transform = "none";
+    const layerBox = layer.getBoundingClientRect(), cellBox = sprite.getBoundingClientRect();
+    const narrow = stageBox.width < 640;
+    const restHeight = composition.getBoundingClientRect().height;
+    const cell = narrow ? Math.min(stageBox.width * 0.76, 420) : Math.min(stageBox.width * 0.42, 600);
+    const above = cell * (narrow ? 0.30 : 0.20), below = cell * (narrow ? 0.34 : 0.20);
+    const needed = above + cell + below;
+    const left = (stageBox.width - cell) / 2 + cell * (narrow ? -0.06 : 0.10), top = Math.max(above, (Math.max(needed, restHeight) - cell) / 2 - (below - above) / 2);
+    const scale = cell / cellBox.width;
+    const offsetX = cellBox.left - layerBox.left, offsetY = cellBox.top - layerBox.top;
+    return {
+      needed, cell, left, top,
+      transform: `translate(${stageBox.left + left - layerBox.left - scale * offsetX}px, ${stageBox.top + top - layerBox.top - scale * offsetY}px) scale(${scale})`,
+    };
+  }
+  function applySpec(target) {
+    spec.style.setProperty("--cell", `${target.cell}px`);
+    spec.style.setProperty("--hair", String(100 / target.cell));
+    Object.assign(spec.style, { width: `${target.cell}px`, height: `${target.cell}px`, transform: `translate(${target.left}px, ${target.top}px)` });
+  }
+
+  async function reveal() {
+    if (open || busy) return;
+    busy = true;
+    await loadSprite();
+    const restHeight = stage.getBoundingClientRect().height;
+    stage.style.minHeight = `${restHeight}px`;
+    showFrame(0);
+    stage.classList.add("is-open");
+    hotspot.setAttribute("aria-expanded", "true");
+    spec.hidden = false;
+    const target = layout();
+    applySpec(target);
+    layer.getBoundingClientRect();
+    const move = reducedMotion ? 1 : MOVE_MS;
+    layer.style.transition = `transform ${move}ms cubic-bezier(.6, 0, .2, 1)`;
+    layer.style.transform = target.transform;
+    stage.style.minHeight = `${Math.max(restHeight, target.needed)}px`;
+    await wait(reducedMotion ? 0 : 60);
+    photo.style.opacity = "0"; sprite.style.opacity = "1";
+    await wait(reducedMotion ? 0 : 90);
+    await play(FRAMES - 1, reducedMotion ? 0 : PLAY_MS);
+    stage.classList.add("specs-in");
+    open = true; busy = false;
+    closeButton.focus({ preventScroll: true });
+  }
+
+  async function conceal() {
+    if (!open || busy) return;
+    busy = true;
+    stage.classList.remove("specs-in");
+    await wait(reducedMotion ? 0 : 220);
+    const move = reducedMotion ? 1 : 1150;
+    layer.style.transition = `transform ${move}ms cubic-bezier(.6, 0, .2, 1)`;
+    layer.style.transform = "none";
+    stage.style.minHeight = "";
+    await play(0, reducedMotion ? 0 : 1050);
+    photo.style.opacity = "1"; sprite.style.opacity = "0";
+    stage.classList.remove("is-open");
+    hotspot.setAttribute("aria-expanded", "false");
+    await wait(reducedMotion ? 0 : 460);
+    spec.hidden = true;
+    layer.style.transition = "";
+    open = false; busy = false;
+    hotspot.focus({ preventScroll: true });
+  }
+
+  hotspot.addEventListener("click", reveal);
+  closeButton.addEventListener("click", conceal);
+  layer.addEventListener("click", conceal);
+  addEventListener("keydown", (event) => { if (event.key === "Escape" && open) conceal(); });
+  addEventListener("resize", () => {
+    if (!open || busy) return;
+    layer.style.transition = "none";
+    const target = layout();
+    layer.style.transform = target.transform; applySpec(target);
+    stage.style.minHeight = `${Math.max(composition.getBoundingClientRect().height, target.needed)}px`;
+  });
+
+  // Gallery for the other products.
+  const gallery = $("gallery"), galleryImage = $("gallery-img");
+  const images = [["ball", "./ball1.webp", "Pilates ball"], ["band", "./band1.webp", "Resistance band"], ["sliders", "./slider1.webp", "Sliders"], ["kit", "./kit1.webp", "Full Pilates kit"]];
+  let current = 0, opener = null;
+  const show = (index) => { current = (index + images.length) % images.length; galleryImage.src = images[current][1]; galleryImage.alt = images[current][2]; };
+  const closeGallery = () => { gallery.classList.remove("open"); document.body.style.overflow = ""; opener?.focus(); };
+  document.querySelectorAll("[data-gallery]").forEach((button) => button.addEventListener("click", () => {
+    opener = button; show(images.findIndex(([id]) => id === button.dataset.gallery));
+    gallery.classList.add("open"); document.body.style.overflow = "hidden"; gallery.querySelector(".g-close").focus();
+  }));
+  gallery.querySelector(".g-close").addEventListener("click", closeGallery);
+  gallery.querySelector(".g-prev").addEventListener("click", () => show(current - 1));
+  gallery.querySelector(".g-next").addEventListener("click", () => show(current + 1));
+  gallery.addEventListener("click", (event) => { if (event.target === gallery) closeGallery(); });
+  addEventListener("keydown", (event) => {
+    if (!gallery.classList.contains("open")) return;
+    if (event.key === "Escape") closeGallery();
+    if (event.key === "ArrowLeft") show(current - 1);
+    if (event.key === "ArrowRight") show(current + 1);
+  });
+})();
+</script>
+</body>
+</html>

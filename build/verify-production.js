@@ -103,7 +103,8 @@ export async function verifyProductionOutput({ directory, base, origin = publicS
   }
 
   // The compatibility root is deliberately not another localized public page.
-  const actual = (await htmlFiles(directory)).filter((file) => file !== "index.html").sort();
+  // Prototype branch only: static pages under poc/ are not part of the localized site.
+  const actual = (await htmlFiles(directory)).filter((file) => file !== "index.html" && !file.startsWith("poc/")).sort();
   assert.deepEqual(actual, [...expected.keys()].sort(), "Localized HTML routes differ from the route manifest");
   for (const filename of ["index.html", ...actual]) {
     const html = await readFile(path.join(directory, filename), "utf8");
