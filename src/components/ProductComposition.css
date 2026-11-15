@@ -47,6 +47,19 @@
   .product-discovery-content {
     padding-inline: 24px;
   }
+
+  /* The image canvas has transparent margins (content spans 8.6–90.4% wide,
+     5.3–87.9% high). Enlarge it and pull those margins outside the card so the
+     kit fills the width; hotspots stay aligned because they scale with the box. */
+  .product-discovery-layout { overflow: hidden; gap: 1.5rem; }
+  .product-composition {
+    width: 118%;
+    max-width: none;
+    margin: -3.5% 0 -8% -8.4%;
+  }
+
+  .product-purchase-cta { min-height: 44px; padding: 10px 16px 10px 24px; font-size: 15px; }
+  .product-purchase-region select { min-height: 44px; padding: 0 34px 0 12px; font-size: 13px; background-position: right 16px center; }
 }
 
 .product-composition img {
@@ -156,9 +169,10 @@
 
 @media (max-width: 639px) {
   .product-hotspot-marker {
-    width: 15px;
-    height: 15px;
+    width: 24px;
+    height: 24px;
   }
+  .product-hotspot-marker svg { width: 12px; height: 12px; }
 }
 
 @media (hover: hover) and (pointer: fine) {
