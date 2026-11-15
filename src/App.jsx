@@ -11,6 +11,13 @@ import ProductPurchase from "./components/ProductPurchase.jsx";
 import Footer from "./components/Footer.jsx";
 import GuidedRoutineDetailPage from "./pages/GuidedRoutineDetailPage.jsx";
 import GuidedRoutinesPage from "./pages/GuidedRoutinesPage.jsx";
+import PrivacyPage from "./pages/PrivacyPage.jsx";
+import AboutUsPage from "./pages/AboutUsPage.jsx";
+import NewsletterConfirmedPage from "./pages/NewsletterConfirmedPage.jsx";
+import WholesalePage from "./pages/WholesalePage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
+import ConsentProvider from "./consent/ConsentProvider.jsx";
+import { MarketplaceProvider } from "./commerce/MarketplaceContext.jsx";
 
 function HomePage() {
   return (
@@ -42,10 +49,15 @@ export default function App({ initialRoute }) {
       });
       return () => window.cancelAnimationFrame(frame);
     }
-    if (route.page === "home") window.scrollTo({ top: 0, behavior: "auto" });
+    if (["home", "privacy", "about-us", "wholesale", "contact", "newsletter-confirmed"].includes(route.page)) window.scrollTo({ top: 0, behavior: "auto" });
   }, [route.page, route.slug, route.hash]);
 
   const renderPage = () => {
+    if (route.page === "about-us") return <AboutUsPage />;
+    if (route.page === "wholesale") return <WholesalePage />;
+    if (route.page === "contact") return <ContactPage />;
+    if (route.page === "privacy") return <PrivacyPage />;
+    if (route.page === "newsletter-confirmed") return <NewsletterConfirmedPage />;
     if (route.page === "guided-routines") {
       return <GuidedRoutinesPage initialFilter={route.filter} />;
     }
@@ -64,12 +76,16 @@ export default function App({ initialRoute }) {
 
   return (
     <RouteContext.Provider value={route}>
-      <SeoMetadata route={route} />
-      <div className="min-h-screen bg-linen text-ink" onClick={handleInternalLink}>
-        <Header />
-        {renderPage()}
-        <Footer />
-      </div>
+      <MarketplaceProvider>
+        <ConsentProvider>
+          <SeoMetadata route={route} />
+          <div className="min-h-screen bg-linen text-ink" onClick={handleInternalLink}>
+            <Header />
+            {renderPage()}
+            <Footer />
+          </div>
+        </ConsentProvider>
+      </MarketplaceProvider>
     </RouteContext.Provider>
   );
 }

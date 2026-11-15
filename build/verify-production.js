@@ -9,6 +9,7 @@ import { parseLocation } from "../src/routing/urls.js";
 import { getMetadata } from "../src/seo/metadata.js";
 import { publicSiteOrigin } from "../src/seo/site.js";
 import { createHostingHeaders } from "./headers.js";
+import { analyticsConfig, analyticsHead, umamiScript } from "./analytics.js";
 
 // Read the markup emitted by our generator; this is not a general HTML validator.
 function decode(value) {
@@ -84,7 +85,7 @@ function validateXml(xml) {
   assert.equal(stack.length, 0, "Unclosed sitemap XML tag");
 }
 
-export async function verifyProductionOutput({ directory, base, origin = publicSiteOrigin, staging = false }) {
+export async function verifyProductionOutput({ directory, base, origin = publicSiteOrigin, staging = false, analytics = null }) {
   publicUrl(origin);
   const expected = new Map();
   const groups = new Set();
@@ -96,7 +97,7 @@ export async function verifyProductionOutput({ directory, base, origin = publicS
     for (const pagePath of pagePaths) {
       const route = parseLocation(new URL(`${base}${language}/${pagePath}`, origin), base);
       const metadata = getMetadata(language, route, i18n.t.bind(i18n), { origin, base });
-      const heading = route.page === "home" ? i18n.t("product.title") : route.page === "guided-routines" ? i18n.t("routines.title") : i18n.t(`routines.categories.${route.slug}.title`);
+      const heading = route.page === "about-us" ? i18n.t("about.inspired.title") : route.page === "wholesale" ? i18n.t("wholesale.title") : route.page === "contact" ? i18n.t("contact.title") : route.page === "newsletter-confirmed" ? i18n.t("newsletterConfirmed.title") : route.page === "home" ? i18n.t("product.title") : route.page === "privacy" ? i18n.t("privacy.title") : route.page === "guided-routines" ? i18n.t("routines.title") : i18n.t(`routines.categories.${route.slug}.title`);
       expected.set(`${language}/${pagePath}index.html`, { metadata, heading });
     }
   }
@@ -104,8 +105,21 @@ export async function verifyProductionOutput({ directory, base, origin = publicS
   // The compatibility root is deliberately not another localized public page.
   const actual = (await htmlFiles(directory)).filter((file) => file !== "index.html").sort();
   assert.deepEqual(actual, [...expected.keys()].sort(), "Localized HTML routes differ from the route manifest");
+  for (const filename of ["index.html", ...actual]) {
+    const html = await readFile(path.join(directory, filename), "utf8");
+    assert(!/fonts\.(?:googleapis|gstatic)\.com/i.test(html), `${filename}: External Google Fonts request`);
+    const head = only(elements(html, "head"), "head");
+    const trackers = tags(html, "script").filter((tag) => tag.src === umamiScript);
+    assert.equal(trackers.length, 0, `${filename}: Incorrect Umami script count: external tracker before consent`);
+    assert(!tags(html, "link").some((tag) => /umami\./i.test(tag.href || "")), `${filename}: Pre-consent analytics resource hint`);
+    assert(!tags(html, "iframe").some((tag) => /(?:youtube|youtu\.be)/i.test(tag.src || "")), `${filename}: YouTube iframe before consent`);
+    assert.equal(tags(html, "script").filter((tag) => tag.id === "muuva-analytics-privacy").length, analytics ? 1 : 0,
+      `${filename}: Incorrect Umami privacy hook count`);
+    if (analytics) assert(head.includes(analyticsHead(analytics)), `${filename}: Incorrect Umami configuration or privacy hook`);
+  }
   const rawKey = new RegExp(`\\b(?:${[...groups].join("|")})\\.[\\w.-]+|\\{\\{|\\}\\}`, "i");
   const checkedAssets = new Set();
+  const checkedStyles = new Set();
   const actualAlternates = new Map();
 
   async function assetExists(reference, canonical) {
@@ -153,7 +167,24 @@ export async function verifyProductionOutput({ directory, base, origin = publicS
       const styles = links.filter((tag) => tag.rel === "stylesheet" && tag.href && new URL(tag.href, canonical).origin === new URL(origin).origin);
       assert(scripts.length && styles.length, "Missing Vite JavaScript or CSS reference");
       for (const tag of scripts) await assetExists(tag.src, canonical);
-      for (const tag of styles) await assetExists(tag.href, canonical);
+      for (const tag of styles) {
+        await assetExists(tag.href, canonical);
+        const cssUrl = new URL(tag.href, canonical);
+        if (checkedStyles.has(cssUrl.href)) continue;
+        checkedStyles.add(cssUrl.href);
+        const css = await readFile(path.resolve(directory, decodeURIComponent(cssUrl.pathname.slice(base.length))), "utf8");
+        assert(!/fonts\.(?:googleapis|gstatic)\.com/i.test(css), "External Google Fonts request in CSS");
+        const faces = [...css.matchAll(/@font-face\s*\{([^}]+)\}/g)].map((match) => match[1]);
+        for (const family of ["Manrope", "Newsreader"]) assert(faces.some((face) => face.includes(family)), `Missing local ${family} font face`);
+        for (const face of faces) {
+          const reference = face.match(/url\(["']?([^"')]+)["']?\)/)?.[1];
+          assert(reference?.endsWith(".woff2"), "Font must reference a local WOFF2 asset");
+          await assetExists(reference, cssUrl.href);
+          const fontUrl = new URL(reference, cssUrl);
+          const font = await readFile(path.resolve(directory, decodeURIComponent(fontUrl.pathname.slice(base.length))));
+          assert.equal(font.subarray(0, 4).toString(), "wOF2", "Invalid WOFF2 asset");
+        }
+      }
     } catch (error) {
       throw new Error(`${filename}: ${error.message}`, { cause: error });
     }
@@ -199,8 +230,12 @@ if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === imp
       base: config.base,
       origin: new URL(config.env.VITE_PUBLIC_SITE_ORIGIN || publicSiteOrigin).origin,
       staging: loadEnv(config.mode, config.envDir, "MUUVA_").MUUVA_STAGING === "true",
+      analytics: analyticsConfig(config.env, {
+        base: config.base,
+        staging: loadEnv(config.mode, config.envDir, "MUUVA_").MUUVA_STAGING === "true",
+      }),
     });
-    console.log(`Production HTML checks passed: ${result.pages} localized pages, ${result.assets} shared JS/CSS assets, reciprocal hreflang, sitemap.xml, robots.txt and hosting headers.`);
+    console.log(`Production HTML checks passed: ${result.pages} localized pages, ${result.assets} shared JS/CSS/font assets, reciprocal hreflang, sitemap.xml, robots.txt and hosting headers.`);
   } catch (error) {
     console.error(`Production HTML verification failed: ${error.message}`);
     process.exitCode = 1;

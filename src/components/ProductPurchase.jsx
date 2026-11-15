@@ -6,8 +6,7 @@ import bandImage from "../assets/images/Products/band1.png";
 import sliderImage from "../assets/images/Products/slider1.png";
 import kitImage from "../assets/images/Products/kit1.png";
 import ProductComposition from "./ProductComposition.jsx";
-
-import { AMAZON_PRODUCT_URL } from "../data/product.js";
+import { MarketplaceLink, MarketplaceSelector } from "../commerce/MarketplaceContext.jsx";
 
 const productImages = [
   { id: "ring", src: ringImage, altKey: "product.images.ring" },
@@ -59,8 +58,9 @@ export default function ProductPurchase() {
       <div className="product-discovery-layout">
         <div className="product-discovery-content">
           <h2 id="product-discovery-heading" className="font-serif text-[clamp(2rem,4vw,2.75rem)] font-normal leading-[1.1] text-ink">{t("product.title")}</h2>
-          <div className="product-purchase-action mt-6">
-            <a className="product-purchase-cta" href={AMAZON_PRODUCT_URL} target="_blank" rel="noopener noreferrer">{t("product.buy")}</a>
+          <div className="product-purchase-action mt-6" role="group" aria-label={t("product.buy")}>
+            <MarketplaceLink className="product-purchase-cta">{t("product.buy")}</MarketplaceLink>
+            <MarketplaceSelector />
           </div>
         </div>
         <ProductComposition onOpenGallery={openGalleryAt} />
@@ -168,14 +168,11 @@ function GalleryModal({
         alt={t(images[activeImage].altKey)}
         onLoad={updateCtaPosition}
       />
-      <a
-        className={`inline-flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-lg border border-softborder bg-cream px-4 py-3 font-sans text-sm font-medium text-ink transition hover:bg-beige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream ${ctaBesideImage ? "absolute left-full top-4 ml-6" : ""}`}
-        href={AMAZON_PRODUCT_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {t("product.buy")}
-      </a>
+        <MarketplaceLink
+          className={`inline-flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-lg border border-softborder bg-cream px-4 py-3 font-sans text-sm font-medium text-ink transition hover:bg-beige focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream ${ctaBesideImage ? "absolute left-full top-4 ml-6" : ""}`}
+        >
+          {t("product.buy")}
+        </MarketplaceLink>
       </div>
 
       <button

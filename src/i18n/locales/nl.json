@@ -17,7 +17,7 @@
   },
   "product": {
     "title": "Haal jouw Pilates-set in huis",
-    "buy": "Koop op Amazon →",
+    "buy": "Koop op Amazon",
     "discover": "Ontdek de complete MUUVA Pilates-set",
     "viewKit": "Bekijk foto's van de complete Pilates-set",
     "imageAlt": "MUUVA Pilates-set met ring, bal, band, sliders, verpakking, draagtas, pomp en handleiding met telefoon",
@@ -39,7 +39,8 @@
       "band": "Weerstandsband uit de Pilates-set",
       "sliders": "Pilates-sliders uit de Pilates-set",
       "full-kit": "Pilates-set"
-    }
+    },
+    "marketplace": { "label": "Amazon-winkel", "automatic": "Automatisch kiezen", "nl": "Nederland", "de": "Duitsland" }
   },
   "promo": {
     "section": "Begeleide Pilates-routines",
@@ -67,33 +68,105 @@
   },
   "footer": {
     "title": "Blijf in beweging.",
-    "description": "Meld je aan voor exclusieve Muuva-content en Pilates-inspiratie",
-    "success": "Je bent aangemeld voor onze nieuwsbrief.",
-    "email": "E-mailadres",
-    "placeholder": "E-mail",
-    "subscribe": "Aanmelden voor de nieuwsbrief",
+    "description": "Pilates-inspiratie, bewegingstips en meer komen eraan.",
     "navigation": "Footernavigatie",
     "policies": "Beleid in de footer",
     "aboutTitle": "Over Muuva",
     "about": "Vanuit Amsterdam maakt Muuva stijlvol ontworpen en duurzaam geproduceerde Pilates-accessoires voor beweging thuis en in de studio.",
     "instagram": "Muuva op Instagram",
+    "tiktok": "Muuva op TikTok",
+    "youtube": "Muuva op YouTube",
+    "socials": "Muuva op sociale media",
     "copyrightPrefix": "© {{year}}, Muuva. Website ontworpen door",
-    "required": "Vul je e-mailadres in.",
-    "invalid": "Vul een geldig e-mailadres in.",
     "links": {
       "behind": "Achter Muuva",
       "contact": "Neem contact op",
-      "wholesale": "Muuva voor retailers",
       "apply": "Word verkooppunt",
-      "care": "Zorg voor je Muuva",
-      "sustainability": "Onze inzet voor duurzaamheid",
-      "faq": "Veelgestelde vragen",
-      "privacy": "Privacybeleid",
-      "refund": "Terugbetalingsbeleid",
-      "shipping": "Verzendbeleid",
-      "service": "Algemene voorwaarden",
-      "use": "Gebruiksvoorwaarden"
+      "privacy": "Privacybeleid"
+    },
+    "comingSoon": "Binnenkort"
+  },
+  "wholesale": {
+    "eyebrow": "MUUVA VOOR BEDRIJVEN",
+    "title": "Samen bewegen met Muuva.",
+    "intro": "Of je nu een Pilates-studio, instructeur of winkel bent, we ontdekken graag hoe we kunnen samenwerken.",
+    "imageAlt": "Pilates-ring en bal van MUUVA op een reformer in een lichte studio",
+    "formTitle": "Laten we kennismaken",
+    "formIntro": "Vertel ons iets over je bedrijf en wat je voor ogen hebt.",
+    "fields": {
+      "name": "Je naam",
+      "businessName": "Bedrijfsnaam",
+      "email": "E-mailadres",
+      "businessType": "Type bedrijf (optioneel)",
+      "enquiry": "Je vraag"
+    },
+    "businessTypes": {
+      "placeholder": "Kies een type bedrijf",
+      "studio": "Pilates-studio",
+      "instructor": "Instructeur",
+      "retailer": "Winkel",
+      "other": "Anders"
+    },
+    "consent": "Ik ga ermee akkoord dat MUUVA mijn gegevens gebruikt om mijn vraag te beantwoorden en bevestig dat ik het privacybeleid heb gelezen.",
+    "privacyText": "Je gegevens helpen ons om je zakelijke vraag te beantwoorden. Lees ons",
+    "verificationLabel": "Verificatie tegen spam",
+    "submit": "VERSTUUR JE VRAAG →",
+    "submitting": "Verzenden...",
+    "successTitle": "Bedankt voor je bericht.",
+    "successText": "We hebben je vraag ontvangen en nemen zo snel mogelijk contact met je op.",
+    "errors": {
+      "rateLimited": "Te veel pogingen. Wacht even voordat je het opnieuw probeert.",
+      "required": "Vul dit veld in.",
+      "tooLong": "Gebruik maximaal {{max}} tekens.",
+      "invalidText": "Verwijder niet-ondersteunde controletekens.",
+      "invalidEmail": "Vul een geldig e-mailadres in.",
+      "invalidBusinessType": "Kies een van de beschikbare bedrijfstypen.",
+      "consentRequired": "Bevestig dat MUUVA je gegevens mag gebruiken om te antwoorden.",
+      "validationError": "Controleer het formulier en vul de verplichte velden in.",
+      "challengeRequired": "Voltooi de verificatie voordat je je vraag verstuurt.",
+      "challengeError": "De verificatie is mislukt of verlopen. Probeer het opnieuw.",
+      "unavailable": "Je vraag kon nu niet worden verstuurd. Je gegevens blijven staan. Probeer het later opnieuw.",
+      "notReady": "Vragen via dit formulier zijn momenteel niet mogelijk. Probeer het later opnieuw."
     }
+  },
+  "newsletter": {
+    "rateLimited": "Te veel pogingen. Wacht even voordat je het opnieuw probeert.",
+    "formLabel": "Aanmelden voor de MUUVA-nieuwsbrief",
+    "emailLabel": "E-mailadres",
+    "emailPlaceholder": "jij@voorbeeld.nl",
+    "consent": "Ik wil marketingmails van MUUVA ontvangen. Ik kan me op elk moment afmelden.",
+    "privacyIntro": "Lees het",
+    "verificationLabel": "Verificatie tegen spam",
+    "subscribe": "Aanmelden",
+    "submitting": "Verzenden...",
+    "success": "Aanvraag ontvangen. Als je een bevestigingsmail ontvangt, volg dan de link om je aan te melden voor de MUUVA-nieuwsbrief. Je bent nog niet aangemeld.",
+    "invalidEmail": "Vul een geldig e-mailadres in.",
+    "consentRequired": "Geef toestemming om de nieuwsbrief te ontvangen.",
+    "challengeRequired": "Voltooi de verificatie voordat je je aanmeldt.",
+    "challengeError": "De verificatie is mislukt of verlopen. Probeer het opnieuw.",
+    "unavailable": "Aanmelden is nu niet mogelijk. Probeer het later opnieuw."
+  },
+  "contact": {
+    "eyebrow": "WE HOREN GRAAG VAN JE",
+    "title": "Neem contact op",
+    "intro": "Heb je een vraag, een idee of iets dat je met ons wilt delen? We horen graag van je.",
+    "formTitle": "Stuur ons een bericht",
+    "formIntro": "Deel wat meer details en we komen bij je terug.",
+    "fields": { "name": "Je naam", "email": "E-mailadres", "subject": "Soort vraag", "message": "Je bericht" },
+    "subjects": { "placeholder": "Kies een soort vraag", "general": "Algemene vraag", "product": "Productondersteuning", "order": "Vraag over een bestelling", "other": "Anders" },
+    "consent": "Ik geef MUUVA toestemming deze gegevens te gebruiken om mijn vraag te behandelen en te beantwoorden. Dit is geen toestemming voor marketing.",
+    "privacyText": "Lees ons",
+    "verificationLabel": "Spamcontrole",
+    "submit": "BERICHT VERSTUREN →",
+    "submitting": "Verzenden...",
+    "successTitle": "Bedankt voor je bericht.",
+    "successText": "Je vraag is ontvangen. Deze bevestiging garandeert niet dat een medewerker het bericht heeft ontvangen. Je kunt ons ook mailen via contact@muuva.nl.",
+    "errors": { "rateLimited": "Te veel pogingen. Wacht even voordat je het opnieuw probeert.", "required": "Vul dit veld in.", "tooLong": "Gebruik maximaal {{max}} tekens.", "invalidText": "Verwijder niet-ondersteunde besturingstekens.", "invalidEmail": "Vul een geldig e-mailadres in.", "invalidSubject": "Kies een van de beschikbare soorten vragen.", "consentRequired": "Bevestig hoe je gegevens worden gebruikt.", "validationError": "Controleer het formulier en vul alle verplichte velden in.", "challengeRequired": "Voltooi de controle voordat je je bericht verstuurt.", "challengeError": "De controle is mislukt of verlopen. Probeer het opnieuw.", "unavailable": "Je bericht kon nu niet worden verstuurd. Je gegevens zijn niet gewist; probeer het later opnieuw.", "notReady": "Dit formulier is momenteel niet beschikbaar. Mail naar contact@muuva.nl." }
+  },
+  "newsletterConfirmed": {
+    "title": "Welkom bij MUUVA",
+    "description": "Als je de bevestigingslink in je e-mail hebt gevolgd, is je aanmelding voor de nieuwsbrief voltooid. Kijk uit naar Pilates-inspiratie, bewegingstips en kleine momenten van motivatie in je inbox.",
+    "cta": "Ontdek MUUVA"
   },
   "routines": {
     "title": "Begeleide routines",
@@ -198,6 +271,165 @@
         "band": "Ontdek een begeleide workout met de weerstandsband van MUUVA. Voeg weerstand toe aan je Pilates-routine en beweeg bewust.",
         "full-body": "Ontdek een begeleide Pilates-workout met alle materialen uit je MUUVA set. Verbind kracht, controle en mobiliteit in één sessie."
       }
+    },
+    "privacy": {
+      "title": "Privacybeleid | MUUVA",
+      "description": "Lees MUUVA’s privacybeleid over toestemming, Umami, YouTube, nieuwsbrief, groothandelsaanvragen en je rechten."
+    },
+    "about": {
+      "title": "Over ons | Het verhaal achter MUUVA",
+      "description": "Ontdek hoe Michelle en Carlos hun liefde voor Pilates en een gedeelde droom omzetten in MUUVA, een Pilates-merk uit Amsterdam."
+    },
+    "wholesale": {
+      "title": "Groothandel & Studio-samenwerkingen | MUUVA",
+      "description": "Werk samen met MUUVA als Pilates-studio, instructeur of winkel. Vertel ons over je bedrijf en ontdek hoe we samen kunnen bewegen."
+    },
+    "contact": { "title": "Contact opnemen met MUUVA", "description": "Neem contact op met MUUVA met een algemene vraag, verzoek om productondersteuning of vraag over een bestelling. We horen graag van je." },
+    "newsletterConfirmed": {
+      "title": "Nieuwsbriefbevestiging | MUUVA",
+      "description": "Informatie voor bezoekers die de bevestigingslink voor de MUUVA-nieuwsbrief hebben gevolgd."
     }
+  },
+  "privacy": {
+    "title": "Privacybeleid",
+    "draft": "Privacyverklaring",
+    "intro": "Deze verklaring beschrijft MUUVA’s website, privacykeuzes, Guided Routines, nieuwsbrief, contact- en groothandelsvragen.",
+    "updated": "Laatst bijgewerkt:",
+    "sections": {
+      "operator": {
+        "title": "Verantwoordelijke en contact",
+        "p1": "MUUVA is een Nederlandse eenmanszaak, KvK 99637588, Nederland. Deze verklaring betreft https://muuva.nl. Voor privacyvragen en verzoeken kun je contact opnemen via contact@muuva.nl.",
+        "p2": "Zakelijk adres: Calveslo 5, 1433 NK Kudelstaart, Noord-Holland, Nederland."
+      },
+      "purposes": {
+        "title": "Gegevens, doelen en grondslagen",
+        "p1": "Websiteverzoeken omvatten IP, browser, bronnen en tijdstippen. Formulieren verzamelen contact-, taal-, toestemmings- of aanvraaggegevens; vermijd gevoelige informatie. Voorgestelde AVG-grondslagen: gerechtvaardigde belangen bij betrouwbare levering, evenredige beveiliging en zakelijke beantwoording (artikel 6 lid 1 onder f); gevraagde precontractuele stappen waar toepasselijk (b); toestemming voor optionele analyses, video’s en nieuwsbrief (a); en toepasselijke wettelijke verplichtingen (c). Definitieve toetsing per doel blijft nodig."
+      },
+      "hosting": {
+        "title": "Websitelevering en beveiliging",
+        "p1": "Cloudflare Pages host MUUVA; Pages Functions verwerkt actieve formulieren en Managed Turnstile controleert misbruik. Noodzakelijke beveiliging staat los van optionele toestemming en kan IP-, apparaat-/browser- en controlegegevens omvatten. Voor staging bevestigt de eigenaar: pre-clearance uit, Workers Logs uit, geen Logpush-taken. Providerlogs en effectieve Production-instellingen zijn daarmee niet geverifieerd.",
+        "p2": "Formulierlimieten gebruiken geheime HMAC-gebaseerde pseudonieme identificatoren uit het client-IP, apart per formulier en omgeving. Actieve tellers verlopen logisch na ongeveer één uur. Identificatoren zijn niet anoniem. Cloudflare SQLite Durable Object-herstelgeschiedenis en andere gegevens kunnen langer blijven; geen volledige verwijdering na één uur of uitsluitend Europese verwerking wordt beloofd."
+      },
+      "storage": {
+        "title": "Functionele opslag en lettertypen",
+        "p1": "Handmatige taalselectie bewaart muuva.language in localStorage tot wijziging of verwijdering; de URL-taal heeft voorrang. Een handmatig gekozen Amazon NL/DE/EU-winkel wordt als muuva.marketplace bewaard tot wijziging of verwijdering. Het Cloudflare-land wordt alleen gebruikt wanneer je een aankooplink volgt en wordt niet opgeslagen. Automatische taaldetectie bewaart niets. Manrope en Newsreader worden zelf gehost zonder Google Fonts-verzoeken.",
+        "p2": "muuva.consent bewaart categorieën, melding/versie, opslagtijd en afloop lokaal, zonder bezoekers-ID of serverdatabase voor toestemming. Vernieuwing aanvankelijk na zes kalendermaanden is een instelbare productkeuze, geen universele wettelijke termijn. Ongeldige, verlopen of onbeschikbare opslag blokkeert optionele diensten."
+      },
+      "consent": {
+        "title": "Keuzes en intrekken",
+        "p1": "Bij eerste bezoek kun je Optioneel weigeren, Aanpassen of Optioneel accepteren. Analyses en Externe video’s zijn onafhankelijk en aanvankelijk uit. Scrollen of verder browsen is geen toestemming. Noodzakelijke functies zijn niet optioneel. Marketingtracking is niet actief.",
+        "p2": "Via Privacyinstellingen in de footer kun je altijd wijzigen of intrekken. Intrekken stopt toekomstige analyses en verwijdert spelers; eerdere overdrachten worden niet automatisch teruggehaald. Keuzes gelden voor deze browser/oorsprong en relevante tabbladen, niet alle apparaten. Gewiste opslag of een nieuwe melding vraagt een nieuwe keuze. Lokale gegevens zijn beperkt bewijs, geen volledig toestemmingsregister."
+      },
+      "analytics": {
+        "title": "Optionele Umami-analyses",
+        "p1": "Wanneer beschikbaar op muuva.nl laadt Umami Cloud alleen na toestemming voor Analyses en met respect voor Do Not Track. Preview en localhost sturen nooit productieanalyses. De eigenaar bevestigt Hobby, EU (Frankfurt) voor analyseopslag en zes maanden standaardbewaring. Dit bevestigt geen actieve Production-analyses.",
+        "p2": "MUUVA stuurt alleen website-ID, hostnaam, goedgekeurd openbaar pad, goedgekeurde vertaalde titel, gevalideerde campagnewaarden en oorsprong van externe verwijzingen. Andere queries, fragmenten, formulierinhoud, eigen ID’s/gebeurtenissen, schermgrootte en browsertaal zijn uitgesloten. Geen advertentiepixels of sessieopnames. Campagnes mogen geen persoonsgegevens bevatten; syntax herkent niet iedere persoonsnaam.",
+        "p3": "Umami ontvangt netwerkmetagegevens zoals IP en User-Agent en kan apparaat-/browserkenmerken en gehashte sessies afleiden. Hashing garandeert geen anonimiteit. Europese analyseopslag betekent niet dat ondersteuning, beveiliging, subverwerkers en andere verwerking volledig in de EU blijven. Operationele logs en back-ups hebben afzonderlijke bewaring."
+      },
+      "videos": {
+        "title": "Optionele YouTube Guided Routines",
+        "p1": "Vóór toestemming voor Externe video’s tonen trainingen lokale afbeeldingen zonder YouTube-verzoeken. YouTube inschakelen en afspelen staat alleen die categorie toe en laadt een privacyvriendelijkere youtube-nocookie.com-speler. Google ontvangt dan netwerk-/browsergegevens en kan afhankelijk van afspelen, aanmelding en instellingen opslag/accountkoppeling gebruiken. De modus voorkomt niet alle Google-verwerking.",
+        "p2": "Intrekken via Privacyinstellingen verwijdert actieve spelers direct. Bekijken op YouTube opent de bestaande video in een nieuw tabblad zonder MUUVA-keuzes te wijzigen. Je verlaat MUUVA; Googles eigen privacypraktijken gelden."
+      },
+      "newsletter": {
+        "title": "Nieuwsbriefaanmeldingen",
+        "p1": "Het actieve formulier vraagt e-mail, interfacetaal en afzonderlijke, aanvankelijk niet aangevinkte nieuwsbriefinstemming. Brevo verzorgt dubbele opt-in en inschrijvingen. Een ontvangstmelding bevestigt geen bezorging of abonnement; bevestig per e-mail als die aankomt. Afmelden via de nieuwsbrieflink of contact. Websitevoorkeuren schrijven je niet in.",
+        "p2": "Toestemmingstekst/versie staat in de bron; Brevo-bevestigings-/inschrijfbewijs, met koppeling aan de getoonde tekst, moet operationeel worden bewaard en geverifieerd. Actieve abonnees blijven zolang ingeschreven, met beoordeling na 24 maanden inactiviteit. Opruimen onbevestigde registraties na 30 dagen is beoogd, niet volledig geverifieerd. Blokkeringen blijven alleen zover nodig om afmeldingen te respecteren met gedocumenteerde criteria."
+      },
+      "wholesale": {
+        "title": "Groothandelsaanvragen",
+        "p1": "Het actieve formulier verzamelt naam, bedrijf, e-mail, optioneel bedrijfstype, aanvraag, taal en privacybevestiging voor beantwoording. Cloudflare Functions, Turnstile en gescheiden omgevingslimieten beschermen het; Brevo bezorgt aan de Microsoft 365-bedrijfsmailbox. De bevestiging geeft geen marketing- of nieuwsbriefinstemming.",
+        "p2": "De bedoeling is inhoud handmatig binnen twaalf maanden na het laatste wezenlijke zakelijke contact te beoordelen/verwijderen, behalve lopende relaties, wettelijke plichten of geschillen. Dit is geen geverifieerde automatische mailboxregel en staat los van Brevo-transactielogs."
+      },
+      "contact": {
+        "title": "Contactvragen",
+        "p1": "Het optionele contactformulier verzamelt je naam, e-mailadres, soort vraag, bericht, interfacetaal en een verplichte bevestiging om je vraag te behandelen en te beantwoorden. Cloudflare Pages Functions, Turnstile en een aparte limietcategorie per omgeving beveiligen inzendingen; Brevo verstuurt een vaste transactionele e-mail naar de ingestelde zakelijke ontvanger. De bevestiging is geen marketingtoestemming en schrijft je niet in voor een nieuwsbrief.",
+        "p2": "Het formulier blijft uitgeschakeld totdat het apart is geconfigureerd. De bewaartermijn en verwijderprocedure voor contactvragen zijn nog niet bevestigd en moeten vóór activering worden beoordeeld. De inhoud wordt alleen gebruikt zolang dat nodig is om de vraag af te handelen en te beantwoorden, met inachtneming van wettelijke verplichtingen en lopende zaken. Transactionele logs van Brevo en back-ups van providers hebben afzonderlijke bewaartermijnen."
+      },
+      "providers": {
+        "title": "E-mail- en infrastructuurproviders",
+        "p1": "Brevo verzorgt dubbele opt-in en transactionele bezorging. De eigenaar bevestigt 24 maanden transactielogbewaring voor alle afzenders. Volledige e-mailvoorbeelden zijn uitgeschakeld; historische voorbeelden, metagegevens en back-ups worden daarmee niet gewist.",
+        "p2": "contact@muuva.nl gebruikt Microsoft 365 Email Essentials via GoDaddy. De eigenaar meldt Default MRM Policy met oudere bewaartags, Online Archive uit en Mailbox Litigation Hold uit. Automatische twaalfmaandse groothandelsverwijdering is niet geverifieerd. Aanvullende Purview-bewaring/holds, werkelijk herstel van verwijderde items en andere back-ups blijven ongeverifieerd.",
+        "p3": "Amazon-kooplinks en Instagram-, TikTok- en YouTube-links zijn vrijwillige externe links, geen ingebedde reclame-/socialetrackers. Aankopen gebeuren bij Amazon. Na volgen gelden de eigen privacypraktijken van de diensten."
+      },
+      "retention": {
+        "title": "Bewaarcriteria",
+        "p1": "Taalopslag blijft tot wijziging/verwijdering; toestemming verloopt eerst na zes kalendermaanden. Actieve formuliertellers verlopen logisch na ongeveer één uur, apart van providerherstelgeschiedenis. Umami-analyses hebben zes maanden standaardbewaring, operationele/beveiligingslogs en back-ups aparte termijnen.",
+        "p2": "Nieuwsbrief-, aanvraag- en transactietermijnen staan hierboven. Privacycorrespondentie blijft slechts zover nodig voor afhandeling, bewijs en plichten. Back-ups, herstel, blokkeringen en juridische holds kunnen actieve gegevens overleven. Geverifieerde termijnen en gedocumenteerde controles blijven nodig; geen absolute permanente verwijderingstermijn voor alle systemen wordt beloofd."
+      },
+      "transfers": {
+        "title": "Internationale verwerking en waarborgen",
+        "p1": "Cloudflare, Brevo, Microsoft/GoDaddy, Umami en Google kunnen toegang/verwerking buiten de EER omvatten. Europese analyseopslag is geen uitsluitend Europese verwerking. Mogelijke waarborgen zijn adequaatheidsbesluiten of standaardcontractbepalingen en aanvullende maatregelen. Toets werkelijk gebruikte diensten, regio’s, subverwerkers en afspraken. Links bewijzen geen aanvaarding door MUUVA, exacte bestemmingen of voltooide toetsing. Vraag ons naar toepasselijke waarborgen."
+      },
+      "rights": {
+        "title": "Rechten en klachten",
+        "p1": "Onder wettelijke voorwaarden kun je inzage, correctie, verwijdering, beperking of overdraagbaarheid vragen, bezwaar maken tegen gerechtvaardigd-belangverwerking en toestemming intrekken zonder eerdere rechtmatige verwerking aan te tasten. Beschrijf je verzoek aan contact@muuva.nl; we vragen alleen evenredige noodzakelijke informatie.",
+        "p2": "We antwoorden normaal binnen één maand, met uitgelegde wettelijke verlengingen. Klagen kan bij de Nederlandse Autoriteit Persoonsgegevens of de toezichthouder waar je woont, werkt of een vermeende inbreuk plaatsvond. Benader waar passend providers voor hun zelfstandige verwerking."
+      },
+      "updates": {
+        "title": "Wijzigingen van deze verklaring",
+        "p1": "De datum geeft aan wanneer deze verklaring voor het laatst is bijgewerkt. Wezenlijke wijzigingen van optionele verwerking vragen zo nodig nieuwe keuzes."
+      }
+    },
+    "links": {
+      "cloudflare": "Cloudflare-privacy",
+      "turnstile": "Turnstile-privacy",
+      "cloudflareDpa": "Cloudflare-verwerkersovereenkomst",
+      "cloudflareTransfers": "Cloudflare-doorgiftevoorwaarden",
+      "cloudflareSubprocessors": "Cloudflare-subverwerkers",
+      "umami": "Umami-privacy",
+      "umamiDpa": "Umami-verwerkersovereenkomst",
+      "umamiSubprocessors": "Umami-subverwerkers",
+      "google": "Google-privacy",
+      "brevo": "Brevo-privacy",
+      "microsoft": "Microsoft-privacy",
+      "godaddy": "GoDaddy-privacy",
+      "contact": "E-mail contact@muuva.nl",
+      "authority": "Autoriteit Persoonsgegevens"
+    }
+  },
+  "about": {
+    "inspired": {
+      "title": "Wat inspireerde Muuva?",
+      "intro": "Een merk geïnspireerd door liefde voor Pilates, de droom om iets betekenisvols op te bouwen en de moed om opnieuw te beginnen.",
+      "p1": "Muuva ontstond in een periode van verandering in Michelles leven. Ze komt oorspronkelijk uit Venezuela en verhuisde naar Nederland voor een kans in de technologiesector. Daar bouwde ze meer dan acht jaar aan haar carrière als ingenieur.",
+      "p2": "Toen dat hoofdstuk eindigde, vroeg ze zich af wat ze hierna echt wilde doen. Ze had er altijd van gedroomd iets van zichzelf te creëren, en voor het eerst begon die droom mogelijk te voelen.",
+      "p3": "Pilates was voor haar altijd een manier om te vertragen, stress los te laten en weer contact te maken met zichzelf. Op drukke dagen en in onzekere momenten gaf het haar een gevoel van balans en plezier.",
+      "p4": "Ze had nooit gedacht dat iets zo persoonlijks deel zou worden van haar professionele leven. Maar langzaam kreeg een idee vorm: waarom niet iets creëren dat andere vrouwen helpt datzelfde gevoel te ontdekken en beweging vanzelfsprekend deel te laten worden van hun dagelijks leven?",
+      "p5": "Met haar manier van denken als ingenieur, haar passie voor Pilates en de zin om iets nieuws te beginnen, ontstond het eerste idee voor Muuva.",
+      "alt": "Michelle zit naast een laptop, met een Pilates-bal en ring van MUUVA voor haar."
+    },
+    "us": {
+      "title": "Over ons",
+      "p1": "Muuva begon met een gedeelde droom van Michelle en haar man Carlos: samen iets betekenisvols creëren, geworteld in iets waar ze allebei echt van houden.",
+      "p2": "Ze komen oorspronkelijk uit Venezuela, zijn allebei ingenieur en verhuisden naar Nederland om er samen een leven op te bouwen. Met verschillende sterke kanten maar een gedeelde manier van denken begonnen ze aan hun nieuwe avontuur met nieuwsgierigheid, creativiteit en het vertrouwen dat zelfs de grootste dromen met kleine stappen beginnen.",
+      "p3": "Muuva opbouwen werd meer dan een bedrijf beginnen. Het bood hun de kans om hun ervaringen samen te brengen, iets volledig nieuws te leren en een idee om te zetten in iets van henzelf. Onderweg ontdekten ze hoeveel ze konden bereiken door elkaar te steunen en hun verschillende perspectieven te verbinden.",
+      "p4": "Vandaag is Muuva een Pilates-merk uit Amsterdam, ontstaan met hart, doordacht design en oprechte liefde voor beweging. Met meer dan alleen mooie Pilates-benodigdheden hopen ze vrouwen te inspireren om plezier te vinden in bewegen, een moment voor zichzelf te nemen en Pilates deel te laten worden van hun dagelijks leven.",
+      "p5": "In de kern weerspiegelt Muuva hun liefde, hun gedeelde visie en de moed om samen een droom te volgen.",
+      "alt": "Michelle en Carlos staan samen, terwijl Carlos naar Michelle glimlacht."
+    }
+  },
+  "consent": {
+    "title": "Privacy- en cookievoorkeuren",
+    "intro": "Noodzakelijke functies houden MUUVA veilig werkend. Met jouw toestemming meet Umami bezoeken en laadt YouTube trainingen. Beide blijven uit totdat je kiest. Je kunt je keuzes altijd wijzigen via Privacyinstellingen.",
+    "essential": "Noodzakelijk — altijd actief",
+    "essentialDescription": "Websitelevering, taal- en privacykeuzes en formulierbeveiliging. Dit zijn geen optionele toestemmingscategorieën.",
+    "analytics": "Analyses",
+    "analyticsDescription": "Sta Umami Cloud toe openbare paginabezoeken met minimale gegevens te meten. Geen advertenties of sessieopnames.",
+    "externalVideos": "Externe video’s",
+    "externalVideosDescription": "Sta YouTube-spelers toe. Google ontvangt informatie zodra een speler laadt, ook vóór afspelen.",
+    "reject": "Optioneel weigeren",
+    "customize": "Aanpassen",
+    "accept": "Optioneel accepteren",
+    "save": "Keuzes opslaan",
+    "close": "Instellingen sluiten",
+    "settings": "Privacyinstellingen",
+    "storageError": "Je browser kon deze keuzes niet opslaan. Optionele analyses en video’s blijven geblokkeerd. Je kunt blijven browsen of rechtstreeks op YouTube kijken."
+  },
+  "videoConsent": {
+    "enable": "YouTube inschakelen en afspelen",
+    "explanation": "Door YouTube in te schakelen mag Google bij het laden informatie zoals je IP-adres en browsergegevens verwerken. Alleen Externe video’s worden toegestaan; je keuze voor Analyses blijft gelijk.",
+    "external": "Bekijken op YouTube",
+    "leaving": "Opent YouTube in een nieuw tabblad. Je verlaat MUUVA; je opgeslagen keuzes veranderen niet."
   }
 }

@@ -17,7 +17,7 @@
   },
   "product": {
     "title": "Consigue tu kit de Pilates",
-    "buy": "Comprar en Amazon →",
+    "buy": "Comprar en Amazon",
     "discover": "Descubre el kit completo de Pilates de MUUVA",
     "viewKit": "Ver fotos del kit completo de Pilates",
     "imageAlt": "Kit de Pilates de MUUVA con aro, pelota, banda, discos deslizantes, caja, bolsa, inflador y guía con teléfono",
@@ -39,7 +39,8 @@
       "band": "Banda de resistencia del kit de Pilates",
       "sliders": "Discos deslizantes del kit de Pilates",
       "full-kit": "Kit de Pilates"
-    }
+    },
+    "marketplace": { "label": "Tienda de Amazon", "automatic": "Elegir automáticamente", "nl": "Países Bajos", "de": "Alemania" }
   },
   "promo": {
     "section": "Rutinas guiadas de Pilates",
@@ -67,33 +68,105 @@
   },
   "footer": {
     "title": "Sigue en movimiento.",
-    "description": "Suscríbete para recibir contenido exclusivo de Muuva e inspiración para Pilates",
-    "success": "Te has suscrito a nuestra newsletter.",
-    "email": "Dirección de correo electrónico",
-    "placeholder": "Correo electrónico",
-    "subscribe": "Suscribirse a la newsletter",
+    "description": "Pronto tendrás inspiración para Pilates, consejos de movimiento y mucho más.",
     "navigation": "Navegación del pie de página",
     "policies": "Políticas del pie de página",
     "aboutTitle": "Sobre Muuva",
     "about": "Desde Ámsterdam, Muuva crea accesorios de Pilates con un diseño cuidado y una fabricación sostenible para tu práctica en casa y en el estudio.",
     "instagram": "Muuva en Instagram",
+    "tiktok": "Muuva en TikTok",
+    "youtube": "Muuva en YouTube",
+    "socials": "Muuva en redes sociales",
     "copyrightPrefix": "© {{year}}, Muuva. Sitio web diseñado por",
-    "required": "Introduce tu dirección de correo electrónico.",
-    "invalid": "Introduce una dirección de correo electrónico válida.",
     "links": {
       "behind": "Detrás de Muuva",
       "contact": "Contacto",
-      "wholesale": "Muuva para distribuidores",
       "apply": "Hazte distribuidor",
-      "care": "Cuida tus productos Muuva",
-      "sustainability": "Compromiso con la sostenibilidad",
-      "faq": "Preguntas frecuentes",
-      "privacy": "Política de privacidad",
-      "refund": "Política de reembolso",
-      "shipping": "Política de envíos",
-      "service": "Condiciones del servicio",
-      "use": "Condiciones de uso"
+      "privacy": "Política de privacidad"
+    },
+    "comingSoon": "Próximamente"
+  },
+  "wholesale": {
+    "eyebrow": "MUUVA PARA NEGOCIOS",
+    "title": "Movámonos juntos con Muuva.",
+    "intro": "Tanto si tienes un estudio de Pilates como si eres instructor o tienes una tienda, nos encantaría descubrir cómo podemos colaborar.",
+    "imageAlt": "Aro y pelota de Pilates de MUUVA sobre un reformer en un estudio luminoso",
+    "formTitle": "Hablemos",
+    "formIntro": "Cuéntanos un poco sobre tu negocio y lo que tienes en mente.",
+    "fields": {
+      "name": "Tu nombre",
+      "businessName": "Nombre del negocio",
+      "email": "Correo electrónico",
+      "businessType": "Tipo de negocio (opcional)",
+      "enquiry": "Tu consulta"
+    },
+    "businessTypes": {
+      "placeholder": "Selecciona un tipo de negocio",
+      "studio": "Estudio de Pilates",
+      "instructor": "Instructor",
+      "retailer": "Tienda",
+      "other": "Otro"
+    },
+    "consent": "Acepto que MUUVA utilice los datos que envío para responder a mi consulta y confirmo que he leído la Política de privacidad.",
+    "privacyText": "Tus datos nos ayudan a responder a tu consulta comercial. Lee nuestra",
+    "verificationLabel": "Verificación contra el spam",
+    "submit": "ENVIAR CONSULTA →",
+    "submitting": "Enviando...",
+    "successTitle": "Gracias por escribirnos.",
+    "successText": "Hemos recibido tu consulta y te responderemos lo antes posible.",
+    "errors": {
+      "rateLimited": "Demasiados intentos. Espera un poco antes de volver a intentarlo.",
+      "required": "Completa este campo.",
+      "tooLong": "Utiliza un máximo de {{max}} caracteres.",
+      "invalidText": "Elimina los caracteres de control no admitidos.",
+      "invalidEmail": "Introduce un correo electrónico válido.",
+      "invalidBusinessType": "Selecciona uno de los tipos de negocio disponibles.",
+      "consentRequired": "Confirma que MUUVA puede utilizar tus datos para responder.",
+      "validationError": "Revisa el formulario y completa los campos obligatorios.",
+      "challengeRequired": "Completa la verificación antes de enviar tu consulta.",
+      "challengeError": "La verificación ha fallado o ha caducado. Inténtalo de nuevo.",
+      "unavailable": "No hemos podido enviar tu consulta ahora. Tus datos siguen aquí; inténtalo más tarde.",
+      "notReady": "Las consultas a través de este formulario no están disponibles ahora. Inténtalo más tarde."
     }
+  },
+  "newsletter": {
+    "rateLimited": "Demasiados intentos. Espera un poco antes de volver a intentarlo.",
+    "formLabel": "Suscripción al boletín de MUUVA",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tu@ejemplo.es",
+    "consent": "Acepto recibir correos de marketing de MUUVA. Puedo darme de baja en cualquier momento.",
+    "privacyIntro": "Lee la",
+    "verificationLabel": "Verificación contra el spam",
+    "subscribe": "Suscribirse",
+    "submitting": "Enviando...",
+    "success": "Solicitud recibida. Si llega un correo de confirmación, sigue el enlace para suscribirte al boletín de MUUVA. Aún no estás suscrito.",
+    "invalidEmail": "Introduce un correo electrónico válido.",
+    "consentRequired": "Acepta recibir el boletín para continuar.",
+    "challengeRequired": "Completa la verificación antes de suscribirte.",
+    "challengeError": "La verificación ha fallado o ha caducado. Inténtalo de nuevo.",
+    "unavailable": "La suscripción no está disponible ahora. Inténtalo más tarde."
+  },
+  "contact": {
+    "eyebrow": "NOS ENCANTARÍA SABER DE TI",
+    "title": "Ponte en contacto",
+    "intro": "¿Tienes una pregunta, una idea o algo que quieras compartir? Nos encantará leerte.",
+    "formTitle": "Envíanos un mensaje",
+    "formIntro": "Cuéntanos algunos detalles y te responderemos.",
+    "fields": { "name": "Tu nombre", "email": "Correo electrónico", "subject": "Tipo de consulta", "message": "Tu mensaje" },
+    "subjects": { "placeholder": "Elige un tipo de consulta", "general": "Pregunta general", "product": "Ayuda con un producto", "order": "Consulta sobre un pedido", "other": "Otro" },
+    "consent": "Acepto que MUUVA utilice estos datos para gestionar y responder a mi consulta. Esto no es consentimiento para recibir marketing.",
+    "privacyText": "Lee nuestra",
+    "verificationLabel": "Verificación contra spam",
+    "submit": "ENVIAR MENSAJE →",
+    "submitting": "Enviando...",
+    "successTitle": "Gracias por escribirnos.",
+    "successText": "Hemos recibido tu consulta. Esta confirmación no garantiza que una persona haya recibido el mensaje; también puedes escribir a contact@muuva.nl.",
+    "errors": { "rateLimited": "Demasiados intentos. Espera un poco antes de volver a intentarlo.", "required": "Completa este campo.", "tooLong": "Usa un máximo de {{max}} caracteres.", "invalidText": "Elimina los caracteres de control no admitidos.", "invalidEmail": "Introduce un correo electrónico válido.", "invalidSubject": "Elige uno de los tipos de consulta disponibles.", "consentRequired": "Confirma cómo se utilizarán tus datos.", "validationError": "Revisa el formulario y completa los campos obligatorios.", "challengeRequired": "Completa la verificación antes de enviar el mensaje.", "challengeError": "La verificación ha fallado o ha caducado. Inténtalo de nuevo.", "unavailable": "No hemos podido enviar tu mensaje ahora. Tus datos siguen aquí; inténtalo más tarde.", "notReady": "Este formulario no está disponible ahora. Escribe a contact@muuva.nl." }
+  },
+  "newsletterConfirmed": {
+    "title": "Te damos la bienvenida a MUUVA",
+    "description": "Si has seguido el enlace de confirmación de tu correo, tu suscripción al boletín está completa. Pronto recibirás inspiración para Pilates, consejos de movimiento y pequeños momentos de motivación.",
+    "cta": "Explorar MUUVA"
   },
   "routines": {
     "title": "Rutinas guiadas",
@@ -198,6 +271,165 @@
         "band": "Descubre un entrenamiento guiado con banda de resistencia de MUUVA. Añade resistencia a tu práctica de Pilates y muévete de forma consciente.",
         "full-body": "Descubre un entrenamiento guiado de Pilates con todo el equipo de tu kit MUUVA. Conecta fuerza, control y movilidad en una sesión."
       }
+    },
+    "privacy": {
+      "title": "Política de privacidad | MUUVA",
+      "description": "Lee la política de privacidad de MUUVA sobre consentimiento, Umami, YouTube, boletín, consultas mayoristas y tus derechos."
+    },
+    "about": {
+      "title": "Sobre nosotros | La historia detrás de MUUVA",
+      "description": "Descubre cómo Michelle y Carlos convirtieron su amor por el Pilates y un sueño compartido en MUUVA, una marca de Pilates de Ámsterdam."
+    },
+    "wholesale": {
+      "title": "Venta al por mayor y colaboraciones | MUUVA",
+      "description": "Colabora con MUUVA como estudio de Pilates, instructor o tienda. Cuéntanos sobre tu negocio y descubre cómo podemos movernos juntos."
+    },
+    "contact": { "title": "Contacto | MUUVA", "description": "Contacta con MUUVA para una pregunta general, ayuda con un producto o una consulta sobre un pedido. Nos encantará leerte." },
+    "newsletterConfirmed": {
+      "title": "Confirmación del boletín | MUUVA",
+      "description": "Información para quienes han seguido el enlace de confirmación del boletín de MUUVA."
     }
+  },
+  "privacy": {
+    "title": "Política de privacidad",
+    "draft": "Aviso de privacidad",
+    "intro": "Este aviso trata el sitio de MUUVA, preferencias de privacidad, Guided Routines, boletín y consultas de contacto y mayoristas.",
+    "updated": "Última actualización:",
+    "sections": {
+      "operator": {
+        "title": "Responsable y contacto",
+        "p1": "MUUVA es una empresa individual neerlandesa (eenmanszaak), KvK 99637588, Países Bajos. Este aviso se refiere a https://muuva.nl. Para preguntas y solicitudes de privacidad, escribe a contact@muuva.nl.",
+        "p2": "Dirección comercial: Calveslo 5, 1433 NK Kudelstaart, Noord-Holland, Países Bajos."
+      },
+      "purposes": {
+        "title": "Datos, fines y bases legales",
+        "p1": "Las solicitudes web incluyen IP, navegador, recursos y horarios. Los formularios recogen datos de contacto, idioma, consentimiento o consulta; evita información sensible. Bases RGPD propuestas: interés legítimo en entrega fiable, seguridad proporcionada y respuesta empresarial (artículo 6.1.f); medidas precontractuales solicitadas cuando proceda (6.1.b); consentimiento para analítica, vídeos y boletín opcionales (6.1.a); y obligaciones legales aplicables (6.1.c). Falta evaluación definitiva por finalidad."
+      },
+      "hosting": {
+        "title": "Entrega y seguridad del sitio",
+        "p1": "Cloudflare Pages aloja MUUVA; Pages Functions procesa formularios activos y Managed Turnstile comprueba abusos. La seguridad necesaria es independiente del consentimiento opcional y puede tratar IP, dispositivo/navegador y verificaciones. Para staging el propietario confirma pre-clearance desactivado, Workers Logs desactivado y ningún trabajo Logpush. Registros del proveedor y ajustes efectivos de Production no quedan verificados por ello.",
+        "p2": "Los límites usan identificadores seudónimos HMAC con clave secreta derivados de la IP, separados por formulario y entorno. Contadores activos caducan lógicamente tras aproximadamente una hora. No son anónimos. El historial de recuperación de Cloudflare SQLite Durable Objects y otros registros pueden durar más; no se promete eliminación completa tras una hora ni tratamiento exclusivo en la UE."
+      },
+      "storage": {
+        "title": "Almacenamiento funcional y fuentes",
+        "p1": "La selección manual de idioma guarda muuva.language en localStorage hasta cambiarlo o borrarlo; prevalece el idioma de la URL. La tienda de Amazon NL/DE/EU elegida manualmente se guarda como muuva.marketplace hasta cambiarla o borrarla. El país detectado por Cloudflare solo se usa al seguir un enlace de compra y no se guarda. La detección automática de idioma no guarda nada. Manrope y Newsreader se alojan localmente sin solicitudes a Google Fonts.",
+        "p2": "muuva.consent guarda categorías, aviso/versión, fecha y caducidad localmente, sin ID de visitante ni base de consentimiento en servidor. Renovar inicialmente a los seis meses naturales es una decisión configurable, no una regla legal universal. Un estado inválido, caducado o inaccesible bloquea servicios opcionales."
+      },
+      "consent": {
+        "title": "Elección y retirada",
+        "p1": "En primera visita puedes Rechazar opcionales, Personalizar o Aceptar opcionales. Analítica y Vídeos externos son independientes y empiezan desactivados. Desplazarse o navegar no da consentimiento. Las funciones esenciales no son opcionales. No hay categoría de seguimiento de marketing activa.",
+        "p2": "Actualiza o retira preferencias desde Ajustes de privacidad en el pie. La retirada detiene futuros análisis y elimina reproductores; envíos anteriores no se recuperan automáticamente. La elección vale para este navegador/origen y pestañas pertinentes, no todos los dispositivos. Borrar almacenamiento o un aviso nuevo requiere elegir de nuevo. Los registros locales son evidencia limitada, no un historial completo de consentimiento."
+      },
+      "analytics": {
+        "title": "Analítica opcional con Umami",
+        "p1": "Cuando está disponible en muuva.nl, Umami Cloud carga solo tras consentimiento de Analítica y respetando Do Not Track. Preview y localhost nunca envían analítica de producción. El propietario confirma Hobby, almacenamiento analítico UE (Frankfurt) y seis meses estándar. Esto no confirma activación en Production.",
+        "p2": "MUUVA envía solo ID del sitio, host, ruta pública aprobada, título traducido aprobado, campañas validadas y origen del referente externo. Se excluyen otras consultas, fragmentos, formularios, ID/eventos propios, pantalla e idioma del navegador. Sin píxeles publicitarios ni grabaciones. Las campañas no deben contener datos personales; la sintaxis no reconoce todos los nombres.",
+        "p3": "Umami recibe metadatos de red como IP y User-Agent y puede derivar dispositivo/navegador y sesiones hash. El hash no garantiza anonimato. Almacenar analítica en la UE no significa que soporte, seguridad, subencargados y demás operaciones permanezcan allí. Registros operativos y copias tienen conservación separada."
+      },
+      "videos": {
+        "title": "Guided Routines opcionales de YouTube",
+        "p1": "Antes del permiso de Vídeos externos, los entrenamientos muestran imágenes locales sin solicitudes a YouTube. Activar YouTube y reproducir permite solo esa categoría y carga un reproductor de privacidad mejorada youtube-nocookie.com. Google recibe datos de red/navegador y puede usar almacenamiento o asociaciones de cuenta según reproducción, sesión y ajustes. El modo no elimina todo tratamiento de Google.",
+        "p2": "Retira el permiso en Ajustes de privacidad para quitar reproductores activos inmediatamente. Ver en YouTube abre el vídeo existente en otra pestaña sin cambiar preferencias MUUVA. Sales de MUUVA y se aplican las prácticas de privacidad de Google."
+      },
+      "newsletter": {
+        "title": "Suscripciones al boletín",
+        "p1": "El formulario activo solicita correo, idioma y consentimiento separado para el boletín, sin marcar inicialmente. Brevo gestiona doble confirmación y suscripciones. Un recibo no confirma entrega ni suscripción; confirma por correo si llega. Baja mediante enlace del boletín o contacto. Las preferencias del sitio no te suscriben.",
+        "p2": "Texto/versión de consentimiento se mantiene en código; evidencias de Brevo de confirmación/suscripción y vinculación al texto mostrado requieren conservación y verificación operativa. Suscriptores activos permanecen mientras estén inscritos, con revisión tras 24 meses de inactividad. Limpiar registros sin confirmar a los 30 días es previsto, no plenamente verificado. Supresiones se guardan solo según necesidad para respetar bajas y criterios documentados."
+      },
+      "wholesale": {
+        "title": "Consultas mayoristas",
+        "p1": "El formulario activo recoge nombre, empresa, correo, tipo de negocio opcional, consulta, idioma y reconocimiento de privacidad para responder. Cloudflare Functions, Turnstile y límites separados por entorno lo protegen; Brevo entrega al buzón empresarial Microsoft 365. El reconocimiento no permite marketing ni suscripción al boletín.",
+        "p2": "Se pretende revisar/eliminar contenidos manualmente dentro de doce meses de la última interacción empresarial significativa, salvo relaciones vigentes, obligaciones o disputas. No es una regla automática verificada del buzón y es independiente de registros transaccionales de Brevo."
+      },
+      "contact": {
+        "title": "Consultas de contacto",
+        "p1": "El formulario opcional de contacto recoge tu nombre, correo electrónico, tipo de consulta, mensaje, idioma de la interfaz y una confirmación obligatoria para tramitar y responder a tu solicitud. Cloudflare Pages Functions, Turnstile y una categoría de limitación independiente por entorno protegen los envíos; Brevo envía un mensaje transaccional fijo al destinatario empresarial configurado. La confirmación no es consentimiento de marketing ni te añade a una lista del boletín.",
+        "p2": "El formulario permanecerá desactivado hasta que se configure por separado. El periodo de conservación y el procedimiento de eliminación de las consultas de contacto aún no están confirmados y deben revisarse antes de la activación. El contenido se utilizará solo mientras sea necesario para tramitar y responder a la solicitud, sujeto a obligaciones legales y asuntos pendientes. Los registros transaccionales de Brevo y las copias de los proveedores tienen plazos distintos."
+      },
+      "providers": {
+        "title": "Proveedores de correo e infraestructura",
+        "p1": "Brevo gestiona doble confirmación y entrega transaccional. El propietario confirma 24 meses de registros transaccionales para todos los remitentes. Vistas previas completas desactivadas; esto no borra vistas históricas, metadatos ni copias.",
+        "p2": "contact@muuva.nl usa Microsoft 365 Email Essentials mediante GoDaddy. El propietario informa Default MRM Policy con etiquetas heredadas, Online Archive desactivado y Mailbox Litigation Hold desactivado. No hay eliminación mayorista automática a doce meses verificada. Retención/holds adicionales de Purview, recuperación real de elementos borrados y otras copias siguen sin verificar.",
+        "p3": "Los enlaces de compra de Amazon y de Instagram, TikTok y YouTube son externos y voluntarios, no rastreadores publicitarios/sociales integrados. Las compras se realizan en Amazon. Al seguirlos se aplican las prácticas propias de esos servicios."
+      },
+      "retention": {
+        "title": "Criterios de conservación",
+        "p1": "El idioma permanece hasta cambiarlo/borrarlo; consentimiento caduca inicialmente a los seis meses naturales. Contadores activos caducan lógicamente tras aproximadamente una hora, aparte del historial del proveedor. Umami tiene seis meses de analítica estándar y registros operativos/de seguridad y copias separados.",
+        "p2": "Periodos de boletín, consultas y transacciones se indican arriba. Correspondencia de privacidad se guarda solo según necesidad de gestión, prueba y obligaciones. Copias, recuperación, supresiones y holds legales pueden superar datos activos. Faltan periodos verificados y revisiones documentadas; no se promete borrado permanente absoluto en todos los sistemas."
+      },
+      "transfers": {
+        "title": "Tratamiento internacional y garantías",
+        "p1": "Cloudflare, Brevo, Microsoft/GoDaddy, Umami y Google pueden implicar acceso/tratamiento fuera del EEE. Almacenar analítica en la UE no es tratamiento exclusivo allí. Garantías aplicables pueden incluir decisiones de adecuación o cláusulas contractuales tipo y medidas adicionales. Revisa servicios, regiones, subencargados y acuerdos reales. Los enlaces no prueban aceptación por MUUVA, destinos exactos ni evaluaciones completas. Pide información sobre garantías aplicables."
+      },
+      "rights": {
+        "title": "Derechos y reclamaciones",
+        "p1": "Según condiciones legales puedes solicitar acceso, rectificación, supresión, limitación o portabilidad, oponerte al interés legítimo y retirar consentimiento sin afectar tratamiento lícito anterior. Describe tu solicitud a contact@muuva.nl; pedimos solo información necesaria y proporcionada para verificarla y atenderla.",
+        "p2": "Normalmente respondemos en un mes, con prórrogas explicadas legalmente permitidas. Puedes reclamar ante la Autoriteit Persoonsgegevens neerlandesa o la autoridad de tu residencia, trabajo o lugar de presunta infracción. Contacta a proveedores sobre su tratamiento independiente cuando corresponda."
+      },
+      "updates": {
+        "title": "Actualizaciones de este aviso",
+        "p1": "La fecha indica la última actualización de este aviso. Cambios sustanciales de tratamiento opcional requieren renovar elecciones cuando proceda."
+      }
+    },
+    "links": {
+      "cloudflare": "Privacidad de Cloudflare",
+      "turnstile": "Privacidad de Turnstile",
+      "cloudflareDpa": "Acuerdo de Cloudflare",
+      "cloudflareTransfers": "Transferencias de Cloudflare",
+      "cloudflareSubprocessors": "Subencargados de Cloudflare",
+      "umami": "Privacidad de Umami",
+      "umamiDpa": "Acuerdo de Umami",
+      "umamiSubprocessors": "Subencargados de Umami",
+      "google": "Privacidad de Google",
+      "brevo": "Privacidad de Brevo",
+      "microsoft": "Privacidad de Microsoft",
+      "godaddy": "Privacidad de GoDaddy",
+      "contact": "Correo contact@muuva.nl",
+      "authority": "Autoridad neerlandesa de protección de datos"
+    }
+  },
+  "about": {
+    "inspired": {
+      "title": "¿Qué inspiró a Muuva?",
+      "intro": "Una marca inspirada en el amor por el Pilates, el sueño de construir algo con significado y la valentía de volver a empezar.",
+      "p1": "Muuva nació en un momento de cambio en la vida de Michelle. Originaria de Venezuela, se mudó a los Países Bajos por una oportunidad en el sector tecnológico y dedicó más de ocho años a desarrollar su carrera como ingeniera.",
+      "p2": "Cuando esa etapa llegó a su fin, empezó a preguntarse qué quería hacer realmente después. Siempre había soñado con crear algo propio y, por primera vez, ese sueño empezó a parecer posible.",
+      "p3": "El Pilates siempre había sido su manera de bajar el ritmo, soltar el estrés y reconectar consigo misma. En los días ajetreados y los momentos de incertidumbre, le aportaba equilibrio y alegría.",
+      "p4": "Nunca imaginó que algo tan personal llegaría a formar parte de su trayectoria profesional. Pero, poco a poco, empezó a tomar forma una idea: ¿por qué no crear algo que ayudara a otras mujeres a descubrir esa misma sensación y a incorporar el movimiento de forma natural a su vida cotidiana?",
+      "p5": "Con su mentalidad de ingeniera, su pasión por el Pilates y la ilusión de empezar algo nuevo, nació la primera idea de Muuva.",
+      "alt": "Michelle sentada junto a un portátil, con una pelota y un aro de Pilates de MUUVA delante de ella."
+    },
+    "us": {
+      "title": "Sobre nosotros",
+      "p1": "Muuva comenzó con un sueño compartido por Michelle y su esposo Carlos: crear juntos algo con significado, alrededor de algo que de verdad les apasiona.",
+      "p2": "Originarios de Venezuela, ambos son ingenieros y se mudaron a los Países Bajos para construir una vida juntos. Con fortalezas distintas pero una manera de pensar compartida, emprendieron su nueva aventura con curiosidad, creatividad y la convicción de que hasta los sueños más grandes empiezan con pequeños pasos.",
+      "p3": "Construir Muuva fue mucho más que poner en marcha un negocio. Fue una oportunidad para unir sus experiencias, aprender algo completamente nuevo y convertir una idea en algo propio. Por el camino descubrieron cuánto podían lograr apoyándose mutuamente y sumando sus diferentes perspectivas.",
+      "p4": "Hoy, Muuva es una marca de Pilates de Ámsterdam creada con cariño, diseño cuidado y un amor sincero por el movimiento. Más allá de ofrecer bonitos productos esenciales de Pilates, esperan inspirar a otras mujeres a disfrutar al moverse, dedicarse un momento a sí mismas e integrar el Pilates en su vida cotidiana.",
+      "p5": "En esencia, Muuva refleja su amor, su visión compartida y la valentía de seguir un sueño juntos.",
+      "alt": "Michelle y Carlos juntos, mientras Carlos le sonríe a Michelle."
+    }
+  },
+  "consent": {
+    "title": "Preferencias de privacidad y cookies",
+    "intro": "Las funciones esenciales mantienen MUUVA seguro. Con tu permiso, Umami mide visitas y YouTube carga entrenamientos. Ambas opciones siguen desactivadas hasta que elijas. Puedes cambiar tu elección en Ajustes de privacidad cuando quieras.",
+    "essential": "Esenciales — siempre activas",
+    "essentialDescription": "Entrega del sitio, preferencias de idioma y privacidad y seguridad de formularios. No son categorías de consentimiento opcional.",
+    "analytics": "Analítica",
+    "analyticsDescription": "Permite a Umami Cloud medir visitas a páginas públicas con datos mínimos. Sin publicidad ni grabaciones de sesiones.",
+    "externalVideos": "Vídeos externos",
+    "externalVideosDescription": "Permite reproductores de YouTube. Google recibe información al cargar el reproductor, incluso antes de reproducir.",
+    "reject": "Rechazar opcionales",
+    "customize": "Personalizar",
+    "accept": "Aceptar opcionales",
+    "save": "Guardar preferencias",
+    "close": "Cerrar ajustes",
+    "settings": "Ajustes de privacidad",
+    "storageError": "Tu navegador no pudo guardar las preferencias. La analítica y los vídeos opcionales siguen bloqueados. Puedes seguir navegando o ver directamente en YouTube."
+  },
+  "videoConsent": {
+    "enable": "Activar YouTube y reproducir",
+    "explanation": "Activar YouTube permite que Google trate información como tu IP y datos del navegador al cargar el reproductor. Solo se guarda el permiso para Vídeos externos; tu elección de Analítica no cambia.",
+    "external": "Ver en YouTube",
+    "leaving": "Abre YouTube en otra pestaña. Sales de MUUVA; tus preferencias guardadas no cambian."
   }
 }

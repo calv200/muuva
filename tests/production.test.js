@@ -14,12 +14,13 @@ import { pagePaths, supportedLanguages } from "../src/routing/routeManifest.js";
 import { parseLocation } from "../src/routing/urls.js";
 import { getMetadata } from "../src/seo/metadata.js";
 import { publicSiteOrigin } from "../src/seo/site.js";
+import { analyticsConfig, documentWithAnalytics } from "../build/analytics.js";
 
 const locales = Object.fromEntries(supportedLanguages.map((language) => [language,
   JSON.parse(readFileSync(new URL(`../src/i18n/locales/${language}.json`, import.meta.url))),
 ]));
 
-async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging = false } = {}) {
+async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging = false, analytics = null } = {}) {
   const directory = await mkdtemp(path.join(tmpdir(), "muuva-production-test-"));
   t.after(async () => {
     const relative = path.relative(path.resolve(tmpdir()), path.resolve(directory));
@@ -28,15 +29,16 @@ async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging
   });
   await mkdir(path.join(directory, "assets"));
   await writeFile(path.join(directory, "assets/app.js"), "/* fixture */");
-  await writeFile(path.join(directory, "assets/app.css"), "/* fixture */");
-  const template = `<!doctype html><html lang="en"><head><title>Old</title><meta name="description" content="Old"><script type="module" src="${base}assets/app.js"></script><link rel="stylesheet" href="${base}assets/app.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope"></head><body><div id="root"></div></body></html>`;
+  await writeFile(path.join(directory, "assets/app.css"), ["Manrope", "Newsreader"].map((family) => `@font-face { font-family: "${family}"; src: url(./font.woff2); font-display: swap; }`).join("\n"));
+  await writeFile(path.join(directory, "assets/font.woff2"), "wOF2fixture");
+  const template = documentWithAnalytics(`<!doctype html><html lang="en"><head><title>Old</title><meta name="description" content="Old"><script type="module" src="${base}assets/app.js"></script><link rel="stylesheet" href="${base}assets/app.css"></head><body><div id="root"></div></body></html>`, analytics);
   const pages = [];
   for (const language of supportedLanguages) {
     const i18n = createInstance();
     i18n.init({ lng: language, resources: { [language]: { translation: locales[language] } }, initImmediate: false });
     for (const pagePath of pagePaths) {
       const route = parseLocation(new URL(`${base}${language}/${pagePath}`, origin), base);
-      const heading = i18n.t(route.page === "home" ? "product.title" : route.page === "guided-routines" ? "routines.title" : `routines.categories.${route.slug}.title`);
+      const heading = i18n.t(route.page === "privacy" ? "privacy.title" : route.page === "wholesale" ? "wholesale.title" : route.page === "contact" ? "contact.title" : route.page === "about-us" ? "about.inspired.title" : route.page === "newsletter-confirmed" ? "newsletterConfirmed.title" : route.page === "home" ? "product.title" : route.page === "guided-routines" ? "routines.title" : `routines.categories.${route.slug}.title`);
       const page = {
         route,
         metadata: getMetadata(language, route, i18n.t.bind(i18n), { origin, base }),
@@ -53,8 +55,27 @@ async function fixture(t, { base = "/muuva/", origin = publicSiteOrigin, staging
   await writeFile(path.join(directory, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${origin}${base}sitemap.xml\n`);
   const headers = createHostingHeaders({ base, staging });
   if (headers) await writeFile(path.join(directory, "_headers"), headers);
-  return { directory, base, origin, staging };
+  return { directory, base, origin, staging, analytics };
 }
+
+test("enabled analytics verifies every localized page and compatibility root, rejecting duplicate or missing scripts", async (t) => {
+  const analytics = analyticsConfig({ VITE_UMAMI_ENABLED: "true", VITE_UMAMI_WEBSITE_ID: "8963af84-1a22-4cad-a8ef-413afe485468", VITE_PUBLIC_SITE_ORIGIN: "https://muuva.nl" }, { base: "/" });
+  const options = await fixture(t, { base: "/", origin: "https://muuva.nl", analytics });
+  assert.equal((await verifyProductionOutput(options)).pages, supportedLanguages.length * pagePaths.length);
+  const file = path.join(options.directory, "index.html");
+  const original = await readFile(file, "utf8");
+  await writeFile(file, original.replace("</head>", '<script src="https://cloud.umami.is/script.js"></script></head>'));
+  await assert.rejects(verifyProductionOutput(options), /Incorrect Umami script count/);
+  await writeFile(file, original.replace(/<script id="muuva-analytics-privacy">[\s\S]*?<\/script>/, ""));
+  await assert.rejects(verifyProductionOutput(options), /Incorrect Umami privacy hook count/);
+});
+
+test("disabled output rejects an accidentally installed tracker on the compatibility root", async (t) => {
+  const options = await fixture(t);
+  const file = path.join(options.directory, "index.html");
+  await writeFile(file, (await readFile(file, "utf8")).replace("</head>", '<script src="https://cloud.umami.is/script.js"></script></head>'));
+  await assert.rejects(verifyProductionOutput(options), /Incorrect Umami script count/);
+});
 
 const pageFile = (options) => path.join(options.directory, supportedLanguages[1], pagePaths[0], "index.html");
 async function edit(file, change) {
@@ -64,14 +85,14 @@ async function edit(file, change) {
 test("production verifier accepts the manifest and ignores bootstrap JSON when checking visible translation keys", async (t) => {
   const options = await fixture(t);
   await edit(pageFile(options), (html) => html.replace("</body>", '<script type="application/json">{"example":"product.title"}</script></body>'));
-  assert.deepEqual(await verifyProductionOutput(options), { pages: supportedLanguages.length * pagePaths.length, assets: 2 });
+  assert.deepEqual(await verifyProductionOutput(options), { pages: supportedLanguages.length * pagePaths.length, assets: 3 });
 });
 
 test("staging requires global noindex while preserving root-hosted localized SEO", async (t) => {
   const options = await fixture(t, { base: "/", origin: "https://muuva.pages.dev", staging: true });
   const file = path.join(options.directory, "_headers");
   assert.equal(await readFile(file, "utf8"), "/*\n  X-Robots-Tag: noindex, nofollow\n");
-  assert.equal((await verifyProductionOutput(options)).pages, 28);
+  assert.equal((await verifyProductionOutput(options)).pages, supportedLanguages.length * pagePaths.length);
   await unlink(file);
   await assert.rejects(verifyProductionOutput(options), /Incorrect hosting headers/);
 });
@@ -85,7 +106,7 @@ test("commercial headers protect project and preview hosts without a custom-doma
     ["https://:version.:project.pages.dev/*", "X-Robots-Tag: noindex, nofollow"],
   ]);
   assert.equal(createHostingHeaders({ base: "/", staging: false }), createHostingHeaders({ base: "/" }));
-  assert.equal((await verifyProductionOutput(options)).pages, 28);
+  assert.equal((await verifyProductionOutput(options)).pages, supportedLanguages.length * pagePaths.length);
 
   for (const invalid of [
     "/*\n  X-Robots-Tag: noindex, nofollow\n",
@@ -99,6 +120,12 @@ test("commercial headers protect project and preview hosts without a custom-doma
 });
 
 const corruptions = {
+  "a pre-consent analytics resource hint": async (o) => edit(pageFile(o), (s) => s.replace("</head>", '<link rel="preconnect" href="https://cloud.umami.is"></head>')),
+  "a pre-consent YouTube iframe": async (o) => edit(pageFile(o), (s) => s.replace("</main>", '<iframe src="https://www.youtube-nocookie.com/embed/bKmylm6T57w"></iframe></main>')),
+  "an external Google font stylesheet": async (o) => edit(pageFile(o), (s) => s.replace("</head>", '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope"></head>')),
+  "an external font URL in CSS": async (o) => edit(path.join(o.directory, "assets/app.css"), (s) => s.replaceAll("./font.woff2", "https://fonts.gstatic.com/font.woff2")),
+  "a missing font file": async (o) => unlink(path.join(o.directory, "assets/font.woff2")),
+  "an invalid font file": async (o) => writeFile(path.join(o.directory, "assets/font.woff2"), "<html>not a font</html>"),
   "a missing localized page": async (o) => unlink(pageFile(o)),
   "an extra unlisted HTML route": async (o) => writeFile(path.join(o.directory, "unexpected.html"), "extra"),
   "an empty React shell": async (o) => edit(pageFile(o), (s) => s.replace(/<div id="root">[\s\S]*?<\/div>/, '<div id="root"></div>')),

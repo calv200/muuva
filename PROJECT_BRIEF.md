@@ -21,7 +21,7 @@ The website should feel closer to a modern lifestyle / design brand than to a co
 5. Styled by You lifestyle image carousel
 6. Footer
 
-A separate **Guided Routines page** now exists as a GitHub Pages-safe routed experience and can continue to be refined after visual review.
+A separate **Guided Routines page** now exists as a statically generated, history-routed experience and can continue to be refined after visual review.
 
 The homepage, Guided Routines listing and detail pages, and shared interfaces support English, German, Dutch, and Spanish. Sections 8.1–8.5 describe localization, localized routing, pre-rendering, SEO, and verification conventions.
 
@@ -44,7 +44,7 @@ This section defines the visual rules that should be reused across the landing p
 
 ### 5.2 Typography System
 
-Use only two main font families across the website.
+Use only two main font families across the website. Both are self-hosted variable WOFF2 fonts in `src/assets/fonts/`, loaded through `src/index.css` with `font-display: swap`. Latin and Latin Extended subsets cover the four locales; licenses and download provenance accompany the files. Manrope supports 400-600 and Newsreader 400-500 with optical sizing retained. No italic styling is currently used. There are no Google Fonts stylesheet, preconnect or runtime font requests.
 
 #### Display / editorial font
 **Newsreader**
@@ -217,7 +217,7 @@ The header should remain minimal and elegant, but it must not feel visually insi
 ### 5.7 Shared CTA / Button Foundation
 
 Create one reusable CTA/button style for actions such as:
-- `Buy on Amazon →`
+- `Buy on Amazon`
 - `Explore Guided Routines →`
 
 Default direction:
@@ -383,13 +383,13 @@ This sketch defines the desired layout direction for the hero section, including
 
 - Placement: after the hero video, before the Guided Routines promotional section. Preserve the remaining page order.
 - Layout: centered framed container up to 1462px wide with square 90-degree corners, a subtle shadow, and one unified `#F2EFE9` background. At 1280px and wider, the left-aligned editorial block shares the card with the image positioned across the center and right. Below 1280px, copy stacks above the image. The surrounding section remains `#FBF8F2`.
-- Static copy: left-aligned Newsreader title `Get Your Pilates Kit` in deep green `#304C40`, wrapping naturally without forced line breaks. No subtitle appears. The single main CTA remains the rounded, filled `Buy on Amazon →` button in `#304C40` with white text, darker hover, and visible focus, spaced directly below the title. The `More info` button remains removed.
+- Static copy: left-aligned Newsreader title `Get Your Pilates Kit` in deep green `#304C40`, wrapping naturally without forced line breaks. No subtitle appears. The single main CTA remains the rounded, filled `Buy on Amazon` pill in `#304C40` with white text, darker hover, and visible focus, whose right end holds the NL/DE/EU Amazon store selector, spaced directly below the title. The `More info` button remains removed.
 - Sizing and positioning: the image wrapper is 100% wide up to 1341.6px below 1280px. At 1280px and wider it is 106% wide up to 1422.1px, shifted right by 9% of its width and upward with a -24px top margin. The wider layout uses 40px top and 24px bottom card padding; the card remains content-sized. The original image proportions, transparent padding, product arrangement, and percentage hotspot alignment remain intact. No equipment is independently resized.
 - Composition: one transparent `src/assets/images/Products/full-kit-cutout.png` (1672×941), derived locally from `src/assets/images/Products/kit-billboard.png`. Preserve the original product arrangement, perspective, guide/phone angle and photographic shadows. Original source remains unchanged. No floating animation.
 - Gallery triggers: five semantic hotspot buttons overlay the single image, with percentage coordinates and centralized `galleryImageId` mapping in `src/data/productComposition.js`. Ring, Ball, Band and Sliders open their respective photos. The workout-guide hotspot at 73% x / 83% y, beneath the printed guide beside the phone, temporarily opens the full-kit photo. Change only its `galleryImageId` when a dedicated guide photo is added to the gallery. The independent image button opens the full-kit photo; empty section space outside the image and editorial text do not.
 - Gallery order and mapping, all under `src/assets/images/Products/`: Ring = `ring1.png`; Ball = `ball1.png`; Band = `band1.png`; Sliders = `slider1.png`; workout guide and full kit = `kit1.png`. The workout-guide hotspot does not add a gallery slide. Use the root-level kit image, never `Archive/kit1.png`.
 - Preserve gallery styling, five images, previous/next arrows, thumbnails, close/backdrop/Escape behavior, keyboard arrows, focus trapping/restoration, and its Amazon CTA.
-- The main and gallery Amazon CTAs use the centralized product URL, a new tab, and `noopener noreferrer`.
+- The main, gallery, and Guided Routines Amazon CTAs use the centralized NL/DE marketplace selector, open in a new tab, and include `noopener noreferrer`.
 - Accessibility: hotspots have 44px targets, meaningful photo-viewing labels and visible focus. The hero-image button and hotspots are independent siblings, never nested controls.
 - Removed: dynamic selection state, hover-preview copy, contextual routine links, reset controls and selected-content transitions. Editorial content never changes during interaction.
 
@@ -401,7 +401,7 @@ Use the localized listing path `/muuva/{language}/guided-routines/` and detail p
 The Sliders routine is available in All and Sliders, using its existing thumbnail and the video URL listed below.
 
 - Routing decision
-The project is deployed as a static Vite build through GitHub Pages. Shared routing utilities handle browser history navigation, and pre-rendered HTML files support direct entry and refresh for every manifest route without a server-side fallback. Hash page routes remain supported only as legacy links; see sections 8.2–8.3.
+The current hosting architecture is Cloudflare Pages at `https://muuva.nl`, as confirmed by the owner. The repository retains GitHub Pages compatibility and its existing workflow; this local pass does not deploy either host. Shared routing utilities handle browser history navigation, and pre-rendered HTML files support direct entry and refresh for every manifest route without a server-side fallback. Hash page routes remain supported only as legacy links; see sections 8.2–8.3.
 
 - Page structure
     ```text
@@ -473,7 +473,7 @@ All Equipment:
 - Routine grid
 Use the existing responsive one/two/three-column editorial grid and unchanged thumbnails and play overlays. Below each thumbnail, show a Newsreader workout title after 20px, then a duration/clock and intensity row after 8px, followed by muscle-group and equipment pills after 8px. Remove the previous uppercase category label. Do not load YouTube iframes inside the grid.
 
-Workout metadata lives in `src/data/guidedRoutines.js`: `titleKey`, `durationMinutes`, `intensity`, `muscleGroups`, and `equipment`. Text is resolved from the locale files. Intensity uses the stable `medium` ID, muscle groups use `fullBody`, and equipment uses `ring`, `ball`, `sliders`, and `band`. In English, Pilates Ring Workout, Pilates Ball Workout, Pilates Sliders Workout, and Resistance Band Workout each show 15 min, Medium, Full body, and their respective Ring/Ball/Slider/Band equipment tag. All Equipment Workout shows 20 min, Medium, Full body, and four separate equipment pills: Band, Ball, Ring, Slider. It remains associated only with the internal `Full body` filter category, displayed as the All Equipment filter (and the All view).
+Workout metadata lives in `src/data/guidedRoutines.js`: `titleKey`, `durationMinutes`, `intensity`, `muscleGroups`, and `equipment`. Text is resolved from the locale files. Intensity uses the stable `medium` ID, muscle groups use `fullBody`, and equipment uses `ring`, `ball`, `sliders`, and `band`. In English, Pilates Ring Workout, Pilates Ball Workout, and Resistance Band Workout each show 15 min, Medium, Full body, and their respective equipment tag. Pilates Sliders Workout shows 10 min. All Equipment Workout shows 20 min, Medium, Full body, and four separate equipment pills: Band, Ball, Ring, Slider. It remains associated only with the internal `Full body` filter category, displayed as the All Equipment filter (and the All view).
 
 Reusable non-interactive metadata pills use Manrope, soft borders, and charcoal text (#24211F). Intensity uses buttery cream #F8EACB; muscle group uses creamy blush #F8E9E3; equipment uses sage #DFE5D8. Styles are centralized in `src/components/guided-routines/RoutineCard.css`. Equipment tags stay in one wrapping group; multi-equipment cards place this group beneath the muscle-group row. The `All` filter shows all five playable cards. Preserve filter labels, category associations, video IDs, destinations, thumbnails, hero content, and player behavior.
 
@@ -497,13 +497,13 @@ Keep routine data and video URLs centralized in:
 `src/data/guidedRoutines.js`
 
 YouTube embed URLs:
-    - Ring: `https://www.youtube.com/embed/Ns9PKZRh2j4`
-    - Ball: `https://www.youtube.com/embed/eZBYO-GSlVk`
-    - Band: `https://www.youtube.com/embed/i9Ev0n22PYc`
-    - Sliders: `https://www.youtube.com/embed/hcx_IU7NLf8`
-    - All Equipment: `https://www.youtube.com/embed/7X87YbXHo9c`
+    - Ring: `https://www.youtube.com/embed/bKmylm6T57w`
+    - Ball: `https://www.youtube.com/embed/XhJxOA3MqFU`
+    - Band: `https://www.youtube.com/embed/H6qv9lBoJUE`
+    - Sliders: `https://www.youtube.com/embed/HXgckKOg-ZM`
+    - All Equipment: `https://www.youtube.com/embed/234bG1XJLRI`
 
-The Sliders card is titled `Pilates Sliders Workout` and shows the clock with `15 min`, `Medium` intensity, `Full body` muscle group, and a `Slider` equipment pill, using the same metadata layout as the other workouts.
+The Sliders card is titled `Pilates Sliders Workout` and shows the clock with `10 min`, `Medium` intensity, `Full body` muscle group, and a `Slider` equipment pill, using the same metadata layout as the other workouts.
 
 - Expected image assets
 Header images:
@@ -568,8 +568,8 @@ The homepage, Guided Routines listing and workout details, and shared interfaces
 
 - `src/i18n/index.js` initializes the browser instance through `src/main.jsx`. `src/i18n/resources.js` supplies the shared resources and translation options for browser rendering and static generation. All four catalogs are bundled; no translation server or runtime locale-file request is required.
 - `src/i18n/locales/en.json`, `de.json`, `nl.json`, and `es.json` are authoritative for implemented interface and SEO copy. English preserves the approved source wording; `CONTENT.md` provides editorial excerpts and a key map rather than a second catalog.
-- Active groups are `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, and `seo`. The older `site.title` entry remains in the catalogs; generated and browser document titles now use `seo.*`.
-- Coverage includes all page copy, filter and metadata labels, header/footer, gallery and hotspot controls, carousel descriptions, form placeholders/validation/confirmation, accessible labels, and SEO titles/descriptions.
+- Active groups are `header`, `languages`, `hero`, `product`, `promo`, `lifestyle`, `footer`, `routines`, `privacy`, `about`, and `seo`. The older `site.title` entry remains in the catalogs; generated and browser document titles now use `seo.*`.
+- Coverage includes page copy, filters/metadata, header/footer, gallery/hotspots, carousel, newsletter and Wholesale form states, consent/video controls, Privacy drafts, accessible labels and SEO.
 - Product Purchase retains the English heading `Get Your Pilates Kit`, no subtitle, and the square uniform `#F2EFE9` container. Localization does not change the kit image, five hotspot coordinates, or Amazon destination.
 
 #### Detection, persistence, and synchronization
@@ -601,15 +601,20 @@ Automatic detection does not save a preference. Manual selection saves the langu
 
 ### 8.2 Localized URL architecture
 
-The current GitHub Pages site uses Vite base `/muuva/`, configured once in `vite.config.js`. It is a project-hosting prefix, not a permanent domain requirement. The public route patterns are:
+Cloudflare production uses Vite base `/` and public origin `https://muuva.nl`. The unchanged repository defaults (`/muuva/`, `https://calv200.github.io`) retain compatibility when no overrides are provided. Use command/environment overrides for the deployment target. The production route patterns are:
 
 | Page | Pattern under the current base | Example |
 | --- | --- | --- |
-| Homepage | `/muuva/{language}/` | `/muuva/de/` |
-| Guided Routines | `/muuva/{language}/guided-routines/` | `/muuva/nl/guided-routines/` |
-| Workout detail | `/muuva/{language}/guided-routines/{slug}/` | `/muuva/es/guided-routines/ring/` |
+| Homepage | `/{language}/` | `/de/` |
+| Guided Routines | `/{language}/guided-routines/` | `/nl/guided-routines/` |
+| Workout detail | `/{language}/guided-routines/{slug}/` | `/es/guided-routines/ring/` |
+| Privacy | `/{language}/privacy/` | `/de/privacy/` |
+| About Us | `/{language}/about-us/` | `/nl/about-us/` |
+| Wholesale | `/{language}/wholesale/` | `/en/wholesale/` |
+| Contact | `/{language}/contact/` | `/de/contact/` |
+| Newsletter confirmation | `/{language}/newsletter-confirmed/` | `/es/newsletter-confirmed/` |
 
-`/muuva/en/` is the English homepage. `src/routing/routeManifest.js` defines supported languages, stable `routineSlugs`, and public `pagePaths`; workout data imports its slug definitions. Slugs and filter IDs stay independent of translated labels.
+`/en/` is the production English homepage (`/muuva/en/` with the compatibility base). `src/routing/routeManifest.js` defines supported languages, stable `routineSlugs`, and public `pagePaths`; workout data imports its slug definitions. Slugs and filter IDs stay independent of translated labels.
 
 `src/routing/urls.js` parses locations and generates base-aware localized URLs and filter queries. `src/routing/navigation.js` implements browser-history navigation and compatibility normalization. `src/routing/RouteContext.jsx` shares the current route, including query state, with page components. Use these utilities instead of concatenating the deployment base in components.
 
@@ -619,11 +624,15 @@ Filter state uses query parameters, for example `/muuva/en/guided-routines/?filt
 
 The unlocalized `/muuva/` entry chooses a language using section 8.1. Existing `#/`, `#/guided-routines`, detail hash routes, and filtered hash links are parsed for backward compatibility and replaced in browser history with their equivalent localized paths. Compatibility normalization uses `replaceState`, not an HTTP redirect or a generic 404 fallback. Old hash-query values take precedence if the outer query repeats the same key. Ordinary section anchors such as `#product` remain separate from legacy page hashes; Shop links target the localized homepage's Product Purchase section.
 
-New navigation must not reintroduce hash-based page routes. Static files support direct entry and refresh for every manifest route; unknown slugs are not generated. A future `muuva.nl` root deployment may use Vite base `/`, but that migration is not implemented.
+New navigation must not reintroduce hash-based page routes. Static files support direct entry and refresh for every manifest route; unknown slugs are not generated. Cloudflare production uses root base `/`; the `/muuva/` examples document retained subpath compatibility.
+
+The Contact page at `/{language}/contact/` is included in the shared route manifest, canonical/hreflang metadata, prerender, and sitemap. The editorial/contact information sits beside a clean form on desktop and stacks on mobile. The required privacy acknowledgement permits processing and replying only; it is not marketing consent. Its separate `functions/api/contact.js` POST endpoint checks exact configured Origin/hostname, bounded strict JSON, field limits, Turnstile action `contact_enquiry`, and the existing fail-closed HMAC/Durable Object limiter under a distinct `contact` category. Contact mail uses the existing `BREVO_WHOLESALE_API_KEY` transactional credential only if owner-authorized, with dedicated fixed Contact recipient/sender configuration and validated Reply-To. It does not enroll a newsletter subscriber or log submitted values. Frontend and backend activation flags both default off; Cloudflare credentials/configuration, retention and legal review are prerequisites.
+
+Amazon destination URLs are centralized in `src/commerce/marketplaceRules.js` and are limited to the owner-supplied NL and DE ASIN links. Destination precedence is visitor NL/DE override, Dutch/German website language, Cloudflare `request.cf.country` NL/DE for English/Spanish, then NL. A small selector on Product Purchase saves only the visitor's two-value functional preference as `muuva.marketplace`; detected country is neither saved nor used to switch language. On root-hosted MUUVA Cloudflare origins, purchase links navigate to `/api/marketplace` as a regular GET, then the function redirects only to the fixed Amazon allowlist. No Origin header or page-load redirect is involved. Local/static/subpath builds retain direct-link override/language/default-NL fallback and must not expose a nonfunctional API endpoint. On 8 November 2026 both supplied Amazon URLs resolved to the expected ASIN product pages, but both fetched pages reported the product currently unavailable; no live offer is confirmed.
 
 ### 8.3 Static pre-rendering and hydration
 
-The route manifest currently produces **28 localized public HTML pages**: four homepages, four Guided Routines listings, and twenty detail pages (five workout slugs in four languages). The separate `dist/index.html` remains a compatibility/language-detection entry, with its canonical pointing to the English homepage; it is not an additional localized page or sitemap entry.
+The route manifest currently produces **48 localized public HTML pages**: four homepages, four Guided Routines listings, twenty detail pages, four Privacy pages, four About Us pages, four Wholesale pages, four Contact pages and four newsletter-confirmation pages. The separate `dist/index.html` is a compatibility/language-detection entry, not another localized page or sitemap entry. Analytics permits 44 routes, excluding newsletter confirmation because a visit does not prove subscription.
 
 `npm run build` runs `build/prerender.js`:
 
@@ -633,7 +642,7 @@ The route manifest currently produces **28 localized public HTML pages**: four h
 4. `build/html.js` inserts localized `lang`, title, description, canonical, and language-alternate tags, preserving Vite's client asset references. The root compatibility entry receives English-home metadata.
 5. The same public route definitions generate `dist/sitemap.xml` and `dist/robots.txt`. Temporary server output is cleaned from the build cache.
 
-The final localized files contain readable translated main content and metadata in the initial HTML response, rather than an empty client-only React root. No running server renderer, SPA rewrite rule, or 404 fallback is needed on GitHub Pages.
+The final localized files contain readable translated main content and metadata in the initial HTML response, rather than an empty client-only React root. No running server renderer, SPA rewrite rule, or 404 fallback is needed for the generated routes on the current Cloudflare host or the retained GitHub Pages compatibility host.
 
 `src/main.jsx` first synchronizes the browser location. Generated pages embed route JSON in `#muuva-prerender`; the client initially renders that same canonical route and calls `hydrateRoot` against the existing HTML. The App then applies the actual query/filter and anchor state after hydration, avoiding a mismatch between the static unfiltered page and a filtered request. `RouteContext` supplies route data without browser-only reads during rendering. Entries without pre-rendered state use `createRoot`, including the compatibility shell and development entry.
 
@@ -647,9 +656,9 @@ Adding a public page or language requires assessing the shared manifest, compone
 
 `src/seo/SeoMetadata.jsx` updates the browser head after page or language navigation without accumulating duplicate canonical/description/alternate tags. Generated HTML already has the correct localized metadata and HTML `lang` before JavaScript runs.
 
-`src/seo/site.js` centralizes the public origin, currently `https://calv200.github.io`, with a `VITE_PUBLIC_SITE_ORIGIN` override. Canonical, alternate, and sitemap URLs combine it with the configured Vite base and route helpers. A hosting/domain migration must update and verify both the public origin and base; changing display copy does not change deployment URLs.
+`src/seo/site.js` centralizes the public origin, defaulting to `https://calv200.github.io`, with production using `VITE_PUBLIC_SITE_ORIGIN=https://muuva.nl`. Canonical, alternate, and sitemap URLs combine it with the configured Vite base and route helpers. A hosting/domain migration must update and verify both the public origin and base; changing display copy does not change deployment URLs.
 
-The sitemap includes exactly the public localized canonical routes, with language alternates in the XHTML namespace. It excludes filter URLs, invalid slugs, development routes, and root/legacy compatibility URLs. The generated robots file allows crawling and references the absolute sitemap URL, currently `https://calv200.github.io/muuva/sitemap.xml`. Under project hosting, this file is served at `/muuva/robots.txt`; it does not configure the hostname's root `/robots.txt`.
+The sitemap includes exactly the public localized canonical routes, with language alternates in the XHTML namespace. It excludes filter URLs, invalid slugs, development routes, and root/legacy compatibility URLs. The generated robots file allows crawling and references the absolute sitemap URL, `https://muuva.nl/sitemap.xml` in production. Under project hosting, this file is served at `/muuva/robots.txt`; it does not configure the hostname's root `/robots.txt`.
 
 New public pages or languages must receive appropriate SEO copy and equivalent canonical/alternate relationships, appear in pre-rendering and sitemap output, and pass production verification. Metadata, routes, and sitemap are derived from shared definitions rather than copied across components.
 
@@ -672,9 +681,21 @@ Routing tests cover URL generation, compatibility, queries, stable filters, and 
 
 See [production verification instructions](docs/production-verification.md) for the detailed checklist and browser/live-host checks. Local automated success does not establish that a hosted workflow, deployment, or search-engine indexing has succeeded.
 
-### 8.6 Known limitations and pending launch work
+### 8.6 Privacy and analytics readiness
 
-GitHub Pages is the current hosting environment. Cloudflare Pages has been discussed but is not implemented; the final `muuva.nl` domain migration is also pending. Moving hosts requires verifying the public origin, Vite base, generated links/assets, canonical/hreflang URLs, sitemap, and robots configuration. These routing and SEO passes do not establish analytics, a newsletter-service backend, or additional security integrations as completed features. The newsletter remains local UI confirmation, and footer policy/navigation links remain placeholders.
+Confirmed by the owner: MUUVA is a Netherlands sole proprietorship (eenmanszaak), KvK 99637588, privacy contact `contact@muuva.nl`, website `https://muuva.nl`. Approved controller identity/address details and final legal review remain publication blockers. Use the neutral business-address placeholder; never recover or publish a residential address. Four Privacy pages retain draft status and the preparation date 1 November 2026.
+
+Umami Cloud Hobby, EU (Frankfurt) analytics storage and six-month standard analytics retention are owner-confirmed. `VITE_UMAMI_ENABLED=true` now means availability for consent-controlled loading. Generated HTML contains only an inert-until-permission first-party loader, never an external tracker tag or resource hint. Exact hostname and DNT gates run before loading and sending; Preview is also excluded at build time. The tracker uses `data-auto-track=false`. MUUVA's gated adapter sends the current eligible page once after load/grant and subsequent router/Back/Forward pageviews, with no preload queue or backfill. Withdrawal blocks future sends; a loaded tracker is reused only after a fresh grant, without automatic listeners or reload. Retained fields remain only `website`, `hostname`, `url`, `referrer`, `title`; approved paths/titles, filtered UTM values and origin-only external referrers remain. No IDs, custom events, advertising or recordings. Provider network metadata, non-EU operations and separate log/backup retention remain relevant.
+
+C.3.2B supersedes the earlier proposed analytics exception and postponed video/consent work. Central `src/consent/` components implement equally styled Reject optional, Customize and Accept optional controls. Analytics and External videos are independent and initially off. Essential delivery/security and functional preferences are not optional categories; no marketing category is active. Versioned `muuva.consent` localStorage contains notice, choices, save time and six-calendar-month expiry, without a visitor ID or server database. Invalid/expired/blocked storage fails closed. Storage events synchronize same-origin tabs; timers/focus/pageshow revalidate expiry. A video-only grant preserves Analytics and its original renewal deadline. Footer Privacy settings supports update/withdrawal at any time. Local evidence has browser/origin/accountability limits.
+
+Workout details show their existing local thumbnail in the unchanged 16:9 frame until External videos consent. Informed Enable YouTube & Play saves only video permission, replaces the thumbnail with a `youtube-nocookie.com` iframe and requests autoplay; normal controls remain if autoplay is blocked. Watch on YouTube opens the existing URL safely in another tab without changing consent. Withdrawal removes iframes. Grid, filters, workout metadata/assets, Back link and vertical centering remain. Consent does not resolve transfers, real playback or legal review. See [privacy review](docs/privacy-compliance-review.md) and [owner release checklist](docs/production-release-c332.md).
+
+### 8.7 Known limitations and pending launch work
+
+Cloudflare Pages is the owner-confirmed host; this local C.3.2B implementation is not deployed. C.3.1 hosted Preview enforcement evidence is owner-reported in its security review. The owner reports separate Production Worker/binding/variables prepared with forms/analytics disabled and rate limiting off; effective settings in a fresh deployment are unverified. The owner-created `workers/forms-rate-limiter/wrangler.production.jsonc` is preserved; Preview configuration is separate. No deployment or account change is authorized by this documentation.
+
+Newsletter DOI and Wholesale enquiries exist with separate build/runtime flags, strict origin/Turnstile checks and shared rate limiting. Newsletter keeps fixed list 3/templates EN2/DE3/NL4/ES5 and neutral receipts; Wholesale sends an escaped transactional enquiry without marketing enrollment. Contact is separately disabled by default and has a distinct limiter category. The footer retains Behind Muuva, Contact Us, Apply for Wholesale and Privacy Policy; Contact and Apply for Wholesale route to localized pages. Social icons link to Instagram, TikTok and YouTube. The website credit links to the designer Instagram account `@calv200`; the former Terms placeholders were removed. Privacy drafts cover Contact and the manual marketplace preference but remain unapproved. Controller disclosure, native-language/legal approval, retention/evidence procedures, marketplace availability and live runtime checks still block unrestricted launch.
 
 Static verification is separate from browser checks for hydration, language/storage behavior, Back/Forward, anchors, filters, active videos, focus, galleries, forms, carousel, and responsive layout. Third-party playback/audio and actual hosted responses/caching require separate validation. The production verifier targets the known generated markup format, not general-purpose HTML validation.
 
@@ -684,6 +705,14 @@ Pre-rendering provides translated initial content and discoverable canonical URL
 
 Product packaging, printed guides, phone screens, photographs, and video imagery can contain baked-in English. These assets remain unchanged. The website translates surrounding interface text and the iframe's accessible title; YouTube owns the embedded player's controls and their language. Website language selection does not localize spoken audio. Captions, subtitles, or localized video versions require separate media work.
 
-Final QA on 2026-10-17 found the Sliders embed (`hcx_IU7NLf8`) reporting a private video. Other live YouTube titles also differ from approved card metadata: Ring and Ball refer to 20-minute videos while the cards show 15 minutes; Band refers to a no-equipment workout; All Equipment refers to a 30-minute dumbbell workout while its card shows 20 minutes and the kit equipment. IDs and card metadata were preserved. The owner should verify availability and intended destinations before publishing. The live embeds loaded, but playback did not advance in the automated Chromium check; uninterrupted playback and audio still require a manual browser/device check.
+Final QA on 2026-10-17 found the Sliders embed (`HXgckKOg-ZM`) reporting a private video. Other live YouTube titles also differ from approved card metadata: Ring and Ball refer to 20-minute videos while the cards show 15 minutes; Band refers to a no-equipment workout; All Equipment refers to a 30-minute dumbbell workout while its card shows 20 minutes and the kit equipment. IDs and card metadata were preserved. The owner should verify availability and intended destinations before publishing. The live embeds loaded, but playback did not advance in the automated Chromium check; uninterrupted playback and audio still require a manual browser/device check.
 
 Native-language brand review is recommended for the localized Product Purchase heading, Styled by You adaptations, newsletter heading, and promotional descriptions. In particular, the DE/NL/ES carousel headings adapt the English phrase to “Your style. Your Muuva.” These are implemented editorial choices, not literal translations; final QA does not replace a native editor's brand-voice review.
+
+### About Us / Behind Muuva (Pass B.1 and B.1.1)
+
+`src/pages/AboutUsPage.jsx` renders two editorial sections inside `SiteContainer`, with no introductory hero or extra CTA. At 1024px and wider, the first row places the image left/text right and the second text left/image right; each image matches its text card height. Below that breakpoint, each section reads text then photograph. Text controls row height, with Newsreader headings, Manrope paragraphs, existing sand and translucent-brand backgrounds, and no new color tokens.
+
+Images are imported unchanged from `src/assets/images/about us/inspired.png` and `src/assets/images/about us/aboutus.jpg`. Object-cover positioning preserves faces; dimensions reserve space, decoding is asynchronous, the first image loads eagerly and the second lazily. The second original is approximately 10 MB; no optimization or asset replacement was authorized.
+
+All four `about` catalogs contain the approved B.1.1 storytelling revision and descriptive alt text. What Inspired Muuva? has one opening statement and five body paragraphs about Michelle's personal path, engineering/technology career and connection to Pilates. About Us has five body paragraphs about Michelle and Carlos, their Venezuelan origins and engineering backgrounds, shared dream, complementary strengths and MUUVA's vision. The first story heading is the single H1; the second is H2. Entry focuses the H1 and scrolls to the top, matching Privacy behavior. Footer Behind Muuva uses `localizedUrl()`; language switching, history, direct entry and refresh share the existing routing architecture. Metadata and analytics paths/titles derive from the shared manifest; C.3.2B consent gating is described above. The checked source is on staging; deployment of this revision remains unverified.

@@ -9,7 +9,9 @@ The approved website interface is available in English, German, Dutch, and Spani
 | `product` | Purchase title and CTA, gallery controls, five hotspots and image descriptions |
 | `promo` | Homepage Guided Routines promotion |
 | `lifestyle` | Styled by You heading, image descriptions and carousel controls |
-| `footer` | Newsletter, navigation, policies, about text, legal credit and form messaging |
+| `about` | Complete two-section founder story, headings and image alt text |
+| `privacy` | Four localized staging drafts; sections, contact links and draft date labels |
+| `footer` | Newsletter teaser, navigation, policies, about text and legal credit |
 | `routines` | Listing and category heroes, filter labels, workouts, metadata, player title, back links, placeholders and unavailable states |
 | `seo` | Localized page titles and meta descriptions for static output and browser navigation |
 
@@ -33,16 +35,17 @@ English navigation: Shop · Training sessions. The language selector shows EN, D
 Get Your Pilates Kit
 
 ## Buy CTA
-Buy on Amazon →
+Buy on Amazon
 
 ## Gallery Buy CTA
-Buy on Amazon →
+Buy on Amazon
 
-## Amazon link
-https://www.amazon.de/dp/B0GZ4RBMX9
+## Amazon marketplaces
+NL: https://www.amazon.nl/dp/B0GZ4RBMX9
+DE: https://www.amazon.de/dp/B0GZ4RBMX9
 
 ## Presentation and gallery behavior
-Left-aligned title and one Buy on Amazon CTA in the square, unified `#F2EFE9` featured container. The title wraps naturally and has no subtitle. On wide desktop the full-kit image sits across the center and right; smaller layouts stack the title and CTA above the image. The title and rounded CTA use deep green `#304C40`. No dynamic selection copy or routine links. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
+Left-aligned title and one Buy on Amazon CTA in the square, unified `#F2EFE9` featured container. The title wraps naturally and has no subtitle. On wide desktop the full-kit image sits across the center and right; smaller layouts stack the title and CTA above the image. The title and rounded CTA use deep green `#304C40`. The right end of the CTA pill holds an NL/DE/EU store selector (no trailing arrow). NL and DE are explicit stores; EU means automatic: Cloudflare country detection sends visitors from Germany to Amazon DE and everyone else to Amazon NL at click time. The preselected value is NL for Dutch, DE for German and EU for English/Spanish. A manual choice is saved in functional localStorage. Static/subpath builds use approved direct links; root Cloudflare builds use an allowlisted first-party redirect. On 8 November 2026 both supplied URLs resolved to the matching ASIN pages but showed the product as currently unavailable; a live offer is not confirmed. Hero asset: `src/assets/images/Products/full-kit-cutout.png`, derived from `kit-billboard.png`.
 
 Hotspot labels and destinations, under `src/assets/images/Products/`:
 
@@ -113,7 +116,7 @@ Part of the Pilates Essential Kit · Explore the kit →
 | --- | --- | --- | --- | --- |
 | Pilates Ring Workout | 15 min | Medium | Full body | Ring |
 | Pilates Ball Workout | 15 min | Medium | Full body | Ball |
-| Pilates Sliders Workout | 15 min | Medium | Full body | Slider |
+| Pilates Sliders Workout | 10 min | Medium | Full body | Slider |
 | Resistance Band Workout | 15 min | Medium | Full body | Band |
 | All Equipment Workout | 20 min | Medium | Full body | Band, Ball, Ring, Slider |
 
@@ -142,20 +145,12 @@ Styled by You.
 Stay in the move.
 
 ## Newsletter description
-Sign up for exclusive Muuva content and pilates inspiration
+Pilates inspiration, movement tips and more are on the way.
 
-## Newsletter confirmation
-You have been subscribed to our newsletter.
+## Newsletter status
+Coming soon
 
-## Newsletter field and validation
-
-- Field label: Email address
-- Placeholder: E-mail
-- Submit accessibility label: Subscribe to newsletter
-- Missing value: Please enter your email address.
-- Invalid email: Please enter a valid email address.
-
-All form messages use `footer` locale entries and update when the language changes. The browser's native email validation remains in use.
+The disabled build retains this noninteractive teaser. An enabled root-hosted build renders the localized Newsletter form with email, separate unchecked newsletter consent, Privacy link and Turnstile. Copy in `newsletter` distinguishes request receipt from actual DOI delivery or subscription. List/template IDs and confirmation routes remain independent of labels; see forms C.1. Website consent choices never subscribe a visitor.
 
 ## About heading
 About Muuva
@@ -164,12 +159,43 @@ About Muuva
 Based in Amsterdam, Muuva creates beautifully designed and sustainably made Pilates gear for movement practices at home and in the studio.
 
 ## Navigation links
-Behind Muuva · Contact Us · Wholesale Muuva · Apply for Wholesale · Caring For Your Muuva · Sustainability Commitment
+Behind Muuva · Contact Us · Apply for Wholesale
 
 ## Policy links
-FAQs · Privacy Policy · Refund Policy · Shipping Policy · Terms of Service · Terms of Use
+Privacy Policy
 
 ## Legal line
 © 2026, Muuva. Website designed by Calv200.
 
-The newsletter form currently shows its confirmation through local page state; it is not connected to a subscription service. Footer navigation and policy labels currently use `#` placeholder links.
+Privacy Policy links to `/{language}/privacy/`, Behind Muuva to `/{language}/about-us/`, Contact Us to `/{language}/contact/`, and Apply for Wholesale to `/{language}/wholesale/`. Instagram (`https://www.instagram.com/muuva.studio/`), TikTok (`https://www.tiktok.com/@muuva.studio`) and YouTube (`https://www.youtube.com/@Muuva.studio`) use matching accessible external icons. Persistent Privacy settings is a button, not a page. The website credit links to `https://www.instagram.com/calv200/`. Terms of Service and Terms of Use were removed; there are no placeholder links.
+
+# Privacy notice editorial status
+
+The four `privacy` catalogs are authoritative; do not duplicate the policy here. Drafts dated 1 November 2026 disclose MUUVA, Netherlands eenmanszaak, KvK 99637588, `contact@muuva.nl` and `https://muuva.nl`, with a translated neutral business-address placeholder. Fifteen sections cover controller, purposes/bases, Cloudflare/Turnstile/HMAC counters, functional storage/fonts, choices/withdrawal, consent-controlled Umami and YouTube, Newsletter, Contact, Wholesale, email/providers, retention, transfers, rights and updates. Contact copy explains enquiry handling, reply processing, Turnstile/rate limiting, fixed transactional recipient and no marketing use; retention needs owner confirmation. Amazon marketplace preference storage and click-only Cloudflare country use are described. SEO and visible labels retain draft status; no absolute provider deletion or EU-only processing is promised.
+
+Approved controller identity/address details, final retention decisions and legal/native-language review remain publication blockers. Never recover or publish a residential address. Keep draft status until approved; no final effective date is fabricated. C.3.2B uses affirmative consent for optional analytics/videos, superseding the earlier proposed analytics exception and postponement. Production activation and actual provider ingestion/delivery/playback remain separately authorized checks. See `docs/privacy-compliance-review.md`.
+
+# Contact Us copy
+
+The four `contact` catalogs define all page, form, validation, verification and neutral receipt text. The business email is `contact@muuva.nl`. The required privacy acknowledgement permits processing and replying only; it is not marketing consent. The form has no newsletter enrollment and stays disabled by default until separately approved and configured.
+
+| Language | Title | Supporting message |
+| --- | --- | --- |
+| EN | Get in touch | Have a question, an idea, or something you'd like to share? We'd love to hear from you. |
+| DE | Nimm Kontakt auf | Hast du eine Frage, eine Idee oder etwas, das du mit uns teilen möchtest? Wir freuen uns, von dir zu hören. |
+| NL | Neem contact op | Heb je een vraag, een idee of iets dat je met ons wilt delen? We horen graag van je. |
+| ES | Ponte en contacto | ¿Tienes una pregunta, una idea o algo que quieras compartir? Nos encantará leerte. |
+
+# Privacy preferences and video copy
+
+The four `consent` catalogs define first-layer choices, category explanations, storage-failure feedback and footer settings. Reject optional, Customize and Accept optional have equal visual weight. Essential functionality is explained without a consent toggle; Analytics and External videos start unchecked. No active marketing category is shown. The four `videoConsent` catalogs define the informed Enable YouTube & Play action, Google-processing explanation, Watch on YouTube link and visible leaving-MUUVA notice. A video grant must preserve Analytics. Existing thumbnails, workout titles and metadata remain unchanged.
+
+# Wholesale copy
+
+The four `wholesale` catalogs define the approved page/form labels, accessibility, validation, rate feedback and inline success. The required privacy acknowledgement authorizes replying to the enquiry, not marketing. Keep the existing editorial layout, supplied reformer photograph and no visitor acknowledgement email; see `docs/forms-pass-c2-wholesale.md`.
+
+# About Us story
+
+The `about.inspired` and `about.us` keys in the four locale catalogs are the authoritative approved Pass B.1.1 story. What Inspired Muuva? has one opening statement and five body paragraphs about Michelle's journey, engineering/technology career and connection to Pilates. About Us has five body paragraphs about Michelle and Carlos, their Venezuelan origins and engineering backgrounds, shared dream, complementary strengths and vision for MUUVA. Preserve Michelle, Carlos, Venezuela, the Netherlands, Amsterdam and Michelle's experience of more than eight years; do not shorten the narrative or add unsupported claims. Headings, alt text and `seo.about` remain localized; route and image filenames stay untranslated.
+
+Use only the two supplied photographs in `src/assets/images/about us/`, with the layout described in `PROJECT_BRIEF.md`. The existing translated Behind Muuva footer label is unchanged and now links to this page. Native-language editorial review remains recommended.

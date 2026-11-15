@@ -13,4 +13,9 @@ export const pagePaths = [
   "",
   "guided-routines/",
   ...Object.values(routineSlugs).map((slug) => `guided-routines/${slug}/`),
+  "privacy/",
+  "about-us/",
+  "wholesale/",
+  "contact/",
+  "newsletter-confirmed/",
 ];
