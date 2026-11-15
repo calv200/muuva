@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="data:,">
-<title>MUUVA prototype | Ring reveal</title>
+<title>MUUVA prototype | Product reveal</title>
 <link rel="preload" href="./manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./kit.webp" as="image">
 <style>
@@ -86,41 +86,53 @@ a { color: inherit; }
   .composition { width: 106%; max-width: 1422.1px; margin-top: -24px; transform: translateX(9%); }
 }
 
-/* Ring reveal */
+/* Product reveals (ring, band): the photo cut-out is swapped for a rendered sprite sequence */
+.reveal-layer { position: absolute; z-index: 2; transform-origin: 0 0; pointer-events: none; visibility: hidden; will-change: transform; }
+.reveal-layer .photo { position: absolute; inset: 0; width: 100%; height: 100%; }
+.reveal-layer .sprite { position: absolute; aspect-ratio: 1; background: 0 0 / 600% 600% no-repeat; opacity: 0; filter: drop-shadow(0 .5em 1em rgb(36 33 31 / .12)); }
+.reveal-layer .photo, .reveal-layer .sprite { transition: opacity 240ms linear; }
+.is-open .reveal-layer.active { visibility: visible; pointer-events: auto; cursor: pointer; }
+.band-layer {
+  /* The band's box inside the 1672x941 kit image: x 379, y 603, 237 wide, 185 high. */
+  left: 22.6675%; top: 64.0808%; width: 14.1746%; aspect-ratio: 237 / 185;
+}
+.band-layer .sprite {
+  /* The sprite camera is the kit camera cropped to a 640px square at x 300, y 200, so frame 0 sits on the photo band. */
+  left: -33.333%; top: -217.838%; width: 270.042%; background-image: url(./band-sprite.webp);
+}
 .ring-layer {
   /* The ring's box inside the 1672x941 kit image: x 643, y 476, 517 wide, 261 high. */
-  position: absolute; left: 38.4569%; top: 50.5845%; width: 30.9211%; aspect-ratio: 517 / 261; z-index: 2;
-  transform-origin: 0 0; pointer-events: none; visibility: hidden; will-change: transform;
+  left: 38.4569%; top: 50.5845%; width: 30.9211%; aspect-ratio: 517 / 261;
 }
-.ring-layer .photo { position: absolute; inset: 0; width: 100%; height: 100%; }
 .ring-layer .sprite {
   /* Frame 0 of the render is scaled and offset so its ring sits on the photo ring. */
-  position: absolute; left: -14.502%; top: -93.37%; width: 129.87%; aspect-ratio: 1;
-  background: url(./ring-sprite.webp) 0 0 / 600% 600% no-repeat; opacity: 0;
-  filter: drop-shadow(0 .5em 1em rgb(36 33 31 / .12));
+  left: -14.502%; top: -93.37%; width: 129.87%; background-image: url(./ring-sprite.webp);
 }
-.ring-layer .photo, .ring-layer .sprite { transition: opacity 240ms linear; }
-.is-open .ring-layer { visibility: visible; pointer-events: auto; cursor: pointer; }
 .is-open .kit-button, .is-open .hotspot { opacity: 0; pointer-events: none; }
 
 .spec { position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none; font-size: clamp(12.5px, calc(var(--cell, 500px) * .034), 21px); color: var(--ink); }
 .spec p { position: absolute; margin: 0; line-height: 1.35; opacity: 0; transform: translateY(6px); transition: opacity 450ms ease, transform 450ms ease; }
 .spec strong { font-weight: 600; }
-.spec .c1 { left: -10%; bottom: 97.5%; width: 17em; }
-.spec .c2 { left: 92%; top: 68%; width: 11.5em; transform: translate(-50%, 6px); text-align: center; }
+#ring-specs .c1 { left: -10%; bottom: 97.5%; width: 17em; }
+#ring-specs .c2 { left: 92%; top: 68%; width: 11.5em; transform: translate(-50%, 6px); text-align: center; }
 .spec .tag { left: 52%; top: 101%; width: min(26em, 150%); transform: translate(-50%, 6px); text-align: center; color: var(--muted); }
+#band-specs .c1 { left: 52%; bottom: 85.5%; width: 14em; text-align: center; }
+#band-specs .c2 { left: 16%; top: 76%; width: 9em; transform: translate(-50%, 6px); text-align: center; }
+#band-specs .tag { top: 99%; }
+@media (max-width: 639px) { #band-specs .c1 { left: 40%; width: 10.5em; } }
 .spec .tag strong { color: var(--ink); }
 .spec svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .spec polyline { fill: none; stroke: var(--ink); stroke-width: var(--hair, .2); stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 600ms ease; }
 .spec circle { fill: var(--warm); stroke: var(--ink); stroke-width: var(--hair, .2); opacity: 0; transition: opacity 300ms ease; }
 .specs-in .spec p { opacity: 1; transform: translateY(0); }
 .specs-in .spec .c2, .specs-in .spec .tag { transform: translate(-50%, 0); }
+.specs-in #band-specs .c1 { transform: translateY(0); }
 .specs-in .spec polyline { stroke-dashoffset: 0; }
 .specs-in .spec circle { opacity: 1; }
 .specs-in .spec .c2 { transition-delay: 150ms; } .specs-in .spec .l2 { transition-delay: 150ms; } .specs-in .spec .tag { transition-delay: 350ms; }
 
 .close { position: absolute; right: 12px; top: 0; z-index: 6; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--border); background: var(--cream); font-size: 22px; line-height: 1; opacity: 0; pointer-events: none; transition: opacity 300ms ease; }
-.is-open .close { opacity: 1; pointer-events: auto; }
+.is-open .close.active { opacity: 1; pointer-events: auto; }
 @media (min-width: 640px) { .close { right: 0; } }
 
 /* Gallery (unchanged behaviour for the other products) */
@@ -140,7 +152,7 @@ a { color: inherit; }
 @media (min-width: 768px) { .site-footer .cols { grid-template-columns: 1.4fr 1fr 1fr; } }
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-@media (prefers-reduced-motion: reduce) { .stage, .ring-layer, .kit-button, .hotspot, .spec p, .spec polyline { transition-duration: 1ms !important; } }
+@media (prefers-reduced-motion: reduce) { .stage, .reveal-layer, .kit-button, .hotspot, .spec p, .spec polyline { transition-duration: 1ms !important; } }
 </style>
 </head>
 <body>
@@ -171,13 +183,17 @@ a { color: inherit; }
           <button type="button" class="kit-button" data-gallery="kit" aria-label="View the full kit" aria-haspopup="dialog">
             <img src="./kit.webp" width="1672" height="941" alt="MUUVA Pilates Essential Kit with ring, ball, resistance band, sliders, carry bag and guide" draggable="false">
           </button>
-          <div class="ring-layer" id="ring-layer" aria-hidden="true">
+          <div class="reveal-layer ring-layer" id="ring-layer" aria-hidden="true">
             <img class="photo" src="./ring-photo.webp" alt="" draggable="false">
-            <div class="sprite" id="sprite"></div>
+            <div class="sprite"></div>
+          </div>
+          <div class="reveal-layer band-layer" id="band-layer" aria-hidden="true">
+            <img class="photo" src="./band-photo.webp" alt="" draggable="false">
+            <div class="sprite"></div>
           </div>
           <button type="button" class="hotspot" id="ring-hotspot" style="--dx:65%;--dy:67%;--mx:65%;--my:67%" aria-label="Show Pilates ring details" aria-expanded="false" aria-controls="ring-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
           <button type="button" class="hotspot" data-gallery="ball" style="--dx:79%;--dy:33%;--mx:79%;--my:33%" aria-label="View the Pilates ball" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
-          <button type="button" class="hotspot" data-gallery="band" style="--dx:29%;--dy:78%;--mx:29%;--my:78%" aria-label="View the resistance band" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
+          <button type="button" class="hotspot" id="band-hotspot" style="--dx:29%;--dy:78%;--mx:29%;--my:78%" aria-label="Show resistance band details" aria-expanded="false" aria-controls="band-specs"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
           <button type="button" class="hotspot" data-gallery="sliders" style="--dx:21%;--dy:65%;--mx:13%;--my:63%" aria-label="View the sliders" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
           <button type="button" class="hotspot" data-gallery="kit" style="--dx:73%;--dy:83%;--mx:73%;--my:83%" aria-label="View the workout guide" aria-haspopup="dialog"><span aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3v10M3 8h10"/></svg></span></button>
         </div>
@@ -193,7 +209,19 @@ a { color: inherit; }
           <p class="c2"><strong>Non-slip</strong> and comfortable foam pads</p>
           <p class="tag"><strong>Small squeeze. Serious work.</strong> The difference between doing the move and feeling the move.</p>
         </div>
+        <div class="spec" id="band-specs" role="region" aria-label="Resistance band details" hidden>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <polyline class="l1" pathLength="1" points="70,15.5 70,31 42,31"/>
+            <circle cx="42" cy="31" r=".9"/>
+            <polyline class="l2" pathLength="1" points="16,74 16,64 58,64"/>
+            <circle cx="58" cy="64" r=".9"/>
+          </svg>
+          <p class="c1">A classic Pilates tool made of a premium <strong>non-slip fabric</strong></p>
+          <p class="c2">Compact &amp; portable</p>
+          <p class="tag">Designed to help you <strong>grow stronger</strong>!</p>
+        </div>
         <button type="button" class="close" id="ring-close" aria-label="Back to the full kit">&times;</button>
+        <button type="button" class="close" id="band-close" aria-label="Back to the full kit">&times;</button>
       </div>
     </div>
   </section>
@@ -206,7 +234,7 @@ a { color: inherit; }
       <ul><li><a href="/en/about-us/">Behind Muuva</a></li><li><a href="/en/contact/">Contact Us</a></li><li><a href="/en/wholesale/">Apply for Wholesale</a></li><li><a href="/en/privacy/">Privacy Policy</a></li></ul>
       <div><strong style="color:var(--ink);font-weight:500">About Muuva</strong><p>Muuva creates beautifully designed Pilates gear for movement practices at home and in the studio.</p></div>
     </div>
-    <p class="legal">Prototype page for the ring reveal interaction. Not part of the public site. &copy; 2026, Muuva.</p>
+    <p class="legal">Prototype page for the ring and band reveal interactions. Not part of the public site. &copy; 2026, Muuva.</p>
   </div>
 </footer>
 
@@ -220,124 +248,144 @@ a { color: inherit; }
 <script>
 (() => {
   const $ = (id) => document.getElementById(id);
-  const stage = $("stage"), composition = $("composition"), layer = $("ring-layer"), sprite = $("sprite");
-  const photo = layer.querySelector(".photo"), spec = $("ring-specs"), hotspot = $("ring-hotspot"), closeButton = $("ring-close");
+  const stage = $("stage"), composition = $("composition");
   const FRAMES = 36, COLUMNS = 6, PLAY_MS = 1300, MOVE_MS = 1450;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let open = false, busy = false, frame = 0, raf = 0, spriteReady = null;
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  let active = null; // the reveal that is open or animating
 
   // Amazon store choice: EU is automatic (this static prototype cannot see the country, so it uses NL).
   const stores = { NL: "https://www.amazon.nl/dp/B0GZ4RBMX9", DE: "https://www.amazon.de/dp/B0GZ4RBMX9", EU: "https://www.amazon.nl/dp/B0GZ4RBMX9" };
   $("buy-region").addEventListener("change", (event) => { $("buy-link").href = stores[event.target.value]; });
 
-  function loadSprite() {
-    spriteReady ??= new Promise((resolve) => { const image = new Image(); image.onload = image.onerror = resolve; image.src = "./ring-sprite.webp"; });
-    return spriteReady;
-  }
-  ["pointerenter", "focus", "touchstart"].forEach((type) => hotspot.addEventListener(type, loadSprite, { passive: true, once: true }));
-  if ("requestIdleCallback" in window) requestIdleCallback(loadSprite, { timeout: 4000 }); else setTimeout(loadSprite, 2500);
+  // One product reveal: the photo cut-out of the product is swapped for a 6x6 sprite of 3D render frames.
+  // Frame 0 sits exactly on the photo; the last frame is the product's detail pose, with callouts around it.
+  // `room` is how much space the callouts need above and below the enlarged render cell (fractions of the cell),
+  // and `shift` nudges the cell sideways so the callouts stay on screen.
+  function makeReveal({ name, sprite: spriteUrl, room, shift }) {
+    const layer = $(`${name}-layer`), sprite = layer.querySelector(".sprite"), photo = layer.querySelector(".photo");
+    const spec = $(`${name}-specs`), hotspot = $(`${name}-hotspot`), closeButton = $(`${name}-close`);
+    let open = false, busy = false, frame = 0, raf = 0, ready = null;
 
-  function showFrame(index) {
-    frame = Math.max(0, Math.min(FRAMES - 1, index));
-    sprite.style.backgroundPosition = `${(frame % COLUMNS) * 20}% ${Math.floor(frame / COLUMNS) * 20}%`;
-  }
-  function play(to, duration) {
-    cancelAnimationFrame(raf);
-    const from = frame, start = performance.now();
-    return new Promise((resolve) => {
-      if (duration <= 1) { showFrame(to); return resolve(); }
-      const tick = (now) => {
-        const progress = Math.min(1, (now - start) / duration);
-        showFrame(Math.round(from + (to - from) * progress));
-        if (progress < 1) raf = requestAnimationFrame(tick); else resolve();
+    const load = () => (ready ??= new Promise((resolve) => { const image = new Image(); image.onload = image.onerror = resolve; image.src = spriteUrl; }));
+    ["pointerenter", "focus", "touchstart"].forEach((type) => hotspot.addEventListener(type, load, { passive: true, once: true }));
+
+    function showFrame(index) {
+      frame = Math.max(0, Math.min(FRAMES - 1, index));
+      sprite.style.backgroundPosition = `${(frame % COLUMNS) * 20}% ${Math.floor(frame / COLUMNS) * 20}%`;
+    }
+    function play(to, duration) {
+      cancelAnimationFrame(raf);
+      const from = frame, start = performance.now();
+      return new Promise((resolve) => {
+        if (duration <= 1) { showFrame(to); return resolve(); }
+        const tick = (now) => {
+          const progress = Math.min(1, (now - start) / duration);
+          showFrame(Math.round(from + (to - from) * progress));
+          if (progress < 1) raf = requestAnimationFrame(tick); else resolve();
+        };
+        raf = requestAnimationFrame(tick);
+      });
+    }
+
+    // Where the enlarged render cell goes. The callouts hang off this cell.
+    function layout() {
+      const stageBox = stage.getBoundingClientRect();
+      layer.style.transform = "none";
+      const layerBox = layer.getBoundingClientRect(), cellBox = sprite.getBoundingClientRect();
+      const narrow = stageBox.width < 640;
+      const restHeight = composition.getBoundingClientRect().height;
+      const cell = narrow ? Math.min(stageBox.width * 0.76, 420) : Math.min(stageBox.width * 0.42, 600);
+      const [aboveF, belowF] = narrow ? room.narrow : room.wide;
+      const above = cell * aboveF, below = cell * belowF;
+      const needed = above + cell + below;
+      const left = (stageBox.width - cell) / 2 + cell * (narrow ? shift.narrow : shift.wide);
+      const top = Math.max(above, (Math.max(needed, restHeight) - cell) / 2 - (below - above) / 2);
+      const scale = cell / cellBox.width;
+      const offsetX = cellBox.left - layerBox.left, offsetY = cellBox.top - layerBox.top;
+      return {
+        needed, cell, left, top,
+        transform: `translate(${stageBox.left + left - layerBox.left - scale * offsetX}px, ${stageBox.top + top - layerBox.top - scale * offsetY}px) scale(${scale})`,
       };
-      raf = requestAnimationFrame(tick);
-    });
-  }
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    }
+    function applySpec(target) {
+      spec.style.setProperty("--cell", `${target.cell}px`);
+      spec.style.setProperty("--hair", String(100 / target.cell));
+      Object.assign(spec.style, { width: `${target.cell}px`, height: `${target.cell}px`, transform: `translate(${target.left}px, ${target.top}px)` });
+    }
 
-  // Where the enlarged render cell goes. The callouts hang off this cell, so the stage
-  // needs room above (first callout) and below (tagline).
-  function layout() {
-    const stageBox = stage.getBoundingClientRect();
-    layer.style.transform = "none";
-    const layerBox = layer.getBoundingClientRect(), cellBox = sprite.getBoundingClientRect();
-    const narrow = stageBox.width < 640;
-    const restHeight = composition.getBoundingClientRect().height;
-    const cell = narrow ? Math.min(stageBox.width * 0.76, 420) : Math.min(stageBox.width * 0.42, 600);
-    const above = cell * (narrow ? 0.30 : 0.20), below = cell * (narrow ? 0.34 : 0.20);
-    const needed = above + cell + below;
-    const left = (stageBox.width - cell) / 2 + cell * (narrow ? -0.06 : 0.10), top = Math.max(above, (Math.max(needed, restHeight) - cell) / 2 - (below - above) / 2);
-    const scale = cell / cellBox.width;
-    const offsetX = cellBox.left - layerBox.left, offsetY = cellBox.top - layerBox.top;
-    return {
-      needed, cell, left, top,
-      transform: `translate(${stageBox.left + left - layerBox.left - scale * offsetX}px, ${stageBox.top + top - layerBox.top - scale * offsetY}px) scale(${scale})`,
-    };
-  }
-  function applySpec(target) {
-    spec.style.setProperty("--cell", `${target.cell}px`);
-    spec.style.setProperty("--hair", String(100 / target.cell));
-    Object.assign(spec.style, { width: `${target.cell}px`, height: `${target.cell}px`, transform: `translate(${target.left}px, ${target.top}px)` });
-  }
+    async function reveal() {
+      if (open || busy || active) return;
+      busy = true; active = api;
+      await load();
+      const restHeight = stage.getBoundingClientRect().height;
+      stage.style.minHeight = `${restHeight}px`;
+      showFrame(0);
+      layer.classList.add("active"); closeButton.classList.add("active");
+      stage.classList.add("is-open");
+      hotspot.setAttribute("aria-expanded", "true");
+      spec.hidden = false;
+      const target = layout();
+      applySpec(target);
+      layer.getBoundingClientRect();
+      const move = reducedMotion ? 1 : MOVE_MS;
+      layer.style.transition = `transform ${move}ms cubic-bezier(.6, 0, .2, 1)`;
+      layer.style.transform = target.transform;
+      stage.style.minHeight = `${Math.max(restHeight, target.needed)}px`;
+      await wait(reducedMotion ? 0 : 60);
+      photo.style.opacity = "0"; sprite.style.opacity = "1";
+      await wait(reducedMotion ? 0 : 90);
+      await play(FRAMES - 1, reducedMotion ? 0 : PLAY_MS);
+      stage.classList.add("specs-in");
+      open = true; busy = false;
+      closeButton.focus({ preventScroll: true });
+    }
 
-  async function reveal() {
-    if (open || busy) return;
-    busy = true;
-    await loadSprite();
-    const restHeight = stage.getBoundingClientRect().height;
-    stage.style.minHeight = `${restHeight}px`;
-    showFrame(0);
-    stage.classList.add("is-open");
-    hotspot.setAttribute("aria-expanded", "true");
-    spec.hidden = false;
-    const target = layout();
-    applySpec(target);
-    layer.getBoundingClientRect();
-    const move = reducedMotion ? 1 : MOVE_MS;
-    layer.style.transition = `transform ${move}ms cubic-bezier(.6, 0, .2, 1)`;
-    layer.style.transform = target.transform;
-    stage.style.minHeight = `${Math.max(restHeight, target.needed)}px`;
-    await wait(reducedMotion ? 0 : 60);
-    photo.style.opacity = "0"; sprite.style.opacity = "1";
-    await wait(reducedMotion ? 0 : 90);
-    await play(FRAMES - 1, reducedMotion ? 0 : PLAY_MS);
-    stage.classList.add("specs-in");
-    open = true; busy = false;
-    closeButton.focus({ preventScroll: true });
-  }
+    async function conceal() {
+      if (!open || busy) return;
+      busy = true;
+      stage.classList.remove("specs-in");
+      await wait(reducedMotion ? 0 : 220);
+      const move = reducedMotion ? 1 : 1150;
+      layer.style.transition = `transform ${move}ms cubic-bezier(.6, 0, .2, 1)`;
+      layer.style.transform = "none";
+      stage.style.minHeight = "";
+      await play(0, reducedMotion ? 0 : 1050);
+      photo.style.opacity = "1"; sprite.style.opacity = "0";
+      stage.classList.remove("is-open");
+      closeButton.classList.remove("active");
+      hotspot.setAttribute("aria-expanded", "false");
+      await wait(reducedMotion ? 0 : 460);
+      layer.classList.remove("active");
+      spec.hidden = true;
+      layer.style.transition = "";
+      open = false; busy = false; active = null;
+      hotspot.focus({ preventScroll: true });
+    }
 
-  async function conceal() {
-    if (!open || busy) return;
-    busy = true;
-    stage.classList.remove("specs-in");
-    await wait(reducedMotion ? 0 : 220);
-    const move = reducedMotion ? 1 : 1150;
-    layer.style.transition = `transform ${move}ms cubic-bezier(.6, 0, .2, 1)`;
-    layer.style.transform = "none";
-    stage.style.minHeight = "";
-    await play(0, reducedMotion ? 0 : 1050);
-    photo.style.opacity = "1"; sprite.style.opacity = "0";
-    stage.classList.remove("is-open");
-    hotspot.setAttribute("aria-expanded", "false");
-    await wait(reducedMotion ? 0 : 460);
-    spec.hidden = true;
-    layer.style.transition = "";
-    open = false; busy = false;
-    hotspot.focus({ preventScroll: true });
+    function relayout() {
+      if (!open || busy) return;
+      layer.style.transition = "none";
+      const target = layout();
+      layer.style.transform = target.transform; applySpec(target);
+      stage.style.minHeight = `${Math.max(composition.getBoundingClientRect().height, target.needed)}px`;
+    }
+
+    hotspot.addEventListener("click", reveal);
+    closeButton.addEventListener("click", conceal);
+    layer.addEventListener("click", conceal);
+    const api = { load, conceal, relayout, isOpen: () => open };
+    return api;
   }
 
-  hotspot.addEventListener("click", reveal);
-  closeButton.addEventListener("click", conceal);
-  layer.addEventListener("click", conceal);
-  addEventListener("keydown", (event) => { if (event.key === "Escape" && open) conceal(); });
-  addEventListener("resize", () => {
-    if (!open || busy) return;
-    layer.style.transition = "none";
-    const target = layout();
-    layer.style.transform = target.transform; applySpec(target);
-    stage.style.minHeight = `${Math.max(composition.getBoundingClientRect().height, target.needed)}px`;
-  });
+  const reveals = [
+    makeReveal({ name: "ring", sprite: "./ring-sprite.webp", room: { narrow: [0.30, 0.34], wide: [0.20, 0.20] }, shift: { narrow: -0.06, wide: 0.10 } }),
+    makeReveal({ name: "band", sprite: "./band-sprite.webp", room: { narrow: [0.13, 0.16], wide: [0.02, 0.14] }, shift: { narrow: 0, wide: 0.04 } }),
+  ];
+  const preload = () => reveals.forEach((reveal) => reveal.load());
+  if ("requestIdleCallback" in window) requestIdleCallback(preload, { timeout: 4000 }); else setTimeout(preload, 2500);
+  addEventListener("keydown", (event) => { if (event.key === "Escape") reveals.forEach((reveal) => reveal.isOpen() && reveal.conceal()); });
+  addEventListener("resize", () => reveals.forEach((reveal) => reveal.relayout()));
 
   // Gallery for the other products.
   const gallery = $("gallery"), galleryImage = $("gallery-img");
