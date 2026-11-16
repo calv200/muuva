@@ -27,11 +27,44 @@
     "next": "Volgende afbeelding",
     "showImage": "Afbeelding {{number}} tonen",
     "hotspots": {
-      "ring": "Bekijk foto's van de Pilates-ring",
-      "ball": "Bekijk foto's van de Pilates-bal",
-      "band": "Bekijk foto's van de weerstandsband",
-      "sliders": "Bekijk foto's van de Pilates-sliders",
-      "workout-guide": "Bekijk foto's van de trainingsgids en de complete set"
+      "ring": "Toon details van de Pilates-ring",
+      "ball": "Toon details van de Pilates-bal",
+      "band": "Toon details van de weerstandsband",
+      "sliders": "Toon details van de Pilates-sliders",
+      "workout-guide": "Toon details van de trainingsgids en begeleide routines"
+    },
+    "reveal": {
+      "close": "Terug naar de complete set",
+      "ring": {
+        "label": "Details van de Pilates-ring",
+        "c1": "Gemaakt van <strong>glasvezel</strong>, voor extra spierdefinitie",
+        "c2": "<strong>Antislip</strong> en comfortabele schuimgrepen",
+        "tag": "<strong>Kleine squeeze. Serieus werk.</strong> Het verschil tussen de beweging maken en de beweging voelen."
+      },
+      "ball": {
+        "label": "Details van de Pilates-bal",
+        "c1": "Verbeterd <strong>dik antislipmateriaal</strong>",
+        "c2": "<strong>Luchtdicht</strong> ontwerp, blijft langer in vorm en op spanning",
+        "tag": "<strong>Niet zomaar een bal.</strong> Ontworpen om eenvoudige bewegingen effectiever te maken."
+      },
+      "band": {
+        "label": "Details van de weerstandsband",
+        "c1": "Een Pilates-klassieker van premium <strong>antislipstof</strong>",
+        "c2": "Compact & draagbaar",
+        "tag": "Ontworpen om je <strong>sterker</strong> te maken!"
+      },
+      "sliders": {
+        "label": "Details van de Pilates-sliders",
+        "c1": "Voor intensievere <strong>core-training</strong> op elke ondergrond",
+        "c2": "Compact & draagbaar",
+        "tag": "<strong>Kracht</strong> in elke slide!"
+      },
+      "guide": {
+        "label": "Details van de trainingsgids en begeleide routines",
+        "c1": "Gedrukte gids met <strong>32 oefeningen</strong> voor elk onderdeel van de set",
+        "c2": "<strong>Begeleide videoroutines</strong>, één scan verwijderd",
+        "tag": "<strong>Hier begint je routine.</strong> Train thuis mee, in je eigen tempo."
+      }
     },
     "images": {
       "ring": "Pilates-ring uit de Pilates-set",

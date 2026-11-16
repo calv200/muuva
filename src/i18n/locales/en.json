@@ -27,11 +27,44 @@
     "next": "Next image",
     "showImage": "Show image {{number}}",
     "hotspots": {
-      "ring": "View Pilates Ring photos",
-      "ball": "View Pilates Ball photos",
-      "band": "View Resistance Band photos",
-      "sliders": "View Pilates Sliders photos",
-      "workout-guide": "View workout guide and complete kit photos"
+      "ring": "Show Pilates ring details",
+      "ball": "Show Pilates ball details",
+      "band": "Show resistance band details",
+      "sliders": "Show Pilates slider details",
+      "workout-guide": "Show workout guide and guided routines details"
+    },
+    "reveal": {
+      "close": "Back to the full kit",
+      "ring": {
+        "label": "Pilates ring details",
+        "c1": "Made from <strong>fiberglass</strong>, to intensify muscle sculpting",
+        "c2": "<strong>Non-slip</strong> and comfortable foam pads",
+        "tag": "<strong>Small squeeze. Serious work.</strong> The difference between doing the move and feeling the move."
+      },
+      "ball": {
+        "label": "Pilates ball details",
+        "c1": "Upgraded <strong>thick non-slip</strong> material",
+        "c2": "<strong>Air-retaining</strong> design, holds shape and air longer",
+        "tag": "<strong>Not just a ball.</strong> Designed to make simple movements work harder."
+      },
+      "band": {
+        "label": "Resistance band details",
+        "c1": "A classic Pilates tool made of a premium <strong>non-slip fabric</strong>",
+        "c2": "Compact & portable",
+        "tag": "Designed to help you <strong>grow stronger</strong>!"
+      },
+      "sliders": {
+        "label": "Pilates slider details",
+        "c1": "To intensify <strong>core training</strong> on any surface",
+        "c2": "Compact & portable",
+        "tag": "<strong>Strength</strong> in every slide!"
+      },
+      "guide": {
+        "label": "Workout guide and guided routines details",
+        "c1": "Printed guide with <strong>32 exercises</strong> for every piece of the kit",
+        "c2": "<strong>Guided video routines</strong>, one scan away",
+        "tag": "<strong>Your routine starts here.</strong> Follow along at home, at your own pace."
+      }
     },
     "images": {
       "ring": "Pilates ring from the Pilates Essential Kit",

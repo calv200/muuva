@@ -27,11 +27,44 @@
     "next": "Imagen siguiente",
     "showImage": "Mostrar imagen {{number}}",
     "hotspots": {
-      "ring": "Ver fotos del aro de Pilates",
-      "ball": "Ver fotos de la pelota de Pilates",
-      "band": "Ver fotos de la banda de resistencia",
-      "sliders": "Ver fotos de los discos deslizantes de Pilates",
-      "workout-guide": "Ver fotos de la guía de ejercicios y del kit completo"
+      "ring": "Ver detalles del aro de Pilates",
+      "ball": "Ver detalles de la pelota de Pilates",
+      "band": "Ver detalles de la banda de resistencia",
+      "sliders": "Ver detalles de los discos deslizantes",
+      "workout-guide": "Ver detalles de la guía de ejercicios y las rutinas guiadas"
+    },
+    "reveal": {
+      "close": "Volver al kit completo",
+      "ring": {
+        "label": "Detalles del aro de Pilates",
+        "c1": "Fabricado en <strong>fibra de vidrio</strong>, para intensificar la tonificación muscular",
+        "c2": "Almohadillas de espuma <strong>antideslizantes</strong> y cómodas",
+        "tag": "<strong>Un pequeño apretón. Un trabajo serio.</strong> La diferencia entre hacer el movimiento y sentirlo."
+      },
+      "ball": {
+        "label": "Detalles de la pelota de Pilates",
+        "c1": "Material mejorado, <strong>grueso y antideslizante</strong>",
+        "c2": "Diseño que <strong>retiene el aire</strong>, mantiene su forma por más tiempo",
+        "tag": "<strong>No es solo una pelota.</strong> Diseñada para que los movimientos sencillos trabajen más."
+      },
+      "band": {
+        "label": "Detalles de la banda de resistencia",
+        "c1": "Un clásico del Pilates, de <strong>tela antideslizante</strong> premium",
+        "c2": "Compacta y portátil",
+        "tag": "¡Diseñada para ayudarte a <strong>ser más fuerte</strong>!"
+      },
+      "sliders": {
+        "label": "Detalles de los discos deslizantes",
+        "c1": "Para intensificar el <strong>entrenamiento del core</strong> en cualquier superficie",
+        "c2": "Compactos y portátiles",
+        "tag": "¡<strong>Fuerza</strong> en cada deslizamiento!"
+      },
+      "guide": {
+        "label": "Detalles de la guía de ejercicios y las rutinas guiadas",
+        "c1": "Guía impresa con <strong>32 ejercicios</strong> para cada pieza del kit",
+        "c2": "<strong>Rutinas guiadas en vídeo</strong>, a un escaneo de distancia",
+        "tag": "<strong>Tu rutina empieza aquí.</strong> Sigue las sesiones en casa, a tu propio ritmo."
+      }
     },
     "images": {
       "ring": "Aro de Pilates del kit de Pilates",

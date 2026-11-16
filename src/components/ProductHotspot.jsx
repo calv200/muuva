@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
-export default function ProductHotspot({ hotspot, onOpenGallery }) {
+
+// Plays the product's reveal (see productRevealController.js); the controller attaches the click handler.
+export default function ProductHotspot({ hotspot }) {
   const { t } = useTranslation();
   const style = {};
   for (const size of ["mobile", "tablet", "desktop"]) {
@@ -11,11 +13,12 @@ export default function ProductHotspot({ hotspot, onOpenGallery }) {
   return (
     <button
       type="button"
+      id={`reveal-${hotspot.revealId}-hotspot`}
       className="product-hotspot"
       style={style}
       aria-label={t(hotspot.labelKey)}
-      aria-haspopup="dialog"
-      onClick={(event) => { event.stopPropagation(); onOpenGallery(hotspot.galleryImageId); }}
+      aria-expanded="false"
+      aria-controls={`reveal-${hotspot.revealId}-specs`}
     >
       <span className="product-hotspot-marker" aria-hidden="true">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
