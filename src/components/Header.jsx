@@ -16,7 +16,7 @@ export default function Header() {
               src={muuvaLogo}
               alt="muuva"
             />
-            <span aria-hidden="true" className="absolute -right-[0.6em] -top-[0.45em] text-[8px] font-semibold leading-none text-brand sm:text-[9px]">®</span>
+            <span aria-hidden="true" className="absolute -right-[0.6em] -top-[0.45em] text-[10.4px] font-semibold leading-none text-brand sm:text-[11.7px]">®</span>
           </span>
         </a>
 

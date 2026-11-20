@@ -27,11 +27,44 @@
     "next": "Next image",
     "showImage": "Show image {{number}}",
     "hotspots": {
-      "ring": "View Pilates Ring photos",
-      "ball": "View Pilates Ball photos",
-      "band": "View Resistance Band photos",
-      "sliders": "View Pilates Sliders photos",
-      "workout-guide": "View workout guide and complete kit photos"
+      "ring": "Show Pilates ring details",
+      "ball": "Show Pilates ball details",
+      "band": "Show resistance band details",
+      "sliders": "Show Pilates slider details",
+      "workout-guide": "Show workout guide and guided routines details"
+    },
+    "reveal": {
+      "close": "Back to the full kit",
+      "ring": {
+        "label": "Pilates ring details",
+        "c1": "Made from <strong>fiberglass</strong>, to intensify muscle sculpting",
+        "c2": "<strong>Non-slip</strong> and comfortable foam pads",
+        "tag": "<strong>Small squeeze. Serious work.</strong> The difference between doing the move and feeling the move."
+      },
+      "ball": {
+        "label": "Pilates ball details",
+        "c1": "Upgraded <strong>thick non-slip</strong> material",
+        "c2": "<strong>Air-retaining</strong> design, holds shape and air longer",
+        "tag": "<strong>Not just a ball.</strong> Designed to make simple movements work harder."
+      },
+      "band": {
+        "label": "Resistance band details",
+        "c1": "A classic Pilates tool made of a premium <strong>non-slip fabric</strong>",
+        "c2": "Compact & portable",
+        "tag": "Designed to help you <strong>grow stronger</strong>!"
+      },
+      "sliders": {
+        "label": "Pilates slider details",
+        "c1": "To intensify <strong>core training</strong> on any surface",
+        "c2": "Compact & portable",
+        "tag": "<strong>Strength</strong> in every slide!"
+      },
+      "guide": {
+        "label": "Workout guide and guided routines details",
+        "c1": "Printed guide with <strong>28 exercises</strong> for every piece of the kit",
+        "c2": "<strong>Guided video routines</strong>, one scan away",
+        "tag": "<strong>Your routine starts here.</strong> Follow along at home, at your own pace."
+      }
     },
     "images": {
       "ring": "Pilates ring from the Pilates Essential Kit",
@@ -391,17 +424,20 @@
   },
   "about": {
     "inspired": {
-      "title": "What Inspired Muuva?",
-      "intro": "Muuva was born from a love for Pilates and a simple idea: every woman deserves a little time just for herself. A moment to slow down, feel good, and reconnect with her body and mind, no matter how busy life gets.",
-      "p1": "For Michelle, Pilates has always been more than just a workout. It’s her way to unwind, let go of stress, and feel like herself again. She wanted to share that feeling with other women and make it easier to enjoy Pilates at home, in their own space and at their own pace. That’s what Muuva is all about: helping women find joy in movement and turn a little me time into an everyday act of self love.",
+      "title": "What Inspired MUUVA?",
+      "intro": "Pilates has always been how I slow down. It’s where the stress of the day goes, and the one part of my routine that’s entirely mine.",
+      "p1": "I wanted more women to have that at home, without a reformer, a membership or a perfect schedule. But equipment on its own isn’t much help if you don’t know what to do with it. So MUUVA is both: the essentials in one kit, and guided routines that show you how to use them.",
+      "closing": "Your space, your pace.",
+      "signature": "Michelle",
       "alt": "Michelle seated beside a laptop with a MUUVA Pilates ball and ring in front of her."
     },
     "us": {
       "title": "About Us",
-      "p1": "Hi, we’re Michelle and Carlos! Originally from Venezuela, two engineers who moved to the Netherlands with big dreams and the hope of building a beautiful life together. After more than eight years working in technology, Michelle found herself at a turning point, wondering what would truly make her happy. With her love for Pilates, Carlos by her side, and a dream they both believed in, they decided to take a chance on something completely new.",
-      "p2": "Muuva is so much more than a business to us. It’s a little piece of our story, built with love, countless ideas, late night conversations, and the excitement (and sometimes fear!) of starting from scratch. We’ve poured our hearts into every detail, hoping to create something that brings a little happiness into other women’s everyday lives.",
+      "p1": "Hi, we’re Michelle and Carlos.",
+      "p2": "We’re two engineers from Venezuela who moved to the Netherlands to build a life together. Michelle spent more than 9 years working in tech, and Pilates was how she switched off: the one part of the day that was entirely hers. When that chapter of her career closed, she asked herself what she actually wanted to build. The answer was already in her routine.",
+      "p3": "Building something together had always been our plan, so we started from scratch: a lot of ideas, late-night conversations, and equal parts excitement and fear. We’re engineers, so we’ve obsessed over every detail. We hope it shows the first time you open the kit.",
       "closing": "With love,",
-      "signature": "Michelle + Carlos",
+      "signature": "Michelle & Carlos",
       "alt": "Michelle and Carlos standing together, with Carlos smiling at Michelle."
     }
   },
