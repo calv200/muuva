@@ -61,7 +61,7 @@
       },
       "guide": {
         "label": "Details van de trainingsgids en begeleide routines",
-        "c1": "Gedrukte gids met <strong>32 oefeningen</strong> voor elk onderdeel van de set",
+        "c1": "Gedrukte gids met <strong>28 oefeningen</strong> voor elk onderdeel van de set",
         "c2": "<strong>Begeleide videoroutines</strong>, één scan verwijderd",
         "tag": "<strong>Hier begint je routine.</strong> Train thuis mee, in je eigen tempo."
       }
@@ -424,17 +424,20 @@
   },
   "about": {
     "inspired": {
-      "title": "Wat inspireerde Muuva?",
-      "intro": "Muuva is ontstaan uit liefde voor Pilates en een eenvoudig idee: elke vrouw verdient een beetje tijd voor zichzelf. Een moment om te vertragen, je goed te voelen en weer contact te maken met je lichaam en geest, hoe druk het leven ook is.",
-      "p1": "Voor Michelle is Pilates altijd meer geweest dan alleen een workout. Het is haar manier om tot rust te komen, stress los te laten en zich weer zichzelf te voelen. Ze wilde dat gevoel delen met andere vrouwen en het makkelijker maken om thuis van Pilates te genieten, in hun eigen ruimte en in hun eigen tempo. Daar draait Muuva om: vrouwen helpen plezier te vinden in beweging en een beetje me-time te veranderen in een dagelijkse daad van zelfliefde.",
+      "title": "Wat inspireerde MUUVA?",
+      "intro": "Pilates is altijd mijn manier geweest om te vertragen. Daar laat ik de stress van de dag los, en het is het enige deel van mijn routine dat helemaal van mij is.",
+      "p1": "Ik wilde dat meer vrouwen dat thuis konden hebben, zonder reformer, abonnement of perfecte planning. Maar materiaal alleen helpt niet veel als je niet weet wat je ermee moet doen. Daarom is MUUVA allebei: de essentials in één set, en begeleide routines die je laten zien hoe je ze gebruikt.",
+      "closing": "Jouw ruimte, jouw tempo.",
+      "signature": "Michelle",
       "alt": "Michelle zit naast een laptop, met een Pilates-bal en ring van MUUVA voor haar."
     },
     "us": {
       "title": "Over ons",
-      "p1": "Hoi, wij zijn Michelle en Carlos! Twee ingenieurs uit Venezuela die naar Nederland verhuisden met grote dromen en de hoop om samen een mooi leven op te bouwen. Na meer dan acht jaar in de technologie stond Michelle op een keerpunt en vroeg ze zich af wat haar echt gelukkig zou maken. Met haar liefde voor Pilates, Carlos aan haar zijde en een droom waar ze allebei in geloofden, besloten ze de sprong te wagen naar iets compleet nieuws.",
-      "p2": "Muuva is voor ons zoveel meer dan een bedrijf. Het is een stukje van ons verhaal, gebouwd met liefde, talloze ideeën, gesprekken tot laat in de nacht en de spanning (en soms angst!) van helemaal opnieuw beginnen. We hebben ons hart in elk detail gestoken, in de hoop iets te creëren dat een beetje geluk brengt in het dagelijks leven van andere vrouwen.",
+      "p1": "Hoi, wij zijn Michelle en Carlos.",
+      "p2": "We zijn twee ingenieurs uit Venezuela die naar Nederland verhuisden om hier samen een leven op te bouwen. Michelle werkte meer dan 9 jaar in de tech, en Pilates was haar manier om uit te schakelen: het enige deel van de dag dat helemaal van haar was. Toen dat hoofdstuk van haar carrière afsloot, vroeg ze zich af wat ze eigenlijk wilde opbouwen. Het antwoord zat al in haar routine.",
+      "p3": "Samen iets opbouwen was altijd ons plan, dus begonnen we vanaf nul: heel veel ideeën, gesprekken tot diep in de nacht, en evenveel spanning als angst. We zijn ingenieurs, dus we zijn geobsedeerd geweest door elk detail. We hopen dat je dat merkt zodra je de set voor het eerst openmaakt.",
       "closing": "Met liefde,",
-      "signature": "Michelle + Carlos",
+      "signature": "Michelle & Carlos",
       "alt": "Michelle en Carlos staan samen, terwijl Carlos naar Michelle glimlacht."
     }
   },

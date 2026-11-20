@@ -61,7 +61,7 @@
       },
       "guide": {
         "label": "Detalles de la guía de ejercicios y las rutinas guiadas",
-        "c1": "Guía impresa con <strong>32 ejercicios</strong> para cada pieza del kit",
+        "c1": "Guía impresa con <strong>28 ejercicios</strong> para cada pieza del kit",
         "c2": "<strong>Rutinas guiadas en vídeo</strong>, a un escaneo de distancia",
         "tag": "<strong>Tu rutina empieza aquí.</strong> Sigue las sesiones en casa, a tu propio ritmo."
       }
@@ -424,17 +424,20 @@
   },
   "about": {
     "inspired": {
-      "title": "¿Qué inspiró a Muuva?",
-      "intro": "Muuva nació del amor por el Pilates y de una idea sencilla: toda mujer merece un poco de tiempo solo para ella. Un momento para bajar el ritmo, sentirse bien y reconectar con su cuerpo y su mente, por muy ajetreada que sea la vida.",
-      "p1": "Para Michelle, el Pilates siempre ha sido mucho más que un entrenamiento. Es su manera de desconectar, soltar el estrés y volver a sentirse ella misma. Quería compartir esa sensación con otras mujeres y hacer que fuera más fácil disfrutar del Pilates en casa, en su propio espacio y a su propio ritmo. De eso se trata Muuva: ayudar a las mujeres a encontrar alegría en el movimiento y convertir un ratito para sí mismas en un acto diario de amor propio.",
+      "title": "¿Qué inspiró a MUUVA?",
+      "intro": "El Pilates siempre ha sido mi manera de bajar el ritmo. Es donde se queda el estrés del día, y la única parte de mi rutina que es completamente mía.",
+      "p1": "Quería que más mujeres pudieran tener eso en casa, sin reformer, sin membresía y sin un horario perfecto. Pero el material por sí solo no sirve de mucho si no sabes qué hacer con él. Por eso MUUVA es las dos cosas: lo esencial en un solo kit, y rutinas guiadas que te enseñan a usarlo.",
+      "closing": "Tu espacio, tu ritmo.",
+      "signature": "Michelle",
       "alt": "Michelle sentada junto a un portátil, con una pelota y un aro de Pilates de MUUVA delante de ella."
     },
     "us": {
       "title": "Sobre nosotros",
-      "p1": "¡Hola, somos Michelle y Carlos! Venezolanos, dos ingenieros que se mudaron a los Países Bajos con grandes sueños y la ilusión de construir juntos una vida bonita. Después de más de ocho años trabajando en tecnología, Michelle llegó a un punto de inflexión y se preguntó qué la haría realmente feliz. Con su amor por el Pilates, Carlos a su lado y un sueño en el que ambos creían, decidieron arriesgarse con algo completamente nuevo.",
-      "p2": "Para nosotros, Muuva es mucho más que un negocio. Es un pedacito de nuestra historia, construido con amor, incontables ideas, conversaciones hasta altas horas de la noche y la emoción (¡y a veces el miedo!) de empezar desde cero. Hemos puesto el corazón en cada detalle, con la esperanza de crear algo que aporte un poco de felicidad al día a día de otras mujeres.",
+      "p1": "Hola, somos Michelle y Carlos.",
+      "p2": "Somos dos ingenieros venezolanos que nos mudamos a los Países Bajos para construir una vida juntos. Michelle trabajó más de 9 años en tecnología, y el Pilates era su manera de desconectar: la única parte del día que era completamente suya. Cuando ese capítulo de su carrera se cerró, se preguntó qué quería construir realmente. La respuesta ya estaba en su rutina.",
+      "p3": "Construir algo juntos siempre fue nuestro plan, así que empezamos desde cero: muchas ideas, conversaciones hasta tarde y, a partes iguales, ilusión y miedo. Somos ingenieros, así que nos hemos obsesionado con cada detalle. Esperamos que se note la primera vez que abras el kit.",
       "closing": "Con cariño,",
-      "signature": "Michelle + Carlos",
+      "signature": "Michelle & Carlos",
       "alt": "Michelle y Carlos juntos, mientras Carlos le sonríe a Michelle."
     }
   },

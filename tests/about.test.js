@@ -28,7 +28,7 @@ test("About server HTML contains the entire localized story, two original images
       assert.equal((main.match(/<h1\b/g) || []).length, 1);
       assert.equal((main.match(/<h2\b/g) || []).length, 1);
       assert.equal((main.match(/<section\b/g) || []).length, 2);
-      assert.equal((main.match(/<p\b/g) || []).length, 5);
+      assert.equal((main.match(/<p\b/g) || []).length, 7);
       assert.equal((main.match(/<img\b/g) || []).length, 2);
       for (const section of ["inspired", "us"]) {
         for (const value of Object.values(locale.about[section])) assert(normalizedMain.includes(escapeMarkup(value)));
@@ -37,8 +37,10 @@ test("About server HTML contains the entire localized story, two original images
       assert.deepEqual(paragraphs, [
         locale.about.inspired.intro,
         locale.about.inspired.p1,
+        `${locale.about.inspired.closing}<br/>${locale.about.inspired.signature}`,
         locale.about.us.p1,
         locale.about.us.p2,
+        locale.about.us.p3,
         `${locale.about.us.closing}<br/>${locale.about.us.signature}`,
       ].map((value) => escapeMarkup(value).replace("&lt;br/&gt;", "<br/>")), `${language}: paragraphs must appear once in the approved order`);
       assert(main.indexOf("<h1") < main.indexOf("<img"), "DOM reading order is text then image");
